@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JUCUM English Center - Grammar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            padding: 50px 20px;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header h1 span {
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        .divider {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+            margin: 25px auto;
+            border-radius: 2px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .levels-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .level-card {
+            background: white;
+            border-radius: 12px;
+            padding: 35px 30px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .level-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-color: transparent;
+        }
+
+        .level-card .indicator {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .level-prea1 .indicator {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        }
+
+        .level-a1i .indicator {
+            background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%);
+        }
+
+        .level-a1ii .indicator {
+            background: linear-gradient(135deg, #42a5f5 0%, #64b5f6 100%);
+        }
+
+        .level-a2i .indicator {
+            background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
+        }
+
+        .level-card h2 {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .level-card .level-subtitle {
+            color: #95a5a6;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .level-card .modules-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #7f8c8d;
+            font-size: 0.85rem;
+        }
+
+        .level-card .modules-info span {
+            background: #f5f7fa;
+            padding: 5px 12px;
+            border-radius: 15px;
+        }
+
+        .level-card .btn-enter {
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: #f5f7fa;
+            color: #2c3e50;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .level-card:hover .btn-enter {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #95a5a6;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 700px) {
+            .levels-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>JUCUM <span>English Center</span></h1>
+            <p class="subtitle">Recursos de Gramática Interactivos</p>
+            <div class="divider"></div>
+        </header>
+
+        <p class="section-title">Selecciona tu nivel</p>
+
+        <div class="levels-grid">
+            <a href="Pre-A1/index.html" class="level-card level-prea1">
+                <div class="indicator">💛</div>
+                <h2>Pre-A1</h2>
+                <p class="level-subtitle">Principiante Absoluto</p>
+                <div class="modules-info">
+                    <span>7 Módulos</span>
+                </div>
+                <div class="btn-enter">Ingresar →</div>
+            </a>
+
+            <a href="A1-Bloque-I/index.html" class="level-card level-a1i">
+                <div class="indicator">🍑</div>
+                <h2>A1 - Bloque I</h2>
+                <p class="level-subtitle">Básico - Primera Parte</p>
+                <div class="modules-info">
+                    <span>7 Módulos</span>
+                </div>
+                <div class="btn-enter">Ingresar →</div>
+            </a>
+
+            <a href="A1-Bloque-II/index.html" class="level-card level-a1ii">
+                <div class="indicator">💙</div>
+                <h2>A1 - Bloque II</h2>
+                <p class="level-subtitle">Básico - Segunda Parte</p>
+                <div class="modules-info">
+                    <span>7 Módulos</span>
+                </div>
+                <div class="btn-enter">Ingresar →</div>
+            </a>
+
+            <a href="A2-Bloque-I/index.html" class="level-card level-a2i">
+                <div class="indicator">💚</div>
+                <h2>A2 - Bloque I</h2>
+                <p class="level-subtitle">Elemental - Primera Parte</p>
+                <div class="modules-info">
+                    <span>7 Módulos</span>
+                </div>
+                <div class="btn-enter">Ingresar →</div>
+            </a>
+        </div>
+
+        <footer class="footer">
+            <p>JUCUM English Center — Lima, Perú</p>
+            <p style="margin-top: 5px; font-size: 0.8rem;">2025 • Versión 1.0</p>
+        </footer>
+    </div>
+</body>
+</html>
