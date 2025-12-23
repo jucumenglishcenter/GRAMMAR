@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adverbs of Degree | A2-Beg M5 | JUCUM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            min-height: 100vh;
+            padding: 16px;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 15px rgba(102, 187, 106, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        /* Navigation */
+        .nav-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            background: white;
+            border-radius: 16px;
+            padding: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .step-dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #f5f5f5;
+        }
+        
+        .step-dot.active {
+            background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(102, 187, 106, 0.4);
+        }
+        
+        .step-dot.completed {
+            background: #c8e6c9;
+        }
+        
+        /* Content Cards */
+        .step-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        .step-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+        
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2e7d32;
+            margin-bottom: 16px;
+        }
+        
+        /* Tables */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin: 12px 0;
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
+            color: white;
+            padding: 10px 8px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #e8f5e9;
+        }
+        
+        .comparison-table tr:hover {
+            background: #f1f8e9;
+        }
+        
+        /* Formula Box */
+        .formula-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left: 4px solid #66bb6a;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 12px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+        
+        /* Examples */
+        .example-correct {
+            background: #e8f5e9;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 8px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .example-incorrect {
+            background: #ffebee;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 8px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        /* Tips */
+        .tip-box {
+            background: #fff3e0;
+            border-radius: 12px;
+            padding: 12px;
+            margin: 8px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+        
+        /* Quiz Section */
+        .quiz-question {
+            background: #fafafa;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .quiz-question p {
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #333;
+        }
+        
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .quiz-option {
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .quiz-option:hover {
+            border-color: #66bb6a;
+            background: #f1f8e9;
+        }
+        
+        .quiz-option.selected {
+            border-color: #66bb6a;
+            background: #e8f5e9;
+        }
+        
+        .quiz-option.correct {
+            border-color: #4caf50;
+            background: #e8f5e9;
+        }
+        
+        .quiz-option.incorrect {
+            border-color: #f44336;
+            background: #ffebee;
+        }
+        
+        .feedback {
+            display: none;
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-size: 0.85rem;
+        }
+        
+        .feedback.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .feedback.correct {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .feedback.incorrect {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+        }
+        
+        /* Score */
+        .score-display {
+            text-align: center;
+            padding: 16px;
+            background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
+            border-radius: 16px;
+            color: white;
+            margin-top: 16px;
+        }
+        
+        .score-display .score-number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            gap: 12px;
+        }
+        
+        .nav-btn {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .nav-btn.prev {
+            background: #e0e0e0;
+            color: #666;
+        }
+        
+        .nav-btn.next {
+            background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
+            color: white;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Word Grid */
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin: 12px 0;
+        }
+        
+        .word-item {
+            background: #e8f5e9;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .word-item strong {
+            color: #2e7d32;
+        }
+        
+        /* Lists */
+        ul {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 8px 0;
+            font-size: 0.9rem;
+        }
+        
+        /* Scale visual */
+        .intensity-scale {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(90deg, #ffcdd2 0%, #fff9c4 50%, #c8e6c9 100%);
+            border-radius: 20px;
+            padding: 12px 16px;
+            margin: 16px 0;
+            position: relative;
+        }
+        
+        .intensity-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-align: center;
+            flex: 1;
+        }
+        
+        .intensity-label span {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎚️ Adverbs of Degree</h1>
+            <p>really / quite / rather / fairly</p>
+            <span class="badge">A2-Beginner • Módulo 5</span>
+        </div>
+        
+        <!-- Step Navigation -->
+        <div class="nav-steps">
+            <div class="step-dot active" onclick="showStep(1)">🇪🇸</div>
+            <div class="step-dot" onclick="showStep(2)">🤝</div>
+            <div class="step-dot" onclick="showStep(3)">⚠️</div>
+            <div class="step-dot" onclick="showStep(4)">💡</div>
+            <div class="step-dot" onclick="showStep(5)">✨</div>
+        </div>
+        
+        <!-- STEP 1: Spanish Review -->
+        <div class="step-content active" id="step1">
+            <div class="card">
+                <div class="card-title">🇪🇸 Paso 1: Repaso en Español</div>
+                
+                <p style="margin-bottom:12px;">En español usamos <strong>adverbios de grado</strong> para indicar CUÁNTO o EN QUÉ MEDIDA algo es verdad.</p>
+                
+                <div class="word-grid">
+                    <div class="word-item"><strong>muy</strong><br>intenso</div>
+                    <div class="word-item"><strong>bastante</strong><br>considerable</div>
+                    <div class="word-item"><strong>algo</strong><br>moderado</div>
+                    <div class="word-item"><strong>un poco</strong><br>leve</div>
+                </div>
+                
+                <div class="example-correct">
+                    <span>📝</span>
+                    <div>
+                        <strong>Ejemplos en español:</strong><br>
+                        • La película es <strong>muy</strong> interesante<br>
+                        • Estoy <strong>bastante</strong> cansado<br>
+                        • Es <strong>algo</strong> difícil
+                    </div>
+                </div>
+                
+                <p style="margin-top:12px;font-size:0.9rem;">💡 Estos adverbios van ANTES del adjetivo que modifican.</p>
+            </div>
+            
+            <!-- Quiz Step 1 -->
+            <div class="card">
+                <div class="card-title">📝 Práctica - Paso 1</div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>1. ¿Qué tipo de palabra es "muy" en español?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">Adverbio de grado</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">Adjetivo</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>2. En "Estoy bastante feliz", ¿dónde va el adverbio?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">Después del adjetivo</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">Antes del adjetivo</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>3. ¿Cuál indica MAYOR intensidad?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">muy</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">algo</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>4. "Un poco nervioso" expresa...</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">Intensidad alta</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">Intensidad baja</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>5. Los adverbios de grado modifican...</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">Adjetivos y otros adverbios</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">Solo sustantivos</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="score-display" id="score1" style="display:none;">
+                    <div class="score-number"><span id="scoreNum1">0</span>/5</div>
+                    <p>Paso 1 completado</p>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="nav-btn prev" disabled>← Anterior</button>
+                <button class="nav-btn next" onclick="showStep(2)">Siguiente →</button>
+            </div>
+        </div>
+        
+        <!-- STEP 2: Similarities -->
+        <div class="step-content" id="step2">
+            <div class="card">
+                <div class="card-title">🤝 Paso 2: Similitudes con el Inglés</div>
+                
+                <div class="intensity-scale">
+                    <div class="intensity-label"><span>😐</span>fairly</div>
+                    <div class="intensity-label"><span>🙂</span>quite</div>
+                    <div class="intensity-label"><span>😊</span>rather</div>
+                    <div class="intensity-label"><span>😃</span>really</div>
+                </div>
+                
+                <ul>
+                    <li>✅ <strong>Posición igual:</strong> Van ANTES del adjetivo (como en español)</li>
+                    <li>✅ <strong>Función igual:</strong> Modifican la intensidad del adjetivo</li>
+                    <li>✅ <strong>Escala similar:</strong> De menos a más intenso</li>
+                    <li>✅ <strong>Sin género:</strong> No cambian por masculino/femenino</li>
+                    <li>✅ <strong>Invariables:</strong> Nunca cambian de forma</li>
+                </ul>
+                
+                <div class="example-correct">
+                    <span>🔄</span>
+                    <div>
+                        <strong>Español → Inglés:</strong><br>
+                        muy feliz → <strong>really</strong> happy<br>
+                        bastante bueno → <strong>quite</strong> good
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quiz Step 2 -->
+            <div class="card">
+                <div class="card-title">📝 Práctica - Paso 2</div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>1. "Really" en inglés va _____ del adjetivo.</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">antes</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">después</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>2. ¿Los adverbios de grado cambian por género en inglés?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">Sí, cambian</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">No, son invariables</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>3. "Muy" se traduce más comúnmente como...</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">really / very</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">fairly</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>4. En ambos idiomas, estos adverbios expresan...</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">grado de intensidad</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">tiempo</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>5. ¿Cuál es la posición correcta en inglés?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">happy really</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">really happy</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="score-display" id="score2" style="display:none;">
+                    <div class="score-number"><span id="scoreNum2">0</span>/5</div>
+                    <p>Paso 2 completado</p>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="nav-btn prev" onclick="showStep(1)">← Anterior</button>
+                <button class="nav-btn next" onclick="showStep(3)">Siguiente →</button>
+            </div>
+        </div>
+        
+        <!-- STEP 3: Differences -->
+        <div class="step-content" id="step3">
+            <div class="card">
+                <div class="card-title">⚠️ Paso 3: Diferencias Importantes</div>
+                
+                <table class="comparison-table">
+                    <tr>
+                        <th>Español</th>
+                        <th>Inglés</th>
+                        <th>Nota</th>
+                    </tr>
+                    <tr>
+                        <td>muy</td>
+                        <td>really / very</td>
+                        <td>Más intenso</td>
+                    </tr>
+                    <tr>
+                        <td>bastante</td>
+                        <td>quite / rather</td>
+                        <td>Moderado-alto</td>
+                    </tr>
+                    <tr>
+                        <td>algo</td>
+                        <td>fairly / rather</td>
+                        <td>Moderado</td>
+                    </tr>
+                    <tr>
+                        <td>un poco</td>
+                        <td>a bit / a little</td>
+                        <td>Menos intenso</td>
+                    </tr>
+                </table>
+                
+                <div class="tip-box">
+                    <span>⚠️</span>
+                    <div>
+                        <strong>¡Cuidado!</strong> "Rather" puede ser positivo O negativo según contexto:<br>
+                        • rather good = bastante bueno ✅<br>
+                        • rather cold = algo frío (negativo) ⚠️
+                    </div>
+                </div>
+                
+                <div class="example-incorrect">
+                    <span>❌</span>
+                    <div>
+                        <strong>Error común:</strong><br>
+                        "very much happy" ❌<br>
+                        "very happy" ✅
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quiz Step 3 -->
+            <div class="card">
+                <div class="card-title">📝 Práctica - Paso 3</div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>1. "Rather" puede tener un tono...</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">solo positivo</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">positivo o negativo</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>2. ¿Cuál es MÁS intenso?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">really tired</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">fairly tired</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>3. "Un poco cansado" se traduce mejor como...</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">very tired</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">a bit tired</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>4. "Fairly" indica intensidad...</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">baja a moderada</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">muy alta</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>5. ¿Cuál es CORRECTO?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">quite good</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">quite much good</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="score-display" id="score3" style="display:none;">
+                    <div class="score-number"><span id="scoreNum3">0</span>/5</div>
+                    <p>Paso 3 completado</p>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="nav-btn prev" onclick="showStep(2)">← Anterior</button>
+                <button class="nav-btn next" onclick="showStep(4)">Siguiente →</button>
+            </div>
+        </div>
+        
+        <!-- STEP 4: Tips -->
+        <div class="step-content" id="step4">
+            <div class="card">
+                <div class="card-title">💡 Paso 4: Consejos Prácticos</div>
+                
+                <div class="tip-box">
+                    <span>1️⃣</span>
+                    <div><strong>Escala de intensidad:</strong><br>fairly → quite → rather → really/very</div>
+                </div>
+                
+                <div class="tip-box">
+                    <span>2️⃣</span>
+                    <div><strong>Really vs Very:</strong><br>"Really" es más informal/conversacional, "very" más neutral</div>
+                </div>
+                
+                <div class="tip-box">
+                    <span>3️⃣</span>
+                    <div><strong>Quite + adj positivo:</strong><br>quite nice = bastante bueno (positivo)</div>
+                </div>
+                
+                <div class="tip-box">
+                    <span>4️⃣</span>
+                    <div><strong>Rather + adj negativo:</strong><br>rather cold = algo frío (queja suave)</div>
+                </div>
+                
+                <div class="formula-box">
+                    <strong>🔑 Fórmula:</strong><br>
+                    Subject + be + <span style="color:#2e7d32">ADVERB</span> + adjective<br><br>
+                    The movie is <span style="color:#2e7d32">really</span> interesting.
+                </div>
+            </div>
+            
+            <!-- Quiz Step 4 -->
+            <div class="card">
+                <div class="card-title">📝 Práctica - Paso 4</div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>1. Para conversación informal, usa...</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">very</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">really</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>2. "The test was rather difficult" suena como...</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">una queja suave</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">un cumplido</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>3. Ordena de MENOS a MÁS intenso:</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">fairly → quite → really</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">really → quite → fairly</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>4. "Quite nice" tiene tono...</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">negativo</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">positivo</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>5. La estructura correcta es:</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">She is really happy</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">She is happy really</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="score-display" id="score4" style="display:none;">
+                    <div class="score-number"><span id="scoreNum4">0</span>/5</div>
+                    <p>Paso 4 completado</p>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="nav-btn prev" onclick="showStep(3)">← Anterior</button>
+                <button class="nav-btn next" onclick="showStep(5)">Siguiente →</button>
+            </div>
+        </div>
+        
+        <!-- STEP 5: Practice -->
+        <div class="step-content" id="step5">
+            <div class="card">
+                <div class="card-title">✨ Paso 5: Ejemplos y Práctica Final</div>
+                
+                <div class="formula-box">
+                    <strong>📐 Fórmulas:</strong><br>
+                    ✅ Subject + be + really/quite/rather/fairly + adjective<br>
+                    ✅ Subject + verb + really/quite/rather/fairly + adverb
+                </div>
+                
+                <div class="example-correct">
+                    <span>✅</span>
+                    <div>
+                        <strong>Afirmativo:</strong><br>
+                        • She is <strong>really</strong> happy. (Ella está muy feliz)<br>
+                        • The movie is <strong>quite</strong> good. (La película es bastante buena)<br>
+                        • It's <strong>rather</strong> cold today. (Está algo frío hoy)
+                    </div>
+                </div>
+                
+                <div class="example-correct">
+                    <span>✅</span>
+                    <div>
+                        <strong>Con verbos:</strong><br>
+                        • He runs <strong>fairly</strong> fast. (Él corre bastante rápido)<br>
+                        • They work <strong>really</strong> hard. (Trabajan muy duro)
+                    </div>
+                </div>
+                
+                <div class="example-incorrect">
+                    <span>❌</span>
+                    <div>
+                        <strong>Errores comunes:</strong><br>
+                        ❌ She is happy really → ✅ She is really happy<br>
+                        ❌ very much tired → ✅ very tired<br>
+                        ❌ really much good → ✅ really good
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Final Quiz -->
+            <div class="card">
+                <div class="card-title">📝 Práctica Final</div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>1. "The food is _____ delicious!" (muy)</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">really</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">fairly</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>2. "It's _____ expensive." (algo caro - queja suave)</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">really</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">rather</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>3. Selecciona la oración CORRECTA:</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">He is quite tall.</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">He is tall quite.</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>4. "The lesson was _____ easy." (moderadamente)</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">very much</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">fairly</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>5. "I'm _____ tired after the long function." (muy)</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">really</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">a bit</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="score-display" id="score5" style="display:none;">
+                    <div class="score-number"><span id="scoreNum5">0</span>/5</div>
+                    <p>¡Tema completado!</p>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="nav-btn prev" onclick="showStep(4)">← Anterior</button>
+                <button class="nav-btn next" onclick="showFinalScore()">Ver Resultado Final →</button>
+            </div>
+            
+            <!-- Final Score -->
+            <div class="card" id="finalScore" style="display:none;">
+                <div class="card-title">🏆 Resultado Final</div>
+                <div class="score-display">
+                    <div class="score-number"><span id="totalScore">0</span>/25</div>
+                    <p>Adverbs of Degree - Completado</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Track scores per step
+        let scores = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
+        let answered = {1: [], 2: [], 3: [], 4: [], 5: []};
+        let currentStep = 1;
+        
+        function showStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.step-dot').forEach(el => el.classList.remove('active'));
+            
+            // Show selected step
+            document.getElementById('step' + step).classList.add('active');
+            document.querySelectorAll('.step-dot')[step - 1].classList.add('active');
+            
+            currentStep = step;
+            
+            // Scroll to top
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+        
+        function checkAnswer(element, selectedIndex) {
+            const question = element.closest('.quiz-question');
+            const correctIndex = parseInt(question.dataset.correct);
+            const options = question.querySelectorAll('.quiz-option');
+            const feedback = question.querySelector('.feedback');
+            
+            // Check if already answered
+            const questionIndex = Array.from(question.parentNode.querySelectorAll('.quiz-question')).indexOf(question);
+            if (answered[currentStep].includes(questionIndex)) return;
+            answered[currentStep].push(questionIndex);
+            
+            // Mark options
+            options.forEach((opt, idx) => {
+                opt.style.pointerEvents = 'none';
+                if (idx === correctIndex) {
+                    opt.classList.add('correct');
+                } else if (idx === selectedIndex && selectedIndex !== correctIndex) {
+                    opt.classList.add('incorrect');
+                }
+            });
+            
+            // Show feedback
+            if (selectedIndex === correctIndex) {
+                scores[currentStep]++;
+                feedback.className = 'feedback show correct';
+                feedback.innerHTML = '✅ <strong>¡Correcto!</strong> ' + getCorrectExplanation(currentStep, questionIndex);
+            } else {
+                feedback.className = 'feedback show incorrect';
+                feedback.innerHTML = '❌ <strong>Incorrecto.</strong> ' + getIncorrectExplanation(currentStep, questionIndex);
+            }
+            
+            // Check if step completed
+            const totalQuestions = question.parentNode.querySelectorAll('.quiz-question').length;
+            if (answered[currentStep].length === totalQuestions) {
+                showStepScore();
+            }
+        }
+        
+        function showStepScore() {
+            const scoreDisplay = document.getElementById('score' + currentStep);
+            const scoreNum = document.getElementById('scoreNum' + currentStep);
+            scoreNum.textContent = scores[currentStep];
+            scoreDisplay.style.display = 'block';
+            
+            // Mark step as completed
+            document.querySelectorAll('.step-dot')[currentStep - 1].classList.add('completed');
+        }
+        
+        function showFinalScore() {
+            const total = scores[1] + scores[2] + scores[3] + scores[4] + scores[5];
+            document.getElementById('totalScore').textContent = total;
+            document.getElementById('finalScore').style.display = 'block';
+            document.getElementById('finalScore').scrollIntoView({behavior: 'smooth'});
+        }
+        
+        function getCorrectExplanation(step, q) {
+            const explanations = {
+                1: [
+                    '"Muy" es un adverbio que modifica la intensidad de adjetivos.',
+                    'En español, el adverbio de grado siempre va ANTES del adjetivo.',
+                    '"Muy" expresa el nivel más alto de intensidad en español.',
+                    '"Un poco" indica una cantidad pequeña o intensidad baja.',
+                    'Los adverbios de grado modifican adjetivos y otros adverbios, no sustantivos.'
+                ],
+                2: [
+                    'Al igual que en español, el adverbio va ANTES del adjetivo.',
+                    'Los adverbios en inglés son invariables - no cambian por género ni número.',
+                    '"Really" y "very" son las traducciones más comunes de "muy".',
+                    'En ambos idiomas, estos adverbios indican CUÁNTO es algo.',
+                    'La estructura es: adverbio + adjetivo (really happy).'
+                ],
+                3: [
+                    '"Rather" es versátil y puede usarse en contextos positivos o negativos.',
+                    '"Really" indica intensidad alta; "fairly" indica intensidad baja.',
+                    '"A bit" significa literalmente "un poco" - intensidad baja.',
+                    '"Fairly" está en el extremo bajo de la escala de intensidad.',
+                    '"Quite good" es correcto - no se necesita "much" con estos adverbios.'
+                ],
+                4: [
+                    '"Really" es más común en conversación informal.',
+                    'Con adjetivos negativos, "rather" expresa una queja suave.',
+                    'La escala va de menor a mayor: fairly → quite → rather → really.',
+                    '"Quite" con adjetivos positivos tiene un tono favorable.',
+                    'El adverbio siempre va ANTES del adjetivo.'
+                ],
+                5: [
+                    '"Really" es perfecto para expresar "muy" en entusiasmo.',
+                    '"Rather" con precio indica una queja suave sobre algo caro.',
+                    'La estructura correcta es: Subject + be + adverb + adjective.',
+                    '"Fairly" indica un nivel moderado, no extremo.',
+                    '"Really" expresa intensidad alta - perfecto para "muy".'
+                ]
+            };
+            return explanations[step][q] || '';
+        }
+        
+        function getIncorrectExplanation(step, q) {
+            const explanations = {
+                1: [
+                    'Un adjetivo describe sustantivos, pero "muy" modifica adjetivos (es adverbio).',
+                    'El adverbio va ANTES: "bastante feliz", no "feliz bastante".',
+                    '"Algo" indica intensidad moderada; "muy" es más fuerte.',
+                    '"Un poco" indica intensidad BAJA, no alta.',
+                    'Los adverbios de grado NO modifican sustantivos directamente.'
+                ],
+                2: [
+                    'El adverbio va ANTES del adjetivo: "really happy".',
+                    'En inglés, estos adverbios NUNCA cambian de forma.',
+                    '"Fairly" indica intensidad baja, no es equivalente a "muy".',
+                    'Estos adverbios expresan GRADO de intensidad, no tiempo.',
+                    '"Happy really" es incorrecto - el adverbio va primero.'
+                ],
+                3: [
+                    '"Rather" NO es solo positivo - puede expresar desaprobación suave.',
+                    '"Fairly" indica intensidad baja; "really" es mucho más fuerte.',
+                    '"Very tired" significa muy cansado - demasiado intenso para "un poco".',
+                    '"Fairly" indica intensidad BAJA a moderada, no muy alta.',
+                    'NUNCA uses "much" con estos adverbios + adjetivos.'
+                ],
+                4: [
+                    '"Very" es más formal y neutral; "really" es más conversacional.',
+                    'Con adjetivos como "difficult", "rather" expresa queja, no cumplido.',
+                    'La escala va de MENOS a MÁS, no al revés.',
+                    '"Quite" + adjetivo positivo = tono positivo.',
+                    'El adverbio SIEMPRE va antes del adjetivo en inglés.'
+                ],
+                5: [
+                    '"Fairly" indica moderación; "really" es mejor para entusiasmo.',
+                    '"Really" es demasiado fuerte para una queja suave sobre precio.',
+                    'El adjetivo va DESPUÉS del adverbio: adverb + adjective.',
+                    '"Very much" NO se usa con adjetivos simples.',
+                    '"A bit" significa "un poco" - no expresa "muy".'
+                ]
+            };
+            return explanations[step][q] || '';
+        }
+    </script>
+</body>
+</html>

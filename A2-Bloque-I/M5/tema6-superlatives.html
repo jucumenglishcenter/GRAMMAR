@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superlatives | A2-Beg M5 | JUCUM</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            min-height: 100vh;
+            padding: 16px;
+        }
+        .container { max-width: 500px; margin: 0 auto; }
+        .header {
+            background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
+            border-radius: 20px; padding: 20px;
+            text-align: center; color: white;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 15px rgba(102, 187, 106, 0.3);
+        }
+        .header h1 { font-size: 1.4rem; margin-bottom: 8px; }
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.25);
+            padding: 4px 12px; border-radius: 20px; font-size: 0.8rem;
+        }
+        .nav-steps {
+            display: flex; justify-content: space-between;
+            margin-bottom: 16px; background: white;
+            border-radius: 16px; padding: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .step-dot {
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; cursor: pointer;
+            transition: all 0.3s; background: #f5f5f5;
+        }
+        .step-dot.active {
+            background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(102, 187, 106, 0.4);
+        }
+        .step-dot.completed { background: #c8e6c9; }
+        .step-content { display: none; animation: fadeIn 0.4s ease; }
+        .step-content.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card {
+            background: white; border-radius: 20px;
+            padding: 20px; margin-bottom: 16px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+        .card-title {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 1.1rem; font-weight: 600; color: #2e7d32;
+            margin-bottom: 16px;
+        }
+        .comparison-table {
+            width: 100%; border-collapse: collapse;
+            font-size: 0.85rem; margin: 12px 0;
+        }
+        .comparison-table th {
+            background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
+            color: white; padding: 10px 6px; text-align: left;
+        }
+        .comparison-table td { padding: 10px 6px; border-bottom: 1px solid #e8f5e9; }
+        .comparison-table tr:hover { background: #f1f8e9; }
+        .formula-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left: 4px solid #66bb6a; border-radius: 12px;
+            padding: 16px; margin: 12px 0;
+            font-family: 'Courier New', monospace; font-size: 0.9rem;
+        }
+        .example-correct {
+            background: #e8f5e9; border-radius: 10px;
+            padding: 12px; margin: 8px 0;
+            display: flex; align-items: flex-start; gap: 10px;
+        }
+        .example-incorrect {
+            background: #ffebee; border-radius: 10px;
+            padding: 12px; margin: 8px 0;
+            display: flex; align-items: flex-start; gap: 10px;
+        }
+        .tip-box {
+            background: #fff3e0; border-radius: 12px;
+            padding: 12px; margin: 8px 0;
+            display: flex; align-items: flex-start; gap: 10px;
+            font-size: 0.9rem;
+        }
+        .quiz-question {
+            background: #fafafa; border-radius: 16px;
+            padding: 16px; margin-bottom: 12px;
+        }
+        .quiz-question p { font-weight: 500; margin-bottom: 12px; color: #333; }
+        .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+        .quiz-option {
+            padding: 12px 16px; border: 2px solid #e0e0e0;
+            border-radius: 12px; cursor: pointer;
+            transition: all 0.3s; font-size: 0.95rem;
+        }
+        .quiz-option:hover { border-color: #66bb6a; background: #f1f8e9; }
+        .quiz-option.correct { border-color: #4caf50; background: #e8f5e9; }
+        .quiz-option.incorrect { border-color: #f44336; background: #ffebee; }
+        .feedback {
+            display: none; padding: 12px; border-radius: 10px;
+            margin-top: 10px; font-size: 0.85rem;
+        }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease; }
+        .feedback.correct { background: #e8f5e9; border-left: 4px solid #4caf50; }
+        .feedback.incorrect { background: #ffebee; border-left: 4px solid #f44336; }
+        .score-display {
+            text-align: center; padding: 16px;
+            background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
+            border-radius: 16px; color: white; margin-top: 16px;
+        }
+        .score-display .score-number { font-size: 2rem; font-weight: bold; }
+        .nav-buttons {
+            display: flex; justify-content: space-between;
+            margin-top: 20px; gap: 12px;
+        }
+        .nav-btn {
+            flex: 1; padding: 14px 20px; border: none;
+            border-radius: 12px; font-size: 1rem; font-weight: 600;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .nav-btn.prev { background: #e0e0e0; color: #666; }
+        .nav-btn.next { background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%); color: white; }
+        .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .preposition-cards {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 10px; margin: 16px 0;
+        }
+        .prep-card {
+            background: #e8f5e9; border-radius: 12px;
+            padding: 12px; text-align: center;
+        }
+        .prep-card .prep { font-size: 1.3rem; font-weight: bold; color: #2e7d32; }
+        .prep-card .use { font-size: 0.75rem; color: #666; margin-top: 4px; }
+        .trophy-display {
+            display: flex; justify-content: center; align-items: center;
+            gap: 15px; margin: 16px 0; padding: 12px;
+            background: #f5f5f5; border-radius: 12px;
+        }
+        .trophy-item { text-align: center; }
+        .trophy-item .medal { font-size: 2rem; }
+        .trophy-item .label { font-size: 0.75rem; color: #666; }
+        ul { padding-left: 20px; }
+        li { margin: 8px 0; font-size: 0.9rem; }
+        .highlight-box {
+            background: #e3f2fd; border-radius: 10px;
+            padding: 12px; margin: 8px 0; border-left: 4px solid #2196f3;
+        }
+        .rule-box {
+            border: 2px solid #66bb6a; border-radius: 12px;
+            padding: 12px; margin: 10px 0;
+        }
+        .rule-title {
+            background: #66bb6a; color: white;
+            padding: 4px 10px; border-radius: 6px;
+            display: inline-block; font-size: 0.85rem; margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏆 Superlatives</h1>
+            <p>the -est / the most + in / of</p>
+            <span class="badge">A2-Beginner • Módulo 5</span>
+        </div>
+        
+        <div class="nav-steps">
+            <div class="step-dot active" onclick="showStep(1)">🇪🇸</div>
+            <div class="step-dot" onclick="showStep(2)">🤝</div>
+            <div class="step-dot" onclick="showStep(3)">⚠️</div>
+            <div class="step-dot" onclick="showStep(4)">💡</div>
+            <div class="step-dot" onclick="showStep(5)">✨</div>
+        </div>
+        
+        <!-- STEP 1 -->
+        <div class="step-content active" id="step1">
+            <div class="card">
+                <div class="card-title">🇪🇸 Paso 1: Repaso en Español</div>
+                
+                <p style="margin-bottom:12px;">En español usamos superlativos para indicar el <strong>máximo grado</strong> de algo.</p>
+                
+                <div class="trophy-display">
+                    <div class="trophy-item">
+                        <div class="medal">🥇</div>
+                        <div class="label">EL MÁS alto</div>
+                    </div>
+                    <div class="trophy-item">
+                        <div class="medal">🥈</div>
+                        <div class="label">alto</div>
+                    </div>
+                    <div class="trophy-item">
+                        <div class="medal">🥉</div>
+                        <div class="label">bajo</div>
+                    </div>
+                </div>
+                
+                <div class="formula-box">
+                    <strong>📐 Estructura en español:</strong><br>
+                    el/la/los/las + <strong>más/menos</strong> + adjetivo + <strong>de</strong>
+                </div>
+                
+                <div class="example-correct">
+                    <span>📝</span>
+                    <div>
+                        <strong>Ejemplos:</strong><br>
+                        • Es <strong>el más</strong> alto <strong>de</strong> la clase<br>
+                        • Es <strong>la más</strong> inteligente <strong>de</strong> mi familia<br>
+                        • Es <strong>el mejor</strong> restaurante <strong>de</strong> la ciudad
+                    </div>
+                </div>
+                
+                <p style="margin-top:12px;font-size:0.9rem;">💡 En español, <strong>"de"</strong> conecta el superlativo con el grupo.</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">📝 Práctica - Paso 1</div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>1. El superlativo indica...</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">el máximo o mínimo grado</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">comparación entre dos</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>2. En "el más alto de la clase", ¿qué es "la clase"?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">el adjetivo</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">el grupo de referencia</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>3. En español, conectamos el superlativo con el grupo usando...</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">"de"</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">"en"</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>4. "El mejor" es el superlativo de...</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">malo</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">bueno</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>5. "El peor" es el superlativo de...</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">malo</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">poco</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="score-display" id="score1" style="display:none;">
+                    <div class="score-number"><span id="scoreNum1">0</span>/5</div>
+                    <p>Paso 1 completado</p>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="nav-btn prev" disabled>← Anterior</button>
+                <button class="nav-btn next" onclick="showStep(2)">Siguiente →</button>
+            </div>
+        </div>
+        
+        <!-- STEP 2 -->
+        <div class="step-content" id="step2">
+            <div class="card">
+                <div class="card-title">🤝 Paso 2: Similitudes con el Inglés</div>
+                
+                <table class="comparison-table">
+                    <tr>
+                        <th>🇪🇸 Español</th>
+                        <th>🇬🇧 English</th>
+                    </tr>
+                    <tr>
+                        <td>el más alto</td>
+                        <td><strong>the tallest</strong></td>
+                    </tr>
+                    <tr>
+                        <td>el más interesante</td>
+                        <td><strong>the most interesting</strong></td>
+                    </tr>
+                    <tr>
+                        <td>el mejor</td>
+                        <td><strong>the best</strong></td>
+                    </tr>
+                    <tr>
+                        <td>el peor</td>
+                        <td><strong>the worst</strong></td>
+                    </tr>
+                </table>
+                
+                <ul>
+                    <li>✅ <strong>THE obligatorio:</strong> Siempre "the" antes del superlativo</li>
+                    <li>✅ <strong>Misma función:</strong> Indicar el máximo grado</li>
+                    <li>✅ <strong>Irregulares similares:</strong> good→best, bad→worst</li>
+                    <li>✅ <strong>Dos formas:</strong> -est (cortos) / most (largos)</li>
+                </ul>
+                
+                <div class="formula-box">
+                    <strong>📐 Estructuras:</strong><br>
+                    <strong>THE</strong> + adj<strong>-EST</strong> (1-2 sílabas)<br>
+                    <strong>THE MOST</strong> + adj (3+ sílabas)
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">📝 Práctica - Paso 2</div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>1. El superlativo de "tall" es...</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">the tallest</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">the most tall</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>2. El superlativo de "interesting" es...</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">the interestingest</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">the most interesting</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>3. El superlativo de "good" es...</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">the best</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">the goodest</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>4. El superlativo de "bad" es...</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">the baddest</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">the worst</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>5. Antes del superlativo siempre va...</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">THE</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">A</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="score-display" id="score2" style="display:none;">
+                    <div class="score-number"><span id="scoreNum2">0</span>/5</div>
+                    <p>Paso 2 completado</p>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="nav-btn prev" onclick="showStep(1)">← Anterior</button>
+                <button class="nav-btn next" onclick="showStep(3)">Siguiente →</button>
+            </div>
+        </div>
+        
+        <!-- STEP 3 -->
+        <div class="step-content" id="step3">
+            <div class="card">
+                <div class="card-title">⚠️ Paso 3: IN vs OF - La Gran Diferencia</div>
+                
+                <div class="highlight-box">
+                    <strong>🎯 Diferencia clave:</strong><br>
+                    En español siempre usamos "de"<br>
+                    En inglés elegimos: <strong>IN</strong> o <strong>OF</strong>
+                </div>
+                
+                <div class="preposition-cards">
+                    <div class="prep-card">
+                        <div class="prep">IN</div>
+                        <div class="use">📍 LUGARES / GRUPOS</div>
+                    </div>
+                    <div class="prep-card">
+                        <div class="prep">OF</div>
+                        <div class="use">👥 CONJUNTOS DEFINIDOS</div>
+                    </div>
+                </div>
+                
+                <div class="rule-box">
+                    <span class="rule-title">📍 USA "IN" CON:</span>
+                    <ul style="margin-top:8px;">
+                        <li>Lugares: <strong>in</strong> the world, <strong>in</strong> the city</li>
+                        <li>Grupos amplios: <strong>in</strong> the class, <strong>in</strong> the office</li>
+                        <li>Áreas: <strong>in</strong> the country, <strong>in</strong> my street</li>
+                    </ul>
+                </div>
+                
+                <div class="rule-box">
+                    <span class="rule-title">👥 USA "OF" CON:</span>
+                    <ul style="margin-top:8px;">
+                        <li>Grupos definidos: <strong>of</strong> the three, <strong>of</strong> all</li>
+                        <li>Posesivos: <strong>of</strong> my friends, <strong>of</strong> the family</li>
+                        <li>Conjuntos específicos: <strong>of</strong> the group, <strong>of</strong> them</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-box">
+                    <span>💡</span>
+                    <div>
+                        <strong>Truco rápido:</strong><br>
+                        ¿Puedes "entrar" ahí? → <strong>IN</strong> (in the room)<br>
+                        ¿Es un conjunto de personas/cosas? → <strong>OF</strong> (of my friends)
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">📝 Práctica - Paso 3</div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>1. "The tallest building _____ the world"</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">in</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">of</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>2. "The best _____ my friends"</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">in</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">of</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>3. "The oldest house _____ the street"</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">in</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">of</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>4. "The youngest _____ the three sisters"</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">in</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">of</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>5. "The most important _____ all"</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">in</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">of</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="score-display" id="score3" style="display:none;">
+                    <div class="score-number"><span id="scoreNum3">0</span>/5</div>
+                    <p>Paso 3 completado</p>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="nav-btn prev" onclick="showStep(2)">← Anterior</button>
+                <button class="nav-btn next" onclick="showStep(4)">Siguiente →</button>
+            </div>
+        </div>
+        
+        <!-- STEP 4 -->
+        <div class="step-content" id="step4">
+            <div class="card">
+                <div class="card-title">💡 Paso 4: Consejos Prácticos</div>
+                
+                <div class="tip-box">
+                    <span>💡</span>
+                    <div>
+                        <strong>Tip 1: NUNCA olvides "THE"</strong><br>
+                        ❌ He is tallest in the class<br>
+                        ✅ He is <strong>the</strong> tallest in the class
+                    </div>
+                </div>
+                
+                <div class="tip-box">
+                    <span>💡</span>
+                    <div>
+                        <strong>Tip 2: País/Ciudad = IN</strong><br>
+                        the best restaurant <strong>in</strong> Peru<br>
+                        the tallest building <strong>in</strong> Lima
+                    </div>
+                </div>
+                
+                <div class="tip-box">
+                    <span>💡</span>
+                    <div>
+                        <strong>Tip 3: Familia/Amigos = OF</strong><br>
+                        the oldest <strong>of</strong> my family<br>
+                        the smartest <strong>of</strong> my friends
+                    </div>
+                </div>
+                
+                <div class="tip-box">
+                    <span>💡</span>
+                    <div>
+                        <strong>Tip 4: "All" siempre con OF</strong><br>
+                        the best <strong>of all</strong><br>
+                        the most important <strong>of all</strong>
+                    </div>
+                </div>
+                
+                <div class="example-correct">
+                    <span>✅</span>
+                    <div>
+                        <strong>Resumen visual:</strong><br>
+                        🏠 <strong>IN</strong>: world, country, city, class, office<br>
+                        👨‍👩‍👧 <strong>OF</strong>: family, friends, group, all, them
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">📝 Práctica - Paso 4</div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>1. "The best photo _____ the family album"</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">of</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">in</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>2. "The strangest style _____ all"</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">of</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">in</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>3. "The highest mountain _____ the country"</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">of</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">in</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>4. "The most fun _____ ourselves"</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">of</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">in</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>5. "The longest period _____ history"</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">of</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">in</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="score-display" id="score4" style="display:none;">
+                    <div class="score-number"><span id="scoreNum4">0</span>/5</div>
+                    <p>Paso 4 completado</p>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="nav-btn prev" onclick="showStep(3)">← Anterior</button>
+                <button class="nav-btn next" onclick="showStep(5)">Siguiente →</button>
+            </div>
+        </div>
+        
+        <!-- STEP 5 -->
+        <div class="step-content" id="step5">
+            <div class="card">
+                <div class="card-title">✨ Paso 5: Práctica Final</div>
+                
+                <div class="formula-box">
+                    <strong>📐 Resumen completo:</strong><br>
+                    THE + superlativo + <strong>IN</strong> + lugar<br>
+                    THE + superlativo + <strong>OF</strong> + grupo definido
+                </div>
+                
+                <div class="example-correct">
+                    <span>🏆</span>
+                    <div>
+                        <strong>Ejemplos completos:</strong><br>
+                        • The tallest mountain <strong>in</strong> the world<br>
+                        • The best <strong>of</strong> all<br>
+                        • The most beautiful city <strong>in</strong> Peru<br>
+                        • The youngest <strong>of</strong> my friends
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">📝 Práctica - Paso 5</div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>1. "This is the most important lesson _____ the course."</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">in</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">of</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>2. "He is the strongest _____ them."</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">in</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">of</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>3. "The most famous image _____ the body of work."</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">in</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">of</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="1">
+                    <p>4. "She has the longest legs _____ the army."</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">of</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">in</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="quiz-question" data-correct="0">
+                    <p>5. "This is the best benefit _____ the plan."</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, 0)">in</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, 1)">of</div>
+                    </div>
+                    <div class="feedback"></div>
+                </div>
+                
+                <div class="score-display" id="score5" style="display:none;">
+                    <div class="score-number"><span id="scoreNum5">0</span>/5</div>
+                    <p>¡Tema completado!</p>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="nav-btn prev" onclick="showStep(4)">← Anterior</button>
+                <button class="nav-btn next" onclick="showFinalScore()">Ver Resultado Final →</button>
+            </div>
+            
+            <div class="card" id="finalScore" style="display:none;">
+                <div class="card-title">🏆 Resultado Final</div>
+                <div class="score-display">
+                    <div class="score-number"><span id="totalScore">0</span>/25</div>
+                    <p>Superlatives (in/of) - Completado</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let scores = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
+        let answered = {1: [], 2: [], 3: [], 4: [], 5: []};
+        let currentStep = 1;
+        
+        function showStep(step) {
+            document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.step-dot').forEach(el => el.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+            document.querySelectorAll('.step-dot')[step - 1].classList.add('active');
+            currentStep = step;
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+        
+        function checkAnswer(element, selectedIndex) {
+            const question = element.closest('.quiz-question');
+            const correctIndex = parseInt(question.dataset.correct);
+            const options = question.querySelectorAll('.quiz-option');
+            const feedback = question.querySelector('.feedback');
+            const questionIndex = Array.from(question.parentNode.querySelectorAll('.quiz-question')).indexOf(question);
+            if (answered[currentStep].includes(questionIndex)) return;
+            answered[currentStep].push(questionIndex);
+            options.forEach((opt, idx) => {
+                opt.style.pointerEvents = 'none';
+                if (idx === correctIndex) opt.classList.add('correct');
+                else if (idx === selectedIndex && selectedIndex !== correctIndex) opt.classList.add('incorrect');
+            });
+            if (selectedIndex === correctIndex) {
+                scores[currentStep]++;
+                feedback.className = 'feedback show correct';
+                feedback.innerHTML = '✅ <strong>¡Correcto!</strong> ' + getCorrectExplanation(currentStep, questionIndex);
+            } else {
+                feedback.className = 'feedback show incorrect';
+                feedback.innerHTML = '❌ <strong>Incorrecto.</strong> ' + getIncorrectExplanation(currentStep, questionIndex);
+            }
+            const totalQuestions = question.parentNode.querySelectorAll('.quiz-question').length;
+            if (answered[currentStep].length === totalQuestions) showStepScore();
+        }
+        
+        function showStepScore() {
+            document.getElementById('score' + currentStep).style.display = 'block';
+            document.getElementById('scoreNum' + currentStep).textContent = scores[currentStep];
+            document.querySelectorAll('.step-dot')[currentStep - 1].classList.add('completed');
+        }
+        
+        function showFinalScore() {
+            const total = scores[1] + scores[2] + scores[3] + scores[4] + scores[5];
+            document.getElementById('totalScore').textContent = total;
+            document.getElementById('finalScore').style.display = 'block';
+            document.getElementById('finalScore').scrollIntoView({behavior: 'smooth'});
+        }
+        
+        function getCorrectExplanation(step, q) {
+            const exp = {
+                1: ['El superlativo indica el grado MÁXIMO (más alto) o MÍNIMO (menos alto).', '"La clase" es el GRUPO donde comparamos - el grupo de referencia.', 'En español siempre usamos "DE" para conectar: el más alto DE la clase.', '"El mejor" es el superlativo irregular de "bueno".', '"El peor" es el superlativo irregular de "malo".'],
+                2: ['"Tall" es corto (1 sílaba) → usamos -EST: tallest.', '"Interesting" tiene 4 sílabas → usamos MOST: most interesting.', '"Good" tiene superlativo irregular: BEST (no goodest).', '"Bad" tiene superlativo irregular: WORST (no baddest).', 'THE es obligatorio antes de todos los superlativos en inglés.'],
+                3: ['"The world" es un LUGAR → usamos IN.', '"My friends" es un GRUPO de personas definido → usamos OF.', '"The street" es un LUGAR → usamos IN.', '"The three sisters" es un CONJUNTO específico → usamos OF.', '"All" SIEMPRE va con OF.'],
+                4: ['"Family album" es como un LUGAR (contenedor de fotos) → usamos IN.', '"All" SIEMPRE requiere OF. Es una regla fija.', '"Country" es un LUGAR → usamos IN.', '"Ourselves" es un pronombre/grupo → usamos OF.', '"History" funciona como un PERÍODO/contexto amplio → usamos IN.'],
+                5: ['"Course" es como un LUGAR (contexto educativo) → usamos IN.', '"Them" es un pronombre que representa un grupo → usamos OF.', '"Body of work" es un CONTEXTO/colección → usamos IN.', '"Army" es una organización/lugar → usamos IN.', '"Plan" es un CONTEXTO/sistema → usamos IN.']
+            };
+            return exp[step][q] || '';
+        }
+        
+        function getIncorrectExplanation(step, q) {
+            const exp = {
+                1: ['El comparativo compara DOS cosas. El superlativo indica el MÁXIMO/MÍNIMO.', '"La clase" no es el adjetivo - es el GRUPO de referencia donde comparamos.', 'En español usamos "DE", no "en": el más alto DE la clase.', '"El mejor" es de "bueno". "Malo" → "el peor".', '"El peor" es de "malo". "Poco" → "el menos".'],
+                2: ['Para adjetivos cortos (1-2 sílabas) usamos -EST, no MOST.', 'Para adjetivos largos (3+ sílabas) usamos MOST, no -EST.', '"Good" es IRREGULAR: good → better → BEST.', '"Bad" es IRREGULAR: bad → worse → WORST.', 'Nunca usamos "A" antes del superlativo. Siempre THE.'],
+                3: ['"World" es un LUGAR → IN. OF es para grupos definidos.', '"Friends" es un grupo de PERSONAS → OF. IN es para lugares.', '"Street" es un LUGAR → IN. OF es para grupos definidos.', '"Three sisters" es un CONJUNTO definido → OF. IN es para lugares.', '"All" SIEMPRE va con OF. Es una regla fija.'],
+                4: ['"Album" funciona como contenedor/lugar para las fotos → IN.', '"All" SIEMPRE requiere OF. Nunca usamos "in all".', '"Country" es un LUGAR → IN. OF es para grupos definidos.', '"Ourselves" es pronombre de grupo → OF. IN es para lugares.', '"History" es un contexto amplio → IN (como "in the world").'],
+                5: ['"Course" es contexto educativo → IN. No es un grupo definido.', '"Them" es pronombre de grupo → OF. IN es para lugares.', '"Body of work" es una colección/contexto → IN.', '"Army" es organización/lugar → IN. No es "of" porque no es posesivo.', '"Plan" es un sistema/contexto → IN. No es un grupo de personas.']
+            };
+            return exp[step][q] || '';
+        }
+    </script>
+</body>
+</html>
