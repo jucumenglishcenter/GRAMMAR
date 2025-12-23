@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future: Going to | A1-Bloque-I M6 | JUCUM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffe8ec 0%, #ffdde1 100%);
+            min-height: 100vh;
+            padding: 15px;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%);
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(238, 156, 167, 0.4);
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 3px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.3);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            color: white;
+        }
+
+        /* Progress Nav */
+        .progress-nav {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+
+        .step-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #ee9ca7;
+            background: white;
+            color: #ee9ca7;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+
+        .step-dot.active {
+            background: #ee9ca7;
+            color: white;
+        }
+
+        .step-dot.completed {
+            background: #e91e63;
+            color: white;
+            border-color: #e91e63;
+        }
+
+        /* Step Card */
+        .step-card {
+            display: none;
+            background: white;
+            border-radius: 16px;
+            padding: 20px 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+
+        .step-card.active {
+            display: block;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ffdde1;
+        }
+
+        .step-icon {
+            font-size: 1.8rem;
+        }
+
+        .step-title {
+            color: #e91e63;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Content Styles */
+        .intro-text {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 12px 0;
+            text-align: center;
+            border: 2px solid #e91e63;
+        }
+
+        .formula-box .formula {
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            color: #c2185b;
+            font-weight: 700;
+        }
+
+        .formula-box .note {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        /* Quick Examples */
+        .quick-example {
+            background: #fff5f7;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+            border-left: 4px solid #ee9ca7;
+        }
+
+        .quick-example .en {
+            color: #c2185b;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .quick-example .es {
+            color: #7f8c8d;
+            font-size: 0.85rem;
+        }
+
+        .quick-example.wrong {
+            background: #fff5f5;
+            border-left-color: #e74c3c;
+        }
+
+        .quick-example.right {
+            background: #f0fff4;
+            border-left-color: #27ae60;
+        }
+
+        /* Conjugation Table */
+        .conj-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.85rem;
+        }
+
+        .conj-table th {
+            background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%);
+            color: white;
+            padding: 10px 8px;
+            text-align: center;
+        }
+
+        .conj-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: center;
+        }
+
+        .conj-table tr:nth-child(even) {
+            background: #fff5f7;
+        }
+
+        .conj-table .subject {
+            font-weight: 600;
+            color: #e91e63;
+        }
+
+        .conj-table .verb {
+            color: #c2185b;
+            font-weight: 600;
+        }
+
+        /* Compare Box */
+        .compare-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .compare-item {
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .compare-item.esp {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+            border: 2px solid #fbc02d;
+        }
+
+        .compare-item.eng {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+            border: 2px solid #e91e63;
+        }
+
+        .compare-item .label {
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+        }
+
+        .compare-item.esp .label { color: #f57f17; }
+        .compare-item.eng .label { color: #c2185b; }
+
+        .compare-item .example {
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        /* Tip Box */
+        .tip-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 12px 0;
+            font-size: 0.85rem;
+            border-left: 4px solid #2196f3;
+        }
+
+        .tip-box strong {
+            color: #1565c0;
+        }
+
+        .tip-box.warning {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-left-color: #ff9800;
+        }
+
+        .tip-box.warning strong {
+            color: #e65100;
+        }
+
+        /* Uses Grid */
+        .uses-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .use-card {
+            background: #fff5f7;
+            border-radius: 10px;
+            padding: 12px;
+            border-left: 4px solid #ee9ca7;
+        }
+
+        .use-card .use-title {
+            font-weight: 700;
+            color: #c2185b;
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+        }
+
+        .use-card .use-example {
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        /* Exercise Section */
+        .exercise-section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px dashed #ffdde1;
+        }
+
+        .exercise-section h3 {
+            color: #e91e63;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .exercise {
+            background: #fafafa;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .exercise.correct {
+            border-color: #27ae60;
+            background: #f0fff4;
+        }
+
+        .exercise.incorrect {
+            border-color: #e74c3c;
+            background: #fff5f5;
+        }
+
+        .exercise-q {
+            font-size: 0.9rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .exercise-q strong {
+            color: #e91e63;
+        }
+
+        .opts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        .opt-btn {
+            padding: 10px 8px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            color: #555;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .opt-btn:hover:not(:disabled) {
+            border-color: #ee9ca7;
+            background: #fff5f7;
+        }
+
+        .opt-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .opt-btn.sel-correct {
+            background: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+
+        .opt-btn.sel-wrong {
+            background: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+        }
+
+        .opt-btn.show-correct {
+            background: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+
+        /* Feedback */
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct-fb {
+            background: #d4edda;
+            border: 1px solid #a5d6a7;
+        }
+
+        .feedback.incorrect-fb {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+        }
+
+        .feedback .result {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .feedback.correct-fb .result { color: #155724; }
+        .feedback.incorrect-fb .result { color: #721c24; }
+
+        .feedback .explanation {
+            color: #555;
+            line-height: 1.4;
+        }
+
+        /* Score */
+        .score-box {
+            text-align: center;
+            padding: 12px;
+            background: linear-gradient(135deg, #fff5f7 0%, #ffdde1 100%);
+            border-radius: 10px;
+            margin-top: 12px;
+        }
+
+        .score-box .num {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e91e63;
+        }
+
+        .score-box .label {
+            font-size: 0.8rem;
+            color: #ee9ca7;
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 12px 15px;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .nav-btn.prev {
+            background: #e0e0e0;
+            color: #666;
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%);
+            color: white;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .step-ind {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* Summary List */
+        .summary-list {
+            list-style: none;
+        }
+
+        .summary-list li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .summary-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #ee9ca7;
+            font-weight: bold;
+        }
+
+        /* Back Link */
+        .back-link {
+            display: inline-block;
+            color: #7f8c8d;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .back-link:hover {
+            color: #e91e63;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="./" class="back-link">← Volver a Módulo 6</a>
+
+        <!-- Header -->
+        <div class="header">
+            <h1>🚀 Future: Going to</h1>
+            <div class="badge">🍑 A1-Bloque-I • M6 • Tema 1</div>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-nav">
+            <div class="step-dot active" onclick="goToStep(1)">1</div>
+            <div class="step-dot" onclick="goToStep(2)">2</div>
+            <div class="step-dot" onclick="goToStep(3)">3</div>
+            <div class="step-dot" onclick="goToStep(4)">4</div>
+            <div class="step-dot" onclick="goToStep(5)">5</div>
+        </div>
+
+        <!-- STEP 1 -->
+        <div class="step-card active" id="step1">
+            <div class="step-header">
+                <span class="step-icon">🇪🇸</span>
+                <span class="step-title">Paso 1: Repaso en Español</span>
+            </div>
+
+            <p class="intro-text">
+                En español, cuando hablamos de <strong>planes o intenciones</strong> para el futuro, 
+                usamos "voy a + verbo". Es algo que ya decidimos o planeamos hacer.
+            </p>
+
+            <div class="quick-example">
+                <div class="en">Ejemplos de planes en español:</div>
+                <div class="es">
+                    • <strong>Voy a</strong> estudiar inglés.<br>
+                    • Ella <strong>va a</strong> cocinar pasta.<br>
+                    • Nosotros <strong>vamos a</strong> ver una película.
+                </div>
+            </div>
+
+            <div class="compare-box">
+                <div class="compare-item esp">
+                    <div class="label">🇪🇸 ESPAÑOL</div>
+                    <div class="example">
+                        voy a<br>
+                        vas a<br>
+                        va a<br>
+                        vamos a
+                    </div>
+                </div>
+                <div class="compare-item eng">
+                    <div class="label">🇬🇧 ENGLISH</div>
+                    <div class="example">
+                        I'm going to<br>
+                        You're going to<br>
+                        He's going to<br>
+                        We're going to
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Clave:</strong> "Going to" en inglés es como "ir a" en español. 
+                ¡El concepto es casi idéntico!
+            </div>
+
+            <!-- Exercises -->
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex1-1">
+                    <div class="exercise-q">1. "Voy a estudiar" expresa:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-1','a','a')">a) Un plan</button>
+                        <button class="opt-btn" onclick="check('ex1-1','b','a')">b) Una orden</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">"Voy a + verbo" expresa un <strong>plan o intención</strong>.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Voy a" expresa planes, no órdenes. Una orden sería "¡Estudia!"</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-2">
+                    <div class="exercise-q">2. En "Ella va a cocinar", ¿qué palabra indica futuro?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-2','a','b')">a) cocinar</button>
+                        <button class="opt-btn" onclick="check('ex1-2','b','b')">b) va a</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">"<strong>Va a</strong>" indica que es un plan futuro.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Cocinar" es el verbo principal. "<strong>Va a</strong>" indica futuro.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-3">
+                    <div class="exercise-q">3. "Vamos a ver una película" significa que:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-3','a','a')">a) Ya lo decidimos</button>
+                        <button class="opt-btn" onclick="check('ex1-3','b','a')">b) No sabemos</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">"Ir a + verbo" indica que ya hay una <strong>decisión o plan</strong>.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">Cuando decimos "vamos a", ya <strong>decidimos</strong> hacerlo.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-4">
+                    <div class="exercise-q">4. En español, para "yo" usamos:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-4','a','a')">a) voy a</button>
+                        <button class="opt-btn" onclick="check('ex1-4','b','a')">b) va a</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">Yo <strong>voy a</strong>... (conjugación de "ir" para yo).</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Va a" es para él/ella. Yo = <strong>voy a</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-5">
+                    <div class="exercise-q">5. "Going to" en inglés es equivalente a:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-5','a','a')">a) ir a</button>
+                        <button class="opt-btn" onclick="check('ex1-5','b','a')">b) haber</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">Going to = <strong>ir a</strong>. ¡Funcionan igual!</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Haber" es "have/there is". Going to = <strong>ir a</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score1">0/5</div>
+                    <div class="label">Paso 1</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step-card" id="step2">
+            <div class="step-header">
+                <span class="step-icon">🤝</span>
+                <span class="step-title">Paso 2: Similitudes ESP ↔ ENG</span>
+            </div>
+
+            <p class="intro-text">
+                ¡Excelentes noticias! Esta estructura es muy similar en ambos idiomas:
+            </p>
+
+            <div class="quick-example">
+                <div class="en">✅ Similitud 1: Misma estructura básica</div>
+                <div class="es">ESP: voy a + verbo | ENG: going to + verb</div>
+            </div>
+
+            <div class="quick-example">
+                <div class="en">✅ Similitud 2: Expresa planes e intenciones</div>
+                <div class="es">Algo que ya decidiste o planeas hacer</div>
+            </div>
+
+            <div class="quick-example">
+                <div class="en">✅ Similitud 3: Usa el verbo "ir" (to go)</div>
+                <div class="es">ESP: ir + a | ENG: be + going to</div>
+            </div>
+
+            <div class="quick-example">
+                <div class="en">✅ Similitud 4: El verbo principal va en infinitivo</div>
+                <div class="es">voy a <strong>estudiar</strong> = going to <strong>study</strong></div>
+            </div>
+
+            <div class="quick-example">
+                <div class="en">✅ Similitud 5: Puedes agregar tiempo</div>
+                <div class="es">Voy a estudiar <strong>mañana</strong> = I'm going to study <strong>tomorrow</strong></div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Truco mental:</strong> Piensa "going to" = "ir a".<br>
+                Solo traduce directamente y ¡casi siempre funciona!
+            </div>
+
+            <!-- Exercises -->
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex2-1">
+                    <div class="exercise-q">1. "Going to" usa el verbo:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-1','a','a')">a) to go (ir)</button>
+                        <button class="opt-btn" onclick="check('ex2-1','b','a')">b) to have (tener)</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">Go<strong>ing</strong> to = <strong>ir</strong> a. Mismo verbo.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Going" viene de "go" = <strong>ir</strong>. Como "voy a".</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-2">
+                    <div class="exercise-q">2. Después de "going to" el verbo va en:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-2','a','a')">a) Infinitivo (base)</button>
+                        <button class="opt-btn" onclick="check('ex2-2','b','a')">b) Pasado</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">Going to + <strong>verbo base</strong>: going to <strong>study</strong>.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">El verbo va en infinitivo: going to <strong>study</strong> (no "studied").</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-3">
+                    <div class="exercise-q">3. "Voy a comer" en inglés es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-3','a','a')">a) I'm going to eat</button>
+                        <button class="opt-btn" onclick="check('ex2-3','b','a')">b) I'm going to eating</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">Going to + verbo BASE: going to <strong>eat</strong>.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">No se duplica -ing. Es: going to <strong>eat</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-4">
+                    <div class="exercise-q">4. ¿"Going to" expresa planes ya decididos?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-4','a','a')">a) Sí</button>
+                        <button class="opt-btn" onclick="check('ex2-4','b','a')">b) No</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">"Going to" expresa <strong>planes e intenciones</strong> ya decididos.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Going to" SÍ expresa planes previos: I'm going to study = Ya lo decidí.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-5">
+                    <div class="exercise-q">5. "Voy a estudiar mañana" = "I'm going to study _____"</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-5','a','b')">a) yesterday</button>
+                        <button class="opt-btn" onclick="check('ex2-5','b','b')">b) tomorrow</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">Mañana = <strong>tomorrow</strong>. Yesterday = ayer (pasado).</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Yesterday" es ayer. Mañana = <strong>tomorrow</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score2">0/5</div>
+                    <div class="label">Paso 2</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step-card" id="step3">
+            <div class="step-header">
+                <span class="step-icon">⚠️</span>
+                <span class="step-title">Paso 3: Diferencias Importantes</span>
+            </div>
+
+            <p class="intro-text">
+                La diferencia principal: en inglés necesitas el verbo <strong>"to be"</strong> antes de "going to".
+            </p>
+
+            <div class="formula-box">
+                <div class="formula">Subject + BE + going to + VERB</div>
+                <div class="note">I <strong>am</strong> going to study</div>
+            </div>
+
+            <table class="conj-table">
+                <tr>
+                    <th>Subject</th>
+                    <th>BE</th>
+                    <th>+ going to</th>
+                </tr>
+                <tr>
+                    <td class="subject">I</td>
+                    <td class="verb">am ('m)</td>
+                    <td>going to study</td>
+                </tr>
+                <tr>
+                    <td class="subject">You / We / They</td>
+                    <td class="verb">are ('re)</td>
+                    <td>going to study</td>
+                </tr>
+                <tr>
+                    <td class="subject">He / She / It</td>
+                    <td class="verb">is ('s)</td>
+                    <td>going to study</td>
+                </tr>
+            </table>
+
+            <div class="quick-example wrong">
+                <div class="en">❌ I going to study. (Falta "am")</div>
+                <div class="es">✅ I <strong>am</strong> going to study.</div>
+            </div>
+
+            <div class="quick-example wrong">
+                <div class="en">❌ She going to cook. (Falta "is")</div>
+                <div class="es">✅ She <strong>is</strong> going to cook.</div>
+            </div>
+
+            <div class="tip-box warning">
+                <strong>⚠️ Error común:</strong> Olvidar el verbo "to be".<br>
+                SIEMPRE: Subject + <strong>am/is/are</strong> + going to + verb
+            </div>
+
+            <!-- Exercises -->
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex3-1">
+                    <div class="exercise-q">1. Con "I" usamos:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-1','a','a')">a) am going to</button>
+                        <button class="opt-btn" onclick="check('ex3-1','b','a')">b) is going to</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">I <strong>am</strong> going to... (I + am siempre).</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Is" es para he/she/it. Con I usamos <strong>am</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-2">
+                    <div class="exercise-q">2. "She _____ going to help."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-2','a','b')">a) am</button>
+                        <button class="opt-btn" onclick="check('ex3-2','b','b')">b) is</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">She <strong>is</strong> going to help. (He/She/It + is)</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Am" es solo para I. She usa <strong>is</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-3">
+                    <div class="exercise-q">3. "They _____ going to travel."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-3','a','a')">a) are</button>
+                        <button class="opt-btn" onclick="check('ex3-3','b','a')">b) is</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">They <strong>are</strong> going to travel. (They + are)</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Is" es singular. They usa <strong>are</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-4">
+                    <div class="exercise-q">4. ¿Cuál es correcta?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-4','a','b')">a) He going to eat</button>
+                        <button class="opt-btn" onclick="check('ex3-4','b','b')">b) He is going to eat</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">He <strong>is</strong> going to eat. Nunca olvides "be".</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">Falta el verbo "be": He <strong>is</strong> going to eat.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-5">
+                    <div class="exercise-q">5. "We _____ going to watch a movie."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-5','a','a')">a) are</button>
+                        <button class="opt-btn" onclick="check('ex3-5','b','a')">b) am</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">We <strong>are</strong> going to watch. (We + are)</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Am" es solo para I. We usa <strong>are</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score3">0/5</div>
+                    <div class="label">Paso 3</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="step-card" id="step4">
+            <div class="step-header">
+                <span class="step-icon">💡</span>
+                <span class="step-title">Paso 4: Consejos Prácticos</span>
+            </div>
+
+            <div class="tip-box">
+                <strong>🎯 Tip 1: Usa contracciones</strong><br>
+                En conversación es más natural:<br>
+                I<strong>'m</strong> going to... | She<strong>'s</strong> going to... | They<strong>'re</strong> going to...
+            </div>
+
+            <div class="tip-box">
+                <strong>📅 Tip 2: Agrega expresiones de tiempo</strong><br>
+                • <strong>tomorrow</strong> (mañana)<br>
+                • <strong>next week</strong> (la próxima semana)<br>
+                • <strong>tonight</strong> (esta noche)
+            </div>
+
+            <div class="uses-grid">
+                <div class="use-card">
+                    <div class="use-title">📋 Para PLANES</div>
+                    <div class="use-example">I'm going to visit my family next week.</div>
+                </div>
+                <div class="use-card">
+                    <div class="use-title">💭 Para INTENCIONES</div>
+                    <div class="use-example">She's going to study medicine.</div>
+                </div>
+                <div class="use-card">
+                    <div class="use-title">🔮 Para PREDICCIONES (con evidencia)</div>
+                    <div class="use-example">Look at those clouds! It's going to rain.</div>
+                </div>
+            </div>
+
+            <div class="tip-box warning">
+                <strong>⚠️ Tip 3: "Gonna" es informal</strong><br>
+                En conversación rápida, "going to" suena como "gonna":<br>
+                "I'm gonna study" = I'm going to study<br>
+                <em>¡Pero no lo escribas en exámenes!</em>
+            </div>
+
+            <!-- Exercises -->
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex4-1">
+                    <div class="exercise-q">1. La contracción de "I am" es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-1','a','a')">a) I'm</button>
+                        <button class="opt-btn" onclick="check('ex4-1','b','a')">b) Im</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">I am = <strong>I'm</strong> (con apóstrofe).</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">La contracción lleva apóstrofe: <strong>I'm</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-2">
+                    <div class="exercise-q">2. "Next week" significa:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-2','a','b')">a) La semana pasada</button>
+                        <button class="opt-btn" onclick="check('ex4-2','b','b')">b) La próxima semana</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">Next = próximo/siguiente. Next week = <strong>próxima semana</strong>.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Last week" = semana pasada. "Next week" = <strong>próxima</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-3">
+                    <div class="exercise-q">3. "Gonna" es una forma:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-3','a','a')">a) Informal de "going to"</button>
+                        <button class="opt-btn" onclick="check('ex4-3','b','a')">b) Correcta para exámenes</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">"Gonna" es <strong>informal</strong>. En escritura formal usa "going to".</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Gonna" es solo para conversación. En exámenes: <strong>going to</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-4">
+                    <div class="exercise-q">4. "Look at those clouds! It's going to rain" es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-4','a','a')">a) Una predicción con evidencia</button>
+                        <button class="opt-btn" onclick="check('ex4-4','b','a')">b) Un plan personal</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">Las nubes son la <strong>evidencia</strong> de que va a llover.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">No es un plan. Es una <strong>predicción</strong> basada en evidencia (nubes).</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-5">
+                    <div class="exercise-q">5. "Tonight" significa:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-5','a','a')">a) Esta noche</button>
+                        <button class="opt-btn" onclick="check('ex4-5','b','a')">b) Anoche</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">Tonight = <strong>esta noche</strong> (futuro). Last night = anoche.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Last night" = anoche. "Tonight" = <strong>esta noche</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score4">0/5</div>
+                    <div class="label">Paso 4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="step-card" id="step5">
+            <div class="step-header">
+                <span class="step-icon">✨</span>
+                <span class="step-title">Paso 5: Práctica Final</span>
+            </div>
+
+            <div class="formula-box">
+                <div class="formula">Subject + am/is/are + going to + VERB</div>
+            </div>
+
+            <div class="quick-example right">
+                <div class="en">I<strong>'m going to</strong> study English tomorrow.</div>
+                <div class="es">Voy a estudiar inglés mañana.</div>
+            </div>
+
+            <div class="quick-example right">
+                <div class="en">She<strong>'s going to</strong> cook dinner tonight.</div>
+                <div class="es">Ella va a cocinar la cena esta noche.</div>
+            </div>
+
+            <div class="quick-example right">
+                <div class="en">We<strong>'re going to</strong> visit our family next week.</div>
+                <div class="es">Vamos a visitar a nuestra familia la próxima semana.</div>
+            </div>
+
+            <div class="quick-example wrong">
+                <div class="en">❌ They going to travel.</div>
+                <div class="es">✅ They <strong>are</strong> going to travel.</div>
+            </div>
+
+            <div class="quick-example wrong">
+                <div class="en">❌ I'm going to studying.</div>
+                <div class="es">✅ I'm going to <strong>study</strong>. (verbo base, sin -ing)</div>
+            </div>
+
+            <!-- Exercises -->
+            <div class="exercise-section">
+                <h3>✏️ Práctica Final</h3>
+
+                <div class="exercise" id="ex5-1">
+                    <div class="exercise-q">1. "Voy a estudiar" =</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-1','a','a')">a) I'm going to study</button>
+                        <button class="opt-btn" onclick="check('ex5-1','b','a')">b) I going to study</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">I <strong>'m</strong> (am) going to study. ¡Perfecto!</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">Falta "am": I <strong>am</strong> going to study.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-2">
+                    <div class="exercise-q">2. "Ella va a cocinar" =</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-2','a','b')">a) She am going to cook</button>
+                        <button class="opt-btn" onclick="check('ex5-2','b','b')">b) She is going to cook</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">She <strong>is</strong> going to cook. (She + is)</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Am" es solo para I. She usa <strong>is</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-3">
+                    <div class="exercise-q">3. "Ellos van a viajar mañana" =</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-3','a','a')">a) They are going to travel tomorrow</button>
+                        <button class="opt-btn" onclick="check('ex5-3','b','a')">b) They is going to travel tomorrow</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">They <strong>are</strong> going to travel tomorrow.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Is" es singular. They usa <strong>are</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-4">
+                    <div class="exercise-q">4. "We _____ going to watch a movie tonight."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-4','a','b')">a) is</button>
+                        <button class="opt-btn" onclick="check('ex5-4','b','b')">b) are</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">We <strong>are</strong> going to watch a movie tonight.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Is" es para he/she/it. We usa <strong>are</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-5">
+                    <div class="exercise-q">5. "He _____ going to help his mother."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-5','a','a')">a) is</button>
+                        <button class="opt-btn" onclick="check('ex5-5','b','a')">b) are</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">He <strong>is</strong> going to help his mother.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Are" es para you/we/they. He usa <strong>is</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score5">0/5</div>
+                    <div class="label">Paso 5</div>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, #fff5f7 0%, #ffdde1 100%); border-radius: 12px;">
+                <h3 style="color: #e91e63; font-size: 0.95rem; margin-bottom: 10px;">🎓 Resumen Final</h3>
+                <ul class="summary-list">
+                    <li><strong>Fórmula:</strong> Subject + am/is/are + going to + verb</li>
+                    <li><strong>I</strong> → am going to</li>
+                    <li><strong>He/She/It</strong> → is going to</li>
+                    <li><strong>You/We/They</strong> → are going to</li>
+                    <li>Expresa <strong>planes e intenciones</strong></li>
+                    <li>El verbo principal va en <strong>forma base</strong></li>
+                    <li>Contracciones: I'm, she's, they're going to</li>
+                    <li>"Gonna" es informal (¡no en exámenes!)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Nav -->
+        <div class="bottom-nav">
+            <button class="nav-btn prev" id="prevBtn" onclick="prevStep()" disabled>← Anterior</button>
+            <span class="step-ind"><span id="currentStep">1</span>/5</span>
+            <button class="nav-btn next" id="nextBtn" onclick="nextStep()">Siguiente →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 5;
+        const scores = {1:0, 2:0, 3:0, 4:0, 5:0};
+        const answered = {};
+
+        function goToStep(step) {
+            if (step < 1 || step > totalSteps) return;
+            
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.querySelectorAll('.step-dot')[currentStep-1].classList.remove('active');
+            
+            if (step > currentStep) {
+                document.querySelectorAll('.step-dot')[currentStep-1].classList.add('completed');
+            }
+            
+            currentStep = step;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            document.querySelectorAll('.step-dot')[currentStep-1].classList.add('active');
+            
+            updateNav();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function nextStep() { if (currentStep < totalSteps) goToStep(currentStep + 1); }
+        function prevStep() { if (currentStep > 1) goToStep(currentStep - 1); }
+
+        function updateNav() {
+            document.getElementById('currentStep').textContent = currentStep;
+            document.getElementById('prevBtn').disabled = currentStep === 1;
+            document.getElementById('nextBtn').disabled = currentStep === totalSteps;
+            document.getElementById('nextBtn').textContent = currentStep === totalSteps ? '✓ Fin' : 'Siguiente →';
+        }
+
+        function check(id, sel, correct) {
+            if (answered[id]) return;
+            answered[id] = true;
+            
+            const ex = document.getElementById(id);
+            const btns = ex.querySelectorAll('.opt-btn');
+            const fbCorrect = document.getElementById(`fb-${id}`);
+            const fbIncorrect = document.getElementById(`fbi-${id}`);
+            
+            btns.forEach(b => b.disabled = true);
+            
+            const stepNum = parseInt(id.split('-')[0].replace('ex',''));
+            
+            if (sel === correct) {
+                ex.classList.add('correct');
+                btns.forEach(b => { 
+                    if (b.textContent.startsWith(sel+')')) b.classList.add('sel-correct'); 
+                });
+                fbCorrect.classList.add('show');
+                scores[stepNum]++;
+            } else {
+                ex.classList.add('incorrect');
+                btns.forEach(b => {
+                    if (b.textContent.startsWith(sel+')')) b.classList.add('sel-wrong');
+                    if (b.textContent.startsWith(correct+')')) b.classList.add('show-correct');
+                });
+                fbIncorrect.classList.add('show');
+            }
+            
+            document.getElementById(`score${stepNum}`).textContent = `${scores[stepNum]}/5`;
+        }
+
+        updateNav();
+    </script>
+</body>
+</html>
