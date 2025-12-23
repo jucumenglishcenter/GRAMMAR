@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past Simple Irregulars | Pre-A1 M6 | JUCUM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            min-height: 100vh;
+            padding: 15px;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Header Compacto */
+        .header {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(253, 160, 133, 0.4);
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 3px;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            color: white;
+        }
+
+        /* Progress Nav */
+        .progress-nav {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+
+        .step-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #fda085;
+            background: white;
+            color: #fda085;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+
+        .step-dot.active {
+            background: #fda085;
+            color: white;
+        }
+
+        .step-dot.completed {
+            background: #e65100;
+            color: white;
+            border-color: #e65100;
+        }
+
+        /* Step Card */
+        .step-card {
+            display: none;
+            background: white;
+            border-radius: 16px;
+            padding: 20px 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+
+        .step-card.active {
+            display: block;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #fff8e1;
+        }
+
+        .step-icon {
+            font-size: 1.8rem;
+        }
+
+        .step-title {
+            color: #e65100;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Visual Comparison Box */
+        .compare-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .compare-item {
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .compare-item.yellow {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border: 2px solid #f6d365;
+        }
+
+        .compare-item.orange {
+            background: linear-gradient(135deg, #ffe0b2 0%, #ffcc80 100%);
+            border: 2px solid #ffa726;
+        }
+
+        .compare-item .icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .compare-item .label {
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .compare-item.yellow .label { color: #e65100; }
+        .compare-item.orange .label { color: #e65100; }
+
+        .compare-item ul {
+            list-style: none;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        .compare-item li {
+            padding: 3px 0;
+        }
+
+        /* Quick Examples */
+        .quick-example {
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quick-example .emoji {
+            font-size: 1.3rem;
+        }
+
+        .quick-example .text {
+            flex: 1;
+        }
+
+        .quick-example .en {
+            color: #e65100;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .quick-example .es {
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        .quick-example.wrong {
+            background: #ffebee;
+            border-left: 3px solid #f44336;
+        }
+
+        .quick-example.right {
+            background: #fff8e1;
+            border-left: 3px solid #fda085;
+        }
+
+        /* Mini Table */
+        .mini-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 0.8rem;
+        }
+
+        .mini-table th {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            color: white;
+            padding: 8px 6px;
+            text-align: center;
+        }
+
+        .mini-table td {
+            padding: 8px 6px;
+            border-bottom: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .mini-table tr:nth-child(even) {
+            background: #fff8e1;
+        }
+
+        /* Tip Box Compacto */
+        .tip-box {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin: 10px 0;
+            font-size: 0.85rem;
+            border-left: 3px solid #fbc02d;
+        }
+
+        .tip-box strong {
+            color: #f57f17;
+        }
+
+        /* Rule Box */
+        .rule-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+            text-align: center;
+            border: 2px solid #42a5f5;
+        }
+
+        .rule-box .formula {
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #1565c0;
+            font-weight: 600;
+        }
+
+        /* Word Grid Compacto */
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+            margin: 10px 0;
+        }
+
+        .word-tag {
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .word-tag.base {
+            background: #fff8e1;
+            color: #e65100;
+            border: 1px solid #f6d365;
+        }
+
+        .word-tag.past {
+            background: #ffe0b2;
+            color: #e65100;
+            border: 1px solid #ffa726;
+        }
+
+        /* Alert Box */
+        .alert-box {
+            background: #ffebee;
+            border: 2px solid #ef5350;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .alert-box .title {
+            color: #c62828;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+        }
+
+        /* Exercise Section */
+        .exercise-section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px dashed #ffecb3;
+        }
+
+        .exercise-section h3 {
+            color: #e65100;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .exercise {
+            background: #fafafa;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .exercise.correct {
+            border-color: #4caf50;
+            background: #e8f5e9;
+        }
+
+        .exercise.incorrect {
+            border-color: #f44336;
+            background: #ffebee;
+        }
+
+        .exercise-q {
+            font-size: 0.9rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .exercise-q strong {
+            color: #e65100;
+        }
+
+        .opts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        .opt-btn {
+            padding: 10px 8px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            color: #555;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .opt-btn:hover:not(:disabled) {
+            border-color: #fda085;
+            background: #fff8e1;
+        }
+
+        .opt-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .opt-btn.sel-correct {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+
+        .opt-btn.sel-wrong {
+            background: #f44336;
+            color: white;
+            border-color: #f44336;
+        }
+
+        .opt-btn.show-correct {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+
+        /* Feedback mejorado */
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct-fb {
+            background: #e8f5e9;
+            border: 1px solid #a5d6a7;
+        }
+
+        .feedback.incorrect-fb {
+            background: #ffebee;
+            border: 1px solid #ef9a9a;
+        }
+
+        .feedback .result {
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .feedback.correct-fb .result {
+            color: #2e7d32;
+        }
+
+        .feedback.incorrect-fb .result {
+            color: #c62828;
+        }
+
+        .feedback .explanation {
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .feedback .why-correct {
+            color: #2e7d32;
+            margin-bottom: 4px;
+        }
+
+        .feedback .why-wrong {
+            color: #c62828;
+        }
+
+        /* Score */
+        .score-box {
+            text-align: center;
+            padding: 12px;
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border-radius: 10px;
+            margin-top: 12px;
+        }
+
+        .score-box .num {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e65100;
+        }
+
+        .score-box .label {
+            font-size: 0.8rem;
+            color: #fda085;
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 12px 15px;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .nav-btn.prev {
+            background: #e0e0e0;
+            color: #666;
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            color: white;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .step-ind {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* Summary List */
+        .summary-list {
+            list-style: none;
+        }
+
+        .summary-list li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .summary-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #fda085;
+            font-weight: bold;
+        }
+
+        /* Verb Card */
+        .verb-card {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 2px solid #f6d365;
+        }
+
+        .verb-card .base {
+            font-weight: 600;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .verb-card .arrow {
+            color: #fda085;
+            font-size: 1.2rem;
+        }
+
+        .verb-card .past {
+            font-weight: 700;
+            color: #e65100;
+            font-size: 0.9rem;
+        }
+
+        .verb-card .meaning {
+            font-size: 0.75rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🔄 Past Simple - Irregulars</h1>
+            <div class="badge">💛 Pre-A1 • M6 • Tema 1</div>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-nav">
+            <div class="step-dot active" onclick="goToStep(1)">1</div>
+            <div class="step-dot" onclick="goToStep(2)">2</div>
+            <div class="step-dot" onclick="goToStep(3)">3</div>
+            <div class="step-dot" onclick="goToStep(4)">4</div>
+            <div class="step-dot" onclick="goToStep(5)">5</div>
+        </div>
+
+        <!-- STEP 1: Repaso en Español -->
+        <div class="step-card active" id="step1">
+            <div class="step-header">
+                <span class="step-icon">🇪🇸</span>
+                <span class="step-title">Paso 1: Repaso en Español</span>
+            </div>
+
+            <p style="font-size: 0.9rem; color: #555; margin-bottom: 15px;">
+                En español, los verbos <strong>irregulares</strong> en pasado no siguen las reglas normales. 
+                ¡En inglés pasa lo mismo!
+            </p>
+
+            <div class="compare-box">
+                <div class="compare-item yellow">
+                    <div class="icon">📐</div>
+                    <div class="label">REGULARES</div>
+                    <ul>
+                        <li>Siguen reglas</li>
+                        <li>walk → walked</li>
+                        <li>play → played</li>
+                    </ul>
+                </div>
+                <div class="compare-item orange">
+                    <div class="icon">🎭</div>
+                    <div class="label">IRREGULARES</div>
+                    <ul>
+                        <li>¡Cambian!</li>
+                        <li>go → went</li>
+                        <li>have → had</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="quick-example">
+                <span class="emoji">🇪🇸</span>
+                <div class="text">
+                    <div class="en">ir → fui (no "irí")</div>
+                    <div class="es">¡En español también hay irregulares!</div>
+                </div>
+            </div>
+
+            <div class="quick-example">
+                <span class="emoji">🇬🇧</span>
+                <div class="text">
+                    <div class="en">go → went (no "goed")</div>
+                    <div class="es">¡En inglés es igual!</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Clave:</strong> Los verbos irregulares NO usan "-ed". 
+                Tienen su propia forma especial que debes memorizar.
+            </div>
+
+            <!-- Exercises Step 1 -->
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex1-1">
+                    <div class="exercise-q">1. En español, "ir" en pasado es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-1','a','a')">a) fui</button>
+                        <button class="opt-btn" onclick="check('ex1-1','b','a')">b) irí</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "Fui" es la forma correcta - es un verbo irregular.</div>
+                            <div class="why-wrong">✗ "Irí" no existe porque "ir" es irregular.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ La correcta es "fui" - es irregular.</div>
+                            <div class="why-wrong">✗ "Irí" no existe en español.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-2">
+                    <div class="exercise-q">2. Los verbos irregulares en inglés usan "-ed":</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-2','a','b')">a) Sí</button>
+                        <button class="opt-btn" onclick="check('ex1-2','b','b')">b) No</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Los irregulares NO usan "-ed", tienen formas especiales.</div>
+                            <div class="why-wrong">✗ Solo los regulares usan "-ed".</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Los irregulares NO usan "-ed".</div>
+                            <div class="why-wrong">✗ "-ed" es solo para verbos regulares.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-3">
+                    <div class="exercise-q">3. "Go" en pasado es "goed":</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-3','a','b')">a) Verdadero</button>
+                        <button class="opt-btn" onclick="check('ex1-3','b','b')">b) Falso</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "Go" es irregular → "went" (no "goed").</div>
+                            <div class="why-wrong">✗ "Goed" NO existe en inglés.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Es FALSO. "Go" → "went".</div>
+                            <div class="why-wrong">✗ "Goed" no existe, es irregular.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-4">
+                    <div class="exercise-q">4. ¿Por qué "go" no usa "-ed"?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-4','a','b')">a) Es muy corto</button>
+                        <button class="opt-btn" onclick="check('ex1-4','b','b')">b) Es irregular</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "Go" es irregular, por eso cambia a "went".</div>
+                            <div class="why-wrong">✗ La longitud no importa, solo si es regular o irregular.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Es porque es IRREGULAR.</div>
+                            <div class="why-wrong">✗ La longitud no determina si usa "-ed".</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-5">
+                    <div class="exercise-q">5. "Have" en pasado es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-5','a','b')">a) haved</button>
+                        <button class="opt-btn" onclick="check('ex1-5','b','b')">b) had</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "Have" → "had" (es irregular).</div>
+                            <div class="why-wrong">✗ "Haved" NO existe.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ La correcta es "had".</div>
+                            <div class="why-wrong">✗ "Haved" no existe, "have" es irregular.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score1">0/5</div>
+                    <div class="label">Paso 1</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2: Similitudes -->
+        <div class="step-card" id="step2">
+            <div class="step-header">
+                <span class="step-icon">🤝</span>
+                <span class="step-title">Paso 2: Similitudes ESP ↔ ENG</span>
+            </div>
+
+            <p style="font-size: 0.9rem; color: #555; margin-bottom: 15px;">
+                ¡Buenas noticias! El español y el inglés comparten algo importante:
+            </p>
+
+            <table class="mini-table">
+                <tr>
+                    <th>Español</th>
+                    <th>English</th>
+                </tr>
+                <tr>
+                    <td>ir → fui</td>
+                    <td>go → went</td>
+                </tr>
+                <tr>
+                    <td>tener → tuve</td>
+                    <td>have → had</td>
+                </tr>
+                <tr>
+                    <td>hacer → hice</td>
+                    <td>do/make → did/made</td>
+                </tr>
+                <tr>
+                    <td>ver → vi</td>
+                    <td>see → saw</td>
+                </tr>
+            </table>
+
+            <div class="quick-example right">
+                <span class="emoji">✅</span>
+                <div class="text">
+                    <div class="en">Ambos idiomas tienen irregulares</div>
+                    <div class="es">¡Ya conoces el concepto!</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">✅</span>
+                <div class="text">
+                    <div class="en">La forma es igual para todos</div>
+                    <div class="es">I went, you went, he went...</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Ventaja:</strong> En inglés, los verbos irregulares son IGUALES 
+                para todas las personas. ¡No hay conjugaciones como en español!
+            </div>
+
+            <!-- Exercises Step 2 -->
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex2-1">
+                    <div class="exercise-q">1. En inglés, "went" se usa para:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-1','a','b')">a) Solo "I"</button>
+                        <button class="opt-btn" onclick="check('ex2-1','b','b')">b) Todas las personas</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "Went" es igual para I, you, he, she, it, we, they.</div>
+                            <div class="why-wrong">✗ No cambia según la persona como en español.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "Went" funciona para TODAS las personas.</div>
+                            <div class="why-wrong">✗ En inglés no hay conjugaciones diferentes.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-2">
+                    <div class="exercise-q">2. "She went" y "They went" son:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-2','a','a')">a) Correctos</button>
+                        <button class="opt-btn" onclick="check('ex2-2','b','a')">b) Incorrectos</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Ambos son correctos - "went" no cambia.</div>
+                            <div class="why-wrong">✗ En español sí cambia (fue/fueron), pero en inglés no.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Ambos son CORRECTOS.</div>
+                            <div class="why-wrong">✗ "Went" es igual para todas las personas.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-3">
+                    <div class="exercise-q">3. ¿Qué tienen en común español e inglés?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-3','a','a')">a) Verbos irregulares</button>
+                        <button class="opt-btn" onclick="check('ex2-3','b','a')">b) Solo regulares</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Ambos idiomas tienen verbos irregulares en pasado.</div>
+                            <div class="why-wrong">✗ Los dos idiomas tienen regulares E irregulares.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Comparten verbos IRREGULARES.</div>
+                            <div class="why-wrong">✗ Ambos idiomas tienen los dos tipos.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-4">
+                    <div class="exercise-q">4. "I had" y "We had" - el verbo:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-4','a','b')">a) Cambia</button>
+                        <button class="opt-btn" onclick="check('ex2-4','b','b')">b) Es igual</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "Had" es igual para todas las personas.</div>
+                            <div class="why-wrong">✗ En inglés pasado, los verbos no conjugan.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Es IGUAL - "had" no cambia.</div>
+                            <div class="why-wrong">✗ A diferencia del español, no hay conjugación.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-5">
+                    <div class="exercise-q">5. Comparado con español, inglés es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-5','a','a')">a) Más simple (1 forma)</button>
+                        <button class="opt-btn" onclick="check('ex2-5','b','a')">b) Más complejo</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ ¡Solo una forma! went = fui/fuiste/fue/fuimos/fueron.</div>
+                            <div class="why-wrong">✗ Español tiene muchas conjugaciones, inglés solo una.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Es MÁS SIMPLE - una sola forma para todos.</div>
+                            <div class="why-wrong">✗ Español es más complejo con sus conjugaciones.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score2">0/5</div>
+                    <div class="label">Paso 2</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3: Diferencias -->
+        <div class="step-card" id="step3">
+            <div class="step-header">
+                <span class="step-icon">⚠️</span>
+                <span class="step-title">Paso 3: ¡Cuidado! Diferencias</span>
+            </div>
+
+            <div class="alert-box">
+                <div class="title">🚨 ERROR COMÚN</div>
+                Agregar "-ed" a verbos irregulares: "goed" ❌ "haved" ❌
+            </div>
+
+            <p style="font-size: 0.85rem; color: #555; margin: 15px 0;">
+                <strong>Debes memorizar</strong> estos verbos irregulares comunes:
+            </p>
+
+            <div class="verb-card">
+                <div>
+                    <span class="base">go</span>
+                    <span class="meaning">(ir)</span>
+                </div>
+                <span class="arrow">→</span>
+                <span class="past">went</span>
+            </div>
+
+            <div class="verb-card">
+                <div>
+                    <span class="base">have</span>
+                    <span class="meaning">(tener)</span>
+                </div>
+                <span class="arrow">→</span>
+                <span class="past">had</span>
+            </div>
+
+            <div class="verb-card">
+                <div>
+                    <span class="base">do</span>
+                    <span class="meaning">(hacer)</span>
+                </div>
+                <span class="arrow">→</span>
+                <span class="past">did</span>
+            </div>
+
+            <div class="verb-card">
+                <div>
+                    <span class="base">see</span>
+                    <span class="meaning">(ver)</span>
+                </div>
+                <span class="arrow">→</span>
+                <span class="past">saw</span>
+            </div>
+
+            <div class="verb-card">
+                <div>
+                    <span class="base">get</span>
+                    <span class="meaning">(obtener)</span>
+                </div>
+                <span class="arrow">→</span>
+                <span class="past">got</span>
+            </div>
+
+            <div class="verb-card">
+                <div>
+                    <span class="base">come</span>
+                    <span class="meaning">(venir)</span>
+                </div>
+                <span class="arrow">→</span>
+                <span class="past">came</span>
+            </div>
+
+            <div class="quick-example wrong">
+                <span class="emoji">❌</span>
+                <div class="text">
+                    <div class="en">I goed to school</div>
+                    <div class="es">INCORRECTO - "goed" no existe</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">✅</span>
+                <div class="text">
+                    <div class="en">I went to school</div>
+                    <div class="es">Fui a la escuela</div>
+                </div>
+            </div>
+
+            <!-- Exercises Step 3 -->
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex3-1">
+                    <div class="exercise-q">1. "Go" en pasado es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-1','a','b')">a) goed</button>
+                        <button class="opt-btn" onclick="check('ex3-1','b','b')">b) went</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "Go" → "went" (irregular).</div>
+                            <div class="why-wrong">✗ "Goed" NO existe en inglés.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ La correcta es "went".</div>
+                            <div class="why-wrong">✗ "Goed" es un error común de principiantes.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-2">
+                    <div class="exercise-q">2. "See" en pasado es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-2','a','a')">a) saw</button>
+                        <button class="opt-btn" onclick="check('ex3-2','b','a')">b) seed</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "See" → "saw" (irregular).</div>
+                            <div class="why-wrong">✗ "Seed" significa "semilla", no es el pasado de "see".</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ La correcta es "saw".</div>
+                            <div class="why-wrong">✗ "Seed" es una palabra diferente (semilla).</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-3">
+                    <div class="exercise-q">3. "Do" en pasado es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-3','a','b')">a) doed</button>
+                        <button class="opt-btn" onclick="check('ex3-3','b','b')">b) did</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "Do" → "did" (muy importante para preguntas).</div>
+                            <div class="why-wrong">✗ "Doed" NO existe.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ La correcta es "did".</div>
+                            <div class="why-wrong">✗ "Doed" no existe en inglés.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-4">
+                    <div class="exercise-q">4. "Come" en pasado es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-4','a','a')">a) came</button>
+                        <button class="opt-btn" onclick="check('ex3-4','b','a')">b) comed</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "Come" → "came" (irregular).</div>
+                            <div class="why-wrong">✗ "Comed" NO existe.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ La correcta es "came".</div>
+                            <div class="why-wrong">✗ "Comed" es un error - come es irregular.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-5">
+                    <div class="exercise-q">5. "Get" en pasado es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-5','a','b')">a) getted</button>
+                        <button class="opt-btn" onclick="check('ex3-5','b','b')">b) got</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "Get" → "got" (muy común en inglés).</div>
+                            <div class="why-wrong">✗ "Getted" NO existe.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ La correcta es "got".</div>
+                            <div class="why-wrong">✗ "Getted" no existe - get es irregular.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score3">0/5</div>
+                    <div class="label">Paso 3</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4: Consejos -->
+        <div class="step-card" id="step4">
+            <div class="step-header">
+                <span class="step-icon">💡</span>
+                <span class="step-title">Paso 4: Consejos Prácticos</span>
+            </div>
+
+            <div class="rule-box">
+                <div class="formula">🧠 MEMORIZA los 6 más comunes:</div>
+                <div style="font-size: 0.8rem; color: #666; margin-top: 5px;">
+                    go→went | have→had | do→did | see→saw | get→got | come→came
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Tip 1:</strong> Practica con frases, no solo palabras sueltas.
+                "I went to school" es más fácil de recordar.
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Tip 2:</strong> Crea asociaciones mentales:
+                <br>• go/went - suena como "vent" (viento) que te lleva
+                <br>• see/saw - "saw" también es "sierra" (herramienta)
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Tip 3:</strong> Si no recuerdas, NO agregues "-ed".
+                Es mejor decir "go" que decir "goed".
+            </div>
+
+            <table class="mini-table">
+                <tr>
+                    <th>Base</th>
+                    <th>Past</th>
+                    <th>Ejemplo</th>
+                </tr>
+                <tr>
+                    <td>go</td>
+                    <td>went</td>
+                    <td>I went home</td>
+                </tr>
+                <tr>
+                    <td>have</td>
+                    <td>had</td>
+                    <td>She had a dog</td>
+                </tr>
+                <tr>
+                    <td>do</td>
+                    <td>did</td>
+                    <td>He did his job</td>
+                </tr>
+                <tr>
+                    <td>see</td>
+                    <td>saw</td>
+                    <td>We saw a game</td>
+                </tr>
+                <tr>
+                    <td>get</td>
+                    <td>got</td>
+                    <td>I got a book</td>
+                </tr>
+                <tr>
+                    <td>come</td>
+                    <td>came</td>
+                    <td>They came early</td>
+                </tr>
+            </table>
+
+            <!-- Exercises Step 4 -->
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex4-1">
+                    <div class="exercise-q">1. Completa: "I ___ to school yesterday."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-1','a','a')">a) went</button>
+                        <button class="opt-btn" onclick="check('ex4-1','b','a')">b) goed</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "I went to school yesterday" - go→went.</div>
+                            <div class="why-wrong">✗ "Goed" no existe en inglés.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ La correcta es "went".</div>
+                            <div class="why-wrong">✗ Recuerda: go es irregular.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-2">
+                    <div class="exercise-q">2. Completa: "She ___ a dog."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-2','a','b')">a) haved</button>
+                        <button class="opt-btn" onclick="check('ex4-2','b','b')">b) had</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "She had a dog" - have→had.</div>
+                            <div class="why-wrong">✗ "Haved" no existe.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ La correcta es "had".</div>
+                            <div class="why-wrong">✗ Have es irregular: have→had.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-3">
+                    <div class="exercise-q">3. Completa: "We ___ a good game."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-3','a','a')">a) saw</button>
+                        <button class="opt-btn" onclick="check('ex4-3','b','a')">b) seed</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "We saw a good game" - see→saw.</div>
+                            <div class="why-wrong">✗ "Seed" significa semilla, no es el pasado de see.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ La correcta es "saw".</div>
+                            <div class="why-wrong">✗ "Seed" es otra palabra (semilla).</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-4">
+                    <div class="exercise-q">4. Completa: "He ___ his job well."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-4','a','b')">a) doed</button>
+                        <button class="opt-btn" onclick="check('ex4-4','b','b')">b) did</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "He did his job well" - do→did.</div>
+                            <div class="why-wrong">✗ "Doed" no existe.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ La correcta es "did".</div>
+                            <div class="why-wrong">✗ Do es irregular: do→did.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-5">
+                    <div class="exercise-q">5. Completa: "They ___ early."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-5','a','a')">a) came</button>
+                        <button class="opt-btn" onclick="check('ex4-5','b','a')">b) comed</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "They came early" - come→came.</div>
+                            <div class="why-wrong">✗ "Comed" no existe.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ La correcta es "came".</div>
+                            <div class="why-wrong">✗ Come es irregular: come→came.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score4">0/5</div>
+                    <div class="label">Paso 4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 5: Práctica Final -->
+        <div class="step-card" id="step5">
+            <div class="step-header">
+                <span class="step-icon">✨</span>
+                <span class="step-title">Paso 5: Práctica Final</span>
+            </div>
+
+            <div class="rule-box">
+                <div class="formula">
+                    🔄 Verbos Irregulares Comunes<br>
+                    go→went | have→had | do→did<br>
+                    see→saw | get→got | come→came
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">🏫</span>
+                <div class="text">
+                    <div class="en">I <strong>went</strong> to school.</div>
+                    <div class="es">Fui a la escuela.</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">🐕</span>
+                <div class="text">
+                    <div class="en">She <strong>had</strong> a dog.</div>
+                    <div class="es">Ella tenía un perro.</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">👀</span>
+                <div class="text">
+                    <div class="en">We <strong>saw</strong> a good game.</div>
+                    <div class="es">Vimos un buen juego.</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">📚</span>
+                <div class="text">
+                    <div class="en">He <strong>got</strong> a book.</div>
+                    <div class="es">Él consiguió un libro.</div>
+                </div>
+            </div>
+
+            <!-- Exercises Step 5 -->
+            <div class="exercise-section">
+                <h3>✏️ Práctica Final</h3>
+
+                <div class="exercise" id="ex5-1">
+                    <div class="exercise-q">1. My dad ___ to the house. (ir)</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-1','a','a')">a) went</button>
+                        <button class="opt-btn" onclick="check('ex5-1','b','a')">b) goed</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "My dad went to the house" - go→went.</div>
+                            <div class="why-wrong">✗ "Goed" no existe en inglés.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ La correcta es "went".</div>
+                            <div class="why-wrong">✗ Go es irregular, no usa "-ed".</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-2">
+                    <div class="exercise-q">2. I ___ a good book. (obtener)</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-2','a','b')">a) getted</button>
+                        <button class="opt-btn" onclick="check('ex5-2','b','b')">b) got</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "I got a good book" - get→got.</div>
+                            <div class="why-wrong">✗ "Getted" no existe.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ La correcta es "got".</div>
+                            <div class="why-wrong">✗ Get es irregular: get→got.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-3">
+                    <div class="exercise-q">3. We ___ a nice dog. (ver)</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-3','a','a')">a) saw</button>
+                        <button class="opt-btn" onclick="check('ex5-3','b','a')">b) seed</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "We saw a nice dog" - see→saw.</div>
+                            <div class="why-wrong">✗ "Seed" significa semilla.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ La correcta es "saw".</div>
+                            <div class="why-wrong">✗ See es irregular: see→saw.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-4">
+                    <div class="exercise-q">4. She ___ a happy family. (tener)</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-4','a','a')">a) had</button>
+                        <button class="opt-btn" onclick="check('ex5-4','b','a')">b) haved</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "She had a happy family" - have→had.</div>
+                            <div class="why-wrong">✗ "Haved" no existe.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ La correcta es "had".</div>
+                            <div class="why-wrong">✗ Have es irregular: have→had.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-5">
+                    <div class="exercise-q">5. They ___ to help. (venir)</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-5','a','b')">a) comed</button>
+                        <button class="opt-btn" onclick="check('ex5-5','b','b')">b) came</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "They came to help" - come→came.</div>
+                            <div class="why-wrong">✗ "Comed" no existe.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ La correcta es "came".</div>
+                            <div class="why-wrong">✗ Come es irregular: come→came.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score5">0/5</div>
+                    <div class="label">Paso 5</div>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%); border-radius: 12px;">
+                <h3 style="color: #e65100; font-size: 0.95rem; margin-bottom: 10px;">🎯 Resumen</h3>
+                <ul class="summary-list">
+                    <li><strong>Irregulares:</strong> NO usan "-ed"</li>
+                    <li><strong>go → went</strong> (ir → fui)</li>
+                    <li><strong>have → had</strong> (tener → tuve)</li>
+                    <li><strong>do → did</strong> (hacer → hice)</li>
+                    <li><strong>see → saw</strong> (ver → vi)</li>
+                    <li><strong>get → got</strong> (obtener → obtuve)</li>
+                    <li><strong>come → came</strong> (venir → vine)</li>
+                    <li>¡Misma forma para todas las personas!</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Nav -->
+        <div class="bottom-nav">
+            <button class="nav-btn prev" id="prevBtn" onclick="prevStep()" disabled>← Anterior</button>
+            <span class="step-ind"><span id="currentStep">1</span>/5</span>
+            <button class="nav-btn next" id="nextBtn" onclick="nextStep()">Siguiente →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 5;
+        const scores = {1:0, 2:0, 3:0, 4:0, 5:0};
+        const answered = {};
+
+        function goToStep(step) {
+            if (step < 1 || step > totalSteps) return;
+            
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.querySelectorAll('.step-dot')[currentStep-1].classList.remove('active');
+            
+            if (step > currentStep) {
+                document.querySelectorAll('.step-dot')[currentStep-1].classList.add('completed');
+            }
+            
+            currentStep = step;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            document.querySelectorAll('.step-dot')[currentStep-1].classList.add('active');
+            
+            updateNav();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function nextStep() { if (currentStep < totalSteps) goToStep(currentStep + 1); }
+        function prevStep() { if (currentStep > 1) goToStep(currentStep - 1); }
+
+        function updateNav() {
+            document.getElementById('currentStep').textContent = currentStep;
+            document.getElementById('prevBtn').disabled = currentStep === 1;
+            document.getElementById('nextBtn').disabled = currentStep === totalSteps;
+            document.getElementById('nextBtn').textContent = currentStep === totalSteps ? '✓ Fin' : 'Siguiente →';
+        }
+
+        function check(id, sel, correct) {
+            if (answered[id]) return;
+            answered[id] = true;
+            
+            const ex = document.getElementById(id);
+            const btns = ex.querySelectorAll('.opt-btn');
+            const fbCorrect = document.getElementById(`fb-${id}`);
+            const fbIncorrect = document.getElementById(`fbi-${id}`);
+            
+            btns.forEach(b => b.disabled = true);
+            
+            const stepNum = parseInt(id.split('-')[0].replace('ex',''));
+            
+            if (sel === correct) {
+                ex.classList.add('correct');
+                btns.forEach(b => { 
+                    if (b.textContent.startsWith(sel+')')) b.classList.add('sel-correct'); 
+                });
+                fbCorrect.classList.add('show');
+                scores[stepNum]++;
+            } else {
+                ex.classList.add('incorrect');
+                btns.forEach(b => {
+                    if (b.textContent.startsWith(sel+')')) b.classList.add('sel-wrong');
+                    if (b.textContent.startsWith(correct+')')) b.classList.add('show-correct');
+                });
+                fbIncorrect.classList.add('show');
+            }
+            
+            document.getElementById(`score${stepNum}`).textContent = `${scores[stepNum]}/5`;
+        }
+
+        updateNav();
+    </script>
+</body>
+</html>
