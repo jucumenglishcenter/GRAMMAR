@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparatives | A1-Beg M5 | JUCUM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffe8ec 0%, #ffdde1 100%);
+            min-height: 100vh;
+            padding: 15px;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%);
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(238, 156, 167, 0.4);
+        }
+
+        .header h1 {
+            color: #8b3a4a;
+            font-size: 1.2rem;
+            margin-bottom: 3px;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: rgba(139, 58, 74, 0.2);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            color: #8b3a4a;
+        }
+
+        .progress-nav {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+
+        .step-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #ee9ca7;
+            background: white;
+            color: #ee9ca7;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+
+        .step-dot.active {
+            background: #ee9ca7;
+            color: white;
+        }
+
+        .step-dot.completed {
+            background: #d4818e;
+            color: white;
+            border-color: #d4818e;
+        }
+
+        .step-card {
+            display: none;
+            background: white;
+            border-radius: 16px;
+            padding: 20px 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+
+        .step-card.active {
+            display: block;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ffe8ec;
+        }
+
+        .step-icon {
+            font-size: 1.8rem;
+        }
+
+        .step-title {
+            color: #8b3a4a;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .compare-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .compare-item {
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .compare-item.pink {
+            background: linear-gradient(135deg, #ffdde1 0%, #ffccd5 100%);
+            border: 2px solid #ee9ca7;
+        }
+
+        .compare-item.blue {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border: 2px solid #64b5f6;
+        }
+
+        .compare-item .icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .compare-item .label {
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .compare-item.pink .label { color: #8b3a4a; }
+        .compare-item.blue .label { color: #1565c0; }
+
+        .compare-item ul {
+            list-style: none;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        .compare-item li {
+            padding: 3px 0;
+        }
+
+        .quick-example {
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quick-example .emoji {
+            font-size: 1.3rem;
+        }
+
+        .quick-example .text {
+            flex: 1;
+        }
+
+        .quick-example .en {
+            color: #8b3a4a;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .quick-example .es {
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        .quick-example.wrong {
+            background: #ffebee;
+            border-left: 3px solid #f44336;
+        }
+
+        .quick-example.right {
+            background: #e8f5e9;
+            border-left: 3px solid #4caf50;
+        }
+
+        .mini-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 0.8rem;
+        }
+
+        .mini-table th {
+            background: #ee9ca7;
+            color: white;
+            padding: 8px 6px;
+            text-align: center;
+        }
+
+        .mini-table td {
+            padding: 8px 6px;
+            border-bottom: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .mini-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin: 10px 0;
+            font-size: 0.85rem;
+            border-left: 3px solid #fbc02d;
+        }
+
+        .tip-box strong {
+            color: #f57f17;
+        }
+
+        .rule-box {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+            text-align: center;
+            border: 2px solid #ee9ca7;
+        }
+
+        .rule-box .formula {
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #8b3a4a;
+            font-weight: 600;
+        }
+
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin: 10px 0;
+        }
+
+        .word-tag {
+            padding: 6px 8px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .word-tag.short {
+            background: #ffdde1;
+            color: #8b3a4a;
+        }
+
+        .word-tag.long {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .alert-box {
+            background: #ffebee;
+            border: 2px solid #ef5350;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .alert-box .title {
+            color: #c62828;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+        }
+
+        .exercise-section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px dashed #ffdde1;
+        }
+
+        .exercise-section h3 {
+            color: #d4818e;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .exercise {
+            background: #fafafa;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .exercise.correct {
+            border-color: #4caf50;
+            background: #e8f5e9;
+        }
+
+        .exercise.incorrect {
+            border-color: #f44336;
+            background: #ffebee;
+        }
+
+        .exercise-q {
+            font-size: 0.9rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .exercise-q strong {
+            color: #8b3a4a;
+        }
+
+        .opts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        .opt-btn {
+            padding: 10px 8px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            color: #555;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .opt-btn:hover:not(:disabled) {
+            border-color: #ee9ca7;
+            background: #ffe8ec;
+        }
+
+        .opt-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .opt-btn.sel-correct {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+
+        .opt-btn.sel-wrong {
+            background: #f44336;
+            color: white;
+            border-color: #f44336;
+        }
+
+        .opt-btn.show-correct {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct-fb {
+            background: #e8f5e9;
+            border: 1px solid #a5d6a7;
+        }
+
+        .feedback.incorrect-fb {
+            background: #ffebee;
+            border: 1px solid #ef9a9a;
+        }
+
+        .feedback .result {
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .feedback.correct-fb .result {
+            color: #2e7d32;
+        }
+
+        .feedback.incorrect-fb .result {
+            color: #c62828;
+        }
+
+        .feedback .explanation {
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .feedback .why-correct {
+            color: #2e7d32;
+            margin-bottom: 4px;
+        }
+
+        .feedback .why-wrong {
+            color: #c62828;
+        }
+
+        .score-box {
+            text-align: center;
+            padding: 12px;
+            background: linear-gradient(135deg, #ffe8ec 0%, #ffdde1 100%);
+            border-radius: 10px;
+            margin-top: 12px;
+        }
+
+        .score-box .num {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8b3a4a;
+        }
+
+        .score-box .label {
+            font-size: 0.8rem;
+            color: #ee9ca7;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 12px 15px;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .nav-btn.prev {
+            background: #e0e0e0;
+            color: #666;
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, #ee9ca7 0%, #d4818e 100%);
+            color: white;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .step-ind {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .summary-list {
+            list-style: none;
+        }
+
+        .summary-list li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .summary-list li:before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            color: #ee9ca7;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Comparatives (-er / more...than)</h1>
+            <div class="badge">🍑 A1-Beginner • M5 • Tema 1</div>
+        </div>
+
+        <div class="progress-nav">
+            <div class="step-dot active" onclick="goToStep(1)">1</div>
+            <div class="step-dot" onclick="goToStep(2)">2</div>
+            <div class="step-dot" onclick="goToStep(3)">3</div>
+            <div class="step-dot" onclick="goToStep(4)">4</div>
+            <div class="step-dot" onclick="goToStep(5)">5</div>
+        </div>
+
+        <!-- STEP 1 -->
+        <div class="step-card active" id="step1">
+            <div class="step-header">
+                <span class="step-icon">🇪🇸</span>
+                <span class="step-title">Paso 1: Repaso en Español</span>
+            </div>
+
+            <p style="font-size: 0.85rem; color: #555; margin-bottom: 12px;">
+                En español usamos <strong>"más... que"</strong> para comparar dos cosas o personas.
+            </p>
+
+            <div class="compare-box">
+                <div class="compare-item pink">
+                    <div class="icon">📏</div>
+                    <div class="label">COMPARAR</div>
+                    <ul>
+                        <li>más + adjetivo</li>
+                        <li>+ que</li>
+                    </ul>
+                </div>
+                <div class="compare-item blue">
+                    <div class="icon">📐</div>
+                    <div class="label">EJEMPLO</div>
+                    <ul>
+                        <li>más alto</li>
+                        <li>que Pedro</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="quick-example">
+                <span class="emoji">🏠</span>
+                <div class="text">
+                    <div class="en">Mi casa es más grande que tu casa.</div>
+                    <div class="es">Comparamos dos casas</div>
+                </div>
+            </div>
+
+            <div class="quick-example">
+                <span class="emoji">👧</span>
+                <div class="text">
+                    <div class="en">María es más alta que Juan.</div>
+                    <div class="es">Comparamos altura de dos personas</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Recuerda:</strong> Siempre comparamos DOS cosas usando "más... que"
+            </div>
+
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex1-1">
+                    <div class="exercise-q">1. ¿Cuál es la estructura correcta en español?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-1','a','a')">a) más + adj + que</button>
+                        <button class="opt-btn" onclick="check('ex1-1','b','a')">b) adj + más + que</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ La estructura es: más + adjetivo + que (más alto que).</div>
+                            <div class="why-wrong">✘ "adj + más + que" invierte el orden incorrecto.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ La correcta es "más + adj + que": más alto que.</div>
+                            <div class="why-wrong">✘ El adjetivo NO va antes de "más" en español.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-2">
+                    <div class="exercise-q">2. Completa: "Mi perro es ___ grande ___ tu gato"</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-2','a','a')">a) más / que</button>
+                        <button class="opt-btn" onclick="check('ex1-2','b','a')">b) que / más</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ "más grande que" es el orden correcto en español.</div>
+                            <div class="why-wrong">✘ "que grande más" no es gramaticalmente correcto.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ La estructura es: más + grande + que.</div>
+                            <div class="why-wrong">✘ Invertiste el orden de "más" y "que".</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-3">
+                    <div class="exercise-q">3. "Esta casa es más nueva que la otra" compara:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-3','a','a')">a) Dos casas</button>
+                        <button class="opt-btn" onclick="check('ex1-3','b','a')">b) Una casa</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ "Esta casa" vs "la otra" = DOS casas comparadas.</div>
+                            <div class="why-wrong">✘ Los comparativos siempre necesitan DOS elementos.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Se comparan DOS casas: "esta" y "la otra".</div>
+                            <div class="why-wrong">✘ No puedes comparar solo una cosa contigo misma.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-4">
+                    <div class="exercise-q">4. ¿Cuál expresa comparación?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-4','a','b')">a) El libro es interesante</button>
+                        <button class="opt-btn" onclick="check('ex1-4','b','b')">b) El libro es más interesante que la película</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Usa "más... que" para comparar libro vs película.</div>
+                            <div class="why-wrong">✘ "Es interesante" solo describe, no compara.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ B usa "más... que" = comparación entre dos cosas.</div>
+                            <div class="why-wrong">✘ A solo describe el libro, no lo compara con nada.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-5">
+                    <div class="exercise-q">5. "Juan corre más rápido que Pedro" - ¿Qué palabra compara?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-5','a','b')">a) corre</button>
+                        <button class="opt-btn" onclick="check('ex1-5','b','b')">b) más rápido que</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ "Más rápido que" es la estructura comparativa.</div>
+                            <div class="why-wrong">✘ "Corre" es solo el verbo, no indica comparación.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ "Más rápido que" es lo que indica comparación.</div>
+                            <div class="why-wrong">✘ "Corre" es solo la acción, no compara nada.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score1">0/5</div>
+                    <div class="label">Paso 1</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step-card" id="step2">
+            <div class="step-header">
+                <span class="step-icon">🤝</span>
+                <span class="step-title">Paso 2: Similitudes ESP ↔ ENG</span>
+            </div>
+
+            <table class="mini-table">
+                <tr>
+                    <th>Similitud</th>
+                    <th>Español</th>
+                    <th>English</th>
+                </tr>
+                <tr>
+                    <td>Estructura básica</td>
+                    <td>más... que</td>
+                    <td>...er than / more... than</td>
+                </tr>
+                <tr>
+                    <td>Compara 2 cosas</td>
+                    <td>A vs B</td>
+                    <td>A vs B</td>
+                </tr>
+                <tr>
+                    <td>Posición</td>
+                    <td>después del verbo</td>
+                    <td>after the verb</td>
+                </tr>
+                <tr>
+                    <td>Palabra clave</td>
+                    <td>"que"</td>
+                    <td>"than"</td>
+                </tr>
+            </table>
+
+            <div class="quick-example right">
+                <span class="emoji">🏠</span>
+                <div class="text">
+                    <div class="en">My house is <strong>bigger than</strong> your house</div>
+                    <div class="es">Mi casa es más grande que tu casa</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">📚</span>
+                <div class="text">
+                    <div class="en">This book is <strong>more interesting than</strong> that one</div>
+                    <div class="es">Este libro es más interesante que ese</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 "Than"</strong> = "que" en comparaciones<br>
+                Siempre va después del comparativo
+            </div>
+
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex2-1">
+                    <div class="exercise-q">1. "Than" en inglés equivale a:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-1','a','a')">a) que</button>
+                        <button class="opt-btn" onclick="check('ex2-1','b','a')">b) más</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ "Than" = "que": bigger than = más grande que.</div>
+                            <div class="why-wrong">✘ "Más" se traduce con -er o "more", no "than".</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ "Than" significa "que" en comparaciones.</div>
+                            <div class="why-wrong">✘ "Más" se expresa con -er o "more" en inglés.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-2">
+                    <div class="exercise-q">2. ¿Cuántas cosas compara "taller than"?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-2','a','b')">a) Una</button>
+                        <button class="opt-btn" onclick="check('ex2-2','b','b')">b) Dos</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Igual que español: comparamos DOS elementos.</div>
+                            <div class="why-wrong">✘ No puedes ser "más alto que" nada (necesitas algo).</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ "Taller than X" compara DOS: yo y X.</div>
+                            <div class="why-wrong">✘ Los comparativos siempre necesitan dos elementos.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-3">
+                    <div class="exercise-q">3. "She is taller than me" - ¿Dónde va "than"?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-3','a','a')">a) Después del comparativo</button>
+                        <button class="opt-btn" onclick="check('ex2-3','b','a')">b) Antes del comparativo</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Taller + THAN me. Igual que "más alto QUE yo".</div>
+                            <div class="why-wrong">✘ Nunca decimos "than taller me".</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ El orden es: comparativo + THAN + objeto.</div>
+                            <div class="why-wrong">✘ "Than" nunca va antes del adjetivo comparativo.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-4">
+                    <div class="exercise-q">4. Ambos idiomas ponen el comparativo:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-4','a','a')">a) Después del verbo</button>
+                        <button class="opt-btn" onclick="check('ex2-4','b','a')">b) Antes del sujeto</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ She IS taller = Ella ES más alta (verbo + comp).</div>
+                            <div class="why-wrong">✘ El comparativo no va antes del sujeto.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Sujeto + verbo + comparativo: She is taller.</div>
+                            <div class="why-wrong">✘ No decimos "Taller she is" ni "Más alta ella es".</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-5">
+                    <div class="exercise-q">5. "More interesting than" = </div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-5','a','a')">a) Más interesante que</button>
+                        <button class="opt-btn" onclick="check('ex2-5','b','a')">b) El más interesante</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ "More... than" = "más... que" (comparativo).</div>
+                            <div class="why-wrong">✘ "El más" sería superlativo: "the most interesting".</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ "More... than" = comparativo = "más... que".</div>
+                            <div class="why-wrong">✘ "El más interesante" es superlativo, no comparativo.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score2">0/5</div>
+                    <div class="label">Paso 2</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step-card" id="step3">
+            <div class="step-header">
+                <span class="step-icon">⚠️</span>
+                <span class="step-title">Paso 3: ¡Cuidado! Diferencias</span>
+            </div>
+
+            <div class="alert-box">
+                <div class="title">🚨 INGLÉS TIENE DOS FORMAS</div>
+                Español solo usa "más", pero inglés usa <strong>-er</strong> o <strong>more</strong>
+            </div>
+
+            <table class="mini-table">
+                <tr>
+                    <th>Tipo</th>
+                    <th>Regla</th>
+                    <th>Ejemplo</th>
+                </tr>
+                <tr>
+                    <td>1 sílaba</td>
+                    <td>+ er</td>
+                    <td>tall → taller</td>
+                </tr>
+                <tr>
+                    <td>2 síl. en -y</td>
+                    <td>y → ier</td>
+                    <td>happy → happier</td>
+                </tr>
+                <tr>
+                    <td>2+ sílabas</td>
+                    <td>more +</td>
+                    <td>more beautiful</td>
+                </tr>
+            </table>
+
+            <div class="quick-example wrong">
+                <span class="emoji">❌</span>
+                <div class="text">
+                    <div class="en">more tall / more big</div>
+                    <div class="es">INCORRECTO - son de 1 sílaba</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">✅</span>
+                <div class="text">
+                    <div class="en">taller / bigger</div>
+                    <div class="es">CORRECTO - usan -er</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Regla CVC:</strong> big → bi<strong>gg</strong>er (dobla consonante final)
+            </div>
+
+            <div class="word-grid">
+                <div class="word-tag short">tall-er</div>
+                <div class="word-tag short">fast-er</div>
+                <div class="word-tag short">old-er</div>
+                <div class="word-tag short">new-er</div>
+                <div class="word-tag short">bigg-er</div>
+                <div class="word-tag short">happi-er</div>
+            </div>
+            <p style="text-align: center; font-size: 0.75rem; color: #8b3a4a;">⬆️ Adjetivos cortos: usan -er</p>
+
+            <div class="word-grid">
+                <div class="word-tag long">more beautiful</div>
+                <div class="word-tag long">more interesting</div>
+                <div class="word-tag long">more expensive</div>
+            </div>
+            <p style="text-align: center; font-size: 0.75rem; color: #1565c0;">⬆️ Adjetivos largos: usan more</p>
+
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex3-1">
+                    <div class="exercise-q">1. "Tall" (1 sílaba) forma comparativo con:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-1','a','a')">a) -er (taller)</button>
+                        <button class="opt-btn" onclick="check('ex3-1','b','a')">b) more (more tall)</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ 1 sílaba = -er. Tall → taller.</div>
+                            <div class="why-wrong">✘ "More tall" es incorrecto para adjetivos cortos.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Adjetivos de 1 sílaba siempre usan -er.</div>
+                            <div class="why-wrong">✘ "More" solo para adjetivos largos (2+ sílabas).</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-2">
+                    <div class="exercise-q">2. "Beautiful" (4 sílabas) forma comparativo con:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-2','a','b')">a) -er (beautifuler)</button>
+                        <button class="opt-btn" onclick="check('ex3-2','b','b')">b) more (more beautiful)</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ 2+ sílabas = more + adjetivo.</div>
+                            <div class="why-wrong">✘ "Beautifuler" NO existe en inglés.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Adjetivos largos usan "more" + adjetivo.</div>
+                            <div class="why-wrong">✘ No agregamos -er a palabras largas.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-3">
+                    <div class="exercise-q">3. "Happy" → comparativo:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-3','a','a')">a) happier</button>
+                        <button class="opt-btn" onclick="check('ex3-3','b','a')">b) happyer</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Termina en -y: cambia y → i + er = happier.</div>
+                            <div class="why-wrong">✘ "Happyer" tiene mala ortografía.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ La -y cambia a -i antes de -er: happier.</div>
+                            <div class="why-wrong">✘ No se escribe "happyer" - la Y desaparece.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-4">
+                    <div class="exercise-q">4. "Big" → comparativo (regla CVC):</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-4','a','b')">a) biger</button>
+                        <button class="opt-btn" onclick="check('ex3-4','b','b')">b) bigger</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ CVC (consonante-vocal-consonante): dobla la G.</div>
+                            <div class="why-wrong">✘ "Biger" está mal escrito - falta una G.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Big termina en CVC: dobla la consonante → bigger.</div>
+                            <div class="why-wrong">✘ Sin doble consonante, la pronunciación cambiaría.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-5">
+                    <div class="exercise-q">5. "Old" → comparativo:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-5','a','a')">a) older</button>
+                        <button class="opt-btn" onclick="check('ex3-5','b','a')">b) more old</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ "Old" es de 1 sílaba = older.</div>
+                            <div class="why-wrong">✘ "More old" es incorrecto para adjetivos cortos.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Old (1 sílaba) + er = older.</div>
+                            <div class="why-wrong">✘ No usamos "more" con adjetivos de 1 sílaba.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score3">0/5</div>
+                    <div class="label">Paso 3</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="step-card" id="step4">
+            <div class="step-header">
+                <span class="step-icon">💡</span>
+                <span class="step-title">Paso 4: Consejos Rápidos</span>
+            </div>
+
+            <div class="rule-box">
+                <div class="formula">🧪 CUENTA LAS SÍLABAS</div>
+                <div style="font-size: 0.8rem; color: #666; margin-top: 5px;">
+                    1 sílaba = -er | 2+ sílabas = more
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>🎯 Tip 1:</strong> Aplaude las sílabas:<br>
+                TALL (1 👏) → taller<br>
+                BEAU-TI-FUL (3 👏) → more beautiful
+            </div>
+
+            <div class="tip-box">
+                <strong>🎯 Tip 2:</strong> Termina en -Y (2 síl):<br>
+                Cambia Y → I + ER: happy → happ<strong>ier</strong>
+            </div>
+
+            <div class="tip-box">
+                <strong>🎯 Tip 3:</strong> Patrón CVC corto:<br>
+                big, hot, fat → bi<strong>gg</strong>er, ho<strong>tt</strong>er, fa<strong>tt</strong>er
+            </div>
+
+            <div class="tip-box">
+                <strong>🎯 Tip 4:</strong> NUNCA combines:<br>
+                ❌ more taller / ❌ more bigger<br>
+                ✅ taller / ✅ bigger
+            </div>
+
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex4-1">
+                    <div class="exercise-q">1. FAST tiene ___ sílaba(s), entonces usa:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-1','a','a')">a) 1 → faster</button>
+                        <button class="opt-btn" onclick="check('ex4-1','b','a')">b) 2 → more fast</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ FAST = 1 sílaba = fast + er = faster.</div>
+                            <div class="why-wrong">✘ "More fast" no es correcto para 1 sílaba.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Aplaude: FAST (1 👏) → usa -er.</div>
+                            <div class="why-wrong">✘ "Fast" NO tiene 2 sílabas.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-2">
+                    <div class="exercise-q">2. "Easy" termina en -Y, entonces:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-2','a','a')">a) Y → I + er = easier</button>
+                        <button class="opt-btn" onclick="check('ex4-2','b','a')">b) Y + er = easyer</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ La Y cambia a I: eas<strong>ier</strong>.</div>
+                            <div class="why-wrong">✘ "Easyer" no existe - la Y desaparece.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Regla: -y → -ier (easy → easier).</div>
+                            <div class="why-wrong">✘ No mantenemos la Y cuando agregamos -er.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-3">
+                    <div class="exercise-q">3. "Hot" es CVC, entonces:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-3','a','b')">a) hoter</button>
+                        <button class="opt-btn" onclick="check('ex4-3','b','b')">b) hotter</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ H-O-T (CVC) → dobla T → ho<strong>tt</strong>er.</div>
+                            <div class="why-wrong">✘ "Hoter" tendría pronunciación incorrecta.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ CVC corto = dobla consonante final.</div>
+                            <div class="why-wrong">✘ Sin doble T, sonaría como "hoter" /hoʊtər/.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-4">
+                    <div class="exercise-q">4. ¿Cuál es INCORRECTO?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-4','a','a')">a) more taller</button>
+                        <button class="opt-btn" onclick="check('ex4-4','b','a')">b) taller</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ "More taller" es doble comparativo = ERROR.</div>
+                            <div class="why-wrong">✘ Solo usas -er O more, NUNCA ambos.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ "More taller" combina más + -er = MAL.</div>
+                            <div class="why-wrong">✘ "Taller" sola es la forma correcta.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-5">
+                    <div class="exercise-q">5. IN-TER-ES-TING tiene ___ sílabas:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-5','a','b')">a) 2 → interestinger</button>
+                        <button class="opt-btn" onclick="check('ex4-5','b','b')">b) 4 → more interesting</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ IN-TER-ES-TING (4 👏) = more interesting.</div>
+                            <div class="why-wrong">✘ "Interestinger" NO existe en inglés.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ 4 sílabas = adjetivo largo = usa "more".</div>
+                            <div class="why-wrong">✘ No agregamos -er a palabras largas.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score4">0/5</div>
+                    <div class="label">Paso 4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="step-card" id="step5">
+            <div class="step-header">
+                <span class="step-icon">✨</span>
+                <span class="step-title">Paso 5: Práctica Final</span>
+            </div>
+
+            <div class="rule-box">
+                <div class="formula">
+                    📏 Subject + be + comparative + than + object<br>
+                    She is taller than me.
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">🏠</span>
+                <div class="text">
+                    <div class="en">My house is <strong>bigger than</strong> your house.</div>
+                    <div class="es">Mi casa es más grande que tu casa.</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">📚</span>
+                <div class="text">
+                    <div class="en">This book is <strong>more interesting than</strong> that one.</div>
+                    <div class="es">Este libro es más interesante que ese.</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">😊</span>
+                <div class="text">
+                    <div class="en">She is <strong>happier than</strong> before.</div>
+                    <div class="es">Ella está más feliz que antes.</div>
+                </div>
+            </div>
+
+            <div class="exercise-section">
+                <h3>✏️ Práctica Final</h3>
+
+                <div class="exercise" id="ex5-1">
+                    <div class="exercise-q">1. My car is ___ your car. (fast)</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-1','a','a')">a) faster than</button>
+                        <button class="opt-btn" onclick="check('ex5-1','b','a')">b) more fast than</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Fast (1 sílaba) + er + than = faster than.</div>
+                            <div class="why-wrong">✘ "More fast" no se usa con adjetivos de 1 sílaba.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Fast → faster than (1 sílaba = -er).</div>
+                            <div class="why-wrong">✘ "More" solo para adjetivos de 2+ sílabas.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-2">
+                    <div class="exercise-q">2. This movie is ___ that one. (interesting)</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-2','a','b')">a) interestinger than</button>
+                        <button class="opt-btn" onclick="check('ex5-2','b','b')">b) more interesting than</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Interesting (4 síl) = more interesting than.</div>
+                            <div class="why-wrong">✘ "Interestinger" no existe en inglés.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Adjetivos largos usan "more" + adjetivo.</div>
+                            <div class="why-wrong">✘ No agregamos -er a palabras largas.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-3">
+                    <div class="exercise-q">3. She is ___ her sister. (happy)</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-3','a','a')">a) happier than</button>
+                        <button class="opt-btn" onclick="check('ex5-3','b','a')">b) more happy than</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Happy (2 síl, -y) → happier than.</div>
+                            <div class="why-wrong">✘ "More happy" es menos común; usa -ier.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Termina en -y = cambia a -ier: happier.</div>
+                            <div class="why-wrong">✘ "More happy" es gramaticalmente menos preferido.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-4">
+                    <div class="exercise-q">4. The elephant is ___ the cat. (big)</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-4','a','b')">a) biger than</button>
+                        <button class="opt-btn" onclick="check('ex5-4','b','b')">b) bigger than</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Big (CVC) → dobla G → bigger than.</div>
+                            <div class="why-wrong">✘ "Biger" tiene ortografía incorrecta.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ CVC corto = dobla consonante: bigger.</div>
+                            <div class="why-wrong">✘ Sin doble G, la palabra sonaría diferente.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-5">
+                    <div class="exercise-q">5. My brother is ___ me. (old)</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-5','a','a')">a) older than</button>
+                        <button class="opt-btn" onclick="check('ex5-5','b','a')">b) more older than</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Old (1 sílaba) → older than.</div>
+                            <div class="why-wrong">✘ "More older" es doble comparativo = ERROR.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✔ Solo usas -er O more, NUNCA ambos.</div>
+                            <div class="why-wrong">✘ "More older" combina dos formas = incorrecto.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score5">0/5</div>
+                    <div class="label">Paso 5</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, #ffe8ec 0%, #ffdde1 100%); border-radius: 12px;">
+                <h3 style="color: #8b3a4a; font-size: 0.95rem; margin-bottom: 10px;">🎓 Resumen</h3>
+                <ul class="summary-list">
+                    <li><strong>1 sílaba:</strong> + er (taller, faster)</li>
+                    <li><strong>2 síl. en -y:</strong> y → ier (happier)</li>
+                    <li><strong>2+ sílabas:</strong> more + adj (more beautiful)</li>
+                    <li><strong>CVC:</strong> dobla consonante (bigger, hotter)</li>
+                    <li><strong>Nunca:</strong> more + -er juntos</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <button class="nav-btn prev" id="prevBtn" onclick="prevStep()" disabled>← Anterior</button>
+            <span class="step-ind"><span id="currentStep">1</span>/5</span>
+            <button class="nav-btn next" id="nextBtn" onclick="nextStep()">Siguiente →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 5;
+        const scores = {1:0, 2:0, 3:0, 4:0, 5:0};
+        const answered = {};
+
+        function goToStep(step) {
+            if (step < 1 || step > totalSteps) return;
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.querySelectorAll('.step-dot')[currentStep-1].classList.remove('active');
+            if (step > currentStep) {
+                document.querySelectorAll('.step-dot')[currentStep-1].classList.add('completed');
+            }
+            currentStep = step;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            document.querySelectorAll('.step-dot')[currentStep-1].classList.add('active');
+            updateNav();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function nextStep() { if (currentStep < totalSteps) goToStep(currentStep + 1); }
+        function prevStep() { if (currentStep > 1) goToStep(currentStep - 1); }
+
+        function updateNav() {
+            document.getElementById('currentStep').textContent = currentStep;
+            document.getElementById('prevBtn').disabled = currentStep === 1;
+            document.getElementById('nextBtn').disabled = currentStep === totalSteps;
+            document.getElementById('nextBtn').textContent = currentStep === totalSteps ? '✔ Fin' : 'Siguiente →';
+        }
+
+        function check(id, sel, correct) {
+            if (answered[id]) return;
+            answered[id] = true;
+            const ex = document.getElementById(id);
+            const btns = ex.querySelectorAll('.opt-btn');
+            const fbCorrect = document.getElementById(`fb-${id}`);
+            const fbIncorrect = document.getElementById(`fbi-${id}`);
+            btns.forEach(b => b.disabled = true);
+            const stepNum = parseInt(id.split('-')[0].replace('ex',''));
+            if (sel === correct) {
+                ex.classList.add('correct');
+                btns.forEach(b => { if (b.textContent.startsWith(sel+')')) b.classList.add('sel-correct'); });
+                fbCorrect.classList.add('show');
+                scores[stepNum]++;
+            } else {
+                ex.classList.add('incorrect');
+                btns.forEach(b => {
+                    if (b.textContent.startsWith(sel+')')) b.classList.add('sel-wrong');
+                    if (b.textContent.startsWith(correct+')')) b.classList.add('show-correct');
+                });
+                fbIncorrect.classList.add('show');
+            }
+            document.getElementById(`score${stepNum}`).textContent = `${scores[stepNum]}/5`;
+        }
+
+        updateNav();
+    </script>
+</body>
+</html>

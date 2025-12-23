@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polite Requests: Can/Could | A1-Beg M5 | JUCUM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffe8ec 0%, #ffdde1 100%);
+            min-height: 100vh;
+            padding: 15px;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%);
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(238, 156, 167, 0.4);
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 3px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.3);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            color: white;
+        }
+
+        .progress-nav {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+
+        .step-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #ee9ca7;
+            background: white;
+            color: #ee9ca7;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+
+        .step-dot.active {
+            background: #ee9ca7;
+            color: white;
+        }
+
+        .step-dot.completed {
+            background: #d4818c;
+            color: white;
+            border-color: #d4818c;
+        }
+
+        .step-card {
+            display: none;
+            background: white;
+            border-radius: 16px;
+            padding: 20px 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+
+        .step-card.active {
+            display: block;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ffe8ec;
+        }
+
+        .step-icon {
+            font-size: 1.8rem;
+        }
+
+        .step-title {
+            color: #d4818c;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .compare-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .compare-item {
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .compare-item.pink {
+            background: linear-gradient(135deg, #ffdde1 0%, #ffb6c1 100%);
+            border: 2px solid #ee9ca7;
+        }
+
+        .compare-item.light {
+            background: linear-gradient(135deg, #fff0f3 0%, #ffe8ec 100%);
+            border: 2px solid #ffb6c1;
+        }
+
+        .compare-item .icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .compare-item .label {
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .compare-item.pink .label { color: #c4636f; }
+        .compare-item.light .label { color: #d4818c; }
+
+        .compare-item ul {
+            list-style: none;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        .compare-item li {
+            padding: 3px 0;
+        }
+
+        .quick-example {
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quick-example .emoji {
+            font-size: 1.3rem;
+        }
+
+        .quick-example .text {
+            flex: 1;
+        }
+
+        .quick-example .en {
+            color: #c4636f;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .quick-example .es {
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        .quick-example.wrong {
+            background: #ffebee;
+            border-left: 3px solid #f44336;
+        }
+
+        .quick-example.right {
+            background: #fff0f3;
+            border-left: 3px solid #ee9ca7;
+        }
+
+        .mini-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 0.8rem;
+        }
+
+        .mini-table th {
+            background: #ee9ca7;
+            color: white;
+            padding: 8px 6px;
+            text-align: center;
+        }
+
+        .mini-table td {
+            padding: 8px 6px;
+            border-bottom: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .mini-table tr:nth-child(even) {
+            background: #fff8f9;
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin: 10px 0;
+            font-size: 0.85rem;
+            border-left: 3px solid #fbc02d;
+        }
+
+        .tip-box strong {
+            color: #f57f17;
+        }
+
+        .rule-box {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+            text-align: center;
+            border: 2px solid #f06292;
+        }
+
+        .rule-box .formula {
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #c2185b;
+            font-weight: 600;
+        }
+
+        .politeness-scale {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(90deg, #ffcdd2 0%, #c8e6c9 100%);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+
+        .politeness-scale .level {
+            text-align: center;
+            font-size: 0.75rem;
+        }
+
+        .politeness-scale .level .word {
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .alert-box {
+            background: #ffebee;
+            border: 2px solid #ef5350;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .alert-box .title {
+            color: #c62828;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+        }
+
+        .exercise-section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px dashed #ffdde1;
+        }
+
+        .exercise-section h3 {
+            color: #d4818c;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .exercise {
+            background: #fafafa;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .exercise.correct {
+            border-color: #4caf50;
+            background: #e8f5e9;
+        }
+
+        .exercise.incorrect {
+            border-color: #f44336;
+            background: #ffebee;
+        }
+
+        .exercise-q {
+            font-size: 0.9rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .exercise-q strong {
+            color: #c4636f;
+        }
+
+        .opts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        .opt-btn {
+            padding: 10px 8px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            color: #555;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .opt-btn:hover:not(:disabled) {
+            border-color: #ee9ca7;
+            background: #fff0f3;
+        }
+
+        .opt-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .opt-btn.sel-correct {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+
+        .opt-btn.sel-wrong {
+            background: #f44336;
+            color: white;
+            border-color: #f44336;
+        }
+
+        .opt-btn.show-correct {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct-fb {
+            background: #e8f5e9;
+            border: 1px solid #a5d6a7;
+        }
+
+        .feedback.incorrect-fb {
+            background: #ffebee;
+            border: 1px solid #ef9a9a;
+        }
+
+        .feedback .result {
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .feedback.correct-fb .result {
+            color: #2e7d32;
+        }
+
+        .feedback.incorrect-fb .result {
+            color: #c62828;
+        }
+
+        .feedback .explanation {
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .feedback .why-correct {
+            color: #2e7d32;
+            margin-bottom: 4px;
+        }
+
+        .feedback .why-wrong {
+            color: #c62828;
+        }
+
+        .score-box {
+            text-align: center;
+            padding: 12px;
+            background: linear-gradient(135deg, #fff0f3 0%, #ffdde1 100%);
+            border-radius: 10px;
+            margin-top: 12px;
+        }
+
+        .score-box .num {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #c4636f;
+        }
+
+        .score-box .label {
+            font-size: 0.8rem;
+            color: #ee9ca7;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 12px 15px;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .nav-btn.prev {
+            background: #e0e0e0;
+            color: #666;
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%);
+            color: white;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .step-ind {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .summary-list {
+            list-style: none;
+        }
+
+        .summary-list li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .summary-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #ee9ca7;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🙏 Polite Requests: Can/Could</h1>
+            <div class="badge">🍑 A1-Beginner • M5 • Tema 2</div>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-nav">
+            <div class="step-dot active" onclick="goToStep(1)">1</div>
+            <div class="step-dot" onclick="goToStep(2)">2</div>
+            <div class="step-dot" onclick="goToStep(3)">3</div>
+            <div class="step-dot" onclick="goToStep(4)">4</div>
+            <div class="step-dot" onclick="goToStep(5)">5</div>
+        </div>
+
+        <!-- STEP 1: Repaso en Español -->
+        <div class="step-card active" id="step1">
+            <div class="step-header">
+                <span class="step-icon">🇪🇸</span>
+                <span class="step-title">Paso 1: Repaso en Español</span>
+            </div>
+
+            <p style="font-size: 0.85rem; color: #555; margin-bottom: 12px;">
+                En español pedimos cosas de forma educada usando <strong>"¿Puedes...?"</strong> o <strong>"¿Podrías...?"</strong>. La cortesía es muy importante.
+            </p>
+
+            <div class="compare-box">
+                <div class="compare-item pink">
+                    <div class="icon">😊</div>
+                    <div class="label">INFORMAL</div>
+                    <ul>
+                        <li>¿Puedes ayudarme?</li>
+                        <li>¿Me pasas la sal?</li>
+                        <li>Amigos, familia</li>
+                    </ul>
+                </div>
+                <div class="compare-item light">
+                    <div class="icon">🎩</div>
+                    <div class="label">FORMAL</div>
+                    <ul>
+                        <li>¿Podría ayudarme?</li>
+                        <li>¿Me pasaría la sal?</li>
+                        <li>Desconocidos, jefes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">👨‍👩‍👧</span>
+                <div class="text">
+                    <div class="en">Mamá, ¿puedes prestarme dinero?</div>
+                    <div class="es">Informal - con familia</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">👔</span>
+                <div class="text">
+                    <div class="en">Señor, ¿podría indicarme la dirección?</div>
+                    <div class="es">Formal - con desconocidos</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Clave:</strong> "Podría" (condicional) es más cortés que "puede" (presente)
+            </div>
+
+            <!-- Exercises Step 1 -->
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex1-1">
+                    <div class="exercise-q">1. ¿Cuál es más formal?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-1','a','b')">a) ¿Puedes...?</button>
+                        <button class="opt-btn" onclick="check('ex1-1','b','b')">b) ¿Podrías...?</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "¿Podrías...?" usa el condicional = más cortés y formal.</div>
+                            <div class="why-wrong">✗ "¿Puedes...?" es más directo e informal.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ El condicional "podrías" es más educado.</div>
+                            <div class="why-wrong">✗ "Puedes" es informal - lo usamos con amigos.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-2">
+                    <div class="exercise-q">2. Con tu mejor amigo usarías:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-2','a','a')">a) ¿Puedes...?</button>
+                        <button class="opt-btn" onclick="check('ex1-2','b','a')">b) ¿Podría usted...?</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Con amigos usamos lenguaje informal: "¿Puedes...?"</div>
+                            <div class="why-wrong">✗ "¿Podría usted...?" es demasiado formal para amigos.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Amigos = informal: "¿Puedes ayudarme?"</div>
+                            <div class="why-wrong">✗ Ser muy formal con amigos suena extraño.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-3">
+                    <div class="exercise-q">3. A tu jefe le dirías:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-3','a','b')">a) Dame el informe</button>
+                        <button class="opt-btn" onclick="check('ex1-3','b','b')">b) ¿Podría darme el informe?</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Con superiores, siempre usar forma cortés: "¿Podría...?"</div>
+                            <div class="why-wrong">✗ "Dame" es una orden - muy irrespetuoso con un jefe.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Jefe = cortesía máxima: "¿Podría...?"</div>
+                            <div class="why-wrong">✗ Dar órdenes a un jefe = problema laboral.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-4">
+                    <div class="exercise-q">4. En un restaurante, al mesero:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-4','a','b')">a) Tráeme agua</button>
+                        <button class="opt-btn" onclick="check('ex1-4','b','b')">b) ¿Podría traerme agua?</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Con desconocidos que nos sirven = cortesía: "¿Podría...?"</div>
+                            <div class="why-wrong">✗ "Tráeme" suena grosero e irrespetuoso.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Servicio = cortesía. Es educación básica.</div>
+                            <div class="why-wrong">✗ Ordenar sin "por favor" o forma cortés es maleducado.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-5">
+                    <div class="exercise-q">5. La cortesía en español usa principalmente:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-5','a','b')">a) Imperativo</button>
+                        <button class="opt-btn" onclick="check('ex1-5','b','b')">b) Condicional</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ El condicional (podría, querría) expresa cortesía.</div>
+                            <div class="why-wrong">✗ El imperativo (haz, dame) da órdenes directas.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Condicional = cortesía: "¿Podría...?" "¿Querría...?"</div>
+                            <div class="why-wrong">✗ Imperativo = órdenes, no peticiones corteses.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score1">0/5</div>
+                    <div class="label">Paso 1</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2: Similitudes -->
+        <div class="step-card" id="step2">
+            <div class="step-header">
+                <span class="step-icon">🤝</span>
+                <span class="step-title">Paso 2: Similitudes ESP ↔ ENG</span>
+            </div>
+
+            <table class="mini-table">
+                <tr>
+                    <th>Español</th>
+                    <th>English</th>
+                    <th>Nivel</th>
+                </tr>
+                <tr>
+                    <td>¿Puedes...?</td>
+                    <td>Can you...?</td>
+                    <td>😊 Informal</td>
+                </tr>
+                <tr>
+                    <td>¿Podrías...?</td>
+                    <td>Could you...?</td>
+                    <td>🎩 Formal</td>
+                </tr>
+            </table>
+
+            <div class="politeness-scale">
+                <div class="level">
+                    <div class="word">Can</div>
+                    <div>Informal</div>
+                </div>
+                <div>→→→</div>
+                <div class="level">
+                    <div class="word">Could</div>
+                    <div>Formal</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">😊</span>
+                <div class="text">
+                    <div class="en"><strong>Can</strong> you help me?</div>
+                    <div class="es">¿Puedes ayudarme? (informal)</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">🎩</span>
+                <div class="text">
+                    <div class="en"><strong>Could</strong> you help me?</div>
+                    <div class="es">¿Podrías ayudarme? (formal)</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Igual que en español:</strong><br>
+                presente (can/puedes) = informal<br>
+                condicional (could/podrías) = formal
+            </div>
+
+            <!-- Exercises Step 2 -->
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex2-1">
+                    <div class="exercise-q">1. "Can" equivale a:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-1','a','a')">a) Puedes</button>
+                        <button class="opt-btn" onclick="check('ex2-1','b','a')">b) Podrías</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Can = puedes (presente, informal).</div>
+                            <div class="why-wrong">✗ "Podrías" es condicional = could.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Can = presente = puedes.</div>
+                            <div class="why-wrong">✗ Could = condicional = podrías.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-2">
+                    <div class="exercise-q">2. "Could" equivale a:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-2','a','b')">a) Puedes</button>
+                        <button class="opt-btn" onclick="check('ex2-2','b','b')">b) Podrías</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Could = podrías (condicional, formal).</div>
+                            <div class="why-wrong">✗ "Puedes" es presente = can.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Could = condicional = podrías.</div>
+                            <div class="why-wrong">✗ Can = presente = puedes.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-3">
+                    <div class="exercise-q">3. ¿Cuál es más cortés en ambos idiomas?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-3','a','b')">a) Presente</button>
+                        <button class="opt-btn" onclick="check('ex2-3','b','b')">b) Condicional</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ El condicional (could/podrías) es más cortés en ambos.</div>
+                            <div class="why-wrong">✗ El presente es más directo e informal.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Condicional = cortesía en español e inglés.</div>
+                            <div class="why-wrong">✗ Presente = más informal en ambos idiomas.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-4">
+                    <div class="exercise-q">4. La estructura de pregunta en ambos idiomas:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-4','a','a')">a) Modal + sujeto + verbo</button>
+                        <button class="opt-btn" onclick="check('ex2-4','b','a')">b) Sujeto + modal + verbo</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ CAN you help? / ¿PUEDES tú ayudar? Modal primero.</div>
+                            <div class="why-wrong">✗ El orden inverso no forma pregunta correcta.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Preguntas: modal + sujeto + verbo base.</div>
+                            <div class="why-wrong">✗ "You can help?" no es pregunta estándar.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-5">
+                    <div class="exercise-q">5. Ambos idiomas usan peticiones corteses para:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-5','a','a')">a) Mostrar respeto</button>
+                        <button class="opt-btn" onclick="check('ex2-5','b','a')">b) Dar órdenes</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Las peticiones corteses muestran respeto y educación.</div>
+                            <div class="why-wrong">✗ Para órdenes usamos imperativo, no peticiones.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Cortesía = respeto, educación, buenas relaciones.</div>
+                            <div class="why-wrong">✗ Órdenes se dan con imperativo, no peticiones.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score2">0/5</div>
+                    <div class="label">Paso 2</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3: Diferencias -->
+        <div class="step-card" id="step3">
+            <div class="step-header">
+                <span class="step-icon">⚠️</span>
+                <span class="step-title">Paso 3: ¡Cuidado! Diferencias</span>
+            </div>
+
+            <div class="alert-box">
+                <div class="title">🚨 DIFERENCIA CLAVE</div>
+                En inglés, después de can/could el verbo va en <strong>forma base</strong> (sin "to")
+            </div>
+
+            <table class="mini-table">
+                <tr>
+                    <th>❌ Incorrecto</th>
+                    <th>✅ Correcto</th>
+                </tr>
+                <tr>
+                    <td>Can you <strong>to help</strong>?</td>
+                    <td>Can you <strong>help</strong>?</td>
+                </tr>
+                <tr>
+                    <td>Could you <strong>to open</strong>?</td>
+                    <td>Could you <strong>open</strong>?</td>
+                </tr>
+            </table>
+
+            <div class="quick-example wrong">
+                <span class="emoji">❌</span>
+                <div class="text">
+                    <div class="en">Can you to pass the salt?</div>
+                    <div class="es">ERROR - No uses "to" después de can/could</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">✅</span>
+                <div class="text">
+                    <div class="en">Can you pass the salt?</div>
+                    <div class="es">CORRECTO - Verbo en forma base</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Regla de oro:</strong><br>
+                CAN/COULD + verbo base (sin TO, sin -S, sin -ING)
+            </div>
+
+            <!-- Exercises Step 3 -->
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex3-1">
+                    <div class="exercise-q">1. ¿Cuál es correcta?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-1','a','b')">a) Can you to help?</button>
+                        <button class="opt-btn" onclick="check('ex3-1','b','b')">b) Can you help?</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Después de "can" va verbo base: Can you HELP?</div>
+                            <div class="why-wrong">✗ "Can you to help" es error común de hispanohablantes.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Can/could + verbo base (sin "to").</div>
+                            <div class="why-wrong">✗ "To" después de modales es incorrecto.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-2">
+                    <div class="exercise-q">2. Could you ___ the door?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-2','a','a')">a) open</button>
+                        <button class="opt-btn" onclick="check('ex3-2','b','a')">b) to open</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Could you OPEN - verbo base sin "to".</div>
+                            <div class="why-wrong">✗ "To open" es incorrecto después de modales.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Modales + verbo base: could you OPEN.</div>
+                            <div class="why-wrong">✗ "To" nunca va después de can/could.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-3">
+                    <div class="exercise-q">3. Can you ___ me? (ayudar)</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-3','a','b')">a) helping</button>
+                        <button class="opt-btn" onclick="check('ex3-3','b','b')">b) help</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Can you HELP - verbo base sin -ING.</div>
+                            <div class="why-wrong">✗ "Helping" es gerundio - no va después de modales.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Después de modales: verbo base (help).</div>
+                            <div class="why-wrong">✗ -ING no se usa después de can/could.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-4">
+                    <div class="exercise-q">4. Could she ___ later? (llamar)</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-4','a','a')">a) call</button>
+                        <button class="opt-btn" onclick="check('ex3-4','b','a')">b) calls</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Could she CALL - verbo base sin -S.</div>
+                            <div class="why-wrong">✗ "Calls" tiene -S de tercera persona, no se usa con modales.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Modales + verbo base (sin -S, sin -ING, sin TO).</div>
+                            <div class="why-wrong">✗ La -S de tercera persona no se usa con modales.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-5">
+                    <div class="exercise-q">5. Después de can/could, el verbo va:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-5','a','a')">a) En forma base</button>
+                        <button class="opt-btn" onclick="check('ex3-5','b','a')">b) Con "to"</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Modales + verbo base: can HELP, could OPEN.</div>
+                            <div class="why-wrong">✗ "To" nunca se usa después de modales.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Regla fundamental: modal + verbo base.</div>
+                            <div class="why-wrong">✗ "To" después de modales es error gramatical.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score3">0/5</div>
+                    <div class="label">Paso 3</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4: Consejos -->
+        <div class="step-card" id="step4">
+            <div class="step-header">
+                <span class="step-icon">💡</span>
+                <span class="step-title">Paso 4: Consejos Rápidos</span>
+            </div>
+
+            <div class="rule-box">
+                <div class="formula">🎯 FÓRMULA PETICIÓN</div>
+                <div style="font-size: 0.8rem; color: #666; margin-top: 5px;">
+                    Can/Could + you + VERBO BASE + complemento?
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Escala de cortesía:</strong><br>
+                😊 Can you...? (amigos, familia)<br>
+                🎩 Could you...? (desconocidos, jefes)<br>
+                👑 Could you please...? (muy formal)
+            </div>
+
+            <div class="tip-box">
+                <strong>🎯 Respuestas comunes:</strong><br>
+                ✅ Sure! / Of course! / No problem!<br>
+                ❌ Sorry, I can't.
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">🙏</span>
+                <div class="text">
+                    <div class="en">Could you <strong>please</strong> close the window?</div>
+                    <div class="es">¿Podría cerrar la ventana, por favor?</div>
+                </div>
+            </div>
+
+            <div class="alert-box">
+                <div class="title">⚠️ AÑADE "PLEASE" PARA MÁS CORTESÍA</div>
+                Could you please help me? = Máxima cortesía
+            </div>
+
+            <!-- Exercises Step 4 -->
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex4-1">
+                    <div class="exercise-q">1. Para ser MUY cortés, añade:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-1','a','a')">a) please</button>
+                        <button class="opt-btn" onclick="check('ex4-1','b','a')">b) now</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "Please" aumenta la cortesía: Could you please help?</div>
+                            <div class="why-wrong">✗ "Now" añade urgencia, no cortesía.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "Please" = por favor = máxima cortesía.</div>
+                            <div class="why-wrong">✗ "Now" puede sonar como orden urgente.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-2">
+                    <div class="exercise-q">2. Con tu profesor usarías:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-2','a','b')">a) Can you...</button>
+                        <button class="opt-btn" onclick="check('ex4-2','b','b')">b) Could you...</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Profesor = figura de respeto = Could you...</div>
+                            <div class="why-wrong">✗ "Can you" es demasiado informal para un profesor.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Respeto a profesores = Could you (formal).</div>
+                            <div class="why-wrong">✗ "Can you" reservado para amigos y familia.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-3">
+                    <div class="exercise-q">3. Respuesta positiva a una petición:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-3','a','a')">a) Sure!</button>
+                        <button class="opt-btn" onclick="check('ex4-3','b','a')">b) No</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "Sure!" = ¡Claro! Respuesta positiva amigable.</div>
+                            <div class="why-wrong">✗ "No" es respuesta negativa.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Sure, Of course, No problem = respuestas positivas.</div>
+                            <div class="why-wrong">✗ "No" rechaza la petición.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-4">
+                    <div class="exercise-q">4. ¿Dónde va "please"?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-4','a','b')">a) Could please you help?</button>
+                        <button class="opt-btn" onclick="check('ex4-4','b','b')">b) Could you please help?</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "Please" va después del sujeto: Could you PLEASE help?</div>
+                            <div class="why-wrong">✗ "Could please you" es orden incorrecto.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Orden: Could + you + please + verbo.</div>
+                            <div class="why-wrong">✗ "Please" no puede ir entre modal y sujeto.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-5">
+                    <div class="exercise-q">5. Para rechazar cortésmente:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-5','a','a')">a) Sorry, I can't</button>
+                        <button class="opt-btn" onclick="check('ex4-5','b','a')">b) No!</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "Sorry, I can't" es rechazo educado.</div>
+                            <div class="why-wrong">✗ "No!" solo es grosero y directo.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Rechazar con cortesía: Sorry, I can't / I'm afraid not.</div>
+                            <div class="why-wrong">✗ Un simple "No!" es descortés.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score4">0/5</div>
+                    <div class="label">Paso 4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 5: Práctica Final -->
+        <div class="step-card" id="step5">
+            <div class="step-header">
+                <span class="step-icon">✨</span>
+                <span class="step-title">Paso 5: Práctica Final</span>
+            </div>
+
+            <div class="rule-box">
+                <div class="formula">
+                    😊 Can you + VERB BASE + ...?<br>
+                    🎩 Could you (please) + VERB BASE + ...?
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">🚪</span>
+                <div class="text">
+                    <div class="en"><strong>Can you</strong> open the door?</div>
+                    <div class="es">¿Puedes abrir la puerta? (informal)</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">📞</span>
+                <div class="text">
+                    <div class="en"><strong>Could you please</strong> call me later?</div>
+                    <div class="es">¿Podría llamarme más tarde, por favor?</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">📝</span>
+                <div class="text">
+                    <div class="en"><strong>Could you</strong> repeat that?</div>
+                    <div class="es">¿Podría repetir eso?</div>
+                </div>
+            </div>
+
+            <!-- Exercises Step 5 -->
+            <div class="exercise-section">
+                <h3>✏️ Práctica Final</h3>
+
+                <div class="exercise" id="ex5-1">
+                    <div class="exercise-q">1. ___ you pass me the book? (informal)</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-1','a','a')">a) Can</button>
+                        <button class="opt-btn" onclick="check('ex5-1','b','a')">b) Could</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Informal = Can you pass me the book?</div>
+                            <div class="why-wrong">✗ "Could" es más formal de lo necesario.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Petición informal = CAN you...?</div>
+                            <div class="why-wrong">✗ Could es para situaciones formales.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-2">
+                    <div class="exercise-q">2. ___ you please help me? (muy formal)</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-2','a','b')">a) Can</button>
+                        <button class="opt-btn" onclick="check('ex5-2','b','b')">b) Could</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Muy formal = Could you please help me?</div>
+                            <div class="why-wrong">✗ "Can" + "please" no es tan formal.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Máxima cortesía = COULD you please...?</div>
+                            <div class="why-wrong">✗ "Can" es menos formal incluso con "please".</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-3">
+                    <div class="exercise-q">3. Could you ___ the window? (cerrar)</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-3','a','a')">a) close</button>
+                        <button class="opt-btn" onclick="check('ex5-3','b','a')">b) to close</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Could you CLOSE - verbo base sin "to".</div>
+                            <div class="why-wrong">✗ "To close" es incorrecto después de modales.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Modales + verbo base (sin to).</div>
+                            <div class="why-wrong">✗ Nunca "to" después de can/could.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-4">
+                    <div class="exercise-q">4. Can she ___ us tomorrow? (visitar)</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-4','a','a')">a) visit</button>
+                        <button class="opt-btn" onclick="check('ex5-4','b','a')">b) visits</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Can she VISIT - verbo base sin -S.</div>
+                            <div class="why-wrong">✗ "Visits" tiene -S de tercera persona, no se usa con modales.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Después de modal: verbo base (sin -S).</div>
+                            <div class="why-wrong">✗ La -S desaparece con modales.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-5">
+                    <div class="exercise-q">5. Respuesta a "Could you help me?": ___!</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-5','a','a')">a) Of course</button>
+                        <button class="opt-btn" onclick="check('ex5-5','b','a')">b) Never</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "Of course!" = ¡Por supuesto! Respuesta positiva.</div>
+                            <div class="why-wrong">✗ "Never" = Nunca. Muy grosero como respuesta.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Respuestas positivas: Sure! / Of course! / No problem!</div>
+                            <div class="why-wrong">✗ "Never" es extremadamente descortés.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score5">0/5</div>
+                    <div class="label">Paso 5</div>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, #fff0f3 0%, #ffdde1 100%); border-radius: 12px;">
+                <h3 style="color: #c4636f; font-size: 0.95rem; margin-bottom: 10px;">🎓 Resumen</h3>
+                <ul class="summary-list">
+                    <li><strong>Can you...?</strong> = Informal (amigos, familia)</li>
+                    <li><strong>Could you...?</strong> = Formal (desconocidos, jefes)</li>
+                    <li><strong>Could you please...?</strong> = Muy formal</li>
+                    <li>Después de can/could: <strong>verbo base</strong> (sin to, sin -s)</li>
+                    <li>Respuestas: Sure! / Of course! / Sorry, I can't</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Nav -->
+        <div class="bottom-nav">
+            <button class="nav-btn prev" id="prevBtn" onclick="prevStep()" disabled>← Anterior</button>
+            <span class="step-ind"><span id="currentStep">1</span>/5</span>
+            <button class="nav-btn next" id="nextBtn" onclick="nextStep()">Siguiente →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 5;
+        const scores = {1:0, 2:0, 3:0, 4:0, 5:0};
+        const answered = {};
+
+        function goToStep(step) {
+            if (step < 1 || step > totalSteps) return;
+            
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.querySelectorAll('.step-dot')[currentStep-1].classList.remove('active');
+            
+            if (step > currentStep) {
+                document.querySelectorAll('.step-dot')[currentStep-1].classList.add('completed');
+            }
+            
+            currentStep = step;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            document.querySelectorAll('.step-dot')[currentStep-1].classList.add('active');
+            
+            updateNav();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function nextStep() { if (currentStep < totalSteps) goToStep(currentStep + 1); }
+        function prevStep() { if (currentStep > 1) goToStep(currentStep - 1); }
+
+        function updateNav() {
+            document.getElementById('currentStep').textContent = currentStep;
+            document.getElementById('prevBtn').disabled = currentStep === 1;
+            document.getElementById('nextBtn').disabled = currentStep === totalSteps;
+            document.getElementById('nextBtn').textContent = currentStep === totalSteps ? '✓ Fin' : 'Siguiente →';
+        }
+
+        function check(id, sel, correct) {
+            if (answered[id]) return;
+            answered[id] = true;
+            
+            const ex = document.getElementById(id);
+            const btns = ex.querySelectorAll('.opt-btn');
+            const fbCorrect = document.getElementById(`fb-${id}`);
+            const fbIncorrect = document.getElementById(`fbi-${id}`);
+            
+            btns.forEach(b => b.disabled = true);
+            
+            const stepNum = parseInt(id.split('-')[0].replace('ex',''));
+            
+            if (sel === correct) {
+                ex.classList.add('correct');
+                btns.forEach(b => { 
+                    if (b.textContent.startsWith(sel+')')) b.classList.add('sel-correct'); 
+                });
+                fbCorrect.classList.add('show');
+                scores[stepNum]++;
+            } else {
+                ex.classList.add('incorrect');
+                btns.forEach(b => {
+                    if (b.textContent.startsWith(sel+')')) b.classList.add('sel-wrong');
+                    if (b.textContent.startsWith(correct+')')) b.classList.add('show-correct');
+                });
+                fbIncorrect.classList.add('show');
+            }
+            
+            document.getElementById(`score${stepNum}`).textContent = `${scores[stepNum]}/5`;
+        }
+
+        updateNav();
+    </script>
+</body>
+</html>
