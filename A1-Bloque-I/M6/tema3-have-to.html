@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Have to (Obligation) | A1-Bloque-I M6 | JUCUM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffe8ec 0%, #ffdde1 100%);
+            min-height: 100vh;
+            padding: 15px;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%);
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(238, 156, 167, 0.4);
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 3px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.3);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            color: white;
+        }
+
+        /* Progress Nav */
+        .progress-nav {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+
+        .step-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #ee9ca7;
+            background: white;
+            color: #ee9ca7;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+
+        .step-dot.active {
+            background: #ee9ca7;
+            color: white;
+        }
+
+        .step-dot.completed {
+            background: #e91e63;
+            color: white;
+            border-color: #e91e63;
+        }
+
+        /* Step Card */
+        .step-card {
+            display: none;
+            background: white;
+            border-radius: 16px;
+            padding: 20px 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+
+        .step-card.active {
+            display: block;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ffdde1;
+        }
+
+        .step-icon {
+            font-size: 1.8rem;
+        }
+
+        .step-title {
+            color: #e91e63;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Content Styles */
+        .intro-text {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 12px 0;
+            text-align: center;
+            border: 2px solid #e91e63;
+        }
+
+        .formula-box .formula {
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            color: #c2185b;
+            font-weight: 700;
+        }
+
+        .formula-box .note {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        /* Quick Examples */
+        .quick-example {
+            background: #fff5f7;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+            border-left: 4px solid #ee9ca7;
+        }
+
+        .quick-example .en {
+            color: #c2185b;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .quick-example .es {
+            color: #7f8c8d;
+            font-size: 0.85rem;
+        }
+
+        .quick-example.wrong {
+            background: #fff5f5;
+            border-left-color: #e74c3c;
+        }
+
+        .quick-example.right {
+            background: #f0fff4;
+            border-left-color: #27ae60;
+        }
+
+        /* Compare Box */
+        .compare-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .compare-item {
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .compare-item.esp {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+            border: 2px solid #fbc02d;
+        }
+
+        .compare-item.eng {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+            border: 2px solid #e91e63;
+        }
+
+        .compare-item.must {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border: 2px solid #f44336;
+        }
+
+        .compare-item.have {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border: 2px solid #2196f3;
+        }
+
+        .compare-item .label {
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+        }
+
+        .compare-item.esp .label { color: #f57f17; }
+        .compare-item.eng .label { color: #c2185b; }
+        .compare-item.must .label { color: #c62828; }
+        .compare-item.have .label { color: #1565c0; }
+
+        .compare-item .example {
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        /* Tip Box */
+        .tip-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 12px 0;
+            font-size: 0.85rem;
+            border-left: 4px solid #2196f3;
+        }
+
+        .tip-box strong {
+            color: #1565c0;
+        }
+
+        .tip-box.warning {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-left-color: #ff9800;
+        }
+
+        .tip-box.warning strong {
+            color: #e65100;
+        }
+
+        .tip-box.pink {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+            border-left-color: #e91e63;
+        }
+
+        .tip-box.pink strong {
+            color: #c2185b;
+        }
+
+        /* Conjugation Table */
+        .conj-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.85rem;
+        }
+
+        .conj-table th {
+            background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%);
+            color: white;
+            padding: 10px 8px;
+            text-align: center;
+        }
+
+        .conj-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: center;
+        }
+
+        .conj-table tr:nth-child(even) {
+            background: #fff5f7;
+        }
+
+        .conj-table .subject {
+            font-weight: 600;
+            color: #e91e63;
+        }
+
+        .conj-table .verb {
+            color: #c2185b;
+            font-weight: 600;
+        }
+
+        /* Exercise Section */
+        .exercise-section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px dashed #ffdde1;
+        }
+
+        .exercise-section h3 {
+            color: #e91e63;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .exercise {
+            background: #fafafa;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .exercise.correct {
+            border-color: #27ae60;
+            background: #f0fff4;
+        }
+
+        .exercise.incorrect {
+            border-color: #e74c3c;
+            background: #fff5f5;
+        }
+
+        .exercise-q {
+            font-size: 0.9rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .exercise-q strong {
+            color: #e91e63;
+        }
+
+        .opts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        .opt-btn {
+            padding: 10px 8px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            color: #555;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .opt-btn:hover:not(:disabled) {
+            border-color: #ee9ca7;
+            background: #fff5f7;
+        }
+
+        .opt-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .opt-btn.sel-correct {
+            background: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+
+        .opt-btn.sel-wrong {
+            background: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+        }
+
+        .opt-btn.show-correct {
+            background: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+
+        /* Feedback */
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct-fb {
+            background: #d4edda;
+            border: 1px solid #a5d6a7;
+        }
+
+        .feedback.incorrect-fb {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+        }
+
+        .feedback .result {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .feedback.correct-fb .result { color: #155724; }
+        .feedback.incorrect-fb .result { color: #721c24; }
+
+        .feedback .explanation {
+            color: #555;
+            line-height: 1.4;
+        }
+
+        /* Score */
+        .score-box {
+            text-align: center;
+            padding: 12px;
+            background: linear-gradient(135deg, #fff5f7 0%, #ffdde1 100%);
+            border-radius: 10px;
+            margin-top: 12px;
+        }
+
+        .score-box .num {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e91e63;
+        }
+
+        .score-box .label {
+            font-size: 0.8rem;
+            color: #ee9ca7;
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 12px 15px;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .nav-btn.prev {
+            background: #e0e0e0;
+            color: #666;
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%);
+            color: white;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .step-ind {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* Summary List */
+        .summary-list {
+            list-style: none;
+        }
+
+        .summary-list li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .summary-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #ee9ca7;
+            font-weight: bold;
+        }
+
+        /* Back Link */
+        .back-link {
+            display: inline-block;
+            color: #7f8c8d;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .back-link:hover {
+            color: #e91e63;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="./" class="back-link">← Volver a Módulo 6</a>
+
+        <!-- Header -->
+        <div class="header">
+            <h1>📋 Have to (Obligation)</h1>
+            <div class="badge">🍑 A1-Bloque-I • M6 • Tema 3</div>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-nav">
+            <div class="step-dot active" onclick="goToStep(1)">1</div>
+            <div class="step-dot" onclick="goToStep(2)">2</div>
+            <div class="step-dot" onclick="goToStep(3)">3</div>
+            <div class="step-dot" onclick="goToStep(4)">4</div>
+            <div class="step-dot" onclick="goToStep(5)">5</div>
+        </div>
+
+        <!-- STEP 1 -->
+        <div class="step-card active" id="step1">
+            <div class="step-header">
+                <span class="step-icon">🇪🇸</span>
+                <span class="step-title">Paso 1: Repaso en Español</span>
+            </div>
+
+            <p class="intro-text">
+                En español, expresamos <strong>obligación externa</strong> con "tener que". 
+                Es algo que DEBES hacer porque las circunstancias lo requieren.
+            </p>
+
+            <div class="quick-example">
+                <div class="en">Ejemplos de obligación en español:</div>
+                <div class="es">
+                    • <strong>Tengo que</strong> estudiar para el examen.<br>
+                    • Ella <strong>tiene que</strong> trabajar mañana.<br>
+                    • <strong>Tenemos que</strong> llegar temprano.
+                </div>
+            </div>
+
+            <div class="compare-box">
+                <div class="compare-item esp">
+                    <div class="label">🇪🇸 ESPAÑOL</div>
+                    <div class="example">
+                        tengo que<br>
+                        tienes que<br>
+                        tiene que<br>
+                        tenemos que
+                    </div>
+                </div>
+                <div class="compare-item eng">
+                    <div class="label">🇬🇧 ENGLISH</div>
+                    <div class="example">
+                        I have to<br>
+                        you have to<br>
+                        he/she has to<br>
+                        we have to
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box pink">
+                <strong>💡 Clave:</strong> "Have to" = "Tener que". 
+                ¡Es una traducción casi directa!
+            </div>
+
+            <!-- Exercises -->
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex1-1">
+                    <div class="exercise-q">1. "Tengo que estudiar" expresa:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-1','a','a')">a) Una obligación</button>
+                        <button class="opt-btn" onclick="check('ex1-1','b','a')">b) Un deseo</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">"Tener que" expresa <strong>obligación</strong>, algo necesario.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">Un deseo sería "quiero estudiar". "Tengo que" = <strong>obligación</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-2">
+                    <div class="exercise-q">2. En "Ella tiene que trabajar", ¿qué palabra indica obligación?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-2','a','b')">a) trabajar</button>
+                        <button class="opt-btn" onclick="check('ex1-2','b','b')">b) tiene que</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">"<strong>Tiene que</strong>" indica la obligación.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Trabajar" es el verbo principal. "<strong>Tiene que</strong>" indica obligación.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-3">
+                    <div class="exercise-q">3. Para "yo" en español usamos:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-3','a','a')">a) tengo que</button>
+                        <button class="opt-btn" onclick="check('ex1-3','b','a')">b) tiene que</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">Yo <strong>tengo que</strong>... (conjugación de "tener").</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Tiene que" es para él/ella. Yo = <strong>tengo que</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-4">
+                    <div class="exercise-q">4. "Tener que" indica que algo es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-4','a','a')">a) Necesario/obligatorio</button>
+                        <button class="opt-btn" onclick="check('ex1-4','b','a')">b) Opcional</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">"Tener que" = algo <strong>necesario</strong>, no puedes evitarlo.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">Si fuera opcional, no usarías "tener que". Es <strong>necesario</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-5">
+                    <div class="exercise-q">5. "Have to" en inglés es equivalente a:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-5','a','a')">a) tener que</button>
+                        <button class="opt-btn" onclick="check('ex1-5','b','a')">b) querer</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">Have to = <strong>tener que</strong>. Querer = want to.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Querer" es "want to". Have to = <strong>tener que</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score1">0/5</div>
+                    <div class="label">Paso 1</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step-card" id="step2">
+            <div class="step-header">
+                <span class="step-icon">🤝</span>
+                <span class="step-title">Paso 2: Similitudes ESP ↔ ENG</span>
+            </div>
+
+            <p class="intro-text">
+                ¡Buenas noticias! "Have to" y "tener que" funcionan muy parecido:
+            </p>
+
+            <div class="quick-example">
+                <div class="en">✅ Similitud 1: Misma estructura</div>
+                <div class="es">ESP: tener que + verbo | ENG: have to + verb</div>
+            </div>
+
+            <div class="quick-example">
+                <div class="en">✅ Similitud 2: Expresa obligación externa</div>
+                <div class="es">Algo que las circunstancias exigen</div>
+            </div>
+
+            <div class="quick-example">
+                <div class="en">✅ Similitud 3: Usa el verbo "tener" (have)</div>
+                <div class="es">ESP: tener + que | ENG: have + to</div>
+            </div>
+
+            <div class="quick-example">
+                <div class="en">✅ Similitud 4: El verbo principal va en infinitivo</div>
+                <div class="es">tengo que <strong>estudiar</strong> = I have to <strong>study</strong></div>
+            </div>
+
+            <div class="quick-example">
+                <div class="en">✅ Similitud 5: Se conjuga igual que "have"</div>
+                <div class="es">I have, you have, he HAS, she HAS</div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Recuerda:</strong> "Have to" funciona como un verbo normal.<br>
+                En 3ra persona singular: he/she/it <strong>has to</strong>.
+            </div>
+
+            <!-- Exercises -->
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex2-1">
+                    <div class="exercise-q">1. "Have to" usa el verbo:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-1','a','a')">a) have (tener)</button>
+                        <button class="opt-btn" onclick="check('ex2-1','b','a')">b) be (ser/estar)</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation"><strong>Have</strong> to = <strong>tener</strong> que.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Be" es ser/estar. "Have" = <strong>tener</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-2">
+                    <div class="exercise-q">2. Con "he/she/it" usamos:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-2','a','b')">a) have to</button>
+                        <button class="opt-btn" onclick="check('ex2-2','b','b')">b) has to</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">He/She/It <strong>has to</strong>. (3ra persona = has)</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">Con he/she/it el verbo "have" cambia a <strong>has</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-3">
+                    <div class="exercise-q">3. "Tengo que trabajar" =</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-3','a','a')">a) I have to work</button>
+                        <button class="opt-btn" onclick="check('ex2-3','b','a')">b) I have to working</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">Have to + verbo BASE: have to <strong>work</strong>.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">No uses -ing después de "to". Es: have to <strong>work</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-4">
+                    <div class="exercise-q">4. "Have to" expresa:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-4','a','a')">a) Obligación externa</button>
+                        <button class="opt-btn" onclick="check('ex2-4','b','a')">b) Sugerencia</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">"Have to" = <strong>obligación</strong> (algo necesario).</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">Sugerencia = "should". "Have to" = <strong>obligación</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-5">
+                    <div class="exercise-q">5. "She _____ to study every day."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-5','a','b')">a) have</button>
+                        <button class="opt-btn" onclick="check('ex2-5','b','b')">b) has</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">She <strong>has</strong> to. (3ra persona singular)</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Have" es para I/you/we/they. She usa <strong>has</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score2">0/5</div>
+                    <div class="label">Paso 2</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step-card" id="step3">
+            <div class="step-header">
+                <span class="step-icon">⚠️</span>
+                <span class="step-title">Paso 3: Diferencias Importantes</span>
+            </div>
+
+            <p class="intro-text">
+                La diferencia principal: "have to" necesita auxiliares para negativo e interrogativo.
+            </p>
+
+            <div class="formula-box">
+                <div class="formula">
+                    ✅ I/You/We/They + have to + verb<br>
+                    ✅ He/She/It + has to + verb
+                </div>
+            </div>
+
+            <table class="conj-table">
+                <tr>
+                    <th>Forma</th>
+                    <th>Estructura</th>
+                    <th>Ejemplo</th>
+                </tr>
+                <tr>
+                    <td class="subject">Afirmativo</td>
+                    <td>have/has to + verb</td>
+                    <td class="verb">I have to go</td>
+                </tr>
+                <tr>
+                    <td class="subject">Negativo</td>
+                    <td>don't/doesn't have to</td>
+                    <td class="verb">I don't have to go</td>
+                </tr>
+                <tr>
+                    <td class="subject">Pregunta</td>
+                    <td>Do/Does + subj + have to</td>
+                    <td class="verb">Do you have to go?</td>
+                </tr>
+            </table>
+
+            <div class="tip-box warning">
+                <strong>⚠️ ¡Cuidado!</strong> "Don't have to" ≠ "Mustn't"<br>
+                <strong>Don't have to</strong> = No es necesario (puedes si quieres)<br>
+                <strong>Mustn't</strong> = Prohibido (no puedes)
+            </div>
+
+            <div class="compare-box">
+                <div class="compare-item have">
+                    <div class="label">✅ DON'T HAVE TO</div>
+                    <div class="example">
+                        "No es necesario"<br>
+                        <em>You don't have to come.</em><br>
+                        (Puedes venir o no)
+                    </div>
+                </div>
+                <div class="compare-item must">
+                    <div class="label">🚫 MUSTN'T</div>
+                    <div class="example">
+                        "Está prohibido"<br>
+                        <em>You mustn't smoke here.</em><br>
+                        (No puedes)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exercises -->
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex3-1">
+                    <div class="exercise-q">1. "She _____ have to work tomorrow."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-1','a','a')">a) doesn't</button>
+                        <button class="opt-btn" onclick="check('ex3-1','b','a')">b) don't</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">She <strong>doesn't</strong> have to. (3ra persona = doesn't)</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Don't" es para I/you/we/they. She usa <strong>doesn't</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-2">
+                    <div class="exercise-q">2. "_____ you have to leave now?"</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-2','a','a')">a) Do</button>
+                        <button class="opt-btn" onclick="check('ex3-2','b','a')">b) Does</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation"><strong>Do</strong> you have to...? (you = do)</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Does" es para he/she/it. You usa <strong>Do</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-3">
+                    <div class="exercise-q">3. "You don't have to come" significa:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-3','a','a')">a) No es necesario que vengas</button>
+                        <button class="opt-btn" onclick="check('ex3-3','b','a')">b) Tienes prohibido venir</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">"Don't have to" = <strong>no es necesario</strong> (opcional).</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">Prohibido = "mustn't". Don't have to = <strong>no necesario</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-4">
+                    <div class="exercise-q">4. "_____ he have to work on Saturdays?"</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-4','a','b')">a) Do</button>
+                        <button class="opt-btn" onclick="check('ex3-4','b','b')">b) Does</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation"><strong>Does</strong> he have to...? (he = does)</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Do" es para I/you/we/they. He usa <strong>Does</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-5">
+                    <div class="exercise-q">5. "They _____ have to pay."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-5','a','a')">a) don't</button>
+                        <button class="opt-btn" onclick="check('ex3-5','b','a')">b) doesn't</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">They <strong>don't</strong> have to. (they = don't)</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Doesn't" es para he/she/it. They usa <strong>don't</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score3">0/5</div>
+                    <div class="label">Paso 3</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="step-card" id="step4">
+            <div class="step-header">
+                <span class="step-icon">💡</span>
+                <span class="step-title">Paso 4: Consejos Prácticos</span>
+            </div>
+
+            <div class="tip-box pink">
+                <strong>🎯 Tip 1: Cuándo usar HAVE TO</strong><br>
+                • Reglas externas: "I have to wear a uniform."<br>
+                • Necesidad: "I have to eat something."<br>
+                • Obligaciones: "We have to pay taxes."
+            </div>
+
+            <div class="tip-box">
+                <strong>📅 Tip 2: Puedes usar en cualquier tiempo</strong><br>
+                • <strong>Presente:</strong> I have to work.<br>
+                • <strong>Pasado:</strong> I <strong>had to</strong> work yesterday.<br>
+                • <strong>Futuro:</strong> I <strong>will have to</strong> work tomorrow.
+            </div>
+
+            <div class="quick-example right">
+                <div class="en">🏫 School rules:</div>
+                <div class="es">
+                    Students <strong>have to</strong> wear uniforms.<br>
+                    They <strong>have to</strong> arrive on time.
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <div class="en">🏠 At home:</div>
+                <div class="es">
+                    I <strong>have to</strong> clean my room.<br>
+                    We <strong>have to</strong> do the dishes.
+                </div>
+            </div>
+
+            <div class="tip-box warning">
+                <strong>⚠️ Tip 3: Have to vs Must</strong><br>
+                Ambos expresan obligación, pero:<br>
+                <strong>Have to</strong> = obligación externa (reglas, leyes)<br>
+                <strong>Must</strong> = obligación personal (yo lo siento así)
+            </div>
+
+            <!-- Exercises -->
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex4-1">
+                    <div class="exercise-q">1. "Yesterday I _____ to work late."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-1','a','a')">a) had</button>
+                        <button class="opt-btn" onclick="check('ex4-1','b','a')">b) have</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">Pasado: I <strong>had to</strong> work. (have → had)</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Yesterday" = pasado. Have → <strong>had</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-2">
+                    <div class="exercise-q">2. "Students have to wear uniforms" es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-2','a','a')">a) Una regla externa</button>
+                        <button class="opt-btn" onclick="check('ex4-2','b','a')">b) Una preferencia</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">Es una <strong>regla</strong> de la escuela (externa).</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">No es preferencia. Es una <strong>regla obligatoria</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-3">
+                    <div class="exercise-q">3. "Tomorrow I will _____ to go early."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-3','a','a')">a) have</button>
+                        <button class="opt-btn" onclick="check('ex4-3','b','a')">b) has</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">Después de "will" va verbo base: will <strong>have</strong> to.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">Después de "will" siempre verbo base: will <strong>have</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-4">
+                    <div class="exercise-q">4. "Have to" expresa obligación:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-4','a','a')">a) Externa (reglas, leyes)</button>
+                        <button class="opt-btn" onclick="check('ex4-4','b','a')">b) Solo personal</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">"Have to" = obligación <strong>externa</strong> (circunstancias).</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Must" es más personal. "Have to" = <strong>externa</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-5">
+                    <div class="exercise-q">5. El pasado de "have to" es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-5','a','a')">a) had to</button>
+                        <button class="opt-btn" onclick="check('ex4-5','b','a')">b) haved to</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">Have → <strong>had</strong> (irregular). Had to = tuve que.</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Haved" no existe. El pasado es <strong>had</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score4">0/5</div>
+                    <div class="label">Paso 4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="step-card" id="step5">
+            <div class="step-header">
+                <span class="step-icon">✨</span>
+                <span class="step-title">Paso 5: Práctica Final</span>
+            </div>
+
+            <div class="formula-box">
+                <div class="formula">
+                    ✅ I/You/We/They have to + verb<br>
+                    ✅ He/She/It has to + verb<br>
+                    ❌ don't/doesn't have to (no necesario)
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <div class="en">I <strong>have to</strong> study for the exam.</div>
+                <div class="es">Tengo que estudiar para el examen.</div>
+            </div>
+
+            <div class="quick-example right">
+                <div class="en">She <strong>has to</strong> work tomorrow.</div>
+                <div class="es">Ella tiene que trabajar mañana.</div>
+            </div>
+
+            <div class="quick-example right">
+                <div class="en">You <strong>don't have to</strong> wait.</div>
+                <div class="es">No tienes que esperar. (No es necesario)</div>
+            </div>
+
+            <div class="quick-example wrong">
+                <div class="en">❌ She have to go.</div>
+                <div class="es">✅ She <strong>has</strong> to go. (3ra persona = has)</div>
+            </div>
+
+            <div class="quick-example wrong">
+                <div class="en">❌ I have to going.</div>
+                <div class="es">✅ I have to <strong>go</strong>. (verbo base, sin -ing)</div>
+            </div>
+
+            <!-- Exercises -->
+            <div class="exercise-section">
+                <h3>✏️ Práctica Final</h3>
+
+                <div class="exercise" id="ex5-1">
+                    <div class="exercise-q">1. "Tengo que estudiar" =</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-1','a','a')">a) I have to study</button>
+                        <button class="opt-btn" onclick="check('ex5-1','b','a')">b) I has to study</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">I <strong>have</strong> to study. (I = have)</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Has" es para he/she/it. I usa <strong>have</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-2">
+                    <div class="exercise-q">2. "Él tiene que trabajar" =</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-2','a','b')">a) He have to work</button>
+                        <button class="opt-btn" onclick="check('ex5-2','b','b')">b) He has to work</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">He <strong>has</strong> to work. (he = has)</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Have" es para I/you/we/they. He usa <strong>has</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-3">
+                    <div class="exercise-q">3. "¿Tienes que irte?" =</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-3','a','a')">a) Do you have to go?</button>
+                        <button class="opt-btn" onclick="check('ex5-3','b','a')">b) Have you to go?</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation"><strong>Do</strong> you have to go? (auxiliar + sujeto + have to)</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">Necesitas auxiliar: <strong>Do</strong> you have to...?</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-4">
+                    <div class="exercise-q">4. "No tienes que pagar" =</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-4','a','a')">a) You don't have to pay</button>
+                        <button class="opt-btn" onclick="check('ex5-4','b','a')">b) You haven't to pay</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">You <strong>don't have to</strong> pay. (don't + have to)</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">"Haven't to" no es común. Usa <strong>don't have to</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-5">
+                    <div class="exercise-q">5. "Tuve que esperar" =</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-5','a','a')">a) I had to wait</button>
+                        <button class="opt-btn" onclick="check('ex5-5','b','a')">b) I have to waited</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">I <strong>had to</strong> wait. (pasado = had to + verbo base)</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">El verbo después de "to" va en base. Pasado = <strong>had to</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score5">0/5</div>
+                    <div class="label">Paso 5</div>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, #fff5f7 0%, #ffdde1 100%); border-radius: 12px;">
+                <h3 style="color: #e91e63; font-size: 0.95rem; margin-bottom: 10px;">🎓 Resumen Final</h3>
+                <ul class="summary-list">
+                    <li><strong>Have to</strong> = Tener que (obligación externa)</li>
+                    <li>I/You/We/They <strong>have to</strong></li>
+                    <li>He/She/It <strong>has to</strong></li>
+                    <li>Negativo: <strong>don't/doesn't have to</strong> (no necesario)</li>
+                    <li>Pregunta: <strong>Do/Does</strong> + subject + have to?</li>
+                    <li>Pasado: <strong>had to</strong></li>
+                    <li>Futuro: <strong>will have to</strong></li>
+                    <li>Don't have to ≠ Mustn't (no necesario vs prohibido)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Nav -->
+        <div class="bottom-nav">
+            <button class="nav-btn prev" id="prevBtn" onclick="prevStep()" disabled>← Anterior</button>
+            <span class="step-ind"><span id="currentStep">1</span>/5</span>
+            <button class="nav-btn next" id="nextBtn" onclick="nextStep()">Siguiente →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 5;
+        const scores = {1:0, 2:0, 3:0, 4:0, 5:0};
+        const answered = {};
+
+        function goToStep(step) {
+            if (step < 1 || step > totalSteps) return;
+            
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.querySelectorAll('.step-dot')[currentStep-1].classList.remove('active');
+            
+            if (step > currentStep) {
+                document.querySelectorAll('.step-dot')[currentStep-1].classList.add('completed');
+            }
+            
+            currentStep = step;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            document.querySelectorAll('.step-dot')[currentStep-1].classList.add('active');
+            
+            updateNav();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function nextStep() { if (currentStep < totalSteps) goToStep(currentStep + 1); }
+        function prevStep() { if (currentStep > 1) goToStep(currentStep - 1); }
+
+        function updateNav() {
+            document.getElementById('currentStep').textContent = currentStep;
+            document.getElementById('prevBtn').disabled = currentStep === 1;
+            document.getElementById('nextBtn').disabled = currentStep === totalSteps;
+            document.getElementById('nextBtn').textContent = currentStep === totalSteps ? '✓ Fin' : 'Siguiente →';
+        }
+
+        function check(id, sel, correct) {
+            if (answered[id]) return;
+            answered[id] = true;
+            
+            const ex = document.getElementById(id);
+            const btns = ex.querySelectorAll('.opt-btn');
+            const fbCorrect = document.getElementById(`fb-${id}`);
+            const fbIncorrect = document.getElementById(`fbi-${id}`);
+            
+            btns.forEach(b => b.disabled = true);
+            
+            const stepNum = parseInt(id.split('-')[0].replace('ex',''));
+            
+            if (sel === correct) {
+                ex.classList.add('correct');
+                btns.forEach(b => { 
+                    if (b.textContent.startsWith(sel+')')) b.classList.add('sel-correct'); 
+                });
+                fbCorrect.classList.add('show');
+                scores[stepNum]++;
+            } else {
+                ex.classList.add('incorrect');
+                btns.forEach(b => {
+                    if (b.textContent.startsWith(sel+')')) b.classList.add('sel-wrong');
+                    if (b.textContent.startsWith(correct+')')) b.classList.add('show-correct');
+                });
+                fbIncorrect.classList.add('show');
+            }
+            
+            document.getElementById(`score${stepNum}`).textContent = `${scores[stepNum]}/5`;
+        }
+
+        updateNav();
+    </script>
+</body>
+</html>
