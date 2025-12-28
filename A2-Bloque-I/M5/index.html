@@ -3,192 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A2-Bloque-I Módulo 5 | JUCUM English Center</title>
+    <title>A2-Bloque-I Módulo 5 | JUCUM Grammar</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #e8f5e9;
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
-        }
-        .container { max-width: 600px; margin: 0 auto; }
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #7f8c8d;
-            text-decoration: none;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            transition: color 0.3s;
-        }
-        .back-link:hover { color: #43a047; }
-        .header {
-            text-align: center;
-            padding: 30px 20px;
-            background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
-            border-radius: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(102, 187, 106, 0.3);
-        }
-        .header .badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.3);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: white;
-            margin-bottom: 10px;
-        }
-        .header h1 {
-            color: white;
-            font-size: 1.8rem;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .section-title {
-            text-align: center;
-            color: #2c3e50;
-            font-size: 1rem;
-            font-weight: 400;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        .topics-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        .topic-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            border-left: 4px solid #66bb6a;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .topic-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 20px rgba(102, 187, 106, 0.2);
-        }
-        .topic-card .number {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-        .topic-card .content { flex: 1; }
-        .topic-card h3 {
-            color: #2c3e50;
-            font-size: 1rem;
-            margin-bottom: 4px;
-        }
-        .topic-card .description {
-            color: #7f8c8d;
-            font-size: 0.8rem;
-        }
-        .topic-card .status {
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            flex-shrink: 0;
-        }
-        .topic-card .status.available {
-            background: #d4edda;
-            color: #155724;
-        }
-        .footer {
-            text-align: center;
-            padding: 20px;
-            color: #95a5a6;
-            font-size: 0.8rem;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 500px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); border-radius: 20px; padding: 25px 20px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 25px rgba(102, 187, 106, 0.4); }
+        .header .level-badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; color: white; margin-bottom: 10px; }
+        .header h1 { color: white; font-size: 1.6rem; margin-bottom: 5px; }
+        .header p { color: rgba(255,255,255,0.9); font-size: 0.9rem; }
+        .topics-grid { display: flex; flex-direction: column; gap: 12px; }
+        .topic-card { background: white; border-radius: 16px; padding: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 15px; text-decoration: none; color: inherit; transition: all 0.3s ease; border: 2px solid transparent; }
+        .topic-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); border-color: #66bb6a; }
+        .topic-num { width: 45px; height: 45px; background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem; flex-shrink: 0; }
+        .topic-info { flex: 1; }
+        .topic-title { color: #2e7d32; font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
+        .topic-desc { color: #666; font-size: 0.8rem; }
+        .topic-arrow { color: #66bb6a; font-size: 1.2rem; }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: #43a047; text-decoration: none; font-size: 0.9rem; margin-bottom: 15px; padding: 8px 16px; background: white; border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .back-link:hover { background: #e8f5e9; }
+        .module-info { background: white; border-radius: 16px; padding: 20px; margin-top: 20px; text-align: center; }
+        .module-info h3 { color: #2e7d32; font-size: 1rem; margin-bottom: 10px; }
+        .module-info p { color: #666; font-size: 0.85rem; line-height: 1.5; }
+        .progress-bar { background: #e0e0e0; height: 8px; border-radius: 4px; margin-top: 15px; overflow: hidden; }
+        .progress-fill { background: linear-gradient(90deg, #66bb6a, #43a047); height: 100%; width: 0%; border-radius: 4px; transition: width 0.5s ease; }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../" class="back-link">← Volver a A2-Bloque-I</a>
+        <a href="../index.html" class="back-link">← Volver a A2-Bloque-I</a>
         
-        <header class="header">
-            <span class="badge">💚 A2-Bloque-I</span>
-            <h1>Módulo 5</h1>
-        </header>
+        <div class="header">
+            <div class="level-badge">💚 A2-Bloque-I</div>
+            <h1>📚 Módulo 5</h1>
+            <p>Comparaciones avanzadas y conectores</p>
+        </div>
 
-        <p class="section-title">📚 Temas de Gramática</p>
-
-        <div class="topics-list">
+        <div class="topics-grid">
             <a href="tema1-adverbs-of-degree.html" class="topic-card">
-                <div class="number">1</div>
-                <div class="content">
-                    <h3>Adverbs of Degree</h3>
-                    <p class="description">really / quite / rather / fairly</p>
+                <div class="topic-num">1</div>
+                <div class="topic-info">
+                    <div class="topic-title">📊 Adverbs of Degree</div>
+                    <div class="topic-desc">really, quite, rather, fairly</div>
                 </div>
-                <span class="status available">✓ Disponible</span>
+                <span class="topic-arrow">→</span>
             </a>
 
-            <a href="tema2-comparatives.html" class="topic-card">
-                <div class="number">2</div>
-                <div class="content">
-                    <h3>Comparatives</h3>
-                    <p class="description">review + not as ... as</p>
+            <a href="tema2-comparatives-not-as-as.html" class="topic-card">
+                <div class="topic-num">2</div>
+                <div class="topic-info">
+                    <div class="topic-title">⚖️ Comparatives: not as...as</div>
+                    <div class="topic-desc">Comparaciones de igualdad e inferioridad</div>
                 </div>
-                <span class="status available">✓ Disponible</span>
+                <span class="topic-arrow">→</span>
             </a>
 
             <a href="tema3-intensifiers-comparatives.html" class="topic-card">
-                <div class="number">3</div>
-                <div class="content">
-                    <h3>Intensifiers with Comparatives</h3>
-                    <p class="description">much / far / a lot / slightly</p>
+                <div class="topic-num">3</div>
+                <div class="topic-info">
+                    <div class="topic-title">🔥 Intensifiers with Comparatives</div>
+                    <div class="topic-desc">much, far, a lot, slightly + comparative</div>
                 </div>
-                <span class="status available">✓ Disponible</span>
+                <span class="topic-arrow">→</span>
             </a>
 
             <a href="tema4-relative-clauses.html" class="topic-card">
-                <div class="number">4</div>
-                <div class="content">
-                    <h3>Relative Clauses</h3>
-                    <p class="description">defining: who / that / which</p>
+                <div class="topic-num">4</div>
+                <div class="topic-info">
+                    <div class="topic-title">🔗 Relative Clauses</div>
+                    <div class="topic-desc">who, that, which (defining)</div>
                 </div>
-                <span class="status available">✓ Disponible</span>
+                <span class="topic-arrow">→</span>
             </a>
 
             <a href="tema5-sequencers-linkers.html" class="topic-card">
-                <div class="number">5</div>
-                <div class="content">
-                    <h3>Sequencers / Linkers</h3>
-                    <p class="description">then / after that / because / so</p>
+                <div class="topic-num">5</div>
+                <div class="topic-info">
+                    <div class="topic-title">📝 Sequencers & Linkers</div>
+                    <div class="topic-desc">then, after that, because, so</div>
                 </div>
-                <span class="status available">✓ Disponible</span>
+                <span class="topic-arrow">→</span>
             </a>
 
-            <a href="tema6-superlatives.html" class="topic-card">
-                <div class="number">6</div>
-                <div class="content">
-                    <h3>Superlatives</h3>
-                    <p class="description">use with in / of</p>
+            <a href="tema6-superlatives-in-of.html" class="topic-card">
+                <div class="topic-num">6</div>
+                <div class="topic-info">
+                    <div class="topic-title">🏆 Superlatives with in/of</div>
+                    <div class="topic-desc">the best in the world / of all time</div>
                 </div>
-                <span class="status available">✓ Disponible</span>
+                <span class="topic-arrow">→</span>
             </a>
         </div>
 
-        <footer class="footer">
-            <p>JUCUM English Center — A2-Bloque-I Módulo 5</p>
-        </footer>
+        <div class="module-info">
+            <h3>📖 Sobre este módulo</h3>
+            <p>En este módulo aprenderás a hacer comparaciones más sofisticadas, usar pronombres relativos para conectar ideas, y organizar narrativas con conectores temporales y causales.</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+            <p style="margin-top: 10px; font-size: 0.8rem; color: #888;">6 temas de gramática</p>
+        </div>
     </div>
+
+    <script>
+        // Simple progress animation
+        setTimeout(() => {
+            document.getElementById('progress').style.width = '100%';
+        }, 300);
+    </script>
 </body>
 </html>
