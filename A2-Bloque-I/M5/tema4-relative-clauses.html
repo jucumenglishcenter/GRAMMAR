@@ -6,751 +6,191 @@
     <title>Relative Clauses | A2-Beg M5 | JUCUM</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            min-height: 100vh;
-            padding: 16px;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); min-height: 100vh; padding: 15px; padding-bottom: 80px; }
         .container { max-width: 500px; margin: 0 auto; }
-        .header {
-            background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
-            border-radius: 20px; padding: 20px;
-            text-align: center; color: white;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 15px rgba(102, 187, 106, 0.3);
-        }
-        .header h1 { font-size: 1.4rem; margin-bottom: 8px; }
-        .badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.25);
-            padding: 4px 12px; border-radius: 20px; font-size: 0.8rem;
-        }
-        .nav-steps {
-            display: flex; justify-content: space-between;
-            margin-bottom: 16px; background: white;
-            border-radius: 16px; padding: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .step-dot {
-            width: 40px; height: 40px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; cursor: pointer;
-            transition: all 0.3s; background: #f5f5f5;
-        }
-        .step-dot.active {
-            background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
-            transform: scale(1.1);
-            box-shadow: 0 4px 15px rgba(102, 187, 106, 0.4);
-        }
-        .step-dot.completed { background: #c8e6c9; }
-        .step-content { display: none; animation: fadeIn 0.4s ease; }
-        .step-content.active { display: block; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .card {
-            background: white; border-radius: 20px;
-            padding: 20px; margin-bottom: 16px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-        }
-        .card-title {
-            display: flex; align-items: center; gap: 10px;
-            font-size: 1.1rem; font-weight: 600; color: #2e7d32;
-            margin-bottom: 16px;
-        }
-        .comparison-table {
-            width: 100%; border-collapse: collapse;
-            font-size: 0.85rem; margin: 12px 0;
-        }
-        .comparison-table th {
-            background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
-            color: white; padding: 10px 6px; text-align: left;
-        }
-        .comparison-table td { padding: 10px 6px; border-bottom: 1px solid #e8f5e9; }
-        .comparison-table tr:hover { background: #f1f8e9; }
-        .formula-box {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            border-left: 4px solid #66bb6a; border-radius: 12px;
-            padding: 16px; margin: 12px 0;
-            font-family: 'Courier New', monospace; font-size: 0.9rem;
-        }
-        .example-correct {
-            background: #e8f5e9; border-radius: 10px;
-            padding: 12px; margin: 8px 0;
-            display: flex; align-items: flex-start; gap: 10px;
-        }
-        .example-incorrect {
-            background: #ffebee; border-radius: 10px;
-            padding: 12px; margin: 8px 0;
-            display: flex; align-items: flex-start; gap: 10px;
-        }
-        .tip-box {
-            background: #fff3e0; border-radius: 12px;
-            padding: 12px; margin: 8px 0;
-            display: flex; align-items: flex-start; gap: 10px;
-            font-size: 0.9rem;
-        }
-        .quiz-question {
-            background: #fafafa; border-radius: 16px;
-            padding: 16px; margin-bottom: 12px;
-        }
-        .quiz-question p { font-weight: 500; margin-bottom: 12px; color: #333; }
-        .quiz-options { display: flex; flex-direction: column; gap: 8px; }
-        .quiz-option {
-            padding: 12px 16px; border: 2px solid #e0e0e0;
-            border-radius: 12px; cursor: pointer;
-            transition: all 0.3s; font-size: 0.95rem;
-        }
-        .quiz-option:hover { border-color: #66bb6a; background: #f1f8e9; }
-        .quiz-option.correct { border-color: #4caf50; background: #e8f5e9; }
-        .quiz-option.incorrect { border-color: #f44336; background: #ffebee; }
-        .feedback {
-            display: none; padding: 12px; border-radius: 10px;
-            margin-top: 10px; font-size: 0.85rem;
-        }
-        .feedback.show { display: block; animation: fadeIn 0.3s ease; }
-        .feedback.correct { background: #e8f5e9; border-left: 4px solid #4caf50; }
-        .feedback.incorrect { background: #ffebee; border-left: 4px solid #f44336; }
-        .score-display {
-            text-align: center; padding: 16px;
-            background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
-            border-radius: 16px; color: white; margin-top: 16px;
-        }
-        .score-display .score-number { font-size: 2rem; font-weight: bold; }
-        .nav-buttons {
-            display: flex; justify-content: space-between;
-            margin-top: 20px; gap: 12px;
-        }
-        .nav-btn {
-            flex: 1; padding: 14px 20px; border: none;
-            border-radius: 12px; font-size: 1rem; font-weight: 600;
-            cursor: pointer; transition: all 0.3s;
-        }
+        .header { background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); border-radius: 16px; padding: 15px; text-align: center; margin-bottom: 15px; }
+        .header h1 { color: white; font-size: 1.2rem; margin-bottom: 3px; }
+        .header .badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 15px; font-size: 0.75rem; color: white; }
+        .progress-nav { display: flex; justify-content: center; gap: 6px; margin-bottom: 15px; }
+        .step-dot { width: 36px; height: 36px; border-radius: 50%; border: 2px solid #66bb6a; background: white; color: #66bb6a; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
+        .step-dot.active { background: #66bb6a; color: white; }
+        .step-dot.completed { background: #43a047; color: white; border-color: #43a047; }
+        .step-card { display: none; background: white; border-radius: 16px; padding: 20px 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 15px; }
+        .step-card.active { display: block; }
+        .step-header { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #e8f5e9; }
+        .step-icon { font-size: 1.8rem; }
+        .step-title { color: #2e7d32; font-size: 1rem; font-weight: 600; }
+        .quick-example { background: #f5f5f5; border-radius: 10px; padding: 10px 12px; margin: 8px 0; display: flex; align-items: center; gap: 10px; }
+        .quick-example .emoji { font-size: 1.3rem; }
+        .quick-example .text { flex: 1; }
+        .quick-example .en { color: #2e7d32; font-weight: 600; font-size: 0.9rem; }
+        .quick-example .es { color: #888; font-size: 0.8rem; }
+        .quick-example.right { background: #e8f5e9; border-left: 3px solid #4caf50; }
+        .quick-example.wrong { background: #ffebee; border-left: 3px solid #f44336; }
+        .mini-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.8rem; }
+        .mini-table th { background: #66bb6a; color: white; padding: 8px 6px; text-align: center; }
+        .mini-table td { padding: 8px 6px; border-bottom: 1px solid #e0e0e0; text-align: center; }
+        .tip-box { background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%); border-radius: 10px; padding: 10px 12px; margin: 10px 0; font-size: 0.85rem; border-left: 3px solid #fbc02d; }
+        .tip-box strong { color: #f57f17; }
+        .rule-box { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-radius: 10px; padding: 12px; margin: 10px 0; text-align: center; border: 2px solid #42a5f5; }
+        .rule-box .formula { font-family: monospace; font-size: 0.9rem; color: #1565c0; font-weight: 600; }
+        .alert-box { background: #ffebee; border: 2px solid #ef5350; border-radius: 10px; padding: 10px; margin: 10px 0; }
+        .alert-box .title { color: #c62828; font-weight: 700; font-size: 0.85rem; margin-bottom: 5px; }
+        .exercise-section { margin-top: 20px; padding-top: 15px; border-top: 2px dashed #c8e6c9; }
+        .exercise-section h3 { color: #43a047; font-size: 0.9rem; margin-bottom: 12px; }
+        .exercise { background: #fafafa; border-radius: 10px; padding: 12px; margin-bottom: 10px; border: 2px solid #e0e0e0; }
+        .exercise.correct { border-color: #4caf50; background: #e8f5e9; }
+        .exercise.incorrect { border-color: #f44336; background: #ffebee; }
+        .exercise-q { font-size: 0.9rem; color: #333; margin-bottom: 10px; }
+        .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .opt-btn { padding: 10px 8px; border: 2px solid #e0e0e0; border-radius: 8px; background: white; color: #555; font-size: 0.85rem; cursor: pointer; }
+        .opt-btn:hover:not(:disabled) { border-color: #66bb6a; background: #e8f5e9; }
+        .opt-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+        .opt-btn.sel-correct { background: #4caf50; color: white; border-color: #4caf50; }
+        .opt-btn.sel-wrong { background: #f44336; color: white; border-color: #f44336; }
+        .opt-btn.show-correct { background: #4caf50; color: white; border-color: #4caf50; }
+        .feedback { margin-top: 10px; padding: 10px; border-radius: 8px; font-size: 0.8rem; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-fb { background: #e8f5e9; border: 1px solid #a5d6a7; }
+        .feedback.incorrect-fb { background: #ffebee; border: 1px solid #ef9a9a; }
+        .feedback .result { font-weight: 700; margin-bottom: 6px; }
+        .feedback.correct-fb .result { color: #2e7d32; }
+        .feedback.incorrect-fb .result { color: #c62828; }
+        .score-box { text-align: center; padding: 12px; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-radius: 10px; margin-top: 12px; }
+        .score-box .num { font-size: 1.5rem; font-weight: bold; color: #2e7d32; }
+        .score-box .label { font-size: 0.8rem; color: #66bb6a; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 12px 15px; box-shadow: 0 -4px 15px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
+        .nav-btn { padding: 10px 20px; border: none; border-radius: 20px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
         .nav-btn.prev { background: #e0e0e0; color: #666; }
-        .nav-btn.next { background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%); color: white; }
-        .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        .pronoun-cards {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 10px; margin: 16px 0;
-        }
-        .pronoun-card {
-            background: #e8f5e9; border-radius: 12px;
-            padding: 12px; text-align: center;
-        }
-        .pronoun-card .pronoun { font-size: 1.3rem; font-weight: bold; color: #2e7d32; }
-        .pronoun-card .use { font-size: 0.75rem; color: #666; margin-top: 4px; }
-        ul { padding-left: 20px; }
-        li { margin: 8px 0; font-size: 0.9rem; }
-        .highlight-box {
-            background: #e3f2fd; border-radius: 10px;
-            padding: 12px; margin: 8px 0; border-left: 4px solid #2196f3;
-        }
+        .nav-btn.next { background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); color: white; }
+        .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .step-ind { font-size: 0.8rem; color: #666; }
+        .summary-list { list-style: none; }
+        .summary-list li { padding: 6px 0 6px 20px; position: relative; font-size: 0.85rem; color: #555; }
+        .summary-list li:before { content: "✓"; position: absolute; left: 0; color: #66bb6a; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🔗 Relative Clauses</h1>
-            <p>who / that / which</p>
-            <span class="badge">A2-Beginner • Módulo 5</span>
+        <div class="header"><h1>🔗 Relative Clauses (who/that/which)</h1><div class="badge">💚 A2-Beginner • M5 • Tema 4</div></div>
+        <div class="progress-nav">
+            <div class="step-dot active" onclick="goToStep(1)">1</div>
+            <div class="step-dot" onclick="goToStep(2)">2</div>
+            <div class="step-dot" onclick="goToStep(3)">3</div>
+            <div class="step-dot" onclick="goToStep(4)">4</div>
+            <div class="step-dot" onclick="goToStep(5)">5</div>
         </div>
-        
-        <div class="nav-steps">
-            <div class="step-dot active" onclick="showStep(1)">🇪🇸</div>
-            <div class="step-dot" onclick="showStep(2)">🤝</div>
-            <div class="step-dot" onclick="showStep(3)">⚠️</div>
-            <div class="step-dot" onclick="showStep(4)">💡</div>
-            <div class="step-dot" onclick="showStep(5)">✨</div>
-        </div>
-        
+
         <!-- STEP 1 -->
-        <div class="step-content active" id="step1">
-            <div class="card">
-                <div class="card-title">🇪🇸 Paso 1: Repaso en Español</div>
-                
-                <p style="margin-bottom:12px;">En español usamos <strong>pronombres relativos</strong> para conectar información sobre un sustantivo.</p>
-                
-                <div class="pronoun-cards">
-                    <div class="pronoun-card">
-                        <div class="pronoun">que</div>
-                        <div class="use">personas y cosas</div>
-                    </div>
-                    <div class="pronoun-card">
-                        <div class="pronoun">quien</div>
-                        <div class="use">solo personas</div>
-                    </div>
-                    <div class="pronoun-card">
-                        <div class="pronoun">el cual</div>
-                        <div class="use">formal</div>
-                    </div>
-                </div>
-                
-                <div class="example-correct">
-                    <span>📝</span>
-                    <div>
-                        <strong>Ejemplos:</strong><br>
-                        • El hombre <strong>que</strong> vive aquí es mi tío<br>
-                        • El libro <strong>que</strong> leí es interesante<br>
-                        • La mujer <strong>que</strong> trabaja allí es doctora
-                    </div>
-                </div>
-                
-                <p style="margin-top:12px;font-size:0.9rem;">💡 "Que" es el más común y se usa para personas Y cosas.</p>
-            </div>
-            
-            <div class="card">
-                <div class="card-title">📝 Práctica - Paso 1</div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>1. En "El niño que juega es mi hijo", ¿qué función tiene "que"?</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">Conectar información sobre el niño</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">Preguntar algo</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="1">
-                    <p>2. "Que" en español se usa para...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">solo cosas</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">personas y cosas</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>3. "La casa que compré" - ¿qué describe la cláusula?</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">cuál casa específicamente</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">todas las casas</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>4. El pronombre relativo va...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">después del sustantivo que describe</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">al principio de la oración</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="1">
-                    <p>5. Las cláusulas relativas dan información...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">innecesaria</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">adicional sobre el sustantivo</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="score-display" id="score1" style="display:none;">
-                    <div class="score-number"><span id="scoreNum1">0</span>/5</div>
-                    <p>Paso 1 completado</p>
-                </div>
-            </div>
-            
-            <div class="nav-buttons">
-                <button class="nav-btn prev" disabled>← Anterior</button>
-                <button class="nav-btn next" onclick="showStep(2)">Siguiente →</button>
+        <div class="step-card active" id="step1">
+            <div class="step-header"><span class="step-icon">🇪🇸</span><span class="step-title">Paso 1: Repaso en Español</span></div>
+            <p style="font-size: 0.9rem; color: #555; margin-bottom: 15px;">En español usamos "que" para conectar oraciones y dar más información.</p>
+            <div class="quick-example right"><span class="emoji">👨</span><div class="text"><div class="en">El hombre <strong>QUE</strong> vive aquí es mi vecino.</div><div class="es">= "que" conecta información sobre "el hombre"</div></div></div>
+            <div class="quick-example right"><span class="emoji">📱</span><div class="text"><div class="en">El teléfono <strong>QUE</strong> compré es nuevo.</div><div class="es">= "que" conecta información sobre "el teléfono"</div></div></div>
+            <div class="tip-box"><strong>💡 Concepto:</strong> Las oraciones de relativo añaden información ESENCIAL para identificar a la persona o cosa.</div>
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+                <div class="exercise" id="ex1-1"><div class="exercise-q">1. En español, "que" se usa para:</div><div class="opts"><button class="opt-btn" onclick="check('ex1-1','a','a')">a) Personas y cosas</button><button class="opt-btn" onclick="check('ex1-1','b','a')">b) Solo personas</button></div><div class="feedback correct-fb" id="fb-ex1-1"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex1-1"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex1-2"><div class="exercise-q">2. "El libro que leí" - "que" conecta información sobre:</div><div class="opts"><button class="opt-btn" onclick="check('ex1-2','a','a')">a) El libro</button><button class="opt-btn" onclick="check('ex1-2','b','a')">b) Leí</button></div><div class="feedback correct-fb" id="fb-ex1-2"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex1-2"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex1-3"><div class="exercise-q">3. "La mujer que trabaja aquí" - "que" refiere a:</div><div class="opts"><button class="opt-btn" onclick="check('ex1-3','a','a')">a) Una persona</button><button class="opt-btn" onclick="check('ex1-3','b','a')">b) Una cosa</button></div><div class="feedback correct-fb" id="fb-ex1-3"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex1-3"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex1-4"><div class="exercise-q">4. Las oraciones de relativo dan información:</div><div class="opts"><button class="opt-btn" onclick="check('ex1-4','a','a')">a) Esencial</button><button class="opt-btn" onclick="check('ex1-4','b','a')">b) Opcional</button></div><div class="feedback correct-fb" id="fb-ex1-4"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex1-4"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex1-5"><div class="exercise-q">5. "El auto que compré" - ¿cuál es el antecedente?</div><div class="opts"><button class="opt-btn" onclick="check('ex1-5','a','a')">a) El auto</button><button class="opt-btn" onclick="check('ex1-5','b','a')">b) Compré</button></div><div class="feedback correct-fb" id="fb-ex1-5"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex1-5"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="score-box"><div class="num" id="score1">0/5</div><div class="label">Paso 1</div></div>
             </div>
         </div>
-        
+
         <!-- STEP 2 -->
-        <div class="step-content" id="step2">
-            <div class="card">
-                <div class="card-title">🤝 Paso 2: Similitudes con el Inglés</div>
-                
-                <div class="pronoun-cards">
-                    <div class="pronoun-card">
-                        <div class="pronoun">who</div>
-                        <div class="use">👤 personas</div>
-                    </div>
-                    <div class="pronoun-card">
-                        <div class="pronoun">which</div>
-                        <div class="use">📦 cosas</div>
-                    </div>
-                    <div class="pronoun-card">
-                        <div class="pronoun">that</div>
-                        <div class="use">👤📦 ambos</div>
-                    </div>
-                </div>
-                
-                <ul>
-                    <li>✅ <strong>Misma función:</strong> Conectar información sobre un sustantivo</li>
-                    <li>✅ <strong>Posición igual:</strong> Después del sustantivo</li>
-                    <li>✅ <strong>Define/identifica:</strong> Especifica CUÁL persona/cosa</li>
-                    <li>✅ <strong>Cláusula completa:</strong> Sujeto + verbo (mínimo)</li>
-                    <li>✅ <strong>Esencial:</strong> Sin coma = información necesaria</li>
-                </ul>
-                
-                <div class="example-correct">
-                    <span>🔄</span>
-                    <div>
-                        <strong>Paralelos:</strong><br>
-                        el hombre <strong>que</strong> vive → the man <strong>who</strong> lives<br>
-                        el libro <strong>que</strong> leí → the book <strong>that</strong> I read
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-title">📝 Práctica - Paso 2</div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>1. "Who" se usa para...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">personas</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">cosas</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="1">
-                    <p>2. "Which" se usa para...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">personas</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">cosas</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>3. "That" puede usarse para...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">personas y cosas</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">solo lugares</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>4. El pronombre relativo va _____ del sustantivo.</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">después</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">antes</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="1">
-                    <p>5. La cláusula relativa especifica...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">el tiempo</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">cuál persona/cosa</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="score-display" id="score2" style="display:none;">
-                    <div class="score-number"><span id="scoreNum2">0</span>/5</div>
-                    <p>Paso 2 completado</p>
-                </div>
-            </div>
-            
-            <div class="nav-buttons">
-                <button class="nav-btn prev" onclick="showStep(1)">← Anterior</button>
-                <button class="nav-btn next" onclick="showStep(3)">Siguiente →</button>
+        <div class="step-card" id="step2">
+            <div class="step-header"><span class="step-icon">🤝</span><span class="step-title">Paso 2: Similitudes ESP ↔ ENG</span></div>
+            <p style="font-size: 0.9rem; color: #555; margin-bottom: 15px;">English has three relative pronouns where Spanish has "que".</p>
+            <table class="mini-table"><tr><th>Español</th><th>English</th><th>Use</th></tr><tr><td>que</td><td>who</td><td>👤 People</td></tr><tr><td>que</td><td>which</td><td>📦 Things</td></tr><tr><td>que</td><td>that</td><td>👤📦 Both</td></tr></table>
+            <div class="quick-example right"><span class="emoji">👤</span><div class="text"><div class="en">The man <strong>who</strong> lives here...</div><div class="es">El hombre que vive aquí...</div></div></div>
+            <div class="tip-box"><strong>💡 "That" is universal:</strong> Puede usarse para personas Y cosas. Es la opción más común.</div>
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+                <div class="exercise" id="ex2-1"><div class="exercise-q">1. "Who" se usa para:</div><div class="opts"><button class="opt-btn" onclick="check('ex2-1','a','a')">a) People</button><button class="opt-btn" onclick="check('ex2-1','b','a')">b) Things</button></div><div class="feedback correct-fb" id="fb-ex2-1"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex2-1"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex2-2"><div class="exercise-q">2. "Which" se usa para:</div><div class="opts"><button class="opt-btn" onclick="check('ex2-2','a','b')">a) People</button><button class="opt-btn" onclick="check('ex2-2','b','b')">b) Things</button></div><div class="feedback correct-fb" id="fb-ex2-2"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex2-2"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex2-3"><div class="exercise-q">3. "That" se usa para:</div><div class="opts"><button class="opt-btn" onclick="check('ex2-3','a','a')">a) People and things</button><button class="opt-btn" onclick="check('ex2-3','b','a')">b) Only things</button></div><div class="feedback correct-fb" id="fb-ex2-3"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex2-3"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex2-4"><div class="exercise-q">4. Traduce: "El hombre que trabaja aquí"</div><div class="opts"><button class="opt-btn" onclick="check('ex2-4','a','a')">a) The man who works here</button><button class="opt-btn" onclick="check('ex2-4','b','a')">b) The man which works</button></div><div class="feedback correct-fb" id="fb-ex2-4"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex2-4"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex2-5"><div class="exercise-q">5. "The book _____ I read"</div><div class="opts"><button class="opt-btn" onclick="check('ex2-5','a','b')">a) who</button><button class="opt-btn" onclick="check('ex2-5','b','b')">b) which/that</button></div><div class="feedback correct-fb" id="fb-ex2-5"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex2-5"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="score-box"><div class="num" id="score2">0/5</div><div class="label">Paso 2</div></div>
             </div>
         </div>
-        
+
         <!-- STEP 3 -->
-        <div class="step-content" id="step3">
-            <div class="card">
-                <div class="card-title">⚠️ Paso 3: Diferencias Importantes</div>
-                
-                <table class="comparison-table">
-                    <tr>
-                        <th>Español</th>
-                        <th>Inglés</th>
-                        <th>Uso</th>
-                    </tr>
-                    <tr>
-                        <td>que (persona)</td>
-                        <td><strong>who / that</strong></td>
-                        <td>👤</td>
-                    </tr>
-                    <tr>
-                        <td>que (cosa)</td>
-                        <td><strong>which / that</strong></td>
-                        <td>📦</td>
-                    </tr>
-                    <tr>
-                        <td>que (universal)</td>
-                        <td><strong>that</strong></td>
-                        <td>👤📦</td>
-                    </tr>
-                </table>
-                
-                <div class="highlight-box">
-                    <strong>💡 Regla clave:</strong><br>
-                    En español "que" sirve para todo.<br>
-                    En inglés hay que elegir: who/which/that
-                </div>
-                
-                <div class="tip-box">
-                    <span>⚠️</span>
-                    <div>
-                        <strong>¡Cuidado!</strong><br>
-                        ❌ The man <strong>which</strong> works here...<br>
-                        ✅ The man <strong>who</strong> works here...
-                    </div>
-                </div>
-                
-                <div class="example-incorrect">
-                    <span>❌</span>
-                    <div>
-                        <strong>Errores comunes:</strong><br>
-                        ❌ The book who I read (who para cosas)<br>
-                        ✅ The book <strong>that/which</strong> I read
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-title">📝 Práctica - Paso 3</div>
-                
-                <div class="quiz-question" data-correct="1">
-                    <p>1. "The woman _____ called is my mother."</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">which</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">who</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>2. "The car _____ I bought is red."</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">which / that</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">who</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>3. ¿Cuál es INCORRECTO?</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">The boy which studies...</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">The boy who studies...</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="1">
-                    <p>4. "That" puede reemplazar a...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">solo who</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">who y which</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>5. Para animales usamos generalmente...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">which / that</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">who</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="score-display" id="score3" style="display:none;">
-                    <div class="score-number"><span id="scoreNum3">0</span>/5</div>
-                    <p>Paso 3 completado</p>
-                </div>
-            </div>
-            
-            <div class="nav-buttons">
-                <button class="nav-btn prev" onclick="showStep(2)">← Anterior</button>
-                <button class="nav-btn next" onclick="showStep(4)">Siguiente →</button>
+        <div class="step-card" id="step3">
+            <div class="step-header"><span class="step-icon">⚠️</span><span class="step-title">Paso 3: ¡Cuidado! Diferencias</span></div>
+            <div class="alert-box"><div class="title">🚨 WHO vs WHICH</div>WHO = solo personas | WHICH = solo cosas</div>
+            <div class="quick-example wrong"><span class="emoji">❌</span><div class="text"><div class="en">The man which works here...</div><div class="es">INCORRECTO - personas = WHO</div></div></div>
+            <div class="quick-example right"><span class="emoji">✅</span><div class="text"><div class="en">The man who/that works here...</div><div class="es">CORRECTO</div></div></div>
+            <div class="tip-box"><strong>💡 Salvavidas:</strong> Si dudas, usa "that" - ¡funciona para todo!</div>
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+                <div class="exercise" id="ex3-1"><div class="exercise-q">1. ¿Cuál es INCORRECTA?</div><div class="opts"><button class="opt-btn" onclick="check('ex3-1','a','a')">a) The teacher which helped</button><button class="opt-btn" onclick="check('ex3-1','b','a')">b) The teacher who helped</button></div><div class="feedback correct-fb" id="fb-ex3-1"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex3-1"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex3-2"><div class="exercise-q">2. "The car _____ I bought"</div><div class="opts"><button class="opt-btn" onclick="check('ex3-2','a','b')">a) who</button><button class="opt-btn" onclick="check('ex3-2','b','b')">b) which/that</button></div><div class="feedback correct-fb" id="fb-ex3-2"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex3-2"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex3-3"><div class="exercise-q">3. Si no sabes si usar who/which, usa:</div><div class="opts"><button class="opt-btn" onclick="check('ex3-3','a','a')">a) that</button><button class="opt-btn" onclick="check('ex3-3','b','a')">b) what</button></div><div class="feedback correct-fb" id="fb-ex3-3"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex3-3"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex3-4"><div class="exercise-q">4. "The woman _____ called you"</div><div class="opts"><button class="opt-btn" onclick="check('ex3-4','a','a')">a) who/that</button><button class="opt-btn" onclick="check('ex3-4','b','a')">b) which</button></div><div class="feedback correct-fb" id="fb-ex3-4"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex3-4"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex3-5"><div class="exercise-q">5. Para animales usamos:</div><div class="opts"><button class="opt-btn" onclick="check('ex3-5','a','a')">a) which/that</button><button class="opt-btn" onclick="check('ex3-5','b','a')">b) who</button></div><div class="feedback correct-fb" id="fb-ex3-5"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex3-5"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="score-box"><div class="num" id="score3">0/5</div><div class="label">Paso 3</div></div>
             </div>
         </div>
-        
+
         <!-- STEP 4 -->
-        <div class="step-content" id="step4">
-            <div class="card">
-                <div class="card-title">💡 Paso 4: Consejos Prácticos</div>
-                
-                <div class="tip-box">
-                    <span>1️⃣</span>
-                    <div><strong>¿Persona? → WHO/THAT</strong><br>The man who/that works here</div>
-                </div>
-                
-                <div class="tip-box">
-                    <span>2️⃣</span>
-                    <div><strong>¿Cosa? → WHICH/THAT</strong><br>The book which/that I read</div>
-                </div>
-                
-                <div class="tip-box">
-                    <span>3️⃣</span>
-                    <div><strong>¿Dudas? → THAT</strong><br>"That" es el comodín - siempre funciona</div>
-                </div>
-                
-                <div class="tip-box">
-                    <span>4️⃣</span>
-                    <div><strong>Omisión del pronombre:</strong><br>Si NO es sujeto, puedes omitirlo:<br>The book (that) I read ✓</div>
-                </div>
-                
-                <div class="formula-box">
-                    <strong>🔑 Fórmulas:</strong><br>
-                    Noun + <span style="color:#2e7d32">WHO</span> + verb (personas)<br>
-                    Noun + <span style="color:#2e7d32">WHICH</span> + verb (cosas)<br>
-                    Noun + <span style="color:#2e7d32">THAT</span> + verb (ambos)
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-title">📝 Práctica - Paso 4</div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>1. Si tienes dudas, el pronombre más seguro es...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">that</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">which</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="1">
-                    <p>2. "The teacher who teaches English" - who es...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">objeto</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">sujeto de la cláusula</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>3. "The movie I saw" - aquí se omitió...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">that/which (objeto)</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">who (sujeto)</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="1">
-                    <p>4. ¿Cuándo NO puedes omitir el pronombre?</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">Cuando es objeto</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">Cuando es sujeto</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>5. Para un perro mascota especial usarías...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">who (por ser querido como persona)</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">nunca who para animales</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="score-display" id="score4" style="display:none;">
-                    <div class="score-number"><span id="scoreNum4">0</span>/5</div>
-                    <p>Paso 4 completado</p>
-                </div>
-            </div>
-            
-            <div class="nav-buttons">
-                <button class="nav-btn prev" onclick="showStep(3)">← Anterior</button>
-                <button class="nav-btn next" onclick="showStep(5)">Siguiente →</button>
+        <div class="step-card" id="step4">
+            <div class="step-header"><span class="step-icon">💡</span><span class="step-title">Paso 4: Consejos Rápidos</span></div>
+            <div class="rule-box"><div class="formula">🎯 NOUN + WHO/WHICH/THAT + VERB</div></div>
+            <table class="mini-table"><tr><th>Antecedent</th><th>Relative</th></tr><tr><td>👤 Person</td><td>who / that</td></tr><tr><td>📦 Thing</td><td>which / that</td></tr><tr><td>🐕 Animal</td><td>which / that</td></tr></table>
+            <div class="tip-box"><strong>🎯 Truco:</strong> ¿Es persona? → WHO | ¿Es cosa/animal? → WHICH | ¿Dudas? → THAT</div>
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+                <div class="exercise" id="ex4-1"><div class="exercise-q">1. El pronombre relativo va _____ del sustantivo.</div><div class="opts"><button class="opt-btn" onclick="check('ex4-1','a','a')">a) Después</button><button class="opt-btn" onclick="check('ex4-1','b','a')">b) Antes</button></div><div class="feedback correct-fb" id="fb-ex4-1"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex4-1"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex4-2"><div class="exercise-q">2. "The movie _____ we watched"</div><div class="opts"><button class="opt-btn" onclick="check('ex4-2','a','a')">a) which/that</button><button class="opt-btn" onclick="check('ex4-2','b','a')">b) who</button></div><div class="feedback correct-fb" id="fb-ex4-2"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex4-2"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex4-3"><div class="exercise-q">3. "The friend _____ helped me"</div><div class="opts"><button class="opt-btn" onclick="check('ex4-3','a','a')">a) who/that</button><button class="opt-btn" onclick="check('ex4-3','b','a')">b) which</button></div><div class="feedback correct-fb" id="fb-ex4-3"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex4-3"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex4-4"><div class="exercise-q">4. "That" puede usarse para:</div><div class="opts"><button class="opt-btn" onclick="check('ex4-4','a','a')">a) Personas y cosas</button><button class="opt-btn" onclick="check('ex4-4','b','a')">b) Solo cosas</button></div><div class="feedback correct-fb" id="fb-ex4-4"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex4-4"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex4-5"><div class="exercise-q">5. "The cat _____ is sleeping"</div><div class="opts"><button class="opt-btn" onclick="check('ex4-5','a','a')">a) which/that</button><button class="opt-btn" onclick="check('ex4-5','b','a')">b) who</button></div><div class="feedback correct-fb" id="fb-ex4-5"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex4-5"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="score-box"><div class="num" id="score4">0/5</div><div class="label">Paso 4</div></div>
             </div>
         </div>
-        
+
         <!-- STEP 5 -->
-        <div class="step-content" id="step5">
-            <div class="card">
-                <div class="card-title">✨ Paso 5: Ejemplos y Práctica Final</div>
-                
-                <div class="example-correct">
-                    <span>✅</span>
-                    <div>
-                        <strong>WHO (personas):</strong><br>
-                        • The woman <strong>who</strong> teaches is my aunt. (que enseña)<br>
-                        • The army <strong>that</strong> arrived was strong. (que llegó)<br>
-                        • People <strong>who</strong> plan often succeed. (que planean)
-                    </div>
-                </div>
-                
-                <div class="example-correct">
-                    <span>✅</span>
-                    <div>
-                        <strong>WHICH/THAT (cosas):</strong><br>
-                        • The function <strong>which</strong> I attended was long. (que asistí)<br>
-                        • The benefit <strong>that</strong> we receive is great. (que recibimos)<br>
-                        • The lesson <strong>that</strong> I studied was useful. (que estudié)
-                    </div>
-                </div>
-                
-                <div class="example-correct">
-                    <span>✅</span>
-                    <div>
-                        <strong>Omisión (cuando es objeto):</strong><br>
-                        • The book (that) I read... (que leí)<br>
-                        • The style (which) she chose... (que eligió)
-                    </div>
-                </div>
-                
-                <div class="example-incorrect">
-                    <span>❌</span>
-                    <div>
-                        <strong>Errores comunes:</strong><br>
-                        ❌ The person which → ✅ The person who/that<br>
-                        ❌ The thing who → ✅ The thing which/that<br>
-                        ❌ The man lives (sin pronombre sujeto) → ✅ The man who lives
-                    </div>
-                </div>
+        <div class="step-card" id="step5">
+            <div class="step-header"><span class="step-icon">✨</span><span class="step-title">Paso 5: Práctica Final</span></div>
+            <div class="rule-box"><div class="formula">🔗 WHO = 👤 | WHICH = 📦 | THAT = 👤📦</div></div>
+            <div class="quick-example right"><span class="emoji">👨‍💼</span><div class="text"><div class="en">The man <strong>who</strong> works there is my uncle.</div><div class="es">El hombre que trabaja ahí es mi tío.</div></div></div>
+            <div class="exercise-section">
+                <h3>✏️ Práctica Final</h3>
+                <div class="exercise" id="ex5-1"><div class="exercise-q">1. The student _____ studies hard will pass.</div><div class="opts"><button class="opt-btn" onclick="check('ex5-1','a','a')">a) who</button><button class="opt-btn" onclick="check('ex5-1','b','a')">b) which</button></div><div class="feedback correct-fb" id="fb-ex5-1"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex5-1"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex5-2"><div class="exercise-q">2. The computer _____ I use is old.</div><div class="opts"><button class="opt-btn" onclick="check('ex5-2','a','b')">a) who</button><button class="opt-btn" onclick="check('ex5-2','b','b')">b) which/that</button></div><div class="feedback correct-fb" id="fb-ex5-2"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex5-2"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex5-3"><div class="exercise-q">3. The doctor _____ helped me was kind.</div><div class="opts"><button class="opt-btn" onclick="check('ex5-3','a','a')">a) who/that</button><button class="opt-btn" onclick="check('ex5-3','b','a')">b) which</button></div><div class="feedback correct-fb" id="fb-ex5-3"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex5-3"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex5-4"><div class="exercise-q">4. The house _____ I bought is big.</div><div class="opts"><button class="opt-btn" onclick="check('ex5-4','a','a')">a) which/that</button><button class="opt-btn" onclick="check('ex5-4','b','a')">b) who</button></div><div class="feedback correct-fb" id="fb-ex5-4"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex5-4"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex5-5"><div class="exercise-q">5. The girl _____ sings well is my sister.</div><div class="opts"><button class="opt-btn" onclick="check('ex5-5','a','a')">a) who/that</button><button class="opt-btn" onclick="check('ex5-5','b','a')">b) which</button></div><div class="feedback correct-fb" id="fb-ex5-5"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex5-5"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="score-box"><div class="num" id="score5">0/5</div><div class="label">Paso 5</div></div>
             </div>
-            
-            <div class="card">
-                <div class="card-title">📝 Práctica Final</div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>1. "The movement _____ started in France was important."</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">that / which</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">who</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="1">
-                    <p>2. "The army _____ fights for freedom is brave."</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">which</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">that</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>3. "The photo _____ I took is beautiful."</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">that / which / (omitido)</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">who</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="1">
-                    <p>4. "Nobody _____ studies fails." (nadie que estudia)</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">which</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">who / that</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>5. "The order _____ we received was correct."</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">that / which</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">who</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="score-display" id="score5" style="display:none;">
-                    <div class="score-number"><span id="scoreNum5">0</span>/5</div>
-                    <p>¡Tema completado!</p>
-                </div>
+            <div style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-radius: 12px;">
+                <h3 style="color: #2e7d32; font-size: 0.95rem; margin-bottom: 10px;">🎓 Resumen</h3>
+                <ul class="summary-list">
+                    <li><strong>WHO</strong> = personas (the man who...)</li>
+                    <li><strong>WHICH</strong> = cosas/animales (the book which...)</li>
+                    <li><strong>THAT</strong> = ambos (universal)</li>
+                    <li>El relativo va DESPUÉS del sustantivo</li>
+                </ul>
             </div>
-            
-            <div class="nav-buttons">
-                <button class="nav-btn prev" onclick="showStep(4)">← Anterior</button>
-                <button class="nav-btn next" onclick="showFinalScore()">Ver Resultado Final →</button>
-            </div>
-            
-            <div class="card" id="finalScore" style="display:none;">
-                <div class="card-title">🏆 Resultado Final</div>
-                <div class="score-display">
-                    <div class="score-number"><span id="totalScore">0</span>/25</div>
-                    <p>Relative Clauses - Completado</p>
-                </div>
-            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <button class="nav-btn prev" id="prevBtn" onclick="prevStep()" disabled>← Anterior</button>
+            <span class="step-ind"><span id="currentStep">1</span>/5</span>
+            <button class="nav-btn next" id="nextBtn" onclick="nextStep()">Siguiente →</button>
         </div>
     </div>
-    
     <script>
-        let scores = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
-        let answered = {1: [], 2: [], 3: [], 4: [], 5: []};
-        let currentStep = 1;
-        
-        function showStep(step) {
-            document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.step-dot').forEach(el => el.classList.remove('active'));
-            document.getElementById('step' + step).classList.add('active');
-            document.querySelectorAll('.step-dot')[step - 1].classList.add('active');
-            currentStep = step;
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-        
-        function checkAnswer(element, selectedIndex) {
-            const question = element.closest('.quiz-question');
-            const correctIndex = parseInt(question.dataset.correct);
-            const options = question.querySelectorAll('.quiz-option');
-            const feedback = question.querySelector('.feedback');
-            const questionIndex = Array.from(question.parentNode.querySelectorAll('.quiz-question')).indexOf(question);
-            if (answered[currentStep].includes(questionIndex)) return;
-            answered[currentStep].push(questionIndex);
-            options.forEach((opt, idx) => {
-                opt.style.pointerEvents = 'none';
-                if (idx === correctIndex) opt.classList.add('correct');
-                else if (idx === selectedIndex && selectedIndex !== correctIndex) opt.classList.add('incorrect');
-            });
-            if (selectedIndex === correctIndex) {
-                scores[currentStep]++;
-                feedback.className = 'feedback show correct';
-                feedback.innerHTML = '✅ <strong>¡Correcto!</strong> ' + getCorrectExplanation(currentStep, questionIndex);
-            } else {
-                feedback.className = 'feedback show incorrect';
-                feedback.innerHTML = '❌ <strong>Incorrecto.</strong> ' + getIncorrectExplanation(currentStep, questionIndex);
-            }
-            const totalQuestions = question.parentNode.querySelectorAll('.quiz-question').length;
-            if (answered[currentStep].length === totalQuestions) showStepScore();
-        }
-        
-        function showStepScore() {
-            document.getElementById('score' + currentStep).style.display = 'block';
-            document.getElementById('scoreNum' + currentStep).textContent = scores[currentStep];
-            document.querySelectorAll('.step-dot')[currentStep - 1].classList.add('completed');
-        }
-        
-        function showFinalScore() {
-            const total = scores[1] + scores[2] + scores[3] + scores[4] + scores[5];
-            document.getElementById('totalScore').textContent = total;
-            document.getElementById('finalScore').style.display = 'block';
-            document.getElementById('finalScore').scrollIntoView({behavior: 'smooth'});
-        }
-        
-        function getCorrectExplanation(step, q) {
-            const exp = {
-                1: ['"Que" conecta información adicional sobre el sustantivo.', '"Que" en español funciona para personas Y cosas.', 'La cláusula relativa especifica CUÁL casa exactamente.', 'El pronombre relativo va DESPUÉS del sustantivo que describe.', 'Las cláusulas relativas añaden información sobre el sustantivo.'],
-                2: ['WHO se usa exclusivamente para personas.', 'WHICH se usa para cosas, animales y conceptos.', 'THAT es el comodín: funciona para personas y cosas.', 'El pronombre va después del sustantivo, igual que en español.', 'La cláusula relativa identifica CUÁL persona o cosa específicamente.'],
-                3: ['Woman es persona = WHO (no which).', 'Car es cosa = WHICH o THAT.', 'Which para personas es incorrecto. Boy = persona = who/that.', 'THAT puede reemplazar tanto a WHO como a WHICH.', 'Animales generalmente usan which/that (a menos que sean mascotas queridas).'],
-                4: ['THAT es el comodín universal - funciona con personas y cosas.', 'WHO es el sujeto de la cláusula (who teaches).', 'Se puede omitir el pronombre cuando es objeto, no sujeto.', 'Cuando el pronombre es SUJETO de la cláusula, es obligatorio.', 'Para mascotas queridas a veces usamos WHO por cariño.'],
-                5: ['Movement es cosa = that/which.', 'Army (grupo de personas) puede usar that.', 'Photo es cosa = that/which. Como es objeto, se puede omitir.', 'Nobody se refiere a personas = who/that.', 'Order (pedido/orden) es cosa = that/which.']
-            };
-            return exp[step][q] || '';
-        }
-        
-        function getIncorrectExplanation(step, q) {
-            const exp = {
-                1: ['"Que" relativo conecta información, no hace preguntas.', '"Que" en español funciona para TODO: personas y cosas.', 'Especifica UNA casa particular, no todas.', 'Va DESPUÉS del sustantivo: "el hombre que vive".', 'La información es ADICIONAL y necesaria para identificar.'],
-                2: ['WHO es para personas. WHICH es para cosas.', 'WHO es para personas. Which para cosas.', 'That funciona para ambos: personas Y cosas.', 'El pronombre va DESPUÉS del sustantivo.', 'Especifica CUÁL persona/cosa, no el tiempo.'],
-                3: ['WHO para personas. Woman = persona.', 'WHO es para personas. Car = cosa = which/that.', 'Which para personas es incorrecto. Debe ser who/that.', 'THAT reemplaza a AMBOS: who y which.', 'Para animales generalmente usamos which/that.'],
-                4: ['THAT es más versátil que which (solo cosas).', 'Who es SUJETO de la cláusula (realiza la acción).', 'Se omitió THAT porque es objeto, no sujeto.', 'Cuando es OBJETO se puede omitir. Cuando es SUJETO, no.', 'Para mascotas queridas, a veces usamos who por cariño.'],
-                5: ['WHO es para personas. Movement = cosa.', 'Which también es correcto, pero that es más común.', 'WHO es para personas. Photo = cosa.', 'WHICH es para cosas. Nobody = personas.', 'WHO es para personas. Order = cosa.']
-            };
-            return exp[step][q] || '';
-        }
+        let currentStep = 1; const totalSteps = 5; const scores = {1:0, 2:0, 3:0, 4:0, 5:0}; const answered = {};
+        function goToStep(step) { if (step < 1 || step > totalSteps) return; document.getElementById(`step${currentStep}`).classList.remove('active'); document.querySelectorAll('.step-dot')[currentStep-1].classList.remove('active'); if (step > currentStep) document.querySelectorAll('.step-dot')[currentStep-1].classList.add('completed'); currentStep = step; document.getElementById(`step${currentStep}`).classList.add('active'); document.querySelectorAll('.step-dot')[currentStep-1].classList.add('active'); updateNav(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+        function nextStep() { if (currentStep < totalSteps) goToStep(currentStep + 1); }
+        function prevStep() { if (currentStep > 1) goToStep(currentStep - 1); }
+        function updateNav() { document.getElementById('currentStep').textContent = currentStep; document.getElementById('prevBtn').disabled = currentStep === 1; document.getElementById('nextBtn').disabled = currentStep === totalSteps; document.getElementById('nextBtn').textContent = currentStep === totalSteps ? '✓ Fin' : 'Siguiente →'; }
+        function check(id, sel, correct) { if (answered[id]) return; answered[id] = true; const ex = document.getElementById(id); const btns = ex.querySelectorAll('.opt-btn'); const fbC = document.getElementById(`fb-${id}`); const fbI = document.getElementById(`fbi-${id}`); btns.forEach(b => b.disabled = true); const sn = parseInt(id.split('-')[0].replace('ex','')); if (sel === correct) { ex.classList.add('correct'); btns.forEach(b => { if (b.textContent.startsWith(sel+')')) b.classList.add('sel-correct'); }); fbC.classList.add('show'); scores[sn]++; } else { ex.classList.add('incorrect'); btns.forEach(b => { if (b.textContent.startsWith(sel+')')) b.classList.add('sel-wrong'); if (b.textContent.startsWith(correct+')')) b.classList.add('show-correct'); }); fbI.classList.add('show'); } document.getElementById(`score${sn}`).textContent = `${scores[sn]}/5`; }
+        updateNav();
     </script>
 </body>
 </html>

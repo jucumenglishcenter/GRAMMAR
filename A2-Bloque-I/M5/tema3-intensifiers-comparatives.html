@@ -6,770 +6,207 @@
     <title>Intensifiers with Comparatives | A2-Beg M5 | JUCUM</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            min-height: 100vh;
-            padding: 16px;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); min-height: 100vh; padding: 15px; padding-bottom: 80px; }
         .container { max-width: 500px; margin: 0 auto; }
-        .header {
-            background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
-            border-radius: 20px;
-            padding: 20px;
-            text-align: center;
-            color: white;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 15px rgba(102, 187, 106, 0.3);
-        }
-        .header h1 { font-size: 1.4rem; margin-bottom: 8px; }
-        .badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.25);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
-        .nav-steps {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 16px;
-            background: white;
-            border-radius: 16px;
-            padding: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .step-dot {
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: #f5f5f5;
-        }
-        .step-dot.active {
-            background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
-            transform: scale(1.1);
-            box-shadow: 0 4px 15px rgba(102, 187, 106, 0.4);
-        }
-        .step-dot.completed { background: #c8e6c9; }
-        .step-content { display: none; animation: fadeIn 0.4s ease; }
-        .step-content.active { display: block; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-        }
-        .card-title {
-            display: flex; align-items: center; gap: 10px;
-            font-size: 1.1rem; font-weight: 600; color: #2e7d32;
-            margin-bottom: 16px;
-        }
-        .comparison-table {
-            width: 100%; border-collapse: collapse;
-            font-size: 0.85rem; margin: 12px 0;
-        }
-        .comparison-table th {
-            background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
-            color: white; padding: 10px 6px; text-align: left;
-        }
-        .comparison-table td { padding: 10px 6px; border-bottom: 1px solid #e8f5e9; }
-        .comparison-table tr:hover { background: #f1f8e9; }
-        .formula-box {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            border-left: 4px solid #66bb6a;
-            border-radius: 12px;
-            padding: 16px; margin: 12px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-        }
-        .example-correct {
-            background: #e8f5e9;
-            border-radius: 10px;
-            padding: 12px; margin: 8px 0;
-            display: flex; align-items: flex-start; gap: 10px;
-        }
-        .example-incorrect {
-            background: #ffebee;
-            border-radius: 10px;
-            padding: 12px; margin: 8px 0;
-            display: flex; align-items: flex-start; gap: 10px;
-        }
-        .tip-box {
-            background: #fff3e0;
-            border-radius: 12px;
-            padding: 12px; margin: 8px 0;
-            display: flex; align-items: flex-start; gap: 10px;
-            font-size: 0.9rem;
-        }
-        .quiz-question {
-            background: #fafafa;
-            border-radius: 16px;
-            padding: 16px; margin-bottom: 12px;
-        }
-        .quiz-question p { font-weight: 500; margin-bottom: 12px; color: #333; }
-        .quiz-options { display: flex; flex-direction: column; gap: 8px; }
-        .quiz-option {
-            padding: 12px 16px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.95rem;
-        }
-        .quiz-option:hover { border-color: #66bb6a; background: #f1f8e9; }
-        .quiz-option.correct { border-color: #4caf50; background: #e8f5e9; }
-        .quiz-option.incorrect { border-color: #f44336; background: #ffebee; }
-        .feedback {
-            display: none; padding: 12px; border-radius: 10px;
-            margin-top: 10px; font-size: 0.85rem;
-        }
-        .feedback.show { display: block; animation: fadeIn 0.3s ease; }
-        .feedback.correct { background: #e8f5e9; border-left: 4px solid #4caf50; }
-        .feedback.incorrect { background: #ffebee; border-left: 4px solid #f44336; }
-        .score-display {
-            text-align: center; padding: 16px;
-            background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%);
-            border-radius: 16px; color: white; margin-top: 16px;
-        }
-        .score-display .score-number { font-size: 2rem; font-weight: bold; }
-        .nav-buttons {
-            display: flex; justify-content: space-between;
-            margin-top: 20px; gap: 12px;
-        }
-        .nav-btn {
-            flex: 1; padding: 14px 20px;
-            border: none; border-radius: 12px;
-            font-size: 1rem; font-weight: 600;
-            cursor: pointer; transition: all 0.3s;
-        }
+        .header { background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); border-radius: 16px; padding: 15px; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(102, 187, 106, 0.4); }
+        .header h1 { color: white; font-size: 1.2rem; margin-bottom: 3px; }
+        .header .badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 15px; font-size: 0.75rem; color: white; }
+        .progress-nav { display: flex; justify-content: center; gap: 6px; margin-bottom: 15px; }
+        .step-dot { width: 36px; height: 36px; border-radius: 50%; border: 2px solid #66bb6a; background: white; color: #66bb6a; font-weight: bold; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
+        .step-dot.active { background: #66bb6a; color: white; }
+        .step-dot.completed { background: #43a047; color: white; border-color: #43a047; }
+        .step-card { display: none; background: white; border-radius: 16px; padding: 20px 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 15px; }
+        .step-card.active { display: block; }
+        .step-header { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #e8f5e9; }
+        .step-icon { font-size: 1.8rem; }
+        .step-title { color: #2e7d32; font-size: 1rem; font-weight: 600; }
+        .compare-box { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+        .compare-item { padding: 12px; border-radius: 12px; text-align: center; }
+        .compare-item.green { background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%); border: 2px solid #66bb6a; }
+        .compare-item.orange { background: linear-gradient(135deg, #ffe0b2 0%, #ffcc80 100%); border: 2px solid #ffa726; }
+        .compare-item .icon { font-size: 1.5rem; margin-bottom: 5px; }
+        .compare-item .label { font-weight: 700; font-size: 0.85rem; margin-bottom: 8px; }
+        .compare-item.green .label { color: #2e7d32; }
+        .compare-item.orange .label { color: #e65100; }
+        .compare-item ul { list-style: none; font-size: 0.8rem; color: #555; }
+        .quick-example { background: #f5f5f5; border-radius: 10px; padding: 10px 12px; margin: 8px 0; display: flex; align-items: center; gap: 10px; }
+        .quick-example .emoji { font-size: 1.3rem; }
+        .quick-example .text { flex: 1; }
+        .quick-example .en { color: #2e7d32; font-weight: 600; font-size: 0.9rem; }
+        .quick-example .es { color: #888; font-size: 0.8rem; }
+        .quick-example.wrong { background: #ffebee; border-left: 3px solid #f44336; }
+        .quick-example.right { background: #e8f5e9; border-left: 3px solid #4caf50; }
+        .mini-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.8rem; }
+        .mini-table th { background: #66bb6a; color: white; padding: 8px 6px; text-align: center; }
+        .mini-table td { padding: 8px 6px; border-bottom: 1px solid #e0e0e0; text-align: center; }
+        .tip-box { background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%); border-radius: 10px; padding: 10px 12px; margin: 10px 0; font-size: 0.85rem; border-left: 3px solid #fbc02d; }
+        .tip-box strong { color: #f57f17; }
+        .rule-box { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-radius: 10px; padding: 12px; margin: 10px 0; text-align: center; border: 2px solid #42a5f5; }
+        .rule-box .formula { font-family: monospace; font-size: 0.9rem; color: #1565c0; font-weight: 600; }
+        .alert-box { background: #ffebee; border: 2px solid #ef5350; border-radius: 10px; padding: 10px; margin: 10px 0; }
+        .alert-box .title { color: #c62828; font-weight: 700; font-size: 0.85rem; margin-bottom: 5px; }
+        .exercise-section { margin-top: 20px; padding-top: 15px; border-top: 2px dashed #c8e6c9; }
+        .exercise-section h3 { color: #43a047; font-size: 0.9rem; margin-bottom: 12px; }
+        .exercise { background: #fafafa; border-radius: 10px; padding: 12px; margin-bottom: 10px; border: 2px solid #e0e0e0; }
+        .exercise.correct { border-color: #4caf50; background: #e8f5e9; }
+        .exercise.incorrect { border-color: #f44336; background: #ffebee; }
+        .exercise-q { font-size: 0.9rem; color: #333; margin-bottom: 10px; }
+        .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .opt-btn { padding: 10px 8px; border: 2px solid #e0e0e0; border-radius: 8px; background: white; color: #555; font-size: 0.85rem; cursor: pointer; transition: all 0.2s ease; }
+        .opt-btn:hover:not(:disabled) { border-color: #66bb6a; background: #e8f5e9; }
+        .opt-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+        .opt-btn.sel-correct { background: #4caf50; color: white; border-color: #4caf50; }
+        .opt-btn.sel-wrong { background: #f44336; color: white; border-color: #f44336; }
+        .opt-btn.show-correct { background: #4caf50; color: white; border-color: #4caf50; }
+        .feedback { margin-top: 10px; padding: 10px; border-radius: 8px; font-size: 0.8rem; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-fb { background: #e8f5e9; border: 1px solid #a5d6a7; }
+        .feedback.incorrect-fb { background: #ffebee; border: 1px solid #ef9a9a; }
+        .feedback .result { font-weight: 700; margin-bottom: 6px; }
+        .feedback.correct-fb .result { color: #2e7d32; }
+        .feedback.incorrect-fb .result { color: #c62828; }
+        .score-box { text-align: center; padding: 12px; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-radius: 10px; margin-top: 12px; }
+        .score-box .num { font-size: 1.5rem; font-weight: bold; color: #2e7d32; }
+        .score-box .label { font-size: 0.8rem; color: #66bb6a; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 12px 15px; box-shadow: 0 -4px 15px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
+        .nav-btn { padding: 10px 20px; border: none; border-radius: 20px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
         .nav-btn.prev { background: #e0e0e0; color: #666; }
-        .nav-btn.next { background: linear-gradient(135deg, #66bb6a 0%, #81c784 100%); color: white; }
-        .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        .intensity-bar {
-            display: flex; align-items: stretch;
-            border-radius: 12px; overflow: hidden;
-            margin: 16px 0; height: 60px;
-        }
-        .intensity-item {
-            flex: 1; display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            font-size: 0.7rem; font-weight: 600;
-            color: white; text-align: center; padding: 4px;
-        }
-        .int-slightly { background: #a5d6a7; }
-        .int-bit { background: #81c784; }
-        .int-lot { background: #66bb6a; }
-        .int-much { background: #43a047; }
-        .int-far { background: #2e7d32; }
-        ul { padding-left: 20px; }
-        li { margin: 8px 0; font-size: 0.9rem; }
-        .word-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px; margin: 12px 0;
-        }
-        .word-item {
-            background: #e8f5e9;
-            padding: 10px; border-radius: 10px;
-            text-align: center; font-size: 0.85rem;
-        }
-        .word-item strong { color: #2e7d32; }
+        .nav-btn.next { background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); color: white; }
+        .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .step-ind { font-size: 0.8rem; color: #666; }
+        .summary-list { list-style: none; }
+        .summary-list li { padding: 6px 0 6px 20px; position: relative; font-size: 0.85rem; color: #555; }
+        .summary-list li:before { content: "✓"; position: absolute; left: 0; color: #66bb6a; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>📊 Intensifiers + Comparatives</h1>
-            <p>much / far / a lot / slightly</p>
-            <span class="badge">A2-Beginner • Módulo 5</span>
+            <h1>🔥 Intensifiers with Comparatives</h1>
+            <div class="badge">💚 A2-Beginner • M5 • Tema 3</div>
         </div>
-        
-        <div class="nav-steps">
-            <div class="step-dot active" onclick="showStep(1)">🇪🇸</div>
-            <div class="step-dot" onclick="showStep(2)">🤝</div>
-            <div class="step-dot" onclick="showStep(3)">⚠️</div>
-            <div class="step-dot" onclick="showStep(4)">💡</div>
-            <div class="step-dot" onclick="showStep(5)">✨</div>
+        <div class="progress-nav">
+            <div class="step-dot active" onclick="goToStep(1)">1</div>
+            <div class="step-dot" onclick="goToStep(2)">2</div>
+            <div class="step-dot" onclick="goToStep(3)">3</div>
+            <div class="step-dot" onclick="goToStep(4)">4</div>
+            <div class="step-dot" onclick="goToStep(5)">5</div>
         </div>
-        
+
         <!-- STEP 1 -->
-        <div class="step-content active" id="step1">
-            <div class="card">
-                <div class="card-title">🇪🇸 Paso 1: Repaso en Español</div>
-                
-                <p style="margin-bottom:12px;">En español, <strong>intensificamos comparativos</strong> para mostrar CUÁNTA diferencia hay.</p>
-                
-                <div class="word-grid">
-                    <div class="word-item"><strong>mucho más</strong><br>gran diferencia</div>
-                    <div class="word-item"><strong>bastante más</strong><br>diferencia notable</div>
-                    <div class="word-item"><strong>un poco más</strong><br>diferencia pequeña</div>
-                    <div class="word-item"><strong>ligeramente más</strong><br>diferencia mínima</div>
-                </div>
-                
-                <div class="example-correct">
-                    <span>📝</span>
-                    <div>
-                        <strong>Ejemplos:</strong><br>
-                        • Juan es <strong>mucho más</strong> alto que Pedro<br>
-                        • Este libro es <strong>un poco más</strong> largo<br>
-                        • El beneficio es <strong>bastante mejor</strong>
-                    </div>
-                </div>
-                
-                <p style="margin-top:12px;font-size:0.9rem;">💡 El intensificador va ANTES del comparativo.</p>
+        <div class="step-card active" id="step1">
+            <div class="step-header"><span class="step-icon">🇪🇸</span><span class="step-title">Paso 1: Repaso en Español</span></div>
+            <p style="font-size: 0.9rem; color: #555; margin-bottom: 15px;">En español usamos palabras para hacer las comparaciones más fuertes o más suaves.</p>
+            <div class="compare-box">
+                <div class="compare-item green"><div class="icon">💪</div><div class="label">FUERTES</div><ul><li>MUCHO más alto</li><li>BASTANTE mejor</li></ul></div>
+                <div class="compare-item orange"><div class="icon">🤏</div><div class="label">SUAVES</div><ul><li>UN POCO más alto</li><li>ALGO mejor</li></ul></div>
             </div>
-            
-            <div class="card">
-                <div class="card-title">📝 Práctica - Paso 1</div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>1. "Mucho más alto" indica una diferencia...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">grande</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">pequeña</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="1">
-                    <p>2. "Un poco más caro" indica diferencia...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">enorme</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">pequeña</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>3. El intensificador va _____ del comparativo.</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">antes</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">después</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="1">
-                    <p>4. ¿Cuál muestra MENOR diferencia?</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">mucho más</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">ligeramente más</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>5. "Bastante mejor" significa...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">considerablemente mejor</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">apenas mejor</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="score-display" id="score1" style="display:none;">
-                    <div class="score-number"><span id="scoreNum1">0</span>/5</div>
-                    <p>Paso 1 completado</p>
-                </div>
-            </div>
-            
-            <div class="nav-buttons">
-                <button class="nav-btn prev" disabled>← Anterior</button>
-                <button class="nav-btn next" onclick="showStep(2)">Siguiente →</button>
+            <div class="quick-example right"><span class="emoji">💪</span><div class="text"><div class="en">MUCHO más rápido</div><div class="es">= Gran diferencia</div></div></div>
+            <div class="quick-example"><span class="emoji">🤏</span><div class="text"><div class="en">UN POCO más rápido</div><div class="es">= Pequeña diferencia</div></div></div>
+            <div class="tip-box"><strong>💡 Concepto:</strong> Los intensificadores modifican el GRADO de diferencia en una comparación.</div>
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+                <div class="exercise" id="ex1-1"><div class="exercise-q">1. "MUCHO más caro" indica diferencia:</div><div class="opts"><button class="opt-btn" onclick="check('ex1-1','a','a')">a) Grande</button><button class="opt-btn" onclick="check('ex1-1','b','a')">b) Pequeña</button></div><div class="feedback correct-fb" id="fb-ex1-1"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex1-1"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex1-2"><div class="exercise-q">2. "Un poco más alto" indica diferencia:</div><div class="opts"><button class="opt-btn" onclick="check('ex1-2','a','b')">a) Grande</button><button class="opt-btn" onclick="check('ex1-2','b','b')">b) Pequeña</button></div><div class="feedback correct-fb" id="fb-ex1-2"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex1-2"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex1-3"><div class="exercise-q">3. Los intensificadores van _____ del comparativo:</div><div class="opts"><button class="opt-btn" onclick="check('ex1-3','a','a')">a) Antes</button><button class="opt-btn" onclick="check('ex1-3','b','a')">b) Después</button></div><div class="feedback correct-fb" id="fb-ex1-3"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex1-3"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex1-4"><div class="exercise-q">4. ¿Cuál expresa mayor diferencia?</div><div class="opts"><button class="opt-btn" onclick="check('ex1-4','a','a')">a) Mucho mejor</button><button class="opt-btn" onclick="check('ex1-4','b','a')">b) Algo mejor</button></div><div class="feedback correct-fb" id="fb-ex1-4"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex1-4"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex1-5"><div class="exercise-q">5. "Ligeramente más difícil" = diferencia:</div><div class="opts"><button class="opt-btn" onclick="check('ex1-5','a','a')">a) Muy pequeña</button><button class="opt-btn" onclick="check('ex1-5','b','a')">b) Muy grande</button></div><div class="feedback correct-fb" id="fb-ex1-5"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex1-5"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="score-box"><div class="num" id="score1">0/5</div><div class="label">Paso 1</div></div>
             </div>
         </div>
-        
+
         <!-- STEP 2 -->
-        <div class="step-content" id="step2">
-            <div class="card">
-                <div class="card-title">🤝 Paso 2: Similitudes con el Inglés</div>
-                
-                <div class="intensity-bar">
-                    <div class="intensity-item int-slightly">slightly<br>📉</div>
-                    <div class="intensity-item int-bit">a bit<br>📊</div>
-                    <div class="intensity-item int-lot">a lot<br>📈</div>
-                    <div class="intensity-item int-much">much<br>🔥</div>
-                    <div class="intensity-item int-far">far<br>🚀</div>
-                </div>
-                
-                <ul>
-                    <li>✅ <strong>Misma función:</strong> Indicar cantidad de diferencia</li>
-                    <li>✅ <strong>Posición igual:</strong> ANTES del comparativo</li>
-                    <li>✅ <strong>Escala similar:</strong> De menos a más intensidad</li>
-                    <li>✅ <strong>Invariables:</strong> No cambian por género/número</li>
-                    <li>✅ <strong>Opcionales:</strong> Se pueden omitir si no importa el grado</li>
-                </ul>
-                
-                <div class="example-correct">
-                    <span>🔄</span>
-                    <div>
-                        <strong>Paralelos:</strong><br>
-                        mucho más → <strong>much</strong> taller<br>
-                        un poco más → <strong>a bit</strong> taller<br>
-                        ligeramente → <strong>slightly</strong> taller
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-title">📝 Práctica - Paso 2</div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>1. "Much" en inglés equivale a...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">mucho</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">un poco</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="1">
-                    <p>2. "Slightly" significa...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">mucho</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">ligeramente</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>3. El intensificador va _____ del comparativo en inglés.</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">antes</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">después</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>4. "A lot" indica diferencia...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">considerable</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">mínima</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="1">
-                    <p>5. ¿Cambian estos intensificadores por género?</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">Sí</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">No, son invariables</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="score-display" id="score2" style="display:none;">
-                    <div class="score-number"><span id="scoreNum2">0</span>/5</div>
-                    <p>Paso 2 completado</p>
-                </div>
-            </div>
-            
-            <div class="nav-buttons">
-                <button class="nav-btn prev" onclick="showStep(1)">← Anterior</button>
-                <button class="nav-btn next" onclick="showStep(3)">Siguiente →</button>
+        <div class="step-card" id="step2">
+            <div class="step-header"><span class="step-icon">🤝</span><span class="step-title">Paso 2: Similitudes ESP ↔ ENG</span></div>
+            <p style="font-size: 0.9rem; color: #555; margin-bottom: 15px;">Both languages use intensifiers BEFORE the comparative.</p>
+            <table class="mini-table"><tr><th>Español</th><th>English</th><th>Intensity</th></tr><tr><td>mucho</td><td>much / far / a lot</td><td>💪</td></tr><tr><td>un poco</td><td>a little / a bit</td><td>🤏</td></tr><tr><td>ligeramente</td><td>slightly</td><td>🤏</td></tr></table>
+            <div class="rule-box"><div class="formula">INTENSIFIER + COMPARATIVE + than</div></div>
+            <div class="quick-example right"><span class="emoji">🇪🇸</span><div class="text"><div class="en">MUCHO más caro</div><div class="es">= MUCH more expensive</div></div></div>
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+                <div class="exercise" id="ex2-1"><div class="exercise-q">1. "Much" en español es:</div><div class="opts"><button class="opt-btn" onclick="check('ex2-1','a','a')">a) Mucho</button><button class="opt-btn" onclick="check('ex2-1','b','a')">b) Un poco</button></div><div class="feedback correct-fb" id="fb-ex2-1"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex2-1"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex2-2"><div class="exercise-q">2. Traduce: "mucho más alto"</div><div class="opts"><button class="opt-btn" onclick="check('ex2-2','a','a')">a) much taller</button><button class="opt-btn" onclick="check('ex2-2','b','a')">b) slightly taller</button></div><div class="feedback correct-fb" id="fb-ex2-2"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex2-2"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex2-3"><div class="exercise-q">3. "A little" indica diferencia:</div><div class="opts"><button class="opt-btn" onclick="check('ex2-3','a','a')">a) Pequeña</button><button class="opt-btn" onclick="check('ex2-3','b','a')">b) Grande</button></div><div class="feedback correct-fb" id="fb-ex2-3"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex2-3"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex2-4"><div class="exercise-q">4. ¿Dónde va el intensificador?</div><div class="opts"><button class="opt-btn" onclick="check('ex2-4','a','a')">a) Before: much taller</button><button class="opt-btn" onclick="check('ex2-4','b','a')">b) After: taller much</button></div><div class="feedback correct-fb" id="fb-ex2-4"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex2-4"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex2-5"><div class="exercise-q">5. "Far better" significa:</div><div class="opts"><button class="opt-btn" onclick="check('ex2-5','a','a')">a) Mucho mejor</button><button class="opt-btn" onclick="check('ex2-5','b','a')">b) Un poco mejor</button></div><div class="feedback correct-fb" id="fb-ex2-5"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex2-5"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="score-box"><div class="num" id="score2">0/5</div><div class="label">Paso 2</div></div>
             </div>
         </div>
-        
+
         <!-- STEP 3 -->
-        <div class="step-content" id="step3">
-            <div class="card">
-                <div class="card-title">⚠️ Paso 3: Diferencias Importantes</div>
-                
-                <table class="comparison-table">
-                    <tr>
-                        <th>Intensificador</th>
-                        <th>Nivel</th>
-                        <th>Ejemplo</th>
-                    </tr>
-                    <tr>
-                        <td><strong>far / much</strong></td>
-                        <td>🔥 Máximo</td>
-                        <td>far better</td>
-                    </tr>
-                    <tr>
-                        <td><strong>a lot</strong></td>
-                        <td>📈 Alto</td>
-                        <td>a lot taller</td>
-                    </tr>
-                    <tr>
-                        <td><strong>a bit / a little</strong></td>
-                        <td>📊 Bajo</td>
-                        <td>a bit cheaper</td>
-                    </tr>
-                    <tr>
-                        <td><strong>slightly</strong></td>
-                        <td>📉 Mínimo</td>
-                        <td>slightly longer</td>
-                    </tr>
-                </table>
-                
-                <div class="tip-box">
-                    <span>⚠️</span>
-                    <div>
-                        <strong>¡Cuidado!</strong><br>
-                        ❌ very taller (INCORRECTO)<br>
-                        ✅ much taller (CORRECTO)<br>
-                        <em>"Very" NO se usa con comparativos</em>
-                    </div>
-                </div>
-                
-                <div class="example-incorrect">
-                    <span>❌</span>
-                    <div>
-                        <strong>Error típico:</strong><br>
-                        ❌ She is very more beautiful<br>
-                        ✅ She is much more beautiful
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-title">📝 Práctica - Paso 3</div>
-                
-                <div class="quiz-question" data-correct="1">
-                    <p>1. ¿Se puede usar "very" con comparativos?</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">Sí, siempre</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">No, es incorrecto</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>2. ¿Cuál indica MAYOR diferencia?</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">far better</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">slightly better</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>3. "A bit taller" indica diferencia...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">pequeña</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">enorme</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="1">
-                    <p>4. Selecciona la forma CORRECTA:</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">very bigger</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">much bigger</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>5. "Far" con comparativos significa...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">mucho (gran diferencia)</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">lejos (distancia)</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="score-display" id="score3" style="display:none;">
-                    <div class="score-number"><span id="scoreNum3">0</span>/5</div>
-                    <p>Paso 3 completado</p>
-                </div>
-            </div>
-            
-            <div class="nav-buttons">
-                <button class="nav-btn prev" onclick="showStep(2)">← Anterior</button>
-                <button class="nav-btn next" onclick="showStep(4)">Siguiente →</button>
+        <div class="step-card" id="step3">
+            <div class="step-header"><span class="step-icon">⚠️</span><span class="step-title">Paso 3: ¡Cuidado! Diferencias</span></div>
+            <div class="alert-box"><div class="title">🚨 VERY vs MUCH</div>"Very" NO se usa con comparativos. Usamos "much" o "far".</div>
+            <div class="quick-example wrong"><span class="emoji">❌</span><div class="text"><div class="en">He is very taller than me.</div><div class="es">INCORRECTO</div></div></div>
+            <div class="quick-example right"><span class="emoji">✅</span><div class="text"><div class="en">He is much taller than me.</div><div class="es">CORRECTO</div></div></div>
+            <div class="tip-box"><strong>💡 Rule:</strong> VERY = adjectives | MUCH/FAR/A LOT = comparatives</div>
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+                <div class="exercise" id="ex3-1"><div class="exercise-q">1. ¿Cuál es INCORRECTA?</div><div class="opts"><button class="opt-btn" onclick="check('ex3-1','a','a')">a) very faster</button><button class="opt-btn" onclick="check('ex3-1','b','a')">b) much faster</button></div><div class="feedback correct-fb" id="fb-ex3-1"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex3-1"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex3-2"><div class="exercise-q">2. "Far" indica:</div><div class="opts"><button class="opt-btn" onclick="check('ex3-2','a','a')">a) Gran diferencia</button><button class="opt-btn" onclick="check('ex3-2','b','a')">b) Pequeña diferencia</button></div><div class="feedback correct-fb" id="fb-ex3-2"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex3-2"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex3-3"><div class="exercise-q">3. Corrige: "very more difficult"</div><div class="opts"><button class="opt-btn" onclick="check('ex3-3','a','a')">a) much more difficult</button><button class="opt-btn" onclick="check('ex3-3','b','a')">b) very more difficult</button></div><div class="feedback correct-fb" id="fb-ex3-3"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex3-3"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex3-4"><div class="exercise-q">4. De menor a mayor: slightly, much, a bit</div><div class="opts"><button class="opt-btn" onclick="check('ex3-4','a','a')">a) slightly → a bit → much</button><button class="opt-btn" onclick="check('ex3-4','b','a')">b) much → a bit → slightly</button></div><div class="feedback correct-fb" id="fb-ex3-4"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex3-4"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex3-5"><div class="exercise-q">5. "A lot" se puede usar con:</div><div class="opts"><button class="opt-btn" onclick="check('ex3-5','a','a')">a) Comparatives</button><button class="opt-btn" onclick="check('ex3-5','b','a')">b) Base adjectives</button></div><div class="feedback correct-fb" id="fb-ex3-5"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex3-5"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="score-box"><div class="num" id="score3">0/5</div><div class="label">Paso 3</div></div>
             </div>
         </div>
-        
+
         <!-- STEP 4 -->
-        <div class="step-content" id="step4">
-            <div class="card">
-                <div class="card-title">💡 Paso 4: Consejos Prácticos</div>
-                
-                <div class="tip-box">
-                    <span>1️⃣</span>
-                    <div><strong>NEVER use "very":</strong><br>Con comparativos, usa much/far/a lot</div>
-                </div>
-                
-                <div class="tip-box">
-                    <span>2️⃣</span>
-                    <div><strong>Escala memoriza:</strong><br>slightly → a bit → a lot → much → far</div>
-                </div>
-                
-                <div class="tip-box">
-                    <span>3️⃣</span>
-                    <div><strong>"A lot" es informal:</strong><br>Para formal usa "much" o "considerably"</div>
-                </div>
-                
-                <div class="tip-box">
-                    <span>4️⃣</span>
-                    <div><strong>Funciona con todos:</strong><br>much taller / much more beautiful (ambos OK)</div>
-                </div>
-                
-                <div class="formula-box">
-                    <strong>🔑 Fórmula:</strong><br>
-                    Subject + be + <span style="color:#2e7d32">INTENSIFIER</span> + comparative + than<br><br>
-                    She is <span style="color:#2e7d32">much</span> taller than him.
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-title">📝 Práctica - Paso 4</div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>1. Para contexto formal, mejor usar...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">much / considerably</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">a lot</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="1">
-                    <p>2. Ordena de MENOR a MAYOR diferencia:</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">far → a bit → slightly</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">slightly → a bit → far</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>3. "Much more interesting" es...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">correcto</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">incorrecto</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="1">
-                    <p>4. Para diferencia mínima, usa...</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">far</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">slightly</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>5. ¿Funciona con -er Y con more?</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">Sí, con ambos</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">Solo con -er</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="score-display" id="score4" style="display:none;">
-                    <div class="score-number"><span id="scoreNum4">0</span>/5</div>
-                    <p>Paso 4 completado</p>
-                </div>
-            </div>
-            
-            <div class="nav-buttons">
-                <button class="nav-btn prev" onclick="showStep(3)">← Anterior</button>
-                <button class="nav-btn next" onclick="showStep(5)">Siguiente →</button>
+        <div class="step-card" id="step4">
+            <div class="step-header"><span class="step-icon">💡</span><span class="step-title">Paso 4: Consejos Rápidos</span></div>
+            <div class="rule-box"><div class="formula">🎯 INTENSIFIER + COMPARATIVE (+ than)</div></div>
+            <table class="mini-table"><tr><th>Strong 💪</th><th>Weak 🤏</th></tr><tr><td>much better</td><td>a little better</td></tr><tr><td>far cheaper</td><td>a bit cheaper</td></tr><tr><td>a lot faster</td><td>slightly faster</td></tr></table>
+            <div class="tip-box"><strong>🎯 Memory trick:</strong> Strong = <strong>M</strong>uch, <strong>F</strong>ar, <strong>A</strong> lot (MFA) 💪</div>
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+                <div class="exercise" id="ex4-1"><div class="exercise-q">1. Para gran diferencia, usamos:</div><div class="opts"><button class="opt-btn" onclick="check('ex4-1','a','a')">a) much / far / a lot</button><button class="opt-btn" onclick="check('ex4-1','b','a')">b) slightly / a bit</button></div><div class="feedback correct-fb" id="fb-ex4-1"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex4-1"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex4-2"><div class="exercise-q">2. "This car is _____ faster" (pequeña diferencia)</div><div class="opts"><button class="opt-btn" onclick="check('ex4-2','a','a')">a) slightly</button><button class="opt-btn" onclick="check('ex4-2','b','a')">b) much</button></div><div class="feedback correct-fb" id="fb-ex4-2"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex4-2"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex4-3"><div class="exercise-q">3. ¿Cuál es correcta?</div><div class="opts"><button class="opt-btn" onclick="check('ex4-3','a','b')">a) very better</button><button class="opt-btn" onclick="check('ex4-3','b','b')">b) much better</button></div><div class="feedback correct-fb" id="fb-ex4-3"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex4-3"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex4-4"><div class="exercise-q">4. "Far more expensive" =</div><div class="opts"><button class="opt-btn" onclick="check('ex4-4','a','a')">a) Mucho más caro</button><button class="opt-btn" onclick="check('ex4-4','b','a')">b) Un poco más caro</button></div><div class="feedback correct-fb" id="fb-ex4-4"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex4-4"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex4-5"><div class="exercise-q">5. "A bit" indica diferencia:</div><div class="opts"><button class="opt-btn" onclick="check('ex4-5','a','a')">a) Pequeña</button><button class="opt-btn" onclick="check('ex4-5','b','a')">b) Grande</button></div><div class="feedback correct-fb" id="fb-ex4-5"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex4-5"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="score-box"><div class="num" id="score4">0/5</div><div class="label">Paso 4</div></div>
             </div>
         </div>
-        
+
         <!-- STEP 5 -->
-        <div class="step-content" id="step5">
-            <div class="card">
-                <div class="card-title">✨ Paso 5: Ejemplos y Práctica Final</div>
-                
-                <div class="example-correct">
-                    <span>✅</span>
-                    <div>
-                        <strong>Gran diferencia (much/far):</strong><br>
-                        • The benefit is <strong>much better</strong> now. (mucho mejor)<br>
-                        • This function is <strong>far more</strong> useful. (mucho más útil)<br>
-                        • The mountain is <strong>far higher</strong>. (mucho más alta)
-                    </div>
-                </div>
-                
-                <div class="example-correct">
-                    <span>✅</span>
-                    <div>
-                        <strong>Diferencia moderada (a lot):</strong><br>
-                        • He is <strong>a lot taller</strong> than me. (mucho más alto)<br>
-                        • This style is <strong>a lot nicer</strong>. (mucho más bonito)
-                    </div>
-                </div>
-                
-                <div class="example-correct">
-                    <span>✅</span>
-                    <div>
-                        <strong>Diferencia pequeña (a bit/slightly):</strong><br>
-                        • She is <strong>a bit older</strong> than him. (un poco mayor)<br>
-                        • The lesson is <strong>slightly longer</strong>. (ligeramente más larga)
-                    </div>
-                </div>
-                
-                <div class="example-incorrect">
-                    <span>❌</span>
-                    <div>
-                        <strong>Errores comunes:</strong><br>
-                        ❌ very taller → ✅ much taller<br>
-                        ❌ more much better → ✅ much better<br>
-                        ❌ very more → ✅ much more
-                    </div>
-                </div>
+        <div class="step-card" id="step5">
+            <div class="step-header"><span class="step-icon">✨</span><span class="step-title">Paso 5: Práctica Final</span></div>
+            <div class="rule-box"><div class="formula">🔥 slightly → a bit → a little → a lot → much → far</div></div>
+            <div class="quick-example right"><span class="emoji">🏃</span><div class="text"><div class="en">He runs <strong>much faster</strong> than me.</div><div class="es">Él corre mucho más rápido que yo.</div></div></div>
+            <div class="exercise-section">
+                <h3>✏️ Práctica Final</h3>
+                <div class="exercise" id="ex5-1"><div class="exercise-q">1. This phone is _____ than mine. (mucho mejor)</div><div class="opts"><button class="opt-btn" onclick="check('ex5-1','a','a')">a) much better</button><button class="opt-btn" onclick="check('ex5-1','b','a')">b) very better</button></div><div class="feedback correct-fb" id="fb-ex5-1"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex5-1"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex5-2"><div class="exercise-q">2. The movie was _____ more interesting. (ligeramente)</div><div class="opts"><button class="opt-btn" onclick="check('ex5-2','a','a')">a) slightly</button><button class="opt-btn" onclick="check('ex5-2','b','a')">b) far</button></div><div class="feedback correct-fb" id="fb-ex5-2"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex5-2"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex5-3"><div class="exercise-q">3. Traduce: "Este libro es mucho más largo"</div><div class="opts"><button class="opt-btn" onclick="check('ex5-3','a','a')">a) This book is much longer</button><button class="opt-btn" onclick="check('ex5-3','b','a')">b) This book is very longer</button></div><div class="feedback correct-fb" id="fb-ex5-3"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex5-3"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex5-4"><div class="exercise-q">4. "A lot cheaper" significa:</div><div class="opts"><button class="opt-btn" onclick="check('ex5-4','a','a')">a) Mucho más barato</button><button class="opt-btn" onclick="check('ex5-4','b','a')">b) Un poco más barato</button></div><div class="feedback correct-fb" id="fb-ex5-4"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex5-4"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="exercise" id="ex5-5"><div class="exercise-q">5. She is _____ older. (un poco)</div><div class="opts"><button class="opt-btn" onclick="check('ex5-5','a','a')">a) a little</button><button class="opt-btn" onclick="check('ex5-5','b','a')">b) far</button></div><div class="feedback correct-fb" id="fb-ex5-5"><div class="result">✅ ¡Correcto!</div></div><div class="feedback incorrect-fb" id="fbi-ex5-5"><div class="result">❌ Incorrecto</div></div></div>
+                <div class="score-box"><div class="num" id="score5">0/5</div><div class="label">Paso 5</div></div>
             </div>
-            
-            <div class="card">
-                <div class="card-title">📝 Práctica Final</div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>1. "The benefit is _____ better than before." (mucho)</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">much</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">very</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="1">
-                    <p>2. "This lesson is _____ longer." (ligeramente)</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">far</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">slightly</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>3. "My opinion is _____ stronger than yours." (mucho)</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">far</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">a bit</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="1">
-                    <p>4. "The body feels _____ better now." (un poco)</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">much</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">a bit</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="quiz-question" data-correct="0">
-                    <p>5. "The angle is _____ more important." (mucho)</p>
-                    <div class="quiz-options">
-                        <div class="quiz-option" onclick="checkAnswer(this, 0)">much</div>
-                        <div class="quiz-option" onclick="checkAnswer(this, 1)">very</div>
-                    </div>
-                    <div class="feedback"></div>
-                </div>
-                
-                <div class="score-display" id="score5" style="display:none;">
-                    <div class="score-number"><span id="scoreNum5">0</span>/5</div>
-                    <p>¡Tema completado!</p>
-                </div>
+            <div style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-radius: 12px;">
+                <h3 style="color: #2e7d32; font-size: 0.95rem; margin-bottom: 10px;">🎓 Resumen</h3>
+                <ul class="summary-list">
+                    <li><strong>Strong:</strong> much / far / a lot + comparative</li>
+                    <li><strong>Weak:</strong> slightly / a bit / a little + comparative</li>
+                    <li>NEVER use "very" with comparatives</li>
+                    <li>Intensifier goes BEFORE comparative</li>
+                </ul>
             </div>
-            
-            <div class="nav-buttons">
-                <button class="nav-btn prev" onclick="showStep(4)">← Anterior</button>
-                <button class="nav-btn next" onclick="showFinalScore()">Ver Resultado Final →</button>
-            </div>
-            
-            <div class="card" id="finalScore" style="display:none;">
-                <div class="card-title">🏆 Resultado Final</div>
-                <div class="score-display">
-                    <div class="score-number"><span id="totalScore">0</span>/25</div>
-                    <p>Intensifiers with Comparatives - Completado</p>
-                </div>
-            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <button class="nav-btn prev" id="prevBtn" onclick="prevStep()" disabled>← Anterior</button>
+            <span class="step-ind"><span id="currentStep">1</span>/5</span>
+            <button class="nav-btn next" id="nextBtn" onclick="nextStep()">Siguiente →</button>
         </div>
     </div>
-    
     <script>
-        let scores = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
-        let answered = {1: [], 2: [], 3: [], 4: [], 5: []};
-        let currentStep = 1;
-        
-        function showStep(step) {
-            document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.step-dot').forEach(el => el.classList.remove('active'));
-            document.getElementById('step' + step).classList.add('active');
-            document.querySelectorAll('.step-dot')[step - 1].classList.add('active');
-            currentStep = step;
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-        
-        function checkAnswer(element, selectedIndex) {
-            const question = element.closest('.quiz-question');
-            const correctIndex = parseInt(question.dataset.correct);
-            const options = question.querySelectorAll('.quiz-option');
-            const feedback = question.querySelector('.feedback');
-            const questionIndex = Array.from(question.parentNode.querySelectorAll('.quiz-question')).indexOf(question);
-            if (answered[currentStep].includes(questionIndex)) return;
-            answered[currentStep].push(questionIndex);
-            options.forEach((opt, idx) => {
-                opt.style.pointerEvents = 'none';
-                if (idx === correctIndex) opt.classList.add('correct');
-                else if (idx === selectedIndex && selectedIndex !== correctIndex) opt.classList.add('incorrect');
-            });
-            if (selectedIndex === correctIndex) {
-                scores[currentStep]++;
-                feedback.className = 'feedback show correct';
-                feedback.innerHTML = '✅ <strong>¡Correcto!</strong> ' + getCorrectExplanation(currentStep, questionIndex);
-            } else {
-                feedback.className = 'feedback show incorrect';
-                feedback.innerHTML = '❌ <strong>Incorrecto.</strong> ' + getIncorrectExplanation(currentStep, questionIndex);
-            }
-            const totalQuestions = question.parentNode.querySelectorAll('.quiz-question').length;
-            if (answered[currentStep].length === totalQuestions) showStepScore();
-        }
-        
-        function showStepScore() {
-            document.getElementById('score' + currentStep).style.display = 'block';
-            document.getElementById('scoreNum' + currentStep).textContent = scores[currentStep];
-            document.querySelectorAll('.step-dot')[currentStep - 1].classList.add('completed');
-        }
-        
-        function showFinalScore() {
-            const total = scores[1] + scores[2] + scores[3] + scores[4] + scores[5];
-            document.getElementById('totalScore').textContent = total;
-            document.getElementById('finalScore').style.display = 'block';
-            document.getElementById('finalScore').scrollIntoView({behavior: 'smooth'});
-        }
-        
-        function getCorrectExplanation(step, q) {
-            const exp = {
-                1: ['Mucho más = gran diferencia entre las dos cosas.', 'Un poco más = diferencia pequeña, no notable.', 'El intensificador siempre precede al comparativo.', 'Ligeramente = mínima diferencia posible.', 'Bastante = considerable, no apenas.'],
-                2: ['Much = mucho en español.', 'Slightly = ligeramente (diferencia mínima).', 'Igual que en español: intensificador + comparativo.', 'A lot = mucho, diferencia considerable.', 'Son invariables en ambos idiomas.'],
-                3: ['Very NUNCA se usa con comparativos. Usa much/far.', 'Far better = mucho mejor (máxima diferencia).', 'A bit = un poco (diferencia pequeña).', 'Much es correcto con comparativos; very no.', 'Far con comparativos = intensificador, no distancia.'],
-                4: ['Much/considerably son más formales que a lot.', 'De menos a más: slightly → a bit → far.', 'Much more + adjetivo largo es correcto.', 'Slightly indica la diferencia más pequeña.', 'Funcionan con -er (taller) y more (more beautiful).'],
-                5: ['Much better es correcto; very better es incorrecto.', 'Slightly = ligeramente, diferencia mínima.', 'Far = gran diferencia, intensidad máxima.', 'A bit = un poco, diferencia pequeña.', 'Much more + adjetivo es la forma correcta.']
-            };
-            return exp[step][q] || '';
-        }
-        
-        function getIncorrectExplanation(step, q) {
-            const exp = {
-                1: ['Mucho más indica diferencia GRANDE, no pequeña.', 'Un poco más es diferencia PEQUEÑA.', 'Después está mal: mucho + más alto, no más alto + mucho.', 'Mucho más es el que indica MAYOR diferencia.', 'Apenas mejor sería "ligeramente mejor".'],
-                2: ['Un poco = a bit/a little. Much = mucho.', 'Mucho = much. Slightly = ligeramente.', 'El intensificador va ANTES, igual que español.', 'A lot indica diferencia notable, no mínima.', 'Son INVARIABLES - no cambian nunca.'],
-                3: ['VERY + comparativo es SIEMPRE incorrecto.', 'Slightly better = diferencia mínima, no máxima.', 'A bit = diferencia pequeña, no enorme.', 'Very es incorrecto con comparativos. Usa much.', 'Far con comparativos significa MUCHO, no distancia.'],
-                4: ['A lot es informal. Para formal: much/considerably.', 'Al revés: de menor a mayor diferencia.', 'Es correcto - much funciona con more + adj.', 'Far indica diferencia MÁXIMA, no mínima.', 'Funcionan con AMBOS tipos de comparativos.'],
-                5: ['Very NUNCA con comparativos. Siempre much.', 'Far indica diferencia grande, no ligera.', 'A bit indica diferencia pequeña, no grande.', 'Much indica diferencia grande, no pequeña.', 'Very NUNCA con comparativos. Siempre much.']
-            };
-            return exp[step][q] || '';
-        }
+        let currentStep = 1; const totalSteps = 5; const scores = {1:0, 2:0, 3:0, 4:0, 5:0}; const answered = {};
+        function goToStep(step) { if (step < 1 || step > totalSteps) return; document.getElementById(`step${currentStep}`).classList.remove('active'); document.querySelectorAll('.step-dot')[currentStep-1].classList.remove('active'); if (step > currentStep) document.querySelectorAll('.step-dot')[currentStep-1].classList.add('completed'); currentStep = step; document.getElementById(`step${currentStep}`).classList.add('active'); document.querySelectorAll('.step-dot')[currentStep-1].classList.add('active'); updateNav(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+        function nextStep() { if (currentStep < totalSteps) goToStep(currentStep + 1); }
+        function prevStep() { if (currentStep > 1) goToStep(currentStep - 1); }
+        function updateNav() { document.getElementById('currentStep').textContent = currentStep; document.getElementById('prevBtn').disabled = currentStep === 1; document.getElementById('nextBtn').disabled = currentStep === totalSteps; document.getElementById('nextBtn').textContent = currentStep === totalSteps ? '✓ Fin' : 'Siguiente →'; }
+        function check(id, sel, correct) { if (answered[id]) return; answered[id] = true; const ex = document.getElementById(id); const btns = ex.querySelectorAll('.opt-btn'); const fbCorrect = document.getElementById(`fb-${id}`); const fbIncorrect = document.getElementById(`fbi-${id}`); btns.forEach(b => b.disabled = true); const stepNum = parseInt(id.split('-')[0].replace('ex','')); if (sel === correct) { ex.classList.add('correct'); btns.forEach(b => { if (b.textContent.startsWith(sel+')')) b.classList.add('sel-correct'); }); fbCorrect.classList.add('show'); scores[stepNum]++; } else { ex.classList.add('incorrect'); btns.forEach(b => { if (b.textContent.startsWith(sel+')')) b.classList.add('sel-wrong'); if (b.textContent.startsWith(correct+')')) b.classList.add('show-correct'); }); fbIncorrect.classList.add('show'); } document.getElementById(`score${stepNum}`).textContent = `${scores[stepNum]}/5`; }
+        updateNav();
     </script>
 </body>
 </html>
