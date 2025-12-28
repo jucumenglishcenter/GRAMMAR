@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For / Since / Ago | A2-Bloque-I M6 | JUCUM</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); min-height: 100vh; padding: 15px; padding-bottom: 80px; }
+        .container { max-width: 500px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); border-radius: 16px; padding: 15px; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(102, 187, 106, 0.4); }
+        .header h1 { color: white; font-size: 1.2rem; margin-bottom: 3px; }
+        .header .badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 15px; font-size: 0.75rem; color: white; }
+        .progress-nav { display: flex; justify-content: center; gap: 6px; margin-bottom: 15px; }
+        .step-dot { width: 36px; height: 36px; border-radius: 50%; border: 2px solid #66bb6a; background: white; color: #66bb6a; font-weight: bold; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
+        .step-dot.active { background: #66bb6a; color: white; }
+        .step-dot.completed { background: #2e7d32; color: white; border-color: #2e7d32; }
+        .step-card { display: none; background: white; border-radius: 16px; padding: 20px 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 15px; }
+        .step-card.active { display: block; }
+        .step-header { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #e8f5e9; }
+        .step-icon { font-size: 1.8rem; }
+        .step-title { color: #2e7d32; font-size: 1rem; font-weight: 600; }
+        .compare-box { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin: 12px 0; }
+        .compare-item { padding: 10px; border-radius: 12px; text-align: center; }
+        .compare-item.green { background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border: 2px solid #66bb6a; }
+        .compare-item.blue { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border: 2px solid #42a5f5; }
+        .compare-item.orange { background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border: 2px solid #ff9800; }
+        .compare-item .icon { font-size: 1.3rem; margin-bottom: 5px; }
+        .compare-item .label { font-weight: 700; font-size: 0.8rem; margin-bottom: 5px; }
+        .compare-item.green .label { color: #2e7d32; }
+        .compare-item.blue .label { color: #1565c0; }
+        .compare-item.orange .label { color: #e65100; }
+        .compare-item .desc { font-size: 0.7rem; color: #555; }
+        .quick-example { background: #f5f5f5; border-radius: 10px; padding: 10px 12px; margin: 8px 0; display: flex; align-items: center; gap: 10px; }
+        .quick-example .emoji { font-size: 1.3rem; }
+        .quick-example .text { flex: 1; }
+        .quick-example .en { color: #2e7d32; font-weight: 600; font-size: 0.9rem; }
+        .quick-example .es { color: #888; font-size: 0.8rem; }
+        .quick-example.right { background: #e8f5e9; border-left: 3px solid #66bb6a; }
+        .mini-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.8rem; }
+        .mini-table th { background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); color: white; padding: 8px 6px; text-align: center; }
+        .mini-table td { padding: 8px 6px; border-bottom: 1px solid #e0e0e0; text-align: center; }
+        .mini-table tr:nth-child(even) { background: #e8f5e9; }
+        .tip-box { background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%); border-radius: 10px; padding: 10px 12px; margin: 10px 0; font-size: 0.85rem; border-left: 3px solid #fbc02d; }
+        .tip-box strong { color: #f57f17; }
+        .rule-box { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-radius: 10px; padding: 12px; margin: 10px 0; text-align: center; border: 2px solid #42a5f5; }
+        .rule-box .formula { font-family: monospace; font-size: 0.9rem; color: #1565c0; font-weight: 600; }
+        .alert-box { background: #ffebee; border: 2px solid #ef5350; border-radius: 10px; padding: 10px; margin: 10px 0; }
+        .alert-box .title { color: #c62828; font-weight: 700; font-size: 0.85rem; margin-bottom: 5px; }
+        .exercise-section { margin-top: 20px; padding-top: 15px; border-top: 2px dashed #c8e6c9; }
+        .exercise-section h3 { color: #2e7d32; font-size: 0.9rem; margin-bottom: 12px; }
+        .exercise { background: #fafafa; border-radius: 10px; padding: 12px; margin-bottom: 10px; border: 2px solid #e0e0e0; }
+        .exercise.correct { border-color: #4caf50; background: #e8f5e9; }
+        .exercise.incorrect { border-color: #f44336; background: #ffebee; }
+        .exercise-q { font-size: 0.9rem; color: #333; margin-bottom: 10px; }
+        .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .opt-btn { padding: 10px 8px; border: 2px solid #e0e0e0; border-radius: 8px; background: white; color: #555; font-size: 0.85rem; cursor: pointer; transition: all 0.2s ease; }
+        .opt-btn:hover:not(:disabled) { border-color: #66bb6a; background: #e8f5e9; }
+        .opt-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+        .opt-btn.sel-correct { background: #4caf50; color: white; border-color: #4caf50; }
+        .opt-btn.sel-wrong { background: #f44336; color: white; border-color: #f44336; }
+        .opt-btn.show-correct { background: #4caf50; color: white; border-color: #4caf50; }
+        .feedback { margin-top: 10px; padding: 10px; border-radius: 8px; font-size: 0.8rem; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-fb { background: #e8f5e9; border: 1px solid #a5d6a7; }
+        .feedback.incorrect-fb { background: #ffebee; border: 1px solid #ef9a9a; }
+        .feedback .result { font-weight: 700; margin-bottom: 6px; }
+        .feedback.correct-fb .result { color: #2e7d32; }
+        .feedback.incorrect-fb .result { color: #c62828; }
+        .feedback .why-correct { color: #2e7d32; margin-bottom: 4px; }
+        .feedback .why-wrong { color: #c62828; }
+        .score-box { text-align: center; padding: 12px; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-radius: 10px; margin-top: 12px; }
+        .score-box .num { font-size: 1.5rem; font-weight: bold; color: #2e7d32; }
+        .score-box .label { font-size: 0.8rem; color: #66bb6a; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 12px 15px; box-shadow: 0 -4px 15px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
+        .nav-btn { padding: 10px 20px; border: none; border-radius: 20px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+        .nav-btn.prev { background: #e0e0e0; color: #666; }
+        .nav-btn.next { background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); color: white; }
+        .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .step-ind { font-size: 0.8rem; color: #666; }
+        .summary-list { list-style: none; }
+        .summary-list li { padding: 6px 0 6px 20px; position: relative; font-size: 0.85rem; color: #555; }
+        .summary-list li:before { content: "✓"; position: absolute; left: 0; color: #66bb6a; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⏰ For / Since / Ago</h1>
+            <div class="badge">💚 A2-Bloque-I • M6 • Tema 2</div>
+        </div>
+
+        <div class="progress-nav">
+            <div class="step-dot active" onclick="goToStep(1)">1</div>
+            <div class="step-dot" onclick="goToStep(2)">2</div>
+            <div class="step-dot" onclick="goToStep(3)">3</div>
+            <div class="step-dot" onclick="goToStep(4)">4</div>
+            <div class="step-dot" onclick="goToStep(5)">5</div>
+        </div>
+
+        <!-- STEP 1 -->
+        <div class="step-card active" id="step1">
+            <div class="step-header">
+                <span class="step-icon">🇪🇸</span>
+                <span class="step-title">Paso 1: Repaso en Español</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #555; margin-bottom: 15px;">En español usamos "desde", "durante" y "hace". En inglés son <strong>since</strong>, <strong>for</strong> y <strong>ago</strong>.</p>
+            
+            <div class="compare-box">
+                <div class="compare-item green">
+                    <div class="icon">📅</div>
+                    <div class="label">SINCE</div>
+                    <div class="desc">Desde (punto)</div>
+                </div>
+                <div class="compare-item blue">
+                    <div class="icon">⏳</div>
+                    <div class="label">FOR</div>
+                    <div class="desc">Durante (período)</div>
+                </div>
+                <div class="compare-item orange">
+                    <div class="icon">⬅️</div>
+                    <div class="label">AGO</div>
+                    <div class="desc">Hace (pasado)</div>
+                </div>
+            </div>
+
+            <div class="quick-example right"><span class="emoji">📅</span><div class="text"><div class="en"><strong>Since</strong> 2020</div><div class="es">Desde 2020</div></div></div>
+            <div class="quick-example right"><span class="emoji">⏳</span><div class="text"><div class="en"><strong>For</strong> five years</div><div class="es">Durante cinco años</div></div></div>
+            <div class="quick-example right"><span class="emoji">⬅️</span><div class="text"><div class="en">Five years <strong>ago</strong></div><div class="es">Hace cinco años</div></div></div>
+
+            <div class="tip-box"><strong>💡 Clave:</strong> SINCE = punto | FOR = duración | AGO = distancia al pasado</div>
+
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+                <div class="exercise" id="ex1-1">
+                    <div class="exercise-q">1. "Desde" en inglés es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-1','a','a')">a) since</button>
+                        <button class="opt-btn" onclick="check('ex1-1','b','a')">b) for</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-1"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ Since = desde.</div><div class="why-wrong">✗ For = durante.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-1"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Since = desde.</div><div class="why-wrong">✗ For = durante.</div></div>
+                </div>
+                <div class="exercise" id="ex1-2">
+                    <div class="exercise-q">2. "Durante" en inglés es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-2','a','b')">a) since</button>
+                        <button class="opt-btn" onclick="check('ex1-2','b','b')">b) for</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-2"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ For = durante.</div><div class="why-wrong">✗ Since = desde.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-2"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ For = durante.</div><div class="why-wrong">✗ Since = desde.</div></div>
+                </div>
+                <div class="exercise" id="ex1-3">
+                    <div class="exercise-q">3. "Hace" en inglés es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-3','a','a')">a) ago</button>
+                        <button class="opt-btn" onclick="check('ex1-3','b','a')">b) before</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-3"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ Ago = hace.</div><div class="why-wrong">✗ Before = antes.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-3"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Ago = hace.</div><div class="why-wrong">✗ Before = antes.</div></div>
+                </div>
+                <div class="exercise" id="ex1-4">
+                    <div class="exercise-q">4. "2020" es un:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-4','a','a')">a) Punto en el tiempo</button>
+                        <button class="opt-btn" onclick="check('ex1-4','b','a')">b) Período de tiempo</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-4"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ Un año específico = punto → SINCE.</div><div class="why-wrong">✗ Período = cantidad de tiempo.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-4"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ 2020 es un punto específico.</div><div class="why-wrong">✗ Período = duración.</div></div>
+                </div>
+                <div class="exercise" id="ex1-5">
+                    <div class="exercise-q">5. "Cinco años" es un:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-5','a','b')">a) Punto en el tiempo</button>
+                        <button class="opt-btn" onclick="check('ex1-5','b','b')">b) Período de tiempo</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-5"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ Una duración = período → FOR.</div><div class="why-wrong">✗ Punto = fecha específica.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-5"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ 5 años = período/duración.</div><div class="why-wrong">✗ Punto = momento específico.</div></div>
+                </div>
+                <div class="score-box"><div class="num" id="score1">0/5</div><div class="label">Paso 1</div></div>
+            </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step-card" id="step2">
+            <div class="step-header">
+                <span class="step-icon">🤝</span>
+                <span class="step-title">Paso 2: Similitudes ESP ↔ ENG</span>
+            </div>
+            
+            <table class="mini-table">
+                <tr><th>Español</th><th>English</th><th>Ejemplo</th></tr>
+                <tr><td>Desde + punto</td><td>Since + point</td><td>since Monday</td></tr>
+                <tr><td>Durante + período</td><td>For + period</td><td>for two weeks</td></tr>
+                <tr><td>Hace + tiempo</td><td>Time + ago</td><td>two weeks ago</td></tr>
+            </table>
+
+            <div class="tip-box"><strong>💡 Importante:</strong> "AGO" va DESPUÉS del tiempo:<br>Hace 3 días = 3 days <strong>ago</strong></div>
+
+            <div class="quick-example right"><span class="emoji">📅</span><div class="text"><div class="en">I've lived here <strong>since</strong> January.</div><div class="es">Vivo aquí desde enero.</div></div></div>
+            <div class="quick-example right"><span class="emoji">⏳</span><div class="text"><div class="en">I've lived here <strong>for</strong> six months.</div><div class="es">Vivo aquí desde hace seis meses.</div></div></div>
+
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+                <div class="exercise" id="ex2-1">
+                    <div class="exercise-q">1. "Hace tres días" en inglés es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-1','a','a')">a) three days ago</button>
+                        <button class="opt-btn" onclick="check('ex2-1','b','a')">b) ago three days</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-1"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ "Ago" va AL FINAL.</div><div class="why-wrong">✗ Orden: tiempo + ago.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-1"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ three days AGO.</div><div class="why-wrong">✗ Ago siempre va al final.</div></div>
+                </div>
+                <div class="exercise" id="ex2-2">
+                    <div class="exercise-q">2. "Desde enero" =</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-2','a','a')">a) since January</button>
+                        <button class="opt-btn" onclick="check('ex2-2','b','a')">b) for January</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-2"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ Enero = punto → SINCE.</div><div class="why-wrong">✗ For es para períodos.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-2"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Punto específico = since.</div><div class="why-wrong">✗ For + cantidad de tiempo.</div></div>
+                </div>
+                <div class="exercise" id="ex2-3">
+                    <div class="exercise-q">3. "Durante dos semanas" =</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-3','a','b')">a) since two weeks</button>
+                        <button class="opt-btn" onclick="check('ex2-3','b','b')">b) for two weeks</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-3"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ Dos semanas = período → FOR.</div><div class="why-wrong">✗ Since es para puntos.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-3"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Período = for.</div><div class="why-wrong">✗ Since + momento específico.</div></div>
+                </div>
+                <div class="exercise" id="ex2-4">
+                    <div class="exercise-q">4. "Desde el lunes" =</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-4','a','a')">a) since Monday</button>
+                        <button class="opt-btn" onclick="check('ex2-4','b','a')">b) for Monday</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-4"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ Lunes = día específico → SINCE.</div><div class="why-wrong">✗ For no funciona con días.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-4"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Día específico = since.</div><div class="why-wrong">✗ For + cantidad de tiempo.</div></div>
+                </div>
+                <div class="exercise" id="ex2-5">
+                    <div class="exercise-q">5. "Hace una hora" =</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-5','a','a')">a) an hour ago</button>
+                        <button class="opt-btn" onclick="check('ex2-5','b','a')">b) since an hour</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-5"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ Hace = tiempo + AGO.</div><div class="why-wrong">✗ Since = desde (diferente).</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-5"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Hace = ago (al final).</div><div class="why-wrong">✗ Since es "desde".</div></div>
+                </div>
+                <div class="score-box"><div class="num" id="score2">0/5</div><div class="label">Paso 2</div></div>
+            </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step-card" id="step3">
+            <div class="step-header">
+                <span class="step-icon">⚠️</span>
+                <span class="step-title">Paso 3: ¡Cuidado! Diferencias</span>
+            </div>
+            
+            <div class="alert-box"><div class="title">🚨 SINCE vs FOR</div>No son intercambiables. SINCE = punto | FOR = período</div>
+
+            <table class="mini-table">
+                <tr><th>SINCE (punto)</th><th>FOR (período)</th></tr>
+                <tr><td>since 2020</td><td>for 4 years</td></tr>
+                <tr><td>since Monday</td><td>for 3 days</td></tr>
+                <tr><td>since 9 o'clock</td><td>for 2 hours</td></tr>
+                <tr><td>since I was young</td><td>for a long time</td></tr>
+            </table>
+
+            <div class="tip-box"><strong>💡 AGO = Past Simple</strong><br>AGO siempre va con Past Simple, NO con Present Perfect.<br>I saw him two days <strong>ago</strong>. ✓<br>I have seen him two days ago. ✗</div>
+
+            <div class="quick-example right"><span class="emoji">✅</span><div class="text"><div class="en">I <strong>met</strong> her two years <strong>ago</strong>.</div><div class="es">La conocí hace dos años. (Past Simple)</div></div></div>
+
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+                <div class="exercise" id="ex3-1">
+                    <div class="exercise-q">1. "I have lived here ___ 2018."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-1','a','a')">a) since</button>
+                        <button class="opt-btn" onclick="check('ex3-1','b','a')">b) for</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-1"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ 2018 = año específico → SINCE.</div><div class="why-wrong">✗ For + cantidad de tiempo.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-1"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Año = punto = since.</div><div class="why-wrong">✗ For es para duraciones.</div></div>
+                </div>
+                <div class="exercise" id="ex3-2">
+                    <div class="exercise-q">2. "I have lived here ___ six years."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-2','a','b')">a) since</button>
+                        <button class="opt-btn" onclick="check('ex3-2','b','b')">b) for</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-2"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ Six years = período → FOR.</div><div class="why-wrong">✗ Since + punto específico.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-2"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Cantidad = período = for.</div><div class="why-wrong">✗ Since es para puntos.</div></div>
+                </div>
+                <div class="exercise" id="ex3-3">
+                    <div class="exercise-q">3. "AGO" se usa con:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-3','a','a')">a) Past Simple</button>
+                        <button class="opt-btn" onclick="check('ex3-3','b','a')">b) Present Perfect</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-3"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ AGO + Past Simple siempre.</div><div class="why-wrong">✗ Present Perfect usa since/for.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-3"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Ago = Past Simple.</div><div class="why-wrong">✗ PP no funciona con ago.</div></div>
+                </div>
+                <div class="exercise" id="ex3-4">
+                    <div class="exercise-q">4. "I ___ him three days ago."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-4','a','a')">a) saw</button>
+                        <button class="opt-btn" onclick="check('ex3-4','b','a')">b) have seen</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-4"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ AGO requiere Past Simple (saw).</div><div class="why-wrong">✗ Present Perfect + ago = ERROR.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-4"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Ago + Past Simple.</div><div class="why-wrong">✗ "Have seen... ago" es incorrecto.</div></div>
+                </div>
+                <div class="exercise" id="ex3-5">
+                    <div class="exercise-q">5. "She has worked here ___ she was 20."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-5','a','a')">a) since</button>
+                        <button class="opt-btn" onclick="check('ex3-5','b','a')">b) for</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-5"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ "She was 20" = punto en el tiempo → SINCE.</div><div class="why-wrong">✗ For + cantidad de tiempo.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-5"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Un momento del pasado = since.</div><div class="why-wrong">✗ For necesita una duración.</div></div>
+                </div>
+                <div class="score-box"><div class="num" id="score3">0/5</div><div class="label">Paso 3</div></div>
+            </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="step-card" id="step4">
+            <div class="step-header">
+                <span class="step-icon">💡</span>
+                <span class="step-title">Paso 4: Consejos Prácticos</span>
+            </div>
+            
+            <div class="rule-box"><div class="formula">📅 SINCE = punto (fecha, hora, evento)<br>⏳ FOR = período (cantidad de tiempo)<br>⬅️ AGO = Past Simple (hace...)</div></div>
+
+            <div class="tip-box"><strong>💡 Truco para SINCE:</strong><br>Si puedes decir "desde ese momento hasta ahora", usa SINCE.<br>Since Monday, since 2020, since I arrived...</div>
+
+            <div class="tip-box"><strong>💡 Truco para FOR:</strong><br>Si puedes contar el tiempo (números), usa FOR.<br>For 3 days, for 2 hours, for a week...</div>
+
+            <table class="mini-table">
+                <tr><th>Preposición</th><th>Tiempo Verbal</th></tr>
+                <tr><td>SINCE</td><td>Present Perfect</td></tr>
+                <tr><td>FOR</td><td>Present Perfect</td></tr>
+                <tr><td>AGO</td><td>Past Simple</td></tr>
+            </table>
+
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+                <div class="exercise" id="ex4-1">
+                    <div class="exercise-q">1. "They have been married ___ 25 years."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-1','a','b')">a) since</button>
+                        <button class="opt-btn" onclick="check('ex4-1','b','b')">b) for</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-1"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ 25 years = cantidad = FOR.</div><div class="why-wrong">✗ Since + punto específico.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-1"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Número + tiempo = for.</div><div class="why-wrong">✗ Since necesita un punto.</div></div>
+                </div>
+                <div class="exercise" id="ex4-2">
+                    <div class="exercise-q">2. "I haven't seen him ___ last summer."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-2','a','a')">a) since</button>
+                        <button class="opt-btn" onclick="check('ex4-2','b','a')">b) for</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-2"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ "Last summer" = punto → SINCE.</div><div class="why-wrong">✗ For + cantidad de tiempo.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-2"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Un momento específico = since.</div><div class="why-wrong">✗ For necesita duración.</div></div>
+                </div>
+                <div class="exercise" id="ex4-3">
+                    <div class="exercise-q">3. "We moved here five years ___."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-3','a','a')">a) ago</button>
+                        <button class="opt-btn" onclick="check('ex4-3','b','a')">b) since</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-3"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ "Moved" = Past Simple → AGO.</div><div class="why-wrong">✗ Since + Present Perfect.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-3"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Past Simple + ago.</div><div class="why-wrong">✗ Since no va con Past Simple.</div></div>
+                </div>
+                <div class="exercise" id="ex4-4">
+                    <div class="exercise-q">4. "She has studied English ___ a long time."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-4','a','b')">a) since</button>
+                        <button class="opt-btn" onclick="check('ex4-4','b','b')">b) for</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-4"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ "A long time" = período → FOR.</div><div class="why-wrong">✗ Since + punto específico.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-4"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Período indefinido = for.</div><div class="why-wrong">✗ Since necesita un momento.</div></div>
+                </div>
+                <div class="exercise" id="ex4-5">
+                    <div class="exercise-q">5. "I ___ that movie two weeks ago."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-5','a','a')">a) watched</button>
+                        <button class="opt-btn" onclick="check('ex4-5','b','a')">b) have watched</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-5"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ AGO requiere Past Simple.</div><div class="why-wrong">✗ Present Perfect + ago = ERROR.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-5"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Ago = Past Simple obligatorio.</div><div class="why-wrong">✗ Have watched + ago es incorrecto.</div></div>
+                </div>
+                <div class="score-box"><div class="num" id="score4">0/5</div><div class="label">Paso 4</div></div>
+            </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="step-card" id="step5">
+            <div class="step-header">
+                <span class="step-icon">✨</span>
+                <span class="step-title">Paso 5: Práctica Final</span>
+            </div>
+            
+            <div class="rule-box"><div class="formula">📅 SINCE + punto (Monday, 2020, 9am)<br>⏳ FOR + período (3 days, 2 hours)<br>⬅️ AGO = Past Simple</div></div>
+
+            <div class="quick-example right"><span class="emoji">🏠</span><div class="text"><div class="en">I've lived here <strong>since</strong> 2019.</div><div class="es">Vivo aquí desde 2019.</div></div></div>
+            <div class="quick-example right"><span class="emoji">👨‍💼</span><div class="text"><div class="en">He's worked here <strong>for</strong> ten years.</div><div class="es">Trabaja aquí desde hace diez años.</div></div></div>
+            <div class="quick-example right"><span class="emoji">✈️</span><div class="text"><div class="en">I visited Paris three months <strong>ago</strong>.</div><div class="es">Visité París hace tres meses.</div></div></div>
+
+            <div class="exercise-section">
+                <h3>✏️ Práctica Final</h3>
+                <div class="exercise" id="ex5-1">
+                    <div class="exercise-q">1. "We have known each other ___ childhood."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-1','a','a')">a) since</button>
+                        <button class="opt-btn" onclick="check('ex5-1','b','a')">b) for</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-1"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ "Childhood" = punto en la vida → SINCE.</div><div class="why-wrong">✗ For + cantidad de tiempo.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-1"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Un momento de la vida = since.</div><div class="why-wrong">✗ For necesita duración.</div></div>
+                </div>
+                <div class="exercise" id="ex5-2">
+                    <div class="exercise-q">2. "I've been waiting ___ 30 minutes!"</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-2','a','b')">a) since</button>
+                        <button class="opt-btn" onclick="check('ex5-2','b','b')">b) for</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-2"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ 30 minutes = período → FOR.</div><div class="why-wrong">✗ Since + punto específico.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-2"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Cantidad de minutos = for.</div><div class="why-wrong">✗ Since necesita un momento.</div></div>
+                </div>
+                <div class="exercise" id="ex5-3">
+                    <div class="exercise-q">3. "They ___ married 20 years ago."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-3','a','a')">a) got</button>
+                        <button class="opt-btn" onclick="check('ex5-3','b','a')">b) have got</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-3"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ AGO = Past Simple (got).</div><div class="why-wrong">✗ Present Perfect + ago = ERROR.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-3"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Ago requiere Past Simple.</div><div class="why-wrong">✗ Have got + ago es incorrecto.</div></div>
+                </div>
+                <div class="exercise" id="ex5-4">
+                    <div class="exercise-q">4. "She hasn't called ___ last week."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-4','a','a')">a) since</button>
+                        <button class="opt-btn" onclick="check('ex5-4','b','a')">b) for</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-4"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ "Last week" = punto → SINCE.</div><div class="why-wrong">✗ For + cantidad de tiempo.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-4"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Un momento específico = since.</div><div class="why-wrong">✗ For necesita duración.</div></div>
+                </div>
+                <div class="exercise" id="ex5-5">
+                    <div class="exercise-q">5. "I've had this phone ___ two years."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-5','a','b')">a) since</button>
+                        <button class="opt-btn" onclick="check('ex5-5','b','b')">b) for</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-5"><div class="result">✅ ¡Correcto!</div><div class="why-correct">✓ "Two years" = período → FOR.</div><div class="why-wrong">✗ Since + punto específico.</div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-5"><div class="result">❌ Incorrecto</div><div class="why-correct">✓ Cantidad de años = for.</div><div class="why-wrong">✗ Since necesita un momento.</div></div>
+                </div>
+                <div class="score-box"><div class="num" id="score5">0/5</div><div class="label">Paso 5</div></div>
+            </div>
+
+            <div style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-radius: 12px;">
+                <h3 style="color: #2e7d32; font-size: 0.95rem; margin-bottom: 10px;">🎯 Resumen</h3>
+                <ul class="summary-list">
+                    <li><strong>SINCE</strong> + punto (2020, Monday, 9am)</li>
+                    <li><strong>FOR</strong> + período (3 days, 2 hours, a week)</li>
+                    <li><strong>AGO</strong> va AL FINAL (two days ago)</li>
+                    <li>SINCE/FOR → Present Perfect</li>
+                    <li>AGO → Past Simple (obligatorio)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <button class="nav-btn prev" id="prevBtn" onclick="prevStep()" disabled>← Anterior</button>
+            <span class="step-ind"><span id="currentStep">1</span>/5</span>
+            <button class="nav-btn next" id="nextBtn" onclick="nextStep()">Siguiente →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 5;
+        const scores = {1:0, 2:0, 3:0, 4:0, 5:0};
+        const answered = {};
+        function goToStep(step) {
+            if (step < 1 || step > totalSteps) return;
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.querySelectorAll('.step-dot')[currentStep-1].classList.remove('active');
+            if (step > currentStep) document.querySelectorAll('.step-dot')[currentStep-1].classList.add('completed');
+            currentStep = step;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            document.querySelectorAll('.step-dot')[currentStep-1].classList.add('active');
+            updateNav();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+        function nextStep() { if (currentStep < totalSteps) goToStep(currentStep + 1); }
+        function prevStep() { if (currentStep > 1) goToStep(currentStep - 1); }
+        function updateNav() {
+            document.getElementById('currentStep').textContent = currentStep;
+            document.getElementById('prevBtn').disabled = currentStep === 1;
+            document.getElementById('nextBtn').disabled = currentStep === totalSteps;
+            document.getElementById('nextBtn').textContent = currentStep === totalSteps ? '✓ Fin' : 'Siguiente →';
+        }
+        function check(id, sel, correct) {
+            if (answered[id]) return;
+            answered[id] = true;
+            const ex = document.getElementById(id);
+            const btns = ex.querySelectorAll('.opt-btn');
+            const fbCorrect = document.getElementById(`fb-${id}`);
+            const fbIncorrect = document.getElementById(`fbi-${id}`);
+            btns.forEach(b => b.disabled = true);
+            const stepNum = parseInt(id.split('-')[0].replace('ex',''));
+            if (sel === correct) {
+                ex.classList.add('correct');
+                btns.forEach(b => { if (b.textContent.startsWith(sel+')')) b.classList.add('sel-correct'); });
+                fbCorrect.classList.add('show');
+                scores[stepNum]++;
+            } else {
+                ex.classList.add('incorrect');
+                btns.forEach(b => {
+                    if (b.textContent.startsWith(sel+')')) b.classList.add('sel-wrong');
+                    if (b.textContent.startsWith(correct+')')) b.classList.add('show-correct');
+                });
+                fbIncorrect.classList.add('show');
+            }
+            document.getElementById(`score${stepNum}`).textContent = `${scores[stepNum]}/5`;
+        }
+        updateNav();
+    </script>
+</body>
+</html>

@@ -1,1 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 6 | A2-Bloque-I | JUCUM Grammar</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 500px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); border-radius: 20px; padding: 25px 20px; text-align: center; margin-bottom: 20px; box-shadow: 0 8px 25px rgba(102, 187, 106, 0.4); }
+        .header h1 { color: white; font-size: 1.5rem; margin-bottom: 5px; }
+        .header p { color: rgba(255,255,255,0.9); font-size: 0.9rem; }
+        .badges { display: flex; justify-content: center; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+        .badge { background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 15px; font-size: 0.75rem; color: white; }
+        .info-box { background: white; border-radius: 12px; padding: 15px; margin-bottom: 20px; border-left: 4px solid #66bb6a; }
+        .info-box h3 { color: #2e7d32; font-size: 0.9rem; margin-bottom: 8px; }
+        .info-box p { color: #555; font-size: 0.85rem; line-height: 1.5; }
+        .topics-grid { display: flex; flex-direction: column; gap: 12px; }
+        .topic-card { background: white; border-radius: 16px; padding: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 15px; text-decoration: none; transition: all 0.3s ease; border: 2px solid transparent; }
+        .topic-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); border-color: #66bb6a; }
+        .topic-num { width: 45px; height: 45px; background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.1rem; flex-shrink: 0; }
+        .topic-content { flex: 1; }
+        .topic-title { color: #2e7d32; font-size: 0.95rem; font-weight: 600; margin-bottom: 3px; }
+        .topic-desc { color: #888; font-size: 0.8rem; }
+        .topic-arrow { color: #66bb6a; font-size: 1.2rem; }
+        .topic-card.completed .topic-num { background: linear-gradient(135deg, #81c784 0%, #66bb6a 100%); }
+        .topic-card.completed::after { content: "✓"; position: absolute; right: 50px; color: #4caf50; font-weight: bold; }
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: #2e7d32; text-decoration: none; font-size: 0.9rem; margin-bottom: 15px; padding: 8px 15px; background: white; border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .back-btn:hover { background: #e8f5e9; }
+        .progress-section { background: white; border-radius: 12px; padding: 15px; margin-top: 20px; }
+        .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .progress-title { color: #2e7d32; font-size: 0.85rem; font-weight: 600; }
+        .progress-count { color: #66bb6a; font-size: 0.85rem; }
+        .progress-bar { height: 8px; background: #e8f5e9; border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #66bb6a 0%, #43a047 100%); border-radius: 4px; transition: width 0.5s ease; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../A2-Bloque-I/" class="back-btn">← Volver a A2-Bloque-I</a>
+        
+        <div class="header">
+            <h1>📚 Módulo 6</h1>
+            <p>Present Perfect - El tiempo del presente perfecto</p>
+            <div class="badges">
+                <span class="badge">💚 A2-Bloque-I</span>
+                <span class="badge">📖 6 Temas</span>
+                <span class="badge">⏱️ ~3 horas</span>
+            </div>
+        </div>
 
+        <div class="info-box">
+            <h3>🎯 ¿Qué aprenderás?</h3>
+            <p>El <strong>Present Perfect</strong> conecta el pasado con el presente. Aprenderás a usar <strong>ever/never</strong> para experiencias, <strong>just/already/yet</strong> para acciones recientes, y <strong>since/for</strong> para duración. También distinguirás <strong>been vs gone</strong> y cuándo usar Present Perfect vs Past Simple.</p>
+        </div>
+
+        <div class="topics-grid">
+            <a href="tema1-been-gone.html" class="topic-card" data-topic="1">
+                <div class="topic-num">1</div>
+                <div class="topic-content">
+                    <div class="topic-title">Been vs Gone</div>
+                    <div class="topic-desc">Diferencia entre "ha ido" y "ha estado"</div>
+                </div>
+                <span class="topic-arrow">→</span>
+            </a>
+
+            <a href="tema2-for-since-ago.html" class="topic-card" data-topic="2">
+                <div class="topic-num">2</div>
+                <div class="topic-content">
+                    <div class="topic-title">For / Since / Ago</div>
+                    <div class="topic-desc">Preposiciones de tiempo con Present Perfect</div>
+                </div>
+                <span class="topic-arrow">→</span>
+            </a>
+
+            <a href="tema3-ever-never.html" class="topic-card" data-topic="3">
+                <div class="topic-num">3</div>
+                <div class="topic-content">
+                    <div class="topic-title">Ever / Never</div>
+                    <div class="topic-desc">Preguntar y hablar sobre experiencias</div>
+                </div>
+                <span class="topic-arrow">→</span>
+            </a>
+
+            <a href="tema4-just-already-yet.html" class="topic-card" data-topic="4">
+                <div class="topic-num">4</div>
+                <div class="topic-content">
+                    <div class="topic-title">Just / Already / Yet</div>
+                    <div class="topic-desc">Acciones recientes y expectativas</div>
+                </div>
+                <span class="topic-arrow">→</span>
+            </a>
+
+            <a href="tema5-since-for.html" class="topic-card" data-topic="5">
+                <div class="topic-num">5</div>
+                <div class="topic-content">
+                    <div class="topic-title">Since / For (Duración)</div>
+                    <div class="topic-desc">Expresar duración hasta el presente</div>
+                </div>
+                <span class="topic-arrow">→</span>
+            </a>
+
+            <a href="tema6-present-perfect-vs-past-simple.html" class="topic-card" data-topic="6">
+                <div class="topic-num">6</div>
+                <div class="topic-content">
+                    <div class="topic-title">Present Perfect vs Past Simple</div>
+                    <div class="topic-desc">Cuándo usar cada tiempo verbal</div>
+                </div>
+                <span class="topic-arrow">→</span>
+            </a>
+        </div>
+
+        <div class="progress-section">
+            <div class="progress-header">
+                <span class="progress-title">📊 Tu progreso</span>
+                <span class="progress-count" id="progressCount">0/6 temas</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateProgress() {
+            const completed = JSON.parse(localStorage.getItem('a2bi_m6_completed') || '[]');
+            const total = 6;
+            const count = completed.length;
+            document.getElementById('progressCount').textContent = `${count}/${total} temas`;
+            document.getElementById('progressFill').style.width = `${(count/total)*100}%`;
+            completed.forEach(topic => {
+                const card = document.querySelector(`[data-topic="${topic}"]`);
+                if (card) card.classList.add('completed');
+            });
+        }
+        updateProgress();
+    </script>
+</body>
+</html>
