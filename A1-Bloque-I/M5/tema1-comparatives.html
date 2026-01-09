@@ -3,14 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comparatives & Superlatives | A1-Beg M5 | JUCUM</title>
+    <title>Comparatives | A1-Beg M5 | JUCUM</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #ffe8ec 0%, #ffdde1 100%);
@@ -18,576 +13,143 @@
             padding: 15px;
             padding-bottom: 80px;
         }
-
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
+        .container { max-width: 500px; margin: 0 auto; }
         .header {
-            background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%);
+            background: linear-gradient(135deg, #ee9ca7 0%, #e8838f 100%);
             border-radius: 16px;
             padding: 15px;
             text-align: center;
             margin-bottom: 15px;
             box-shadow: 0 4px 15px rgba(238, 156, 167, 0.4);
         }
-
-        .header h1 {
-            color: #8b3a4a;
-            font-size: 1.1rem;
-            margin-bottom: 3px;
-        }
-
+        .header h1 { color: white; font-size: 1.2rem; margin-bottom: 3px; }
         .header .badge {
             display: inline-block;
-            background: rgba(139, 58, 74, 0.2);
+            background: rgba(255,255,255,0.2);
             padding: 4px 12px;
             border-radius: 15px;
             font-size: 0.75rem;
-            color: #8b3a4a;
+            color: white;
         }
-
-        .progress-nav {
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            margin-bottom: 15px;
-        }
-
+        .progress-nav { display: flex; justify-content: center; gap: 6px; margin-bottom: 15px; }
         .step-dot {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: 2px solid #ee9ca7;
-            background: white;
-            color: #ee9ca7;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.85rem;
+            width: 36px; height: 36px; border-radius: 50%;
+            border: 2px solid #ee9ca7; background: white; color: #ee9ca7;
+            font-weight: bold; cursor: pointer; transition: all 0.3s ease;
+            display: flex; align-items: center; justify-content: center; font-size: 0.85rem;
         }
-
-        .step-dot.active {
-            background: #ee9ca7;
-            color: white;
-        }
-
-        .step-dot.completed {
-            background: #d4818e;
-            color: white;
-            border-color: #d4818e;
-        }
-
+        .step-dot.active { background: #ee9ca7; color: white; }
+        .step-dot.completed { background: #e8838f; color: white; border-color: #e8838f; }
         .step-card {
-            display: none;
-            background: white;
-            border-radius: 16px;
-            padding: 20px 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
+            display: none; background: white; border-radius: 16px;
+            padding: 20px 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 15px;
         }
-
-        .step-card.active {
-            display: block;
-        }
-
+        .step-card.active { display: block; }
         .step-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #ffe8ec;
+            display: flex; align-items: center; gap: 10px;
+            margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #ffe8ec;
         }
-
-        .step-icon {
-            font-size: 1.8rem;
-        }
-
-        .step-title {
-            color: #8b3a4a;
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        .compare-box {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 12px 0;
-        }
-
-        .compare-item {
-            padding: 12px;
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        .compare-item.pink {
-            background: linear-gradient(135deg, #ffdde1 0%, #ffccd5 100%);
-            border: 2px solid #ee9ca7;
-        }
-
-        .compare-item.blue {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            border: 2px solid #64b5f6;
-        }
-
-        .compare-item.purple {
-            background: linear-gradient(135deg, #e1bee7 0%, #ce93d8 100%);
-            border: 2px solid #ab47bc;
-        }
-
-        .compare-item .icon {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-
-        .compare-item .label {
-            font-weight: 700;
-            font-size: 0.85rem;
-            margin-bottom: 8px;
-        }
-
-        .compare-item.pink .label { color: #8b3a4a; }
+        .step-icon { font-size: 1.8rem; }
+        .step-title { color: #c2185b; font-size: 1rem; font-weight: 600; }
+        .compare-box { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+        .compare-item { padding: 12px 8px; border-radius: 12px; text-align: center; }
+        .compare-item.pink { background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%); border: 2px solid #ee9ca7; }
+        .compare-item.blue { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border: 2px solid #64b5f6; }
+        .compare-item .icon { font-size: 1.3rem; margin-bottom: 5px; }
+        .compare-item .label { font-weight: 700; font-size: 0.8rem; margin-bottom: 6px; }
+        .compare-item.pink .label { color: #c2185b; }
         .compare-item.blue .label { color: #1565c0; }
-        .compare-item.purple .label { color: #7b1fa2; }
-
-        .compare-item ul {
-            list-style: none;
-            font-size: 0.8rem;
-            color: #555;
-        }
-
-        .compare-item li {
-            padding: 3px 0;
-        }
-
+        .compare-item ul { list-style: none; font-size: 0.8rem; color: #555; }
+        .compare-item li { padding: 3px 0; }
         .quick-example {
-            background: #f5f5f5;
-            border-radius: 10px;
-            padding: 10px 12px;
-            margin: 8px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            background: #f5f5f5; border-radius: 10px; padding: 10px 12px;
+            margin: 8px 0; display: flex; align-items: center; gap: 10px;
         }
-
-        .quick-example .emoji {
-            font-size: 1.3rem;
-        }
-
-        .quick-example .text {
-            flex: 1;
-        }
-
-        .quick-example .en {
-            color: #8b3a4a;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .quick-example .es {
-            color: #888;
-            font-size: 0.8rem;
-        }
-
-        .quick-example.wrong {
-            background: #ffebee;
-            border-left: 3px solid #f44336;
-        }
-
-        .quick-example.right {
-            background: #e8f5e9;
-            border-left: 3px solid #4caf50;
-        }
-
-        .mini-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 10px 0;
-            font-size: 0.8rem;
-        }
-
-        .mini-table th {
-            background: #ee9ca7;
-            color: white;
-            padding: 8px 6px;
-            text-align: center;
-        }
-
-        .mini-table td {
-            padding: 8px 6px;
-            border-bottom: 1px solid #e0e0e0;
-            text-align: center;
-        }
-
-        .mini-table tr:nth-child(even) {
-            background: #fdf5f7;
-        }
-
+        .quick-example .emoji { font-size: 1.3rem; }
+        .quick-example .text { flex: 1; }
+        .quick-example .en { color: #c2185b; font-weight: 600; font-size: 0.9rem; }
+        .quick-example .es { color: #888; font-size: 0.8rem; }
+        .quick-example.wrong { background: #ffebee; border-left: 3px solid #f44336; }
+        .quick-example.right { background: #e8f5e9; border-left: 3px solid #4caf50; }
+        .mini-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.8rem; }
+        .mini-table th { background: #ee9ca7; color: white; padding: 8px 6px; text-align: center; }
+        .mini-table td { padding: 8px 6px; border-bottom: 1px solid #e0e0e0; text-align: center; }
+        .mini-table tr:nth-child(even) { background: #fce4ec; }
         .tip-box {
             background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
-            border-radius: 10px;
-            padding: 10px 12px;
-            margin: 10px 0;
-            font-size: 0.85rem;
-            border-left: 3px solid #fbc02d;
+            border-radius: 10px; padding: 10px 12px; margin: 10px 0;
+            font-size: 0.85rem; border-left: 3px solid #fbc02d;
         }
-
-        .tip-box strong {
-            color: #f57f17;
-        }
-
+        .tip-box strong { color: #f57f17; }
         .rule-box {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            border-radius: 10px;
-            padding: 12px;
-            margin: 10px 0;
-            text-align: center;
-            border: 2px solid #42a5f5;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+            border-radius: 10px; padding: 12px; margin: 10px 0;
+            text-align: center; border: 2px solid #ee9ca7;
         }
-
-        .rule-box .formula {
-            font-family: monospace;
-            font-size: 0.9rem;
-            color: #1565c0;
-            font-weight: 600;
-        }
-
-        .word-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-            margin: 10px 0;
-        }
-
-        .word-tag {
-            padding: 6px 8px;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        .word-tag.short {
-            background: #c8e6c9;
-            color: #2e7d32;
-        }
-
-        .word-tag.long {
-            background: #ffcdd2;
-            color: #c62828;
-        }
-
-        .word-tag.irreg {
-            background: #e1bee7;
-            color: #7b1fa2;
-        }
-
-        .alert-box {
-            background: #ffebee;
-            border: 2px solid #ef5350;
-            border-radius: 10px;
-            padding: 10px;
-            margin: 10px 0;
-        }
-
-        .alert-box .title {
-            color: #c62828;
-            font-weight: 700;
-            font-size: 0.85rem;
-            margin-bottom: 5px;
-        }
-
-        .exercise-section {
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 2px dashed #ffdde1;
-        }
-
-        .exercise-section h3 {
-            color: #8b3a4a;
-            font-size: 0.9rem;
-            margin-bottom: 12px;
-        }
-
-        .exercise {
-            background: #fafafa;
-            border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 10px;
-            border: 2px solid #e0e0e0;
-        }
-
-        .exercise.correct {
-            border-color: #4caf50;
-            background: #e8f5e9;
-        }
-
-        .exercise.incorrect {
-            border-color: #f44336;
-            background: #ffebee;
-        }
-
-        .exercise-q {
-            font-size: 0.9rem;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .exercise-q strong {
-            color: #8b3a4a;
-        }
-
-        .opts {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6px;
-        }
-
+        .rule-box .formula { font-family: monospace; font-size: 0.9rem; color: #c2185b; font-weight: 600; line-height: 1.6; }
+        .word-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 10px 0; }
+        .word-tag { padding: 6px 4px; border-radius: 8px; font-size: 0.75rem; text-align: center; font-weight: 500; }
+        .word-tag.short { background: #fce4ec; color: #c2185b; }
+        .word-tag.long { background: #e3f2fd; color: #1565c0; }
+        .word-tag.irreg { background: #fff3e0; color: #e65100; }
+        .alert-box { background: #ffebee; border: 2px solid #ef5350; border-radius: 10px; padding: 10px; margin: 10px 0; }
+        .alert-box .title { color: #c62828; font-weight: 700; font-size: 0.85rem; margin-bottom: 5px; }
+        .exercise-section { margin-top: 20px; padding-top: 15px; border-top: 2px dashed #fce4ec; }
+        .exercise-section h3 { color: #c2185b; font-size: 0.9rem; margin-bottom: 12px; }
+        .exercise { background: #fafafa; border-radius: 10px; padding: 12px; margin-bottom: 10px; border: 2px solid #e0e0e0; }
+        .exercise.correct { border-color: #4caf50; background: #e8f5e9; }
+        .exercise.incorrect { border-color: #f44336; background: #ffebee; }
+        .exercise-q { font-size: 0.9rem; color: #333; margin-bottom: 10px; }
+        .exercise-q strong { color: #c2185b; }
+        .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
         .opt-btn {
-            padding: 10px 8px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            background: white;
-            color: #555;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            padding: 10px 8px; border: 2px solid #e0e0e0; border-radius: 8px;
+            background: white; color: #555; font-size: 0.85rem; cursor: pointer; transition: all 0.2s ease;
         }
-
-        .opt-btn:hover:not(:disabled) {
-            border-color: #ee9ca7;
-            background: #fff5f7;
-        }
-
-        .opt-btn:disabled {
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-        .opt-btn.sel-correct {
-            background: #4caf50;
-            color: white;
-            border-color: #4caf50;
-        }
-
-        .opt-btn.sel-wrong {
-            background: #f44336;
-            color: white;
-            border-color: #f44336;
-        }
-
-        .opt-btn.show-correct {
-            background: #4caf50;
-            color: white;
-            border-color: #4caf50;
-        }
-
-        .feedback {
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            display: none;
-        }
-
-        .feedback.show {
-            display: block;
-        }
-
-        .feedback.correct-fb {
-            background: #e8f5e9;
-            border: 1px solid #a5d6a7;
-        }
-
-        .feedback.incorrect-fb {
-            background: #ffebee;
-            border: 1px solid #ef9a9a;
-        }
-
-        .feedback .result {
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-
-        .feedback.correct-fb .result {
-            color: #2e7d32;
-        }
-
-        .feedback.incorrect-fb .result {
-            color: #c62828;
-        }
-
-        .feedback .explanation {
-            color: #555;
-            line-height: 1.4;
-        }
-
-        .feedback .why-correct {
-            color: #2e7d32;
-            margin-bottom: 4px;
-        }
-
-        .feedback .why-wrong {
-            color: #c62828;
-        }
-
+        .opt-btn:hover:not(:disabled) { border-color: #ee9ca7; background: #fce4ec; }
+        .opt-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+        .opt-btn.sel-correct { background: #4caf50; color: white; border-color: #4caf50; }
+        .opt-btn.sel-wrong { background: #f44336; color: white; border-color: #f44336; }
+        .opt-btn.show-correct { background: #4caf50; color: white; border-color: #4caf50; }
+        .feedback { margin-top: 10px; padding: 10px; border-radius: 8px; font-size: 0.8rem; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-fb { background: #e8f5e9; border: 1px solid #a5d6a7; }
+        .feedback.incorrect-fb { background: #ffebee; border: 1px solid #ef9a9a; }
+        .feedback .result { font-weight: 700; margin-bottom: 6px; }
+        .feedback.correct-fb .result { color: #2e7d32; }
+        .feedback.incorrect-fb .result { color: #c62828; }
+        .feedback .explanation { color: #555; line-height: 1.4; }
+        .feedback .why-correct { color: #2e7d32; margin-bottom: 4px; }
+        .feedback .why-wrong { color: #c62828; }
         .score-box {
-            text-align: center;
-            padding: 12px;
-            background: linear-gradient(135deg, #ffe8ec 0%, #ffdde1 100%);
-            border-radius: 10px;
-            margin-top: 12px;
+            text-align: center; padding: 12px;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+            border-radius: 10px; margin-top: 12px;
         }
-
-        .score-box .num {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #8b3a4a;
-        }
-
-        .score-box .label {
-            font-size: 0.8rem;
-            color: #ee9ca7;
-        }
-
+        .score-box .num { font-size: 1.5rem; font-weight: bold; color: #c2185b; }
+        .score-box .label { font-size: 0.8rem; color: #ee9ca7; }
         .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            padding: 12px 15px;
-            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            position: fixed; bottom: 0; left: 0; right: 0; background: white;
+            padding: 12px 15px; box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+            display: flex; justify-content: space-between; align-items: center;
         }
-
-        .nav-btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .nav-btn.prev {
-            background: #e0e0e0;
-            color: #666;
-        }
-
-        .nav-btn.next {
-            background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%);
-            color: #8b3a4a;
-        }
-
-        .nav-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .step-ind {
-            font-size: 0.8rem;
-            color: #666;
-        }
-
-        .summary-list {
-            list-style: none;
-        }
-
-        .summary-list li {
-            padding: 6px 0 6px 20px;
-            position: relative;
-            font-size: 0.85rem;
-            color: #555;
-        }
-
-        .summary-list li:before {
-            content: "✔";
-            position: absolute;
-            left: 0;
-            color: #ee9ca7;
-            font-weight: bold;
-        }
-
-        .degrees-flow {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            margin: 15px 0;
-            flex-wrap: wrap;
-        }
-
-        .degree-box {
-            padding: 10px 15px;
-            border-radius: 10px;
-            text-align: center;
-            min-width: 80px;
-        }
-
-        .degree-box.base {
-            background: #e3f2fd;
-            border: 2px solid #64b5f6;
-        }
-
-        .degree-box.comp {
-            background: #fff3e0;
-            border: 2px solid #ffb74d;
-        }
-
-        .degree-box.super {
-            background: #f3e5f5;
-            border: 2px solid #ab47bc;
-        }
-
-        .degree-box .word {
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        .degree-box .type {
-            font-size: 0.7rem;
-            color: #666;
-            margin-top: 3px;
-        }
-
-        .arrow {
-            font-size: 1.2rem;
-            color: #999;
-        }
-
-        .section-divider {
-            text-align: center;
-            margin: 20px 0 15px 0;
-            padding: 10px;
-            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
-            border-radius: 10px;
-        }
-
-        .section-divider h4 {
-            color: #7b1fa2;
-            font-size: 0.9rem;
-        }
+        .nav-btn { padding: 10px 20px; border: none; border-radius: 20px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+        .nav-btn.prev { background: #e0e0e0; color: #666; }
+        .nav-btn.next { background: linear-gradient(135deg, #ee9ca7 0%, #e8838f 100%); color: white; }
+        .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .step-ind { font-size: 0.8rem; color: #666; }
+        .summary-list { list-style: none; }
+        .summary-list li { padding: 6px 0 6px 20px; position: relative; font-size: 0.85rem; color: #555; }
+        .summary-list li:before { content: "✔"; position: absolute; left: 0; color: #ee9ca7; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <div class="header">
-            <h1>📊 Comparatives & Superlatives</h1>
-            <div class="badge">🍑 A1-Beginner • M5 • Grados del Adjetivo</div>
+            <h1>📊 Comparatives (-er / more...than)</h1>
+            <div class="badge">🍑 A1-Beginner • M5 • Tema 1</div>
         </div>
 
-        <!-- Progress -->
         <div class="progress-nav">
             <div class="step-dot active" onclick="goToStep(1)">1</div>
             <div class="step-dot" onclick="goToStep(2)">2</div>
@@ -596,200 +158,127 @@
             <div class="step-dot" onclick="goToStep(5)">5</div>
         </div>
 
-        <!-- STEP 1 -->
+        <!-- STEP 1: Repaso en Español -->
         <div class="step-card active" id="step1">
             <div class="step-header">
                 <span class="step-icon">🇪🇸</span>
                 <span class="step-title">Paso 1: Repaso en Español</span>
             </div>
 
-            <p style="font-size: 0.85rem; color: #555; margin-bottom: 15px;">
-                En español tenemos <strong>3 grados del adjetivo</strong> para expresar diferentes niveles de cualidad:
+            <p style="font-size: 0.85rem; color: #555; margin-bottom: 12px;">
+                El <strong>comparativo</strong> se usa para comparar <strong>DOS</strong> cosas, personas o ideas.
             </p>
-
-            <!-- Degrees Flow Visual -->
-            <div class="degrees-flow">
-                <div class="degree-box base">
-                    <div class="word">alto</div>
-                    <div class="type">POSITIVO</div>
-                </div>
-                <span class="arrow">→</span>
-                <div class="degree-box comp">
-                    <div class="word">más alto</div>
-                    <div class="type">COMPARATIVO</div>
-                </div>
-                <span class="arrow">→</span>
-                <div class="degree-box super">
-                    <div class="word">el más alto</div>
-                    <div class="type">SUPERLATIVO</div>
-                </div>
-            </div>
 
             <div class="compare-box">
                 <div class="compare-item pink">
-                    <div class="icon">⚖️</div>
+                    <div class="icon">😊</div>
+                    <div class="label">POSITIVO</div>
+                    <ul>
+                        <li>alto</li>
+                        <li>grande</li>
+                        <li>caro</li>
+                        <li><em>Solo describe</em></li>
+                    </ul>
+                </div>
+                <div class="compare-item blue">
+                    <div class="icon">📊</div>
                     <div class="label">COMPARATIVO</div>
                     <ul>
-                        <li>más... que</li>
-                        <li>menos... que</li>
-                        <li>Compara 2 cosas</li>
-                    </ul>
-                </div>
-                <div class="compare-item purple">
-                    <div class="icon">🏆</div>
-                    <div class="label">SUPERLATIVO</div>
-                    <ul>
-                        <li>el/la más...</li>
-                        <li>el/la menos...</li>
-                        <li>Máximo del grupo</li>
+                        <li>más alto <strong>que</strong></li>
+                        <li>más grande <strong>que</strong></li>
+                        <li>más caro <strong>que</strong></li>
+                        <li><em>Compara 2</em></li>
                     </ul>
                 </div>
             </div>
 
             <div class="quick-example">
-                <span class="emoji">⚖️</span>
+                <span class="emoji">👫</span>
                 <div class="text">
-                    <div class="en">María es <strong>más alta que</strong> Juan</div>
-                    <div class="es">Comparativo: compara 2 personas</div>
+                    <div class="en">María es más alta que Juan.</div>
+                    <div class="es">Compara 2 personas: María vs Juan</div>
                 </div>
             </div>
 
             <div class="quick-example">
-                <span class="emoji">🏆</span>
+                <span class="emoji">🏠</span>
                 <div class="text">
-                    <div class="en">María es <strong>la más alta</strong> de la clase</div>
-                    <div class="es">Superlativo: máxima del grupo</div>
+                    <div class="en">Mi casa es más grande que tu casa.</div>
+                    <div class="es">Compara 2 casas: mi casa vs tu casa</div>
+                </div>
+            </div>
+
+            <div class="rule-box">
+                <div class="formula">
+                    📊 COMPARATIVO en español:<br>
+                    más + adjetivo + QUE
                 </div>
             </div>
 
             <div class="tip-box">
                 <strong>💡 Irregulares en español:</strong><br>
-                bueno → mejor → el mejor<br>
-                malo → peor → el peor
+                bueno → <strong>mejor</strong> (no "más bueno")<br>
+                malo → <strong>peor</strong> (no "más malo")
             </div>
 
-            <!-- Exercises -->
             <div class="exercise-section">
                 <h3>✏️ Ejercicios</h3>
 
                 <div class="exercise" id="ex1-1">
-                    <div class="exercise-q">1. "Pedro es más rápido que Luis" es:</div>
+                    <div class="exercise-q">1. El comparativo compara:</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex1-1','a','a')">a) Comparativo</button>
-                        <button class="opt-btn" onclick="check('ex1-1','b','a')">b) Superlativo</button>
+                        <button class="opt-btn" onclick="check('ex1-1','a','a')">a) 2 elementos</button>
+                        <button class="opt-btn" onclick="check('ex1-1','b','a')">b) 3+ elementos</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex1-1">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "Más... que" compara DOS elementos = Comparativo.</div>
-                            <div class="why-wrong">✘ Superlativo sería "el más rápido DE todos".</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex1-1">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ La correcta es "Comparativo" - usa "más... que" para comparar 2.</div>
-                            <div class="why-wrong">✘ El superlativo usa "el más" sin "que".</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-1"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ Comparativo siempre compara A vs B (exactamente 2).</div><div class="why-wrong">✗ Para 3+ elementos usamos el superlativo ("el más alto de todos").</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-1"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ El comparativo compara 2 elementos: "A es más alto que B".</div><div class="why-wrong">✗ Para grupos de 3+ usamos superlativo, no comparativo.</div></div></div>
                 </div>
 
                 <div class="exercise" id="ex1-2">
-                    <div class="exercise-q">2. "Ana es la más inteligente del grupo" es:</div>
+                    <div class="exercise-q">2. "María es más alta que Juan" - ¿Cuántas personas se comparan?</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex1-2','a','b')">a) Comparativo</button>
-                        <button class="opt-btn" onclick="check('ex1-2','b','b')">b) Superlativo</button>
+                        <button class="opt-btn" onclick="check('ex1-2','a','a')">a) 2</button>
+                        <button class="opt-btn" onclick="check('ex1-2','b','a')">b) 3</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex1-2">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "La más... del grupo" = Superlativo (máxima del grupo).</div>
-                            <div class="why-wrong">✘ Comparativo sería "más inteligente QUE alguien".</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex1-2">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ La correcta es "Superlativo" - "la más" indica máximo.</div>
-                            <div class="why-wrong">✘ Comparativo necesita "que" para comparar con otro.</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-2"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ Se comparan 2: María y Juan.</div><div class="why-wrong">✗ No hay una tercera persona en esta comparación.</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-2"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Solo hay 2 personas: María vs Juan.</div><div class="why-wrong">✗ El comparativo siempre trabaja con 2 elementos.</div></div></div>
                 </div>
 
                 <div class="exercise" id="ex1-3">
-                    <div class="exercise-q">3. El comparativo de "bueno" en español es:</div>
+                    <div class="exercise-q">3. ¿Cuál es el comparativo de "bueno" en español?</div>
                     <div class="opts">
                         <button class="opt-btn" onclick="check('ex1-3','a','b')">a) más bueno</button>
                         <button class="opt-btn" onclick="check('ex1-3','b','b')">b) mejor</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex1-3">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "Bueno" es irregular: bueno → mejor → el mejor.</div>
-                            <div class="why-wrong">✘ "Más bueno" es incorrecto (aunque se oye coloquialmente).</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex1-3">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ La correcta es "mejor" - forma irregular.</div>
-                            <div class="why-wrong">✘ "Más bueno" no es la forma estándar correcta.</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-3"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ "Mejor" es la forma correcta (irregular).</div><div class="why-wrong">✗ "Más bueno" es incorrecto en español estándar.</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-3"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Bueno → mejor (forma irregular).</div><div class="why-wrong">✗ "Más bueno" no es la forma correcta.</div></div></div>
                 </div>
 
                 <div class="exercise" id="ex1-4">
-                    <div class="exercise-q">4. El superlativo de "malo" en español es:</div>
+                    <div class="exercise-q">4. Completa: "Mi carro es más rápido ___ tu carro"</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex1-4','a','a')">a) el peor</button>
-                        <button class="opt-btn" onclick="check('ex1-4','b','a')">b) el más malo</button>
+                        <button class="opt-btn" onclick="check('ex1-4','a','a')">a) que</button>
+                        <button class="opt-btn" onclick="check('ex1-4','b','a')">b) de</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex1-4">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "Malo" es irregular: malo → peor → el peor.</div>
-                            <div class="why-wrong">✘ "El más malo" no es la forma estándar.</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex1-4">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ La correcta es "el peor" - forma irregular.</div>
-                            <div class="why-wrong">✘ "El más malo" no es correcto en español estándar.</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-4"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ "Que" conecta los dos elementos comparados.</div><div class="why-wrong">✗ "De" se usa con superlativos ("el más rápido de todos").</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-4"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Estructura: más + adj + QUE.</div><div class="why-wrong">✗ "De" no se usa en comparativos.</div></div></div>
                 </div>
 
                 <div class="exercise" id="ex1-5">
-                    <div class="exercise-q">5. ¿Cuál indica el MÁXIMO en un grupo?</div>
+                    <div class="exercise-q">5. ¿Cuál es el comparativo de "malo"?</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex1-5','a','b')">a) Comparativo</button>
-                        <button class="opt-btn" onclick="check('ex1-5','b','b')">b) Superlativo</button>
+                        <button class="opt-btn" onclick="check('ex1-5','a','b')">a) más malo</button>
+                        <button class="opt-btn" onclick="check('ex1-5','b','b')">b) peor</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex1-5">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ Superlativo = "el más/menos" = máximo o mínimo del grupo.</div>
-                            <div class="why-wrong">✘ Comparativo solo compara 2 elementos, no indica máximo.</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex1-5">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ Superlativo indica el máximo: "el más alto DE todos".</div>
-                            <div class="why-wrong">✘ Comparativo solo compara 2: "más alto QUE Juan".</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-5"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ "Peor" es la forma irregular correcta.</div><div class="why-wrong">✗ "Más malo" es incorrecto en español estándar.</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-5"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Malo → peor (forma irregular).</div><div class="why-wrong">✗ "Más malo" no es aceptado.</div></div></div>
                 </div>
 
-                <div class="score-box">
-                    <div class="num" id="score1">0/5</div>
-                    <div class="label">Paso 1</div>
-                </div>
+                <div class="score-box"><div class="num" id="score1">0/5</div><div class="label">Paso 1</div></div>
             </div>
         </div>
 
-        <!-- STEP 2 -->
+        <!-- STEP 2: Similitudes -->
         <div class="step-card" id="step2">
             <div class="step-header">
                 <span class="step-icon">🤝</span>
@@ -797,193 +286,106 @@
             </div>
 
             <table class="mini-table">
-                <tr>
-                    <th>Aspecto</th>
-                    <th>Español</th>
-                    <th>English</th>
-                </tr>
-                <tr>
-                    <td>Comparativo</td>
-                    <td>más... que</td>
-                    <td>...er than / more... than</td>
-                </tr>
-                <tr>
-                    <td>Superlativo</td>
-                    <td>el/la más...</td>
-                    <td>the ...est / the most...</td>
-                </tr>
-                <tr>
-                    <td>Irregulares</td>
-                    <td>bueno → mejor</td>
-                    <td>good → better</td>
-                </tr>
-                <tr>
-                    <td>Irregulares</td>
-                    <td>malo → peor</td>
-                    <td>bad → worse</td>
-                </tr>
+                <tr><th>Español</th><th>English</th><th>Función</th></tr>
+                <tr><td>más alto <strong>que</strong></td><td>taller <strong>than</strong></td><td>Conecta A y B</td></tr>
+                <tr><td>mejor <strong>que</strong></td><td>better <strong>than</strong></td><td>Irregular</td></tr>
+                <tr><td>peor <strong>que</strong></td><td>worse <strong>than</strong></td><td>Irregular</td></tr>
             </table>
 
-            <div class="degrees-flow">
-                <div class="degree-box base">
-                    <div class="word">tall</div>
-                    <div class="type">BASE</div>
-                </div>
-                <span class="arrow">→</span>
-                <div class="degree-box comp">
-                    <div class="word">taller</div>
-                    <div class="type">COMPARATIVE</div>
-                </div>
-                <span class="arrow">→</span>
-                <div class="degree-box super">
-                    <div class="word">the tallest</div>
-                    <div class="type">SUPERLATIVE</div>
+            <div class="quick-example right">
+                <span class="emoji">🔗</span>
+                <div class="text">
+                    <div class="en">"THAN" = "QUE"</div>
+                    <div class="es">Misma función: conectar los 2 elementos</div>
                 </div>
             </div>
 
-            <div class="quick-example right">
-                <span class="emoji">⚖️</span>
-                <div class="text">
-                    <div class="en">She is <strong>taller than</strong> him</div>
-                    <div class="es">Ella es más alta que él</div>
+            <div class="compare-box">
+                <div class="compare-item pink">
+                    <div class="icon">🇪🇸</div>
+                    <div class="label">ESPAÑOL</div>
+                    <ul>
+                        <li>más + adj + que</li>
+                        <li>bueno → mejor</li>
+                        <li>malo → peor</li>
+                    </ul>
                 </div>
-            </div>
-
-            <div class="quick-example right">
-                <span class="emoji">🏆</span>
-                <div class="text">
-                    <div class="en">She is <strong>the tallest</strong> in the class</div>
-                    <div class="es">Ella es la más alta de la clase</div>
+                <div class="compare-item blue">
+                    <div class="icon">🇬🇧</div>
+                    <div class="label">ENGLISH</div>
+                    <ul>
+                        <li>adj + er + than</li>
+                        <li>good → better</li>
+                        <li>bad → worse</li>
+                    </ul>
                 </div>
             </div>
 
             <div class="tip-box">
-                <strong>💡 Mismos irregulares:</strong><br>
-                good → better → the best (bueno → mejor → el mejor)<br>
-                bad → worse → the worst (malo → peor → el peor)
+                <strong>💡 Los irregulares son similares:</strong><br>
+                • bueno/good → mejor/better<br>
+                • malo/bad → peor/worse<br>
+                ¡Ambos idiomas tienen las mismas excepciones!
             </div>
 
             <div class="exercise-section">
                 <h3>✏️ Ejercicios</h3>
 
                 <div class="exercise" id="ex2-1">
-                    <div class="exercise-q">1. "Than" en comparativos equivale a:</div>
+                    <div class="exercise-q">1. "Than" en inglés equivale a:</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex2-1','a','a')">a) que</button>
-                        <button class="opt-btn" onclick="check('ex2-1','b','a')">b) de</button>
+                        <button class="opt-btn" onclick="check('ex2-1','a','b')">a) más</button>
+                        <button class="opt-btn" onclick="check('ex2-1','b','b')">b) que</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex2-1">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "Than" = "que" en comparaciones: taller than = más alto que.</div>
-                            <div class="why-wrong">✘ "De" se usa con superlativos: the tallest in the class.</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex2-1">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "Than" = "que": more expensive THAN = más caro QUE.</div>
-                            <div class="why-wrong">✘ "De" traduce "in/of" en superlativos.</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-1"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ "Than" conecta los elementos = "que" en español.</div><div class="why-wrong">✗ "Más" se expresa con el sufijo -er o la palabra "more".</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-1"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Than = que (taller THAN = más alto QUE).</div><div class="why-wrong">✗ El "más" está en -er o "more", no en "than".</div></div></div>
                 </div>
 
                 <div class="exercise" id="ex2-2">
-                    <div class="exercise-q">2. "Better" en español es:</div>
+                    <div class="exercise-q">2. "Better" es el comparativo de:</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex2-2','a','a')">a) mejor</button>
-                        <button class="opt-btn" onclick="check('ex2-2','b','a')">b) más bueno</button>
+                        <button class="opt-btn" onclick="check('ex2-2','a','a')">a) good</button>
+                        <button class="opt-btn" onclick="check('ex2-2','b','a')">b) bad</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex2-2">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "Better" = "mejor" - ambos son irregulares.</div>
-                            <div class="why-wrong">✘ "Más bueno" no es la traducción correcta de "better".</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex2-2">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "Better" = "mejor" (forma irregular en ambos idiomas).</div>
-                            <div class="why-wrong">✘ "Más bueno" es incorrecto para traducir "better".</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-2"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ Good → better (como bueno → mejor).</div><div class="why-wrong">✗ Bad → worse (como malo → peor).</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-2"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Good = bueno → better = mejor.</div><div class="why-wrong">✗ El comparativo de bad es "worse", no "better".</div></div></div>
                 </div>
 
                 <div class="exercise" id="ex2-3">
-                    <div class="exercise-q">3. "The worst" en español es:</div>
+                    <div class="exercise-q">3. "Worse" significa:</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex2-3','a','b')">a) el más malo</button>
-                        <button class="opt-btn" onclick="check('ex2-3','b','b')">b) el peor</button>
+                        <button class="opt-btn" onclick="check('ex2-3','a','b')">a) mejor</button>
+                        <button class="opt-btn" onclick="check('ex2-3','b','b')">b) peor</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex2-3">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "The worst" = "el peor" - superlativo irregular.</div>
-                            <div class="why-wrong">✘ "El más malo" no es la traducción estándar.</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex2-3">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "The worst" = "el peor" (bad → worse → worst).</div>
-                            <div class="why-wrong">✘ La forma irregular es la correcta en ambos idiomas.</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-3"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ Bad → worse = malo → peor.</div><div class="why-wrong">✗ Mejor = better (de good).</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-3"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Worse = peor (comparativo de bad).</div><div class="why-wrong">✗ Mejor es "better", no "worse".</div></div></div>
                 </div>
 
                 <div class="exercise" id="ex2-4">
-                    <div class="exercise-q">4. Los superlativos en inglés usan:</div>
+                    <div class="exercise-q">4. Tanto español como inglés tienen formas:</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex2-4','a','a')">a) the</button>
-                        <button class="opt-btn" onclick="check('ex2-4','b','a')">b) a</button>
+                        <button class="opt-btn" onclick="check('ex2-4','a','a')">a) Irregulares</button>
+                        <button class="opt-btn" onclick="check('ex2-4','b','a')">b) Solo regulares</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex2-4">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ Siempre "THE" + superlativo: THE tallest, THE most beautiful.</div>
-                            <div class="why-wrong">✘ "A" nunca se usa con superlativos.</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex2-4">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ Los superlativos SIEMPRE llevan "THE": the best, the tallest.</div>
-                            <div class="why-wrong">✘ "A" es artículo indefinido, no va con superlativos.</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-4"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ Ambos idiomas: bueno→mejor / good→better.</div><div class="why-wrong">✗ No todo es regular: hay excepciones importantes.</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-4"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Irregulares existen en ambos idiomas.</div><div class="why-wrong">✗ Good→better y bad→worse son irregulares.</div></div></div>
                 </div>
 
                 <div class="exercise" id="ex2-5">
-                    <div class="exercise-q">5. "In the class" en superlativos equivale a:</div>
+                    <div class="exercise-q">5. "Taller than" significa:</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex2-5','a','b')">a) que la clase</button>
-                        <button class="opt-btn" onclick="check('ex2-5','b','b')">b) de la clase</button>
+                        <button class="opt-btn" onclick="check('ex2-5','a','a')">a) más alto que</button>
+                        <button class="opt-btn" onclick="check('ex2-5','b','a')">b) el más alto</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex2-5">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "In/of" con superlativos = "de": the tallest IN the class = el más alto DE la clase.</div>
-                            <div class="why-wrong">✘ "Que" se usa con comparativos, no superlativos.</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex2-5">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "In/of the class" = "de la clase" con superlativos.</div>
-                            <div class="why-wrong">✘ "Que" es para comparativos: taller THAN = más alto QUE.</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-5"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ Taller than = más alto que (comparativo).</div><div class="why-wrong">✗ "El más alto" sería "the tallest" (superlativo).</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-5"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ -ER + than = más + que.</div><div class="why-wrong">✗ "El más alto" es superlativo, no comparativo.</div></div></div>
                 </div>
 
-                <div class="score-box">
-                    <div class="num" id="score2">0/5</div>
-                    <div class="label">Paso 2</div>
-                </div>
+                <div class="score-box"><div class="num" id="score2">0/5</div><div class="label">Paso 2</div></div>
             </div>
         </div>
 
-        <!-- STEP 3 -->
+        <!-- STEP 3: Diferencias -->
         <div class="step-card" id="step3">
             <div class="step-header">
                 <span class="step-icon">⚠️</span>
@@ -991,83 +393,58 @@
             </div>
 
             <div class="alert-box">
-                <div class="title">🚨 DIFERENCIA CLAVE</div>
-                Inglés tiene DOS formas: <strong>-er/-est</strong> O <strong>more/most</strong><br>
-                (Español solo usa "más/el más")
+                <div class="title">🚨 ¡GRAN DIFERENCIA!</div>
+                En inglés hay DOS formas de hacer comparativos según la longitud del adjetivo
             </div>
 
-            <table class="mini-table">
-                <tr>
-                    <th>Tipo</th>
-                    <th>Comparative</th>
-                    <th>Superlative</th>
-                </tr>
-                <tr>
-                    <td><strong>1 sílaba</strong></td>
-                    <td>tall → tall<strong>er</strong></td>
-                    <td>the tall<strong>est</strong></td>
-                </tr>
-                <tr>
-                    <td><strong>2+ sílabas</strong></td>
-                    <td><strong>more</strong> beautiful</td>
-                    <td><strong>the most</strong> beautiful</td>
-                </tr>
-                <tr>
-                    <td><strong>-y final</strong></td>
-                    <td>happy → happ<strong>ier</strong></td>
-                    <td>the happ<strong>iest</strong></td>
-                </tr>
-            </table>
+            <div class="compare-box">
+                <div class="compare-item pink">
+                    <div class="icon">📏</div>
+                    <div class="label">CORTOS (1 sílaba)</div>
+                    <ul>
+                        <li>tall → tall<strong>ER</strong></li>
+                        <li>big → bigg<strong>ER</strong></li>
+                        <li>old → old<strong>ER</strong></li>
+                        <li>fast → fast<strong>ER</strong></li>
+                    </ul>
+                </div>
+                <div class="compare-item blue">
+                    <div class="icon">📐</div>
+                    <div class="label">LARGOS (2+ sílabas)</div>
+                    <ul>
+                        <li><strong>MORE</strong> beautiful</li>
+                        <li><strong>MORE</strong> expensive</li>
+                        <li><strong>MORE</strong> important</li>
+                        <li><strong>MORE</strong> interesting</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="quick-example wrong">
+                <span class="emoji">❌</span>
+                <div class="text">
+                    <div class="en">more taller / more big</div>
+                    <div class="es">INCORRECTO - nunca mezcles las formas</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">✅</span>
+                <div class="text">
+                    <div class="en">taller / bigger ✓</div>
+                    <div class="es">more beautiful / more expensive ✓</div>
+                </div>
+            </div>
 
             <div class="tip-box">
-                <strong>💡 Regla de sílabas:</strong><br>
-                • 1 sílaba → -er / -est<br>
-                • 2+ sílabas → more / the most<br>
-                • Termina en -y → -ier / -iest
+                <strong>💡 Regla -Y:</strong> Adjetivos terminados en -Y usan -IER<br>
+                happy → happ<strong>ier</strong> | easy → eas<strong>ier</strong> | busy → bus<strong>ier</strong>
             </div>
 
-            <div class="word-grid">
-                <div class="word-tag short">tall</div>
-                <div class="word-tag short">fast</div>
-                <div class="word-tag short">old</div>
-                <div class="word-tag long">beautiful</div>
-                <div class="word-tag long">expensive</div>
-                <div class="word-tag long">important</div>
-                <div class="word-tag irreg">good</div>
-                <div class="word-tag irreg">bad</div>
-                <div class="word-tag irreg">far</div>
-            </div>
-            <p style="text-align: center; font-size: 0.7rem; color: #666;">🟢 Cortos (-er/-est) | 🔴 Largos (more/most) | 🟣 Irregulares</p>
-
-            <div class="quick-example wrong">
-                <span class="emoji">❌</span>
-                <div class="text">
-                    <div class="en">more tall / the most tall</div>
-                    <div class="es">INCORRECTO - "tall" es corto</div>
-                </div>
-            </div>
-
-            <div class="quick-example right">
-                <span class="emoji">✅</span>
-                <div class="text">
-                    <div class="en">taller / the tallest</div>
-                    <div class="es">CORRECTO - usa -er/-est</div>
-                </div>
-            </div>
-
-            <div class="quick-example wrong">
-                <span class="emoji">❌</span>
-                <div class="text">
-                    <div class="en">beautifuler / beautifulest</div>
-                    <div class="es">INCORRECTO - "beautiful" es largo</div>
-                </div>
-            </div>
-
-            <div class="quick-example right">
-                <span class="emoji">✅</span>
-                <div class="text">
-                    <div class="en">more beautiful / the most beautiful</div>
-                    <div class="es">CORRECTO - usa more/most</div>
+            <div class="rule-box">
+                <div class="formula">
+                    📏 1 sílaba: adj + ER + than<br>
+                    📐 2+ sílabas: MORE + adj + than
                 </div>
             </div>
 
@@ -1075,315 +452,162 @@
                 <h3>✏️ Ejercicios</h3>
 
                 <div class="exercise" id="ex3-1">
-                    <div class="exercise-q">1. "Fast" (1 sílaba) - comparativo:</div>
+                    <div class="exercise-q">1. "Big" (1 sílaba) → comparativo:</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex3-1','a','a')">a) faster</button>
-                        <button class="opt-btn" onclick="check('ex3-1','b','a')">b) more fast</button>
+                        <button class="opt-btn" onclick="check('ex3-1','a','a')">a) bigger</button>
+                        <button class="opt-btn" onclick="check('ex3-1','b','a')">b) more big</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex3-1">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "Fast" es de 1 sílaba → usa -er: faster.</div>
-                            <div class="why-wrong">✘ "More fast" es incorrecto para adjetivos cortos.</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex3-1">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ La correcta es "faster" - adjetivos de 1 sílaba usan -er.</div>
-                            <div class="why-wrong">✘ "More" solo se usa con adjetivos largos (2+ sílabas).</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-1"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ 1 sílaba = añadir -ER: big → bigger.</div><div class="why-wrong">✗ "More big" es incorrecto para adjetivos cortos.</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-1"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Adjetivos de 1 sílaba usan -ER.</div><div class="why-wrong">✗ MORE es solo para adjetivos largos (2+ sílabas).</div></div></div>
                 </div>
 
                 <div class="exercise" id="ex3-2">
-                    <div class="exercise-q">2. "Expensive" (4 sílabas) - superlativo:</div>
+                    <div class="exercise-q">2. "Beautiful" (3 sílabas) → comparativo:</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex3-2','a','b')">a) the expensivest</button>
-                        <button class="opt-btn" onclick="check('ex3-2','b','b')">b) the most expensive</button>
+                        <button class="opt-btn" onclick="check('ex3-2','a','b')">a) beautifuler</button>
+                        <button class="opt-btn" onclick="check('ex3-2','b','b')">b) more beautiful</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex3-2">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "Expensive" es largo → the most expensive.</div>
-                            <div class="why-wrong">✘ "Expensivest" no existe - nunca -est con palabras largas.</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex3-2">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ La correcta es "the most expensive" - adjetivos largos usan most.</div>
-                            <div class="why-wrong">✘ "-est" solo funciona con adjetivos cortos.</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-2"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ 3 sílabas = usar MORE: more beautiful.</div><div class="why-wrong">✗ "Beautifuler" NO existe en inglés.</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-2"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Adjetivos largos usan MORE + adj.</div><div class="why-wrong">✗ NUNCA añadas -er a palabras largas.</div></div></div>
                 </div>
 
                 <div class="exercise" id="ex3-3">
-                    <div class="exercise-q">3. "Happy" (termina en -y) - comparativo:</div>
+                    <div class="exercise-q">3. "Happy" → comparativo:</div>
                     <div class="opts">
                         <button class="opt-btn" onclick="check('ex3-3','a','a')">a) happier</button>
                         <button class="opt-btn" onclick="check('ex3-3','b','a')">b) more happy</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex3-3">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ Adjetivos en -y cambian a -ier: happy → happier.</div>
-                            <div class="why-wrong">✘ "More happy" es incorrecto aunque tenga 2 sílabas.</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex3-3">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ La correcta es "happier" - y cambia a -ier.</div>
-                            <div class="why-wrong">✘ Adjetivos en -y son excepción: siempre usan -ier/-iest.</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-3"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ -Y cambia a -IER: happy → happier.</div><div class="why-wrong">✗ "More happy" no es la forma estándar.</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-3"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Regla -Y: la Y cambia a I + ER.</div><div class="why-wrong">✗ Los adjetivos en -Y usan -ier, no "more".</div></div></div>
                 </div>
 
                 <div class="exercise" id="ex3-4">
-                    <div class="exercise-q">4. "Good" - superlativo:</div>
+                    <div class="exercise-q">4. ¿Cuál es INCORRECTO?</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex3-4','a','b')">a) the goodest</button>
-                        <button class="opt-btn" onclick="check('ex3-4','b','b')">b) the best</button>
+                        <button class="opt-btn" onclick="check('ex3-4','a','a')">a) more taller</button>
+                        <button class="opt-btn" onclick="check('ex3-4','b','a')">b) more expensive</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex3-4">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "Good" es irregular: good → better → the best.</div>
-                            <div class="why-wrong">✘ "Goodest" no existe - good es irregular.</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex3-4">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ La correcta es "the best" - forma irregular.</div>
-                            <div class="why-wrong">✘ "Good" nunca usa -er/-est, tiene formas únicas.</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-4"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ "More taller" = doble comparativo (ERROR grave).</div><div class="why-wrong">✗ "More expensive" es correcto (adjetivo largo).</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-4"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ NUNCA combines more + -er.</div><div class="why-wrong">✗ "More expensive" es la forma correcta para adjetivos largos.</div></div></div>
                 </div>
 
                 <div class="exercise" id="ex3-5">
-                    <div class="exercise-q">5. "Big" (CVC) - comparativo:</div>
+                    <div class="exercise-q">5. "Expensive" → comparativo:</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex3-5','a','b')">a) biger</button>
-                        <button class="opt-btn" onclick="check('ex3-5','b','b')">b) bigger</button>
+                        <button class="opt-btn" onclick="check('ex3-5','a','b')">a) expensiver</button>
+                        <button class="opt-btn" onclick="check('ex3-5','b','b')">b) more expensive</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex3-5">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ CVC (consonante-vocal-consonante) duplica la última: big → bigger.</div>
-                            <div class="why-wrong">✘ "Biger" tiene error de ortografía.</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex3-5">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ La correcta es "bigger" - se duplica la g.</div>
-                            <div class="why-wrong">✘ Patrón CVC siempre duplica: hot → hotter, big → bigger.</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-5"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ Ex-pen-sive = 3 sílabas → more expensive.</div><div class="why-wrong">✗ "Expensiver" NO existe en inglés.</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-5"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Palabras largas usan MORE.</div><div class="why-wrong">✗ Nunca -er con adjetivos de 2+ sílabas.</div></div></div>
                 </div>
 
-                <div class="score-box">
-                    <div class="num" id="score3">0/5</div>
-                    <div class="label">Paso 3</div>
-                </div>
+                <div class="score-box"><div class="num" id="score3">0/5</div><div class="label">Paso 3</div></div>
             </div>
         </div>
 
-        <!-- STEP 4 -->
+        <!-- STEP 4: Consejos -->
         <div class="step-card" id="step4">
             <div class="step-header">
                 <span class="step-icon">💡</span>
-                <span class="step-title">Paso 4: Consejos Prácticos</span>
+                <span class="step-title">Paso 4: Consejos Rápidos</span>
             </div>
 
             <div class="rule-box">
                 <div class="formula">
-                    📊 COMPARATIVE: adj + -er + than / more + adj + than<br>
-                    🏆 SUPERLATIVE: the + adj + -est / the most + adj
+                    🧪 TEST: ¿Cuántas palmadas?<br>
+                    1 palmada → -ER than<br>
+                    2+ palmadas → MORE ... than
                 </div>
             </div>
 
-            <div class="tip-box">
-                <strong>💡 Tip 1: Cuenta sílabas con palmas</strong><br>
-                beau-ti-ful = 3 👏👏👏 → more/most<br>
-                tall = 1 👏 → -er/-est
+            <p style="text-align: center; font-size: 0.8rem; color: #c2185b; margin: 10px 0;">⬇️ Adjetivos CORTOS → -ER</p>
+            <div class="word-grid">
+                <div class="word-tag short">tall → taller</div>
+                <div class="word-tag short">old → older</div>
+                <div class="word-tag short">new → newer</div>
+                <div class="word-tag short">big → bigger</div>
+                <div class="word-tag short">small → smaller</div>
+                <div class="word-tag short">fast → faster</div>
             </div>
 
-            <div class="tip-box">
-                <strong>💡 Tip 2: NUNCA combines</strong><br>
-                ❌ more taller / the most tallest<br>
-                ✅ taller / the tallest
+            <p style="text-align: center; font-size: 0.8rem; color: #1565c0; margin: 10px 0;">⬇️ Adjetivos LARGOS → MORE</p>
+            <div class="word-grid">
+                <div class="word-tag long">more beautiful</div>
+                <div class="word-tag long">more expensive</div>
+                <div class="word-tag long">more important</div>
             </div>
 
-            <div class="tip-box">
-                <strong>💡 Tip 3: Memoriza los irregulares</strong><br>
-                good → better → the best<br>
-                bad → worse → the worst<br>
-                far → farther → the farthest
+            <p style="text-align: center; font-size: 0.8rem; color: #e65100; margin: 10px 0;">⬇️ IRREGULARES → ¡Memoriza!</p>
+            <div class="word-grid">
+                <div class="word-tag irreg">good → better</div>
+                <div class="word-tag irreg">bad → worse</div>
+                <div class="word-tag irreg">far → farther</div>
             </div>
 
-            <div class="tip-box">
-                <strong>💡 Tip 4: Preposiciones después del superlativo</strong><br>
-                • IN + lugares: the tallest IN the class<br>
-                • OF + grupos: the best OF all
+            <div class="alert-box">
+                <div class="title">⚠️ Reglas de ortografía</div>
+                • <strong>CVC:</strong> big → bigg<strong>er</strong> (duplica consonante)<br>
+                • <strong>-Y:</strong> happy → happ<strong>ier</strong> (y → i)
             </div>
-
-            <table class="mini-table">
-                <tr>
-                    <th>Base</th>
-                    <th>Comparative</th>
-                    <th>Superlative</th>
-                </tr>
-                <tr>
-                    <td>good</td>
-                    <td>better</td>
-                    <td>the best</td>
-                </tr>
-                <tr>
-                    <td>bad</td>
-                    <td>worse</td>
-                    <td>the worst</td>
-                </tr>
-                <tr>
-                    <td>far</td>
-                    <td>farther</td>
-                    <td>the farthest</td>
-                </tr>
-                <tr>
-                    <td>little</td>
-                    <td>less</td>
-                    <td>the least</td>
-                </tr>
-                <tr>
-                    <td>much/many</td>
-                    <td>more</td>
-                    <td>the most</td>
-                </tr>
-            </table>
 
             <div class="exercise-section">
                 <h3>✏️ Ejercicios</h3>
 
                 <div class="exercise" id="ex4-1">
-                    <div class="exercise-q">1. ¿Cuál es correcta?</div>
+                    <div class="exercise-q">1. "Hot" → comparativo (ortografía):</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex4-1','a','b')">a) more better</button>
-                        <button class="opt-btn" onclick="check('ex4-1','b','b')">b) better</button>
+                        <button class="opt-btn" onclick="check('ex4-1','a','b')">a) hoter</button>
+                        <button class="opt-btn" onclick="check('ex4-1','b','b')">b) hotter</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex4-1">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "Better" ya es comparativo - no necesita "more".</div>
-                            <div class="why-wrong">✘ "More better" es error común - nunca combinar.</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex4-1">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ La correcta es "better" solo.</div>
-                            <div class="why-wrong">✘ NUNCA combinar more + -er o most + -est.</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-1"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ Consonante final se duplica: hot → hotter.</div><div class="why-wrong">✗ "Hoter" tiene ortografía incorrecta.</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-1"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ CVC (consonante-vocal-consonante) = duplica: hotter.</div><div class="why-wrong">✗ La T se duplica antes de -er.</div></div></div>
                 </div>
 
                 <div class="exercise" id="ex4-2">
-                    <div class="exercise-q">2. "The tallest ___ the school"</div>
+                    <div class="exercise-q">2. "Easy" → comparativo:</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex4-2','a','a')">a) in</button>
-                        <button class="opt-btn" onclick="check('ex4-2','b','a')">b) than</button>
+                        <button class="opt-btn" onclick="check('ex4-2','a','a')">a) easier</button>
+                        <button class="opt-btn" onclick="check('ex4-2','b','a')">b) easyer</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex4-2">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ Superlativos + IN con lugares: in the school, in the world.</div>
-                            <div class="why-wrong">✘ "Than" es para comparativos: taller THAN.</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex4-2">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ La correcta es "in" - superlativos usan in/of.</div>
-                            <div class="why-wrong">✘ "Than" solo va con comparativos.</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-2"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ -Y cambia a -I: easy → easier.</div><div class="why-wrong">✗ "Easyer" tiene ortografía incorrecta.</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-2"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Regla: -Y → -IER (easy → easier).</div><div class="why-wrong">✗ La Y siempre cambia a I antes de -er.</div></div></div>
                 </div>
 
                 <div class="exercise" id="ex4-3">
-                    <div class="exercise-q">3. "The best ___ all my friends"</div>
+                    <div class="exercise-q">3. ¿Cuántas sílabas tiene "important"?</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex4-3','a','a')">a) of</button>
-                        <button class="opt-btn" onclick="check('ex4-3','b','a')">b) than</button>
+                        <button class="opt-btn" onclick="check('ex4-3','a','b')">a) 2</button>
+                        <button class="opt-btn" onclick="check('ex4-3','b','b')">b) 3</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex4-3">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ Superlativos + OF con grupos: of all, of my friends.</div>
-                            <div class="why-wrong">✘ "Than" es para comparativos, no superlativos.</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex4-3">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ La correcta es "of" - of all, of the group.</div>
-                            <div class="why-wrong">✘ "Than" nunca va después de superlativos.</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-3"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ Im-POR-tant = 3 sílabas → usa "more".</div><div class="why-wrong">✗ 2 sílabas sería como "hap-py".</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-3"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Cuenta: im-por-tant = 3 palmadas.</div><div class="why-wrong">✗ Por eso usa "more important", no "importanter".</div></div></div>
                 </div>
 
                 <div class="exercise" id="ex4-4">
-                    <div class="exercise-q">4. "Far" - superlativo:</div>
+                    <div class="exercise-q">4. "Good → ___" (comparativo irregular)</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex4-4','a','b')">a) the farest</button>
-                        <button class="opt-btn" onclick="check('ex4-4','b','b')">b) the farthest</button>
+                        <button class="opt-btn" onclick="check('ex4-4','a','a')">a) better</button>
+                        <button class="opt-btn" onclick="check('ex4-4','b','a')">b) gooder</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex4-4">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "Far" es irregular: far → farther → the farthest.</div>
-                            <div class="why-wrong">✘ "Farest" no existe - far es irregular.</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex4-4">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ La correcta es "the farthest" - forma irregular.</div>
-                            <div class="why-wrong">✘ Memoriza: far → farther → the farthest.</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-4"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ Good es irregular: better.</div><div class="why-wrong">✗ "Gooder" NO existe en inglés.</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-4"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Memoriza: good → better (irregular).</div><div class="why-wrong">✗ No puedes añadir -er a "good".</div></div></div>
                 </div>
 
                 <div class="exercise" id="ex4-5">
-                    <div class="exercise-q">5. "Interesting" tiene:</div>
+                    <div class="exercise-q">5. "Bad → ___" (comparativo irregular)</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex4-5','a','b')">a) 2 sílabas → -er/-est</button>
-                        <button class="opt-btn" onclick="check('ex4-5','b','b')">b) 4 sílabas → more/most</button>
+                        <button class="opt-btn" onclick="check('ex4-5','a','b')">a) badder</button>
+                        <button class="opt-btn" onclick="check('ex4-5','b','b')">b) worse</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex4-5">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ In-ter-est-ing = 4 sílabas → more interesting / the most interesting.</div>
-                            <div class="why-wrong">✘ Nunca usaría -er/-est con palabras tan largas.</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex4-5">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "Interesting" = 4 sílabas → more/most.</div>
-                            <div class="why-wrong">✘ Cuenta con palmas: in-ter-est-ing = 4 👏👏👏👏.</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-5"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ Bad es irregular: worse.</div><div class="why-wrong">✗ "Badder" NO existe en inglés estándar.</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-5"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Memoriza: bad → worse (irregular).</div><div class="why-wrong">✗ "Badder" es incorrecto.</div></div></div>
                 </div>
 
-                <div class="score-box">
-                    <div class="num" id="score4">0/5</div>
-                    <div class="label">Paso 4</div>
-                </div>
+                <div class="score-box"><div class="num" id="score4">0/5</div><div class="label">Paso 4</div></div>
             </div>
         </div>
 
-        <!-- STEP 5 -->
+        <!-- STEP 5: Práctica Final -->
         <div class="step-card" id="step5">
             <div class="step-header">
                 <span class="step-icon">✨</span>
@@ -1392,41 +616,33 @@
 
             <div class="rule-box">
                 <div class="formula">
-                    ⚖️ She is tall<strong>er than</strong> me<br>
-                    🏆 She is <strong>the tallest</strong> in the class
-                </div>
-            </div>
-
-            <div class="degrees-flow">
-                <div class="degree-box base">
-                    <div class="word">good</div>
-                    <div class="type">BASE</div>
-                </div>
-                <span class="arrow">→</span>
-                <div class="degree-box comp">
-                    <div class="word">better</div>
-                    <div class="type">COMPARATIVE</div>
-                </div>
-                <span class="arrow">→</span>
-                <div class="degree-box super">
-                    <div class="word">the best</div>
-                    <div class="type">SUPERLATIVE</div>
+                    📊 FÓRMULA COMPARATIVO:<br>
+                    Corto: A is ADJ-ER than B<br>
+                    Largo: A is MORE ADJ than B
                 </div>
             </div>
 
             <div class="quick-example right">
                 <span class="emoji">🏠</span>
                 <div class="text">
-                    <div class="en">This house is <strong>bigger than</strong> that one.</div>
-                    <div class="es">Esta casa es más grande que esa.</div>
+                    <div class="en">My house is <strong>bigger than</strong> your house.</div>
+                    <div class="es">Mi casa es más grande que tu casa.</div>
                 </div>
             </div>
 
             <div class="quick-example right">
-                <span class="emoji">🏆</span>
+                <span class="emoji">💰</span>
                 <div class="text">
-                    <div class="en">This is <strong>the most expensive</strong> house in the city.</div>
-                    <div class="es">Esta es la casa más cara de la ciudad.</div>
+                    <div class="en">Gold is <strong>more expensive than</strong> silver.</div>
+                    <div class="es">El oro es más caro que la plata.</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">🍕</span>
+                <div class="text">
+                    <div class="en">This pizza is <strong>better than</strong> that one.</div>
+                    <div class="es">Esta pizza es mejor que esa.</div>
                 </div>
             </div>
 
@@ -1434,136 +650,71 @@
                 <h3>✏️ Práctica Final</h3>
 
                 <div class="exercise" id="ex5-1">
-                    <div class="exercise-q">1. "My room is _____ than yours." (small)</div>
+                    <div class="exercise-q">1. My brother is ___ than me. (tall)</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex5-1','a','a')">a) smaller</button>
-                        <button class="opt-btn" onclick="check('ex5-1','b','a')">b) more small</button>
+                        <button class="opt-btn" onclick="check('ex5-1','a','a')">a) taller</button>
+                        <button class="opt-btn" onclick="check('ex5-1','b','a')">b) more tall</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex5-1">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "Small" = 1 sílaba → smaller than.</div>
-                            <div class="why-wrong">✘ "More small" es incorrecto para adjetivos cortos.</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex5-1">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ La correcta es "smaller" - adjetivo de 1 sílaba.</div>
-                            <div class="why-wrong">✘ Solo usamos "more" con adjetivos de 2+ sílabas.</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-1"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ Tall = 1 sílaba → taller than.</div><div class="why-wrong">✗ "More tall" es incorrecto para adjetivos cortos.</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-1"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Adjetivos cortos: tall → taller.</div><div class="why-wrong">✗ No uses MORE con adjetivos de 1 sílaba.</div></div></div>
                 </div>
 
                 <div class="exercise" id="ex5-2">
-                    <div class="exercise-q">2. "She is _____ student in the class." (intelligent)</div>
+                    <div class="exercise-q">2. English is ___ than math for me. (easy)</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex5-2','a','b')">a) the intelligentest</button>
-                        <button class="opt-btn" onclick="check('ex5-2','b','b')">b) the most intelligent</button>
+                        <button class="opt-btn" onclick="check('ex5-2','a','a')">a) easier</button>
+                        <button class="opt-btn" onclick="check('ex5-2','b','a')">b) more easy</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex5-2">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "Intelligent" = 4 sílabas → the most intelligent.</div>
-                            <div class="why-wrong">✘ "-est" nunca se usa con palabras largas.</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex5-2">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ La correcta es "the most intelligent".</div>
-                            <div class="why-wrong">✘ In-tel-li-gent = 4 sílabas → usa most, no -est.</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-2"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ -Y → -IER: easy → easier.</div><div class="why-wrong">✗ "More easy" no es la forma estándar.</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-2"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Adjetivos en -Y usan -ier.</div><div class="why-wrong">✗ La forma correcta es "easier".</div></div></div>
                 </div>
 
                 <div class="exercise" id="ex5-3">
-                    <div class="exercise-q">3. "This book is _____ than that one." (good)</div>
+                    <div class="exercise-q">3. That car is ___ than this one. (expensive)</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex5-3','a','a')">a) better</button>
-                        <button class="opt-btn" onclick="check('ex5-3','b','a')">b) gooder</button>
+                        <button class="opt-btn" onclick="check('ex5-3','a','b')">a) expensiver</button>
+                        <button class="opt-btn" onclick="check('ex5-3','b','b')">b) more expensive</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex5-3">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "Good" es irregular → better (no gooder).</div>
-                            <div class="why-wrong">✘ "Gooder" no existe - good siempre usa "better".</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex5-3">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ La correcta es "better" - forma irregular.</div>
-                            <div class="why-wrong">✘ Good → better → the best (memoriza).</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-3"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ Ex-pen-sive = 3 sílabas → more expensive.</div><div class="why-wrong">✗ "Expensiver" NO existe.</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-3"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Adjetivos largos usan MORE + adj.</div><div class="why-wrong">✗ Nunca -er con palabras largas.</div></div></div>
                 </div>
 
                 <div class="exercise" id="ex5-4">
-                    <div class="exercise-q">4. "This is _____ day of my life!" (happy)</div>
+                    <div class="exercise-q">4. This movie is ___ than the book. (good)</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex5-4','a','a')">a) the happiest</button>
-                        <button class="opt-btn" onclick="check('ex5-4','b','a')">b) the most happy</button>
+                        <button class="opt-btn" onclick="check('ex5-4','a','a')">a) better</button>
+                        <button class="opt-btn" onclick="check('ex5-4','b','a')">b) gooder</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex5-4">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ Adjetivos en -y → -iest: happy → the happiest.</div>
-                            <div class="why-wrong">✘ "Most happy" es incorrecto para -y adjectives.</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex5-4">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ La correcta es "the happiest" - y cambia a -iest.</div>
-                            <div class="why-wrong">✘ Adjetivos en -y siempre usan -ier/-iest.</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-4"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ Good → better (irregular).</div><div class="why-wrong">✗ "Gooder" NO existe.</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-4"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Good es irregular: better.</div><div class="why-wrong">✗ Memoriza: good → better.</div></div></div>
                 </div>
 
                 <div class="exercise" id="ex5-5">
-                    <div class="exercise-q">5. "Mount Everest is _____ mountain ___ the world."</div>
+                    <div class="exercise-q">5. Today's weather is ___ than yesterday. (bad)</div>
                     <div class="opts">
-                        <button class="opt-btn" onclick="check('ex5-5','a','a')">a) the highest / in</button>
-                        <button class="opt-btn" onclick="check('ex5-5','b','a')">b) higher / than</button>
+                        <button class="opt-btn" onclick="check('ex5-5','a','b')">a) badder</button>
+                        <button class="opt-btn" onclick="check('ex5-5','b','b')">b) worse</button>
                     </div>
-                    <div class="feedback correct-fb" id="fb-ex5-5">
-                        <div class="result">✅ ¡Correcto!</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ Superlativo + IN con lugares: the highest IN the world.</div>
-                            <div class="why-wrong">✘ "Higher than" sería comparativo entre 2 montañas.</div>
-                        </div>
-                    </div>
-                    <div class="feedback incorrect-fb" id="fbi-ex5-5">
-                        <div class="result">❌ Incorrecto</div>
-                        <div class="explanation">
-                            <div class="why-correct">✔ "The highest in the world" - superlativo + in.</div>
-                            <div class="why-wrong">✘ Hablamos del máximo, no de comparar 2 montañas.</div>
-                        </div>
-                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-5"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✔ Bad → worse (irregular).</div><div class="why-wrong">✗ "Badder" NO existe.</div></div></div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-5"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✔ Bad es irregular: worse.</div><div class="why-wrong">✗ Memoriza: bad → worse.</div></div></div>
                 </div>
 
-                <div class="score-box">
-                    <div class="num" id="score5">0/5</div>
-                    <div class="label">Paso 5</div>
-                </div>
+                <div class="score-box"><div class="num" id="score5">0/5</div><div class="label">Paso 5</div></div>
             </div>
 
-            <!-- Summary -->
-            <div style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, #ffe8ec 0%, #ffdde1 100%); border-radius: 12px;">
-                <h3 style="color: #8b3a4a; font-size: 0.95rem; margin-bottom: 10px;">🎓 Resumen Final</h3>
+            <div style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%); border-radius: 12px;">
+                <h3 style="color: #c2185b; font-size: 0.95rem; margin-bottom: 10px;">🎓 Resumen: Comparativos</h3>
                 <ul class="summary-list">
-                    <li><strong>1 sílaba:</strong> tall → taller → the tallest</li>
-                    <li><strong>2+ sílabas:</strong> beautiful → more beautiful → the most beautiful</li>
-                    <li><strong>-y final:</strong> happy → happier → the happiest</li>
-                    <li><strong>Irregulares:</strong> good/better/best, bad/worse/worst</li>
-                    <li><strong>Comparativo:</strong> + than | <strong>Superlativo:</strong> + in/of</li>
-                    <li><strong>NUNCA:</strong> more + -er / most + -est</li>
+                    <li><strong>Cortos (1 síl):</strong> adj + ER + than (taller than)</li>
+                    <li><strong>Largos (2+ síl):</strong> MORE + adj + than (more beautiful than)</li>
+                    <li><strong>-Y:</strong> cambia a -IER (happier, easier)</li>
+                    <li><strong>CVC:</strong> duplica consonante (bigger, hotter)</li>
+                    <li><strong>Irregulares:</strong> good→better, bad→worse</li>
+                    <li><strong>NUNCA:</strong> more + -er juntos</li>
                 </ul>
             </div>
         </div>
 
-        <!-- Bottom Nav -->
         <div class="bottom-nav">
             <button class="nav-btn prev" id="prevBtn" onclick="prevStep()" disabled>← Anterior</button>
             <span class="step-ind"><span id="currentStep">1</span>/5</span>
@@ -1579,18 +730,12 @@
 
         function goToStep(step) {
             if (step < 1 || step > totalSteps) return;
-            
             document.getElementById(`step${currentStep}`).classList.remove('active');
             document.querySelectorAll('.step-dot')[currentStep-1].classList.remove('active');
-            
-            if (step > currentStep) {
-                document.querySelectorAll('.step-dot')[currentStep-1].classList.add('completed');
-            }
-            
+            if (step > currentStep) document.querySelectorAll('.step-dot')[currentStep-1].classList.add('completed');
             currentStep = step;
             document.getElementById(`step${currentStep}`).classList.add('active');
             document.querySelectorAll('.step-dot')[currentStep-1].classList.add('active');
-            
             updateNav();
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
@@ -1608,21 +753,15 @@
         function check(id, sel, correct) {
             if (answered[id]) return;
             answered[id] = true;
-            
             const ex = document.getElementById(id);
             const btns = ex.querySelectorAll('.opt-btn');
             const fbCorrect = document.getElementById(`fb-${id}`);
             const fbIncorrect = document.getElementById(`fbi-${id}`);
-            
             btns.forEach(b => b.disabled = true);
-            
             const stepNum = parseInt(id.split('-')[0].replace('ex',''));
-            
             if (sel === correct) {
                 ex.classList.add('correct');
-                btns.forEach(b => { 
-                    if (b.textContent.startsWith(sel+')')) b.classList.add('sel-correct'); 
-                });
+                btns.forEach(b => { if (b.textContent.startsWith(sel+')')) b.classList.add('sel-correct'); });
                 fbCorrect.classList.add('show');
                 scores[stepNum]++;
             } else {
@@ -1633,7 +772,6 @@
                 });
                 fbIncorrect.classList.add('show');
             }
-            
             document.getElementById(`score${stepNum}`).textContent = `${scores[stepNum]}/5`;
         }
 
