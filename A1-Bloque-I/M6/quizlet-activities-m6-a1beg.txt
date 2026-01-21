@@ -1,0 +1,73 @@
+# ============================================
+# QUIZLET ACTIVITIES - Module 6 - A1-Beginner
+# Topics: Have to (obligation) & Should (advice)
+# Total: 40 exercises (20 Traducir + 20 Ordenar)
+# ============================================
+
+# --------------------------------------------
+# PARTE 1: TRADUCIR (20 exercises)
+# Inglés00Español
+# Complejidad progresiva: 1-5 BAJA, 6-10 MEDIA-BAJA, 11-15 MEDIA-ALTA, 16-20 ALTA
+# --------------------------------------------
+
+# Ejercicios 1-5 (BAJA: 5-7 palabras)
+I have to study.00Tengo que estudiar.
+She has to work.00Ella tiene que trabajar.
+You should rest.00Deberías descansar.
+He has to go.00Él tiene que ir.
+We should think.00Deberíamos pensar.
+
+# Ejercicios 6-10 (MEDIA-BAJA: 6-8 palabras)
+They have to bring their books.00Ellos tienen que traer sus libros.
+She should see a doctor.00Ella debería ver a un doctor.
+I don't have to work today.00No tengo que trabajar hoy.
+You shouldn't eat too much.00No deberías comer demasiado.
+He has to move to a different city.00Él tiene que mudarse a una ciudad diferente.
+
+# Ejercicios 11-15 (MEDIA-ALTA: 7-9 palabras)
+We should accept their help after class.00Deberíamos aceptar su ayuda después de clase.
+Does she have to provide the forms?00¿Tiene ella que proporcionar los formularios?
+They don't have to confirm it this year.00Ellos no tienen que confirmarlo este año.
+Should I bring something different tomorrow?00¿Debería traer algo diferente mañana?
+He has to think about his experience.00Él tiene que pensar en su experiencia.
+
+# Ejercicios 16-20 (ALTA: 8-10 palabras)
+You should usually see where they happen first.00Usualmente deberías ver dónde ocurren primero.
+She doesn't have to compare their work while studying.00Ella no tiene que comparar su trabajo mientras estudia.
+Do we have to obtain permission before we move?00¿Tenemos que obtener permiso antes de mudarnos?
+They should think about what happens after this year.00Ellos deberían pensar en lo que pasa después de este año.
+I have to accept that things become different sometimes.00Tengo que aceptar que las cosas se vuelven diferentes a veces.
+
+# --------------------------------------------
+# PARTE 2: ORDENAR (20 exercises)
+# palabras/desordenadas/aleatoriamente00Oración correcta completa
+# Complejidad progresiva con agrupación según nivel
+# --------------------------------------------
+
+# Ejercicios 1-5 (BAJA: 3-4 bloques)
+study/to/have/I00I have to study.
+has to/She/work00She has to work.
+should/rest/You00You should rest.
+go/to/has/He00He has to go.
+think/should/We00We should think.
+
+# Ejercicios 6-10 (MEDIA-BAJA: 4-5 bloques)
+their books/They/bring/have to00They have to bring their books.
+should/She/a doctor/see00She should see a doctor.
+today/don't have to/work/I00I don't have to work today.
+too much/eat/shouldn't/You00You shouldn't eat too much.
+has to/He/move/to a different city00He has to move to a different city.
+
+# Ejercicios 11-15 (MEDIA-ALTA: 5-6 bloques)
+accept/should/We/their help/after class00We should accept their help after class.
+have to/Does she/provide/the forms00Does she have to provide the forms?
+this year/don't have to/confirm it/They00They don't have to confirm it this year.
+bring/Should I/something different/tomorrow00Should I bring something different tomorrow?
+think/has to/He/about/his experience00He has to think about his experience.
+
+# Ejercicios 16-20 (ALTA: 6-7 bloques con agrupación)
+should usually/You/see/where/they happen/first00You should usually see where they happen first.
+doesn't have to/She/compare/their work/while studying00She doesn't have to compare their work while studying.
+have to/Do we/obtain permission/before/we move00Do we have to obtain permission before we move?
+should think/They/about/what happens/after this year00They should think about what happens after this year.
+have to/I/accept/that things/become different/sometimes00I have to accept that things become different sometimes.

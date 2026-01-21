@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future: Will | A1-Beg M6 | JUCUM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffe8ec 0%, #ffdde1 100%);
+            min-height: 100vh;
+            padding: 15px;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #ee9ca7 0%, #d4818c 100%);
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(238, 156, 167, 0.4);
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 3px;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            color: white;
+        }
+
+        /* Progress Nav */
+        .progress-nav {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+
+        .step-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #ee9ca7;
+            background: white;
+            color: #ee9ca7;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+
+        .step-dot.active {
+            background: #ee9ca7;
+            color: white;
+        }
+
+        .step-dot.completed {
+            background: #d4818c;
+            color: white;
+            border-color: #d4818c;
+        }
+
+        /* Step Card */
+        .step-card {
+            display: none;
+            background: white;
+            border-radius: 16px;
+            padding: 20px 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-card.active {
+            display: block;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ffe8ec;
+        }
+
+        .step-icon {
+            font-size: 1.8rem;
+        }
+
+        .step-title {
+            color: #d4818c;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* BLOQUES DE COLORES */
+        .block {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin: 2px;
+        }
+
+        .block.subject { background: #e3f2fd; color: #1565c0; }
+        .block.will { background: #f3e5f5; color: #7b1fa2; }
+        .block.wont { background: #ffebee; color: #c62828; }
+        .block.verb { background: #fff9c4; color: #f57f17; }
+        .block.not { background: #ffcdd2; color: #c62828; }
+
+        /* Leyenda Visual WILL */
+        .will-legend {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .will-card {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border: 2px solid #ab47bc;
+            border-radius: 12px;
+            padding: 12px 16px;
+            text-align: center;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .will-card .icon { font-size: 1.5rem; margin-bottom: 5px; }
+        .will-card .label { font-weight: 700; color: #7b1fa2; font-size: 0.85rem; }
+        .will-card .desc { font-size: 0.75rem; color: #666; margin-top: 3px; }
+
+        /* Visual Compare ESP ↔ ENG */
+        .visual-compare {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 8px;
+            align-items: center;
+            margin: 12px 0;
+            padding: 12px;
+            background: #fafafa;
+            border-radius: 12px;
+        }
+
+        .compare-esp, .compare-eng {
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .compare-esp {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+            border: 2px solid #fbc02d;
+        }
+
+        .compare-eng {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border: 2px solid #42a5f5;
+        }
+
+        .compare-esp .flag, .compare-eng .flag { font-size: 1.2rem; }
+        .compare-esp .text, .compare-eng .text { 
+            font-weight: 600; 
+            font-size: 0.9rem; 
+            margin-top: 5px;
+        }
+        .compare-esp .text { color: #f57f17; }
+        .compare-eng .text { color: #1565c0; }
+
+        .compare-arrow {
+            font-size: 1.5rem;
+            color: #999;
+        }
+
+        /* Memory Cards */
+        .memory-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .memory-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .memory-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .memory-card.decision { border-color: #ab47bc; background: #faf4fc; }
+        .memory-card.promise { border-color: #42a5f5; background: #f5faff; }
+        .memory-card.offer { border-color: #66bb6a; background: #f5fff6; }
+        .memory-card.prediction { border-color: #ffa726; background: #fffaf5; }
+
+        .memory-card .icon { font-size: 1.8rem; margin-bottom: 5px; }
+        .memory-card .title { font-weight: 700; font-size: 0.8rem; margin-bottom: 3px; }
+        .memory-card.decision .title { color: #7b1fa2; }
+        .memory-card.promise .title { color: #1976d2; }
+        .memory-card.offer .title { color: #388e3c; }
+        .memory-card.prediction .title { color: #f57c00; }
+        .memory-card .example { font-size: 0.75rem; color: #666; }
+
+        /* Sentence Visual (oraciones desglosadas) */
+        .sentence-visual {
+            background: #f5f5f5;
+            border-radius: 12px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+
+        .sentence-blocks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .sentence-trans {
+            font-size: 0.8rem;
+            color: #666;
+            text-align: center;
+            border-left: 3px solid #ee9ca7;
+            padding-left: 10px;
+            margin-top: 8px;
+        }
+
+        /* Formula Visual */
+        .formula-visual {
+            background: linear-gradient(135deg, #f5f5f5 0%, #eeeeee 100%);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 12px 0;
+            text-align: center;
+        }
+
+        .formula-visual.affirmative { border: 2px solid #66bb6a; }
+        .formula-visual.negative { border: 2px solid #ef5350; }
+        .formula-visual.question { border: 2px solid #42a5f5; }
+
+        .formula-visual .title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            padding: 4px 12px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+
+        .formula-visual.affirmative .title { background: #e8f5e9; color: #2e7d32; }
+        .formula-visual.negative .title { background: #ffebee; color: #c62828; }
+        .formula-visual.question .title { background: #e3f2fd; color: #1565c0; }
+
+        .formula-blocks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .formula-plus {
+            color: #999;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Contraction Pills */
+        .contr-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 12px 0;
+        }
+
+        .contr-pill {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #f5f5f5;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .contr-pill .full { color: #666; }
+        .contr-pill .arrow { color: #999; }
+        .contr-pill .short { color: #d4818c; font-weight: 700; }
+
+        /* Error vs Correct */
+        .error-correct {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .error-box, .correct-box {
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .error-box {
+            background: #ffebee;
+            border: 2px solid #ef5350;
+        }
+
+        .correct-box {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+        }
+
+        .error-box .icon, .correct-box .icon { font-size: 1.3rem; margin-bottom: 5px; }
+        .error-box .text { color: #c62828; text-decoration: line-through; font-size: 0.85rem; }
+        .correct-box .text { color: #2e7d32; font-weight: 600; font-size: 0.85rem; }
+
+        /* Alert Box */
+        .alert-box {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border: 2px solid #ef5350;
+            border-radius: 12px;
+            padding: 12px;
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-box .icon { font-size: 1.5rem; }
+        .alert-box .content { flex: 1; }
+        .alert-box .title { color: #c62828; font-weight: 700; font-size: 0.85rem; }
+        .alert-box .desc { color: #c62828; font-size: 0.8rem; }
+
+        /* Tip Chip */
+        .tip-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 5px 3px;
+            border: 1px solid #fbc02d;
+        }
+
+        .tip-chip .icon { font-size: 1rem; }
+        .tip-chip .text { color: #f57f17; }
+
+        /* Quick Example Compact */
+        .quick-ex {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 4px solid #ee9ca7;
+        }
+
+        .quick-ex .emoji { font-size: 1.3rem; }
+        .quick-ex .en { color: #d4818c; font-weight: 600; font-size: 0.9rem; }
+        .quick-ex .es { color: #888; font-size: 0.8rem; }
+
+        /* Exercise Section */
+        .exercise-section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px dashed #ffe8ec;
+        }
+
+        .exercise-section h3 {
+            color: #d4818c;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .exercise {
+            background: #fafafa;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .exercise.correct { border-color: #4caf50; background: #e8f5e9; }
+        .exercise.incorrect { border-color: #f44336; background: #ffebee; }
+
+        .exercise-q {
+            font-size: 0.9rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .exercise-q strong { color: #d4818c; }
+
+        .opts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        .opt-btn {
+            padding: 10px 8px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            color: #555;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .opt-btn:hover:not(:disabled) {
+            border-color: #ee9ca7;
+            background: #ffe8ec;
+        }
+
+        .opt-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+        .opt-btn.sel-correct { background: #4caf50; color: white; border-color: #4caf50; }
+        .opt-btn.sel-wrong { background: #f44336; color: white; border-color: #f44336; }
+        .opt-btn.show-correct { background: #4caf50; color: white; border-color: #4caf50; }
+
+        /* Feedback Compacto */
+        .feedback {
+            margin-top: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            display: none;
+        }
+
+        .feedback.show { display: block; }
+        .feedback.correct-fb { background: #e8f5e9; border-left: 3px solid #4caf50; }
+        .feedback.incorrect-fb { background: #ffebee; border-left: 3px solid #f44336; }
+
+        .feedback .result { font-weight: 700; margin-bottom: 4px; }
+        .feedback.correct-fb .result { color: #2e7d32; }
+        .feedback.incorrect-fb .result { color: #c62828; }
+        .feedback .explanation { color: #555; line-height: 1.3; }
+
+        /* Score */
+        .score-box {
+            text-align: center;
+            padding: 12px;
+            background: linear-gradient(135deg, #ffe8ec 0%, #ffdde1 100%);
+            border-radius: 10px;
+            margin-top: 12px;
+        }
+
+        .score-box .num { font-size: 1.5rem; font-weight: bold; color: #d4818c; }
+        .score-box .label { font-size: 0.8rem; color: #ee9ca7; }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 12px 15px;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .nav-btn.prev { background: #e0e0e0; color: #666; }
+        .nav-btn.next { background: linear-gradient(135deg, #ee9ca7 0%, #d4818c 100%); color: white; }
+        .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .step-ind { font-size: 0.8rem; color: #666; }
+
+        /* Summary */
+        .summary-list { list-style: none; }
+        .summary-list li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 0.85rem;
+            color: #555;
+        }
+        .summary-list li:before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            color: #ee9ca7;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>⚡ Future: Will (Decisions)</h1>
+            <div class="badge">🍑 A1-Beginner • M6 • Tema 2</div>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-nav">
+            <div class="step-dot active" onclick="goToStep(1)">1</div>
+            <div class="step-dot" onclick="goToStep(2)">2</div>
+            <div class="step-dot" onclick="goToStep(3)">3</div>
+            <div class="step-dot" onclick="goToStep(4)">4</div>
+            <div class="step-dot" onclick="goToStep(5)">5</div>
+        </div>
+
+        <!-- STEP 1: Repaso en Español -->
+        <div class="step-card active" id="step1">
+            <div class="step-header">
+                <span class="step-icon">🇪🇸</span>
+                <span class="step-title">Paso 1: Repaso en Español</span>
+            </div>
+
+            <!-- Tarjetas de Memoria: Usos -->
+            <div class="memory-cards">
+                <div class="memory-card decision">
+                    <div class="icon">⚡</div>
+                    <div class="title">DECISIÓN INSTANTÁNEA</div>
+                    <div class="example">"¡Ya sé! Te ayudaré"</div>
+                </div>
+                <div class="memory-card promise">
+                    <div class="icon">🤝</div>
+                    <div class="title">PROMESAS</div>
+                    <div class="example">"Te lo prometo"</div>
+                </div>
+            </div>
+
+            <!-- Comparación Visual -->
+            <div class="visual-compare">
+                <div class="compare-esp">
+                    <div class="flag">🇪🇸</div>
+                    <div class="text">Ayudaré</div>
+                </div>
+                <div class="compare-arrow">→</div>
+                <div class="compare-eng">
+                    <div class="flag">🇬🇧</div>
+                    <div class="text">I will help</div>
+                </div>
+            </div>
+
+            <div class="tip-chip">
+                <span class="icon">💡</span>
+                <span class="text">"Voy a" = plan previo | "-ré" (haré) = decisión AHORA</span>
+            </div>
+
+            <!-- Exercises -->
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex1-1">
+                    <div class="exercise-q">1. "¡Yo contestaré el teléfono!" expresa:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-1','a','a')">a) Decisión instantánea</button>
+                        <button class="opt-btn" onclick="check('ex1-1','b','a')">b) Plan de hace días</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ Decisión tomada EN EL MOMENTO de escuchar el teléfono</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ Es decisión instantánea — un plan previo usaría "voy a contestar"</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-2">
+                    <div class="exercise-q">2. "Te prometo que <strong>haré</strong> mi tarea" es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-2','a','a')">a) Una promesa</button>
+                        <button class="opt-btn" onclick="check('ex1-2','b','a')">b) Una predicción</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ "Te prometo que..." indica claramente una PROMESA</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ "Te prometo" = promesa, una predicción sería "Creo que lloverá"</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-3">
+                    <div class="exercise-q">3. ¿Cuál es decisión espontánea?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-3','a','b')">a) Voy a ir al cine</button>
+                        <button class="opt-btn" onclick="check('ex1-3','b','b')">b) ¡Ya sé! Iré al cine</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ "¡Ya sé!" indica que la idea surge AHORA MISMO</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ "Voy a ir" es plan previo, "Iré" es decisión del momento</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-4">
+                    <div class="exercise-q">4. "No te preocupes, yo te <strong>ayudaré</strong>" es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-4','a','a')">a) Un ofrecimiento</button>
+                        <button class="opt-btn" onclick="check('ex1-4','b','a')">b) Una orden</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ "No te preocupes" + futuro = ofrecimiento voluntario</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ Una orden sería "¡Ayúdame!" — esto es un ofrecimiento</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-5">
+                    <div class="exercise-q">5. El futuro "-ré/-rá" expresa:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-5','a','b')">a) Acciones pasadas</button>
+                        <button class="opt-btn" onclick="check('ex1-5','b','b')">b) Decisiones y promesas</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ Haré, iré, diré = decisiones espontáneas, promesas, ofrecimientos</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ El pasado usa otras formas (hice, fui), no "-ré"</div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score1">0/5</div>
+                    <div class="label">Paso 1</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2: Similitudes -->
+        <div class="step-card" id="step2">
+            <div class="step-header">
+                <span class="step-icon">🤝</span>
+                <span class="step-title">Paso 2: Similitudes ESP ↔ ENG</span>
+            </div>
+
+            <!-- Comparación lado a lado -->
+            <div class="visual-compare">
+                <div class="compare-esp">
+                    <div class="flag">🇪🇸</div>
+                    <div class="text">Te ayudaré</div>
+                </div>
+                <div class="compare-arrow">↔</div>
+                <div class="compare-eng">
+                    <div class="flag">🇬🇧</div>
+                    <div class="text">I will help you</div>
+                </div>
+            </div>
+
+            <div class="visual-compare">
+                <div class="compare-esp">
+                    <div class="flag">🇪🇸</div>
+                    <div class="text">Lo haré</div>
+                </div>
+                <div class="compare-arrow">↔</div>
+                <div class="compare-eng">
+                    <div class="flag">🇬🇧</div>
+                    <div class="text">I will do it</div>
+                </div>
+            </div>
+
+            <!-- Memory Cards de funciones compartidas -->
+            <div class="memory-cards">
+                <div class="memory-card decision">
+                    <div class="icon">⚡</div>
+                    <div class="title">AMBOS</div>
+                    <div class="example">Decisiones del momento</div>
+                </div>
+                <div class="memory-card promise">
+                    <div class="icon">🤝</div>
+                    <div class="title">AMBOS</div>
+                    <div class="example">Promesas</div>
+                </div>
+            </div>
+
+            <div class="tip-chip">
+                <span class="icon">🎯</span>
+                <span class="text">En español "-ré/-rá" → en inglés "WILL"</span>
+            </div>
+
+            <!-- Exercises -->
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex2-1">
+                    <div class="exercise-q">1. "Te ayudaré" en inglés es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-1','a','a')">a) I will help you</button>
+                        <button class="opt-btn" onclick="check('ex2-1','b','a')">b) I going to help you</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ "Ayudaré" (futuro simple) = WILL help</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ Futuro español (-ré) = WILL en inglés, no "going to"</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-2">
+                    <div class="exercise-q">2. <strong>Ambos</strong> idiomas usan WILL / "-ré" para:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-2','a','a')">a) Promesas</button>
+                        <button class="opt-btn" onclick="check('ex2-2','b','a')">b) Acciones pasadas</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ "Te prometo que lo haré" = "I promise I will do it"</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ El pasado usa otras formas (hice, did)</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-3">
+                    <div class="exercise-q">3. "I will do it" significa:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-3','a','a')">a) Lo haré</button>
+                        <button class="opt-btn" onclick="check('ex2-3','b','a')">b) Lo hice</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ WILL + verb = futuro = haré, irá, dirá</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ "Lo hice" sería "I did it" (pasado)</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-4">
+                    <div class="exercise-q">4. WILL / "-ré" expresa en ambos idiomas:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-4','a','b')">a) Planes de hace tiempo</button>
+                        <button class="opt-btn" onclick="check('ex2-4','b','b')">b) Decisiones del momento</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ WILL = decisión espontánea, no planeada</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ Planes previos usan "going to / ir a"</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-5">
+                    <div class="exercise-q">5. "I will go" corresponde a:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-5','a','a')">a) Iré</button>
+                        <button class="opt-btn" onclick="check('ex2-5','b','a')">b) Voy a ir</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ WILL go = Iré (decisión espontánea)</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ "Voy a ir" = I'm going to go (plan previo)</div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score2">0/5</div>
+                    <div class="label">Paso 2</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3: Diferencias -->
+        <div class="step-card" id="step3">
+            <div class="step-header">
+                <span class="step-icon">⚠️</span>
+                <span class="step-title">Paso 3: ¡Cuidado! Diferencias</span>
+            </div>
+
+            <!-- Alerta Principal -->
+            <div class="alert-box">
+                <div class="icon">🚨</div>
+                <div class="content">
+                    <div class="title">WILL NUNCA CAMBIA</div>
+                    <div class="desc">Es igual para TODOS los sujetos</div>
+                </div>
+            </div>
+
+            <!-- Oraciones desglosadas -->
+            <div class="sentence-visual">
+                <div class="sentence-blocks">
+                    <span class="block subject">I</span>
+                    <span class="block will">will</span>
+                    <span class="block verb">help</span>
+                </div>
+                <div class="sentence-trans">Ayudaré</div>
+            </div>
+
+            <div class="sentence-visual">
+                <div class="sentence-blocks">
+                    <span class="block subject">She</span>
+                    <span class="block will">will</span>
+                    <span class="block verb">help</span>
+                </div>
+                <div class="sentence-trans">Ella ayudará (NO "wills")</div>
+            </div>
+
+            <div class="sentence-visual">
+                <div class="sentence-blocks">
+                    <span class="block subject">They</span>
+                    <span class="block will">will</span>
+                    <span class="block verb">help</span>
+                </div>
+                <div class="sentence-trans">Ellos ayudarán</div>
+            </div>
+
+            <!-- Error vs Correct -->
+            <div class="error-correct">
+                <div class="error-box">
+                    <div class="icon">❌</div>
+                    <div class="text">She wills help</div>
+                </div>
+                <div class="correct-box">
+                    <div class="icon">✅</div>
+                    <div class="text">She will help</div>
+                </div>
+            </div>
+
+            <!-- Contractions -->
+            <div class="contr-row">
+                <div class="contr-pill">
+                    <span class="full">I will</span>
+                    <span class="arrow">→</span>
+                    <span class="short">I'll</span>
+                </div>
+                <div class="contr-pill">
+                    <span class="full">He will</span>
+                    <span class="arrow">→</span>
+                    <span class="short">He'll</span>
+                </div>
+                <div class="contr-pill">
+                    <span class="full">They will</span>
+                    <span class="arrow">→</span>
+                    <span class="short">They'll</span>
+                </div>
+            </div>
+
+            <!-- Exercises -->
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex3-1">
+                    <div class="exercise-q">1. WILL cambia según el sujeto (I will, he wills):</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-1','a','b')">a) Verdadero</button>
+                        <button class="opt-btn" onclick="check('ex3-1','b','b')">b) Falso</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ WILL NUNCA cambia — siempre es WILL para todos</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ WILL es invariable: I will, he will, they will</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-2">
+                    <div class="exercise-q">2. "She ___ help" (ella ayudará)</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-2','a','a')">a) will</button>
+                        <button class="opt-btn" onclick="check('ex3-2','b','a')">b) wills</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ Siempre WILL, nunca cambia con he/she/it</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ She WILL help — "wills" no existe en inglés</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-3">
+                    <div class="exercise-q">3. Decisión espontánea: "The phone! I ___"</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-3','a','b')">a) am going to answer</button>
+                        <button class="opt-btn" onclick="check('ex3-3','b','b')">b) will answer</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ WILL = decisión instantánea (decido ahora)</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ Escucho el teléfono → decido ahora → WILL</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-4">
+                    <div class="exercise-q">4. La contracción de "I will" es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-4','a','a')">a) I'll</button>
+                        <button class="opt-btn" onclick="check('ex3-4','b','a')">b) Ill</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ I'll (con apóstrofo) = I will</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ "Ill" sin apóstrofo significa "enfermo"</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-5">
+                    <div class="exercise-q">5. Plan hecho ayer: "I ___ visit grandma tomorrow"</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-5','a','a')">a) am going to</button>
+                        <button class="opt-btn" onclick="check('ex3-5','b','a')">b) will</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ Plan decidido ANTES = going to</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ Plan previo = GOING TO, no WILL</div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score3">0/5</div>
+                    <div class="label">Paso 3</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4: Consejos Prácticos -->
+        <div class="step-card" id="step4">
+            <div class="step-header">
+                <span class="step-icon">💡</span>
+                <span class="step-title">Paso 4: Fórmulas</span>
+            </div>
+
+            <!-- Fórmulas Visuales -->
+            <div class="formula-visual affirmative">
+                <div class="title">✅ AFIRMATIVO</div>
+                <div class="formula-blocks">
+                    <span class="block subject">Subject</span>
+                    <span class="formula-plus">+</span>
+                    <span class="block will">WILL</span>
+                    <span class="formula-plus">+</span>
+                    <span class="block verb">VERB</span>
+                </div>
+            </div>
+
+            <div class="formula-visual negative">
+                <div class="title">❌ NEGATIVO</div>
+                <div class="formula-blocks">
+                    <span class="block subject">Subject</span>
+                    <span class="formula-plus">+</span>
+                    <span class="block wont">WON'T</span>
+                    <span class="formula-plus">+</span>
+                    <span class="block verb">VERB</span>
+                </div>
+            </div>
+
+            <div class="formula-visual question">
+                <div class="title">❓ PREGUNTA</div>
+                <div class="formula-blocks">
+                    <span class="block will">WILL</span>
+                    <span class="formula-plus">+</span>
+                    <span class="block subject">Subject</span>
+                    <span class="formula-plus">+</span>
+                    <span class="block verb">VERB</span>
+                    <span class="formula-plus">+ ?</span>
+                </div>
+            </div>
+
+            <!-- Contracción negativa -->
+            <div class="contr-row">
+                <div class="contr-pill">
+                    <span class="full">will not</span>
+                    <span class="arrow">→</span>
+                    <span class="short">won't</span>
+                </div>
+            </div>
+
+            <!-- Memory Cards de usos -->
+            <div class="memory-cards">
+                <div class="memory-card decision">
+                    <div class="icon">⚡</div>
+                    <div class="title">DECISIONES</div>
+                    <div class="example">I'll do it!</div>
+                </div>
+                <div class="memory-card promise">
+                    <div class="icon">🤝</div>
+                    <div class="title">PROMESAS</div>
+                    <div class="example">I promise I'll help</div>
+                </div>
+                <div class="memory-card offer">
+                    <div class="icon">🎁</div>
+                    <div class="title">OFRECIMIENTOS</div>
+                    <div class="example">I'll carry that</div>
+                </div>
+                <div class="memory-card prediction">
+                    <div class="icon">🔮</div>
+                    <div class="title">PREDICCIONES</div>
+                    <div class="example">It will rain</div>
+                </div>
+            </div>
+
+            <!-- Exercises -->
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex4-1">
+                    <div class="exercise-q">1. Negativo de "I will help" es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-1','a','a')">a) I won't help</button>
+                        <button class="opt-btn" onclick="check('ex4-1','b','a')">b) I willn't help</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ WON'T = will not (contracción correcta)</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ "Willn't" no existe — la forma es WON'T</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-2">
+                    <div class="exercise-q">2. Pregunta: "___ you <strong>do</strong> the homework?"</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-2','a','a')">a) Will</button>
+                        <button class="opt-btn" onclick="check('ex4-2','b','a')">b) Do will</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ Pregunta: WILL + subject + verb</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ WILL va primero en preguntas: Will you...?</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-3">
+                    <div class="exercise-q">3. "She will <strong>helps</strong>" es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-3','a','a')">a) Incorrecto</button>
+                        <button class="opt-btn" onclick="check('ex4-3','b','a')">b) Correcto</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ Después de WILL → forma base: help (no "helps")</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ El verbo después de WILL NUNCA lleva -s</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-4">
+                    <div class="exercise-q">4. Ofrecimiento: "I ___ carry your bags"</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-4','a','b')">a) am going to</button>
+                        <button class="opt-btn" onclick="check('ex4-4','b','b')">b) will</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ Ofrecimientos voluntarios usan WILL</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ Ofrecerte a ayudar = I'll (will)</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-5">
+                    <div class="exercise-q">5. "They ___ come" (negativo)</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-5','a','a')">a) won't</button>
+                        <button class="opt-btn" onclick="check('ex4-5','b','a')">b) will don't</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ Negativo: won't (will not)</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ "Will don't" no existe — usa WON'T</div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score4">0/5</div>
+                    <div class="label">Paso 4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 5: Práctica Final -->
+        <div class="step-card" id="step5">
+            <div class="step-header">
+                <span class="step-icon">✨</span>
+                <span class="step-title">Paso 5: Práctica Final</span>
+            </div>
+
+            <!-- Ejemplos desglosados -->
+            <div class="sentence-visual">
+                <div class="sentence-blocks">
+                    <span class="block subject">I</span>
+                    <span class="block will">'ll</span>
+                    <span class="block verb">help</span>
+                    <span class="block subject">you</span>
+                </div>
+                <div class="sentence-trans">Te ayudaré</div>
+            </div>
+
+            <div class="sentence-visual">
+                <div class="sentence-blocks">
+                    <span class="block subject">She</span>
+                    <span class="block wont">won't</span>
+                    <span class="block verb">do</span>
+                    <span>it</span>
+                </div>
+                <div class="sentence-trans">Ella no lo hará</div>
+            </div>
+
+            <div class="sentence-visual">
+                <div class="sentence-blocks">
+                    <span class="block will">Will</span>
+                    <span class="block subject">you</span>
+                    <span class="block verb">help</span>
+                    <span>me?</span>
+                </div>
+                <div class="sentence-trans">¿Me ayudarás?</div>
+            </div>
+
+            <!-- Exercises -->
+            <div class="exercise-section">
+                <h3>✏️ Práctica Final</h3>
+
+                <div class="exercise" id="ex5-1">
+                    <div class="exercise-q">1. "Te ayudaré" en inglés:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-1','a','a')">a) I'll help you</button>
+                        <button class="opt-btn" onclick="check('ex5-1','b','a')">b) I going to help you</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ "Ayudaré" (futuro simple) = I'll (I will) help</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ Futuro español (-ré) = WILL, no "going to"</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-2">
+                    <div class="exercise-q">2. "Ella no lo hará" =</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-2','a','b')">a) She will do it not</button>
+                        <button class="opt-btn" onclick="check('ex5-2','b','b')">b) She won't do it</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ WON'T (will not) va antes del verbo</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ Orden: Subject + WON'T + verb</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-3">
+                    <div class="exercise-q">3. "¿Me ayudarás?" =</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-3','a','a')">a) Will you help me?</button>
+                        <button class="opt-btn" onclick="check('ex5-3','b','a')">b) You will help me?</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ Pregunta = WILL + subject + verb</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ Las preguntas con WILL invierten el orden</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-4">
+                    <div class="exercise-q">4. Promesa: "I promise I ___ <strong>do</strong> it."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-4','a','b')">a) am going to</button>
+                        <button class="opt-btn" onclick="check('ex5-4','b','b')">b) will</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ Promesas siempre usan WILL</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ "I promise I WILL..." = estructura de promesa</div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-5">
+                    <div class="exercise-q">5. Decisión instantánea: "It's cold! I ___ close the window."</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-5','a','b')">a) am going to</button>
+                        <button class="opt-btn" onclick="check('ex5-5','b','b')">b) will</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">✔ Sientes frío AHORA → decides AHORA → WILL</div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">✔ Reacción instantánea = WILL</div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score5">0/5</div>
+                    <div class="label">Paso 5</div>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, #ffe8ec 0%, #ffdde1 100%); border-radius: 12px;">
+                <h3 style="color: #d4818c; font-size: 0.95rem; margin-bottom: 10px;">🎓 Resumen Final</h3>
+                <ul class="summary-list">
+                    <li><strong>Afirmativo:</strong> I'll / He'll / They'll + verb</li>
+                    <li><strong>Negativo:</strong> won't + verb</li>
+                    <li><strong>Pregunta:</strong> Will + subject + verb?</li>
+                    <li><strong>Uso 1:</strong> Decisiones instantáneas</li>
+                    <li><strong>Uso 2:</strong> Promesas y ofrecimientos</li>
+                    <li><strong>WILL nunca cambia</strong> (no "wills")</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Nav -->
+        <div class="bottom-nav">
+            <button class="nav-btn prev" id="prevBtn" onclick="prevStep()" disabled>← Anterior</button>
+            <span class="step-ind"><span id="currentStep">1</span>/5</span>
+            <button class="nav-btn next" id="nextBtn" onclick="nextStep()">Siguiente →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 5;
+        const scores = {1:0, 2:0, 3:0, 4:0, 5:0};
+        const answered = {};
+
+        function goToStep(step) {
+            if (step < 1 || step > totalSteps) return;
+            
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.querySelectorAll('.step-dot')[currentStep-1].classList.remove('active');
+            
+            if (step > currentStep) {
+                document.querySelectorAll('.step-dot')[currentStep-1].classList.add('completed');
+            }
+            
+            currentStep = step;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            document.querySelectorAll('.step-dot')[currentStep-1].classList.add('active');
+            
+            updateNav();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function nextStep() { if (currentStep < totalSteps) goToStep(currentStep + 1); }
+        function prevStep() { if (currentStep > 1) goToStep(currentStep - 1); }
+
+        function updateNav() {
+            document.getElementById('currentStep').textContent = currentStep;
+            document.getElementById('prevBtn').disabled = currentStep === 1;
+            document.getElementById('nextBtn').disabled = currentStep === totalSteps;
+            document.getElementById('nextBtn').textContent = currentStep === totalSteps ? '✓ Fin' : 'Siguiente →';
+        }
+
+        function check(id, sel, correct) {
+            if (answered[id]) return;
+            answered[id] = true;
+            
+            const ex = document.getElementById(id);
+            const btns = ex.querySelectorAll('.opt-btn');
+            const fbCorrect = document.getElementById(`fb-${id}`);
+            const fbIncorrect = document.getElementById(`fbi-${id}`);
+            
+            btns.forEach(b => b.disabled = true);
+            
+            const stepNum = parseInt(id.split('-')[0].replace('ex',''));
+            
+            if (sel === correct) {
+                ex.classList.add('correct');
+                btns.forEach(b => { 
+                    if (b.textContent.startsWith(sel+')')) b.classList.add('sel-correct'); 
+                });
+                fbCorrect.classList.add('show');
+                scores[stepNum]++;
+            } else {
+                ex.classList.add('incorrect');
+                btns.forEach(b => {
+                    if (b.textContent.startsWith(sel+')')) b.classList.add('sel-wrong');
+                    if (b.textContent.startsWith(correct+')')) b.classList.add('show-correct');
+                });
+                fbIncorrect.classList.add('show');
+            }
+            
+            document.getElementById(`score${stepNum}`).textContent = `${scores[stepNum]}/5`;
+        }
+
+        updateNav();
+    </script>
+</body>
+</html>
