@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indirect Questions | A2-Beg M7 | JUCUM</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            min-height: 100vh;
+            padding: 15px;
+            padding-bottom: 80px;
+        }
+        .container { max-width: 500px; margin: 0 auto; }
+        .header {
+            background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(102, 187, 106, 0.4);
+        }
+        .header h1 { color: white; font-size: 1.2rem; margin-bottom: 3px; }
+        .header .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            color: white;
+        }
+        .progress-nav {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+        .step-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #66bb6a;
+            background: white;
+            color: #66bb6a;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+        .step-dot.active { background: #66bb6a; color: white; }
+        .step-dot.completed { background: #43a047; color: white; border-color: #43a047; }
+        .step-card {
+            display: none;
+            background: white;
+            border-radius: 16px;
+            padding: 20px 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+        .step-card.active { display: block; }
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e9;
+        }
+        .step-icon { font-size: 1.8rem; }
+        .step-title { color: #2e7d32; font-size: 1rem; font-weight: 600; }
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.8rem;
+        }
+        .compare-table th {
+            background: #66bb6a;
+            color: white;
+            padding: 8px 6px;
+            text-align: left;
+            font-size: 0.75rem;
+        }
+        .compare-table td { padding: 8px 6px; border-bottom: 1px solid #e0e0e0; }
+        .compare-table tr:nth-child(even) { background: #f9f9f9; }
+        .quick-example {
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .quick-example .emoji { font-size: 1.3rem; }
+        .quick-example .text { flex: 1; }
+        .quick-example .en { color: #2e7d32; font-weight: 600; font-size: 0.9rem; }
+        .quick-example .es { color: #888; font-size: 0.8rem; }
+        .quick-example.wrong { background: #ffebee; border-left: 3px solid #f44336; }
+        .quick-example.right { background: #e8f5e9; border-left: 3px solid #4caf50; }
+        .tip-box {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin: 10px 0;
+            font-size: 0.85rem;
+            border-left: 3px solid #fbc02d;
+        }
+        .tip-box strong { color: #f57f17; }
+        .rule-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+            text-align: center;
+            border: 2px solid #42a5f5;
+        }
+        .rule-box .formula {
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #1565c0;
+            font-weight: 600;
+        }
+        .simple-list { list-style: none; padding-left: 0; }
+        .simple-list li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 0.85rem;
+            color: #555;
+        }
+        .simple-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #66bb6a;
+            font-weight: bold;
+        }
+        .exercise-section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px dashed #c8e6c9;
+        }
+        .exercise-section h3 { color: #43a047; font-size: 0.9rem; margin-bottom: 12px; }
+        .exercise {
+            background: #fafafa;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 2px solid #e0e0e0;
+        }
+        .exercise.correct { border-color: #4caf50; background: #e8f5e9; }
+        .exercise.incorrect { border-color: #f44336; background: #ffebee; }
+        .exercise-q { font-size: 0.9rem; color: #333; margin-bottom: 10px; }
+        .exercise-q strong { color: #2e7d32; }
+        .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .opt-btn {
+            padding: 10px 8px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            color: #555;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .opt-btn:hover:not(:disabled) { border-color: #66bb6a; background: #e8f5e9; }
+        .opt-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+        .opt-btn.sel-correct { background: #4caf50; color: white; border-color: #4caf50; }
+        .opt-btn.sel-wrong { background: #f44336; color: white; border-color: #f44336; }
+        .opt-btn.show-correct { background: #4caf50; color: white; border-color: #4caf50; }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            display: none;
+        }
+        .feedback.show { display: block; }
+        .feedback.correct-fb { background: #e8f5e9; border: 1px solid #a5d6a7; }
+        .feedback.incorrect-fb { background: #ffebee; border: 1px solid #ef9a9a; }
+        .feedback .result { font-weight: 700; margin-bottom: 6px; }
+        .feedback.correct-fb .result { color: #2e7d32; }
+        .feedback.incorrect-fb .result { color: #c62828; }
+        .feedback .explanation { color: #555; line-height: 1.4; }
+        .feedback .why-correct { color: #2e7d32; margin-bottom: 4px; }
+        .feedback .why-wrong { color: #c62828; }
+        .score-box {
+            text-align: center;
+            padding: 12px;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-radius: 10px;
+            margin-top: 12px;
+        }
+        .score-box .num { font-size: 1.5rem; font-weight: bold; color: #2e7d32; }
+        .score-box .label { font-size: 0.8rem; color: #66bb6a; }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 12px 15px;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .nav-btn.prev { background: #e0e0e0; color: #666; }
+        .nav-btn.next { background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); color: white; }
+        .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .step-ind { font-size: 0.8rem; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 Indirect Questions</h1>
+            <div class="badge">💚 A2-Beginner • M7 • Tema 1</div>
+        </div>
+
+        <div class="progress-nav">
+            <div class="step-dot active" onclick="goToStep(1)">1</div>
+            <div class="step-dot" onclick="goToStep(2)">2</div>
+            <div class="step-dot" onclick="goToStep(3)">3</div>
+            <div class="step-dot" onclick="goToStep(4)">4</div>
+            <div class="step-dot" onclick="goToStep(5)">5</div>
+        </div>
+
+        <!-- PASO 1 -->
+        <div class="step-card active" id="step1">
+            <div class="step-header">
+                <span class="step-icon">🇪🇸</span>
+                <span class="step-title">Paso 1: Repaso en Español</span>
+            </div>
+            <p style="font-size:0.85rem;color:#555;margin-bottom:12px;">
+                En español, cuando queremos ser educados al preguntar, usamos formas indirectas. En vez de "¿Dónde está?", decimos "¿Podrías decirme dónde está?" Esto suena más amable y respetuoso.
+            </p>
+            <div class="quick-example">
+                <span class="emoji">🗣️</span>
+                <div class="text">
+                    <div class="en">Directa: ¿Dónde está el banco?</div>
+                    <div class="es">Menos formal</div>
+                </div>
+            </div>
+            <div class="quick-example">
+                <span class="emoji">🎩</span>
+                <div class="text">
+                    <div class="en">Indirecta: ¿Podrías decirme dónde está el banco?</div>
+                    <div class="es">Más educado</div>
+                </div>
+            </div>
+            <div class="tip-box">
+                <strong>💡 En español:</strong> Las indirectas suenan más amables, especialmente con desconocidos.
+            </div>
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+                <div class="exercise" data-ex="ex1">
+                    <div class="exercise-q">1. En español, ¿cuál es más educada?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex1','b')">a) ¿Qué hora es?</button>
+                        <button class="opt-btn" onclick="check(this,'ex1','b')">b) ¿Sabes qué hora es?</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ "¿Sabes qué hora es?" es indirecta y educada.</div><div class="why-wrong">✗ "¿Qué hora es?" es directa y menos formal.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ La correcta es "¿Sabes qué hora es?" - es indirecta.</div><div class="why-wrong">✗ La directa es menos formal.</div></div></div>
+                </div>
+                <div class="exercise" data-ex="ex2">
+                    <div class="exercise-q">2. "¿Podrías decirme..." es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex2','a')">a) Indirecta</button>
+                        <button class="opt-btn" onclick="check(this,'ex2','a')">b) Directa</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Introduce pregunta indirecta educada.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Es indirecta con introducción educada.</div></div></div>
+                </div>
+                <div class="exercise" data-ex="ex3">
+                    <div class="exercise-q">3. Las indirectas son más:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex3','a')">a) Educadas</button>
+                        <button class="opt-btn" onclick="check(this,'ex3','a')">b) Agresivas</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Muestran respeto y cortesía.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Son educadas, no agresivas.</div></div></div>
+                </div>
+                <div class="exercise" data-ex="ex4">
+                    <div class="exercise-q">4. "Me pregunto dónde está..." es:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex4','a')">a) Indirecta</button>
+                        <button class="opt-btn" onclick="check(this,'ex4','a')">b) Directa</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Forma indirecta reflexiva.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Es indirecta reflexiva.</div></div></div>
+                </div>
+                <div class="exercise" data-ex="ex5">
+                    <div class="exercise-q">5. ¿Con quién usamos más indirectas?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex5','b')">a) Familia</button>
+                        <button class="opt-btn" onclick="check(this,'ex5','b')">b) Desconocidos</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Con desconocidos, más educación.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Desconocidos requieren cortesía.</div></div></div>
+                </div>
+                <div class="score-box"><div class="num" id="score">0/5</div><div class="label">Paso 1</div></div>
+            </div>
+        </div>
+
+        <!-- PASO 2 -->
+        <div class="step-card" id="step2">
+            <div class="step-header">
+                <span class="step-icon">🤝</span>
+                <span class="step-title">Paso 2: Similitudes ESP ↔ ENG</span>
+            </div>
+            <ul class="simple-list">
+                <li>Ambos tienen directas e indirectas</li>
+                <li>En ambos, indirectas son educadas</li>
+                <li>Usan frases introductorias</li>
+                <li>Para situaciones formales</li>
+                <li>Suenan más profesionales</li>
+            </ul>
+            <div class="tip-box">
+                <strong>💡 Similitud:</strong> En español e inglés, indirectas = profesional.
+            </div>
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+                <div class="exercise" data-ex="ex6">
+                    <div class="exercise-q">1. En ambos idiomas, indirectas son:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex6','a')">a) Más educadas</button>
+                        <button class="opt-btn" onclick="check(this,'ex6','a')">b) Menos educadas</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Ambos idiomas: indirectas = educadas.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Son más educadas universalmente.</div></div></div>
+                </div>
+                <div class="exercise" data-ex="ex7">
+                    <div class="exercise-q">2. "Could you...?" es similar a:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex7','a')">a) ¿Podrías...?</button>
+                        <button class="opt-btn" onclick="check(this,'ex7','a')">b) ¿Por qué...?</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Frases introductorias educadas.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ "¿Podrías...?" es equivalente.</div></div></div>
+                </div>
+                <div class="exercise" data-ex="ex8">
+                    <div class="exercise-q">3. Indirectas usan:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex8','a')">a) Frases introductorias</button>
+                        <button class="opt-btn" onclick="check(this,'ex8','a')">b) Solo verbo</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Necesitan introducción educada.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Requieren frases introductorias.</div></div></div>
+                </div>
+                <div class="exercise" data-ex="ex9">
+                    <div class="exercise-q">4. En ambos, indirectas suenan:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex9','a')">a) Profesionales</button>
+                        <button class="opt-btn" onclick="check(this,'ex9','a')">b) Infantiles</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Apropiadas para negocios.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Profesionales y maduras.</div></div></div>
+                </div>
+                <div class="exercise" data-ex="ex10">
+                    <div class="exercise-q">5. Son útiles en:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex10','a')">a) Contextos formales</button>
+                        <button class="opt-btn" onclick="check(this,'ex10','a')">b) Solo con niños</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Para trabajo, entrevistas.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Situaciones formales requieren indirectas.</div></div></div>
+                </div>
+                <div class="score-box"><div class="num" id="score2">0/5</div><div class="label">Paso 2</div></div>
+            </div>
+        </div>
+
+        <!-- PASO 3 -->
+        <div class="step-card" id="step3">
+            <div class="step-header">
+                <span class="step-icon">⚠️</span>
+                <span class="step-title">Paso 3: ¡Cuidado! Diferencias</span>
+            </div>
+            <table class="compare-table">
+                <tr><th>Aspecto</th><th>Español</th><th>English</th></tr>
+                <tr><td>Orden</td><td>dónde está</td><td>where it is</td></tr>
+                <tr><td>Inversión</td><td>Mantiene</td><td>Cambia a afirmativo</td></tr>
+                <tr><td>Do/Does</td><td>No usa</td><td>Desaparece</td></tr>
+            </table>
+            <div class="quick-example wrong">
+                <span class="emoji">❌</span>
+                <div class="text">
+                    <div class="en">where is it?</div>
+                    <div class="es">INCORRECTO</div>
+                </div>
+            </div>
+            <div class="quick-example right">
+                <span class="emoji">✅</span>
+                <div class="text">
+                    <div class="en">where it is?</div>
+                    <div class="es">CORRECTO</div>
+                </div>
+            </div>
+            <div class="tip-box">
+                <strong>💡 Clave:</strong> Después de introducción → orden afirmativo.
+            </div>
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+                <div class="exercise" data-ex="ex11">
+                    <div class="exercise-q">1. ¿Cuál es correcta?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex11','b')">a) where is the bank</button>
+                        <button class="opt-btn" onclick="check(this,'ex11','b')">b) where the bank is</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Orden afirmativo: subject + verb.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Debe ser "where the bank is".</div></div></div>
+                </div>
+                <div class="exercise" data-ex="ex12">
+                    <div class="exercise-q">2. Después de introducción, orden:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex12','a')">a) Afirmativo</button>
+                        <button class="opt-btn" onclick="check(this,'ex12','a')">b) Interrogativo</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Siempre afirmativo.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Usa orden afirmativo.</div></div></div>
+                </div>
+                <div class="exercise" data-ex="ex13">
+                    <div class="exercise-q">3. En indirectas, "do/does":</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex13','a')">a) Desaparece</button>
+                        <button class="opt-btn" onclick="check(this,'ex13','a')">b) Se mantiene</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ No se usa do/does.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Desaparece en indirectas.</div></div></div>
+                </div>
+                <div class="exercise" data-ex="ex14">
+                    <div class="exercise-q">4. ¿Cuál mantiene orden correcto?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex14','b')">a) what does she want</button>
+                        <button class="opt-btn" onclick="check(this,'ex14','b')">b) what she wants</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ "what she wants" es afirmativo.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ No uses "does" en indirectas.</div></div></div>
+                </div>
+                <div class="exercise" data-ex="ex15">
+                    <div class="exercise-q">5. "¿dónde está?" en indirecta:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex15','b')">a) where is</button>
+                        <button class="opt-btn" onclick="check(this,'ex15','b')">b) where it is</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ "where it is" orden afirmativo.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Cambia a "where it is".</div></div></div>
+                </div>
+                <div class="score-box"><div class="num" id="score3">0/5</div><div class="label">Paso 3</div></div>
+            </div>
+        </div>
+
+        <!-- PASO 4 -->
+        <div class="step-card" id="step4">
+            <div class="step-header">
+                <span class="step-icon">💡</span>
+                <span class="step-title">Paso 4: Consejos Prácticos</span>
+            </div>
+            <div class="rule-box">
+                <div class="formula">Intro + Wh-word + Subject + Verb</div>
+            </div>
+            <div class="tip-box"><strong>💡 Tip 1:</strong> Después de intro, piensa afirmativo.</div>
+            <div class="tip-box"><strong>💡 Tip 2:</strong> Comunes: Could you tell me...? / Do you know...?</div>
+            <div class="tip-box"><strong>💡 Tip 3:</strong> Do/does/did desaparecen.</div>
+            <div class="tip-box"><strong>💡 Tip 4:</strong> Usa para sonar profesional.</div>
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+                <div class="exercise" data-ex="ex16">
+                    <div class="exercise-q">1. Could you tell me _____?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex16','b')">a) where is she</button>
+                        <button class="opt-btn" onclick="check(this,'ex16','b')">b) where she is</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Subject + verb.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ "where she is".</div></div></div>
+                </div>
+                <div class="exercise" data-ex="ex17">
+                    <div class="exercise-q">2. Do you know _____?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex17','b')">a) what does she want</button>
+                        <button class="opt-btn" onclick="check(this,'ex17','b')">b) what she wants</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Does desaparece.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ "what she wants".</div></div></div>
+                </div>
+                <div class="exercise" data-ex="ex18">
+                    <div class="exercise-q">3. I wonder _____?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex18','a')">a) when they will arrive</button>
+                        <button class="opt-btn" onclick="check(this,'ex18','a')">b) when will they arrive</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Subject antes de verb.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ No inviertas will y they.</div></div></div>
+                </div>
+                <div class="exercise" data-ex="ex19">
+                    <div class="exercise-q">4. Could you tell me _____?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex19','b')">a) how can I get there</button>
+                        <button class="opt-btn" onclick="check(this,'ex19','b')">b) how I can get there</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ I antes de can.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ "how I can get there".</div></div></div>
+                </div>
+                <div class="exercise" data-ex="ex20">
+                    <div class="exercise-q">5. ¿Cuál suena más profesional?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex20','b')">a) What time is it?</button>
+                        <button class="opt-btn" onclick="check(this,'ex20','b')">b) Could you tell me what time it is?</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Indirecta más profesional.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ La indirecta es más profesional.</div></div></div>
+                </div>
+                <div class="score-box"><div class="num" id="score4">0/5</div><div class="label">Paso 4</div></div>
+            </div>
+        </div>
+
+        <!-- PASO 5 -->
+        <div class="step-card" id="step5">
+            <div class="step-header">
+                <span class="step-icon">✨</span>
+                <span class="step-title">Paso 5: Práctica Final</span>
+            </div>
+            <div class="rule-box">
+                <div class="formula">Intro + Wh-word + Subject + Verb</div>
+            </div>
+            <div class="quick-example right">
+                <span class="emoji">✅</span>
+                <div class="text">
+                    <div class="en">Could you tell me <strong>where the store is</strong>?</div>
+                    <div class="es">¿Podrías decirme dónde está la tienda?</div>
+                </div>
+            </div>
+            <div class="quick-example right">
+                <span class="emoji">✅</span>
+                <div class="text">
+                    <div class="en">Do you know <strong>what time it is</strong>?</div>
+                    <div class="es">¿Sabes qué hora es?</div>
+                </div>
+            </div>
+            <div class="exercise-section">
+                <h3>✏️ Práctica Final</h3>
+                <div class="exercise" data-ex="ex21">
+                    <div class="exercise-q">1. Could you tell me where _____?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex21','b')">a) is the bank</button>
+                        <button class="opt-btn" onclick="check(this,'ex21','b')">b) the bank is</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Subject + verb.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Orden afirmativo.</div></div></div>
+                </div>
+                <div class="exercise" data-ex="ex22">
+                    <div class="exercise-q">2. Do you know when _____?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex22','b')">a) does the store close</button>
+                        <button class="opt-btn" onclick="check(this,'ex22','b')">b) the store closes</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Does desaparece.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ "the store closes".</div></div></div>
+                </div>
+                <div class="exercise" data-ex="ex23">
+                    <div class="exercise-q">3. I wonder why _____.</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex23','a')">a) she is sad</button>
+                        <button class="opt-btn" onclick="check(this,'ex23','a')">b) is she sad</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Subject antes de verb.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ "she is sad".</div></div></div>
+                </div>
+                <div class="exercise" data-ex="ex24">
+                    <div class="exercise-q">4. Could you tell me how much _____?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex24','b')">a) does it cost</button>
+                        <button class="opt-btn" onclick="check(this,'ex24','b')">b) it costs</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Does desaparece.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ "it costs".</div></div></div>
+                </div>
+                <div class="exercise" data-ex="ex25">
+                    <div class="exercise-q">5. Do you know what _____?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check(this,'ex25','a')">a) her name is</button>
+                        <button class="opt-btn" onclick="check(this,'ex25','a')">b) is her name</button>
+                    </div>
+                    <div class="feedback correct-fb"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Subject + verb.</div></div></div>
+                    <div class="feedback incorrect-fb"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ "her name is".</div></div></div>
+                </div>
+                <div class="score-box"><div class="num" id="score5">0/5</div><div class="label">Paso 5</div></div>
+            </div>
+            <div style="margin-top:20px;padding:15px;background:linear-gradient(135deg,#e8f5e9 0%,#c8e6c9 100%);border-radius:12px;">
+                <h3 style="color:#2e7d32;font-size:0.95rem;margin-bottom:10px;">🎓 Resumen</h3>
+                <ul class="simple-list">
+                    <li>Indirectas más educadas</li>
+                    <li>Orden afirmativo después intro</li>
+                    <li>Do/does/did desaparecen</li>
+                    <li>Fórmula: Intro + Wh + Subject + Verb</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <button class="nav-btn prev" id="prevBtn" onclick="prevStep()" disabled>← Anterior</button>
+            <span class="step-ind">Paso <span id="current">1</span>/5</span>
+            <button class="nav-btn next" id="nextBtn" onclick="nextStep()">Siguiente →</button>
+        </div>
+    </div>
+
+    <script>
+        let step = 1;
+        const total = 5;
+        const scores = {1:0,2:0,3:0,4:0,5:0};
+        const done = {};
+
+        function goToStep(s) {
+            document.getElementById('step'+step).classList.remove('active');
+            document.querySelectorAll('.step-dot')[step-1].classList.remove('active');
+            if(s > step) document.querySelectorAll('.step-dot')[step-1].classList.add('completed');
+            step = s;
+            document.getElementById('step'+step).classList.add('active');
+            document.querySelectorAll('.step-dot')[step-1].classList.add('active');
+            updateNav();
+            window.scrollTo({top: 0});
+        }
+
+        function nextStep() { if(step < total) goToStep(step + 1); }
+        function prevStep() { if(step > 1) goToStep(step - 1); }
+
+        function updateNav() {
+            document.getElementById('current').textContent = step;
+            document.getElementById('prevBtn').disabled = step === 1;
+            document.getElementById('nextBtn').disabled = step === total;
+        }
+
+        function check(btn, id, correct) {
+            if(done[id]) return;
+            done[id] = true;
+            const ex = document.querySelector(`[data-ex="${id}"]`);
+            const btns = ex.querySelectorAll('.opt-btn');
+            const sel = btn.textContent.charAt(0);
+            btns.forEach(b => b.disabled = true);
+            if(sel === correct) {
+                ex.classList.add('correct');
+                btn.classList.add('sel-correct');
+                ex.querySelector('.correct-fb').classList.add('show');
+                scores[step]++;
+            } else {
+                ex.classList.add('incorrect');
+                btn.classList.add('sel-wrong');
+                btns.forEach(b => { if(b.textContent.charAt(0) === correct) b.classList.add('show-correct'); });
+                ex.querySelector('.incorrect-fb').classList.add('show');
+            }
+            const scoreEl = document.getElementById('score'+(step>1?step:''));
+            if(scoreEl) scoreEl.textContent = scores[step] + '/5';
+        }
+    </script>
+</body>
+</html>
