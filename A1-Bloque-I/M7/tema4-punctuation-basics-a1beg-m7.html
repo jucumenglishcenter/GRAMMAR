@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punctuation Basics | A1-Beg M7 | JUCUM</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #ffe8ec 0%, #ffdde1 100%); min-height: 100vh; padding: 15px; padding-bottom: 80px; }
+        .container { max-width: 500px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%); border-radius: 16px; padding: 15px; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(238, 156, 167, 0.4); }
+        .header h1 { color: white; font-size: 1.2rem; margin-bottom: 3px; }
+        .header .badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 15px; font-size: 0.75rem; color: white; }
+        .progress-nav { display: flex; justify-content: center; gap: 6px; margin-bottom: 15px; }
+        .step-dot { width: 36px; height: 36px; border-radius: 50%; border: 2px solid #ee9ca7; background: white; color: #ee9ca7; font-weight: bold; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
+        .step-dot.active { background: #ee9ca7; color: white; }
+        .step-dot.completed { background: #d8869b; color: white; border-color: #d8869b; }
+        .step-card { display: none; background: white; border-radius: 16px; padding: 20px 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 15px; }
+        .step-card.active { display: block; }
+        .step-header { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #ffe8ec; }
+        .step-icon { font-size: 1.8rem; }
+        .step-title { color: #d8869b; font-size: 1rem; font-weight: 600; }
+        .mini-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.8rem; }
+        .mini-table th { background: #ee9ca7; color: white; padding: 8px 6px; text-align: center; }
+        .mini-table td { padding: 8px 6px; border-bottom: 1px solid #e0e0e0; text-align: center; }
+        .mini-table tr:nth-child(even) { background: #f9f9f9; }
+        .quick-example { background: #f5f5f5; border-radius: 10px; padding: 10px 12px; margin: 8px 0; display: flex; align-items: center; gap: 10px; }
+        .quick-example .emoji { font-size: 1.3rem; }
+        .quick-example .text { flex: 1; }
+        .quick-example .en { color: #d8869b; font-weight: 600; font-size: 0.9rem; }
+        .quick-example .es { color: #888; font-size: 0.8rem; }
+        .quick-example.right { background: #ffe8ec; border-left: 3px solid #ee9ca7; }
+        .quick-example.wrong { background: #ffebee; border-left: 3px solid #f44336; }
+        .tip-box { background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%); border-radius: 10px; padding: 10px 12px; margin: 10px 0; font-size: 0.85rem; border-left: 3px solid #fbc02d; }
+        .tip-box strong { color: #f57f17; }
+        .rule-box { background: linear-gradient(135deg, #ffdde1 0%, #ffcdd6 100%); border-radius: 10px; padding: 12px; margin: 10px 0; text-align: center; border: 2px solid #ee9ca7; }
+        .rule-box .formula { font-family: monospace; font-size: 0.9rem; color: #d8869b; font-weight: 600; }
+        .word-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin: 10px 0; }
+        .word-tag { padding: 6px 8px; border-radius: 8px; font-size: 0.75rem; text-align: center; font-weight: 500; background: #ffdde1; color: #d8869b; }
+        .exercise-section { margin-top: 20px; padding-top: 15px; border-top: 2px dashed #ffdde1; }
+        .exercise-section h3 { color: #d8869b; font-size: 0.9rem; margin-bottom: 12px; }
+        .exercise { background: #fafafa; border-radius: 10px; padding: 12px; margin-bottom: 10px; border: 2px solid #e0e0e0; }
+        .exercise.correct { border-color: #ee9ca7; background: #ffe8ec; }
+        .exercise.incorrect { border-color: #f44336; background: #ffebee; }
+        .exercise-q { font-size: 0.9rem; color: #333; margin-bottom: 10px; }
+        .exercise-q strong { color: #d8869b; }
+        .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .opt-btn { padding: 10px 8px; border: 2px solid #e0e0e0; border-radius: 8px; background: white; color: #555; font-size: 0.85rem; cursor: pointer; transition: all 0.2s ease; }
+        .opt-btn:hover:not(:disabled) { border-color: #ee9ca7; background: #ffe8ec; }
+        .opt-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+        .opt-btn.sel-correct { background: #ee9ca7; color: white; border-color: #ee9ca7; }
+        .opt-btn.sel-wrong { background: #f44336; color: white; border-color: #f44336; }
+        .opt-btn.show-correct { background: #ee9ca7; color: white; border-color: #ee9ca7; }
+        .feedback { margin-top: 10px; padding: 10px; border-radius: 8px; font-size: 0.8rem; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-fb { background: #ffe8ec; border: 1px solid #ffdde1; }
+        .feedback.incorrect-fb { background: #ffebee; border: 1px solid #ef9a9a; }
+        .feedback .result { font-weight: 700; margin-bottom: 6px; }
+        .feedback.correct-fb .result { color: #d8869b; }
+        .feedback.incorrect-fb .result { color: #c62828; }
+        .feedback .explanation { color: #555; line-height: 1.4; }
+        .feedback .why-correct { color: #d8869b; margin-bottom: 4px; }
+        .feedback .why-wrong { color: #c62828; }
+        .score-box { text-align: center; padding: 12px; background: linear-gradient(135deg, #ffe8ec 0%, #ffdde1 100%); border-radius: 10px; margin-top: 12px; }
+        .score-box .num { font-size: 1.5rem; font-weight: bold; color: #d8869b; }
+        .score-box .label { font-size: 0.8rem; color: #ee9ca7; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 12px 15px; box-shadow: 0 -4px 15px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
+        .nav-btn { padding: 10px 20px; border: none; border-radius: 20px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+        .nav-btn.prev { background: #e0e0e0; color: #666; }
+        .nav-btn.next { background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%); color: white; }
+        .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .step-ind { font-size: 0.8rem; color: #666; }
+        .summary-list { list-style: none; }
+        .summary-list li { padding: 6px 0 6px 20px; position: relative; font-size: 0.85rem; color: #555; }
+        .summary-list li:before { content: "✓"; position: absolute; left: 0; color: #ee9ca7; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📌 Punctuation Basics</h1>
+            <div class="badge">🍑 A1-Beginner • M7 • Tema 4</div>
+        </div>
+        <div class="progress-nav">
+            <div class="step-dot active" onclick="goToStep(1)">1</div>
+            <div class="step-dot" onclick="goToStep(2)">2</div>
+            <div class="step-dot" onclick="goToStep(3)">3</div>
+            <div class="step-dot" onclick="goToStep(4)">4</div>
+            <div class="step-dot" onclick="goToStep(5)">5</div>
+        </div>
+
+        <div class="step-card active" id="step1">
+            <div class="step-header"><span class="step-icon">🇪🇸</span><span class="step-title">Paso 1: Repaso en Español</span></div>
+            <table class="mini-table">
+                <tr><th>Signo</th><th>Nombre</th><th>Uso</th></tr>
+                <tr><td>.</td><td>Punto</td><td>Termina oración</td></tr>
+                <tr><td>,</td><td>Coma</td><td>Separa elementos</td></tr>
+                <tr><td>?</td><td>Interrogación</td><td>Pregunta (¿?)</td></tr>
+                <tr><td>!</td><td>Exclamación</td><td>Énfasis (¡!)</td></tr>
+            </table>
+            <div class="quick-example"><span class="emoji">📖</span><div class="text"><div class="en">Hola, mamá. ¿Cómo estás?</div><div class="es">Punto termina, coma separa, ¿? pregunta</div></div></div>
+            <div class="quick-example"><span class="emoji">📝</span><div class="text"><div class="en">Compré: pan, leche, huevos.</div><div class="es">Comas en listas</div></div></div>
+            <div class="tip-box"><strong>💡 En español:</strong> Usamos ¿? y ¡! al inicio Y al final.</div>
+            <div class="exercise-section"><h3>✏️ Ejercicios</h3>
+                <div class="exercise" id="ex1-1"><div class="exercise-q">1. El punto (.) se usa para:</div><div class="opts"><button class="opt-btn" onclick="check('ex1-1','a','a')">a) Terminar oración</button><button class="opt-btn" onclick="check('ex1-1','b','a')">b) Hacer pregunta</button></div><div class="feedback correct-fb" id="fb-ex1-1"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ El PUNTO termina oraciones completas.</div><div class="why-wrong">✗ Para preguntas usamos ¿?</div></div></div><div class="feedback incorrect-fb" id="fbi-ex1-1"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Punto (.) TERMINA oraciones.</div><div class="why-wrong">✗ Las preguntas usan ¿?</div></div></div></div>
+                <div class="exercise" id="ex1-2"><div class="exercise-q">2. La coma (,) sirve para:</div><div class="opts"><button class="opt-btn" onclick="check('ex1-2','a','a')">a) Separar elementos</button><button class="opt-btn" onclick="check('ex1-2','b','a')">b) Terminar frase</button></div><div class="feedback correct-fb" id="fb-ex1-2"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ La COMA separa: pan, leche, huevos.</div><div class="why-wrong">✗ Para terminar usamos punto (.).</div></div></div><div class="feedback incorrect-fb" id="fbi-ex1-2"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ SEPARA elementos en listas.</div><div class="why-wrong">✗ Terminar = punto (.).</div></div></div></div>
+                <div class="exercise" id="ex1-3"><div class="exercise-q">3. En español, preguntas usan:</div><div class="opts"><button class="opt-btn" onclick="check('ex1-3','a','a')">a) ¿ y ?</button><button class="opt-btn" onclick="check('ex1-3','b','a')">b) Solo ?</button></div><div class="feedback correct-fb" id="fb-ex1-3"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ DOS signos: ¿ (inicio) y ? (final).</div><div class="why-wrong">✗ En español usamos AMBOS.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex1-3"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ ¿ Y ? - al inicio y al final.</div><div class="why-wrong">✗ No es solo uno.</div></div></div></div>
+                <div class="exercise" id="ex1-4"><div class="exercise-q">4. "Hola Juan" necesita:</div><div class="opts"><button class="opt-btn" onclick="check('ex1-4','a','a')">a) Hola, Juan</button><button class="opt-btn" onclick="check('ex1-4','b','a')">b) Hola Juan.</button></div><div class="feedback correct-fb" id="fb-ex1-4"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ COMA después de saludo: Hola, Juan.</div><div class="why-wrong">✗ Sin coma suena incorrecto.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex1-4"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Necesita COMA: Hola, Juan.</div><div class="why-wrong">✗ Los saludos llevan coma.</div></div></div></div>
+                <div class="exercise" id="ex1-5"><div class="exercise-q">5. La exclamación usa:</div><div class="opts"><button class="opt-btn" onclick="check('ex1-5','a','a')">a) ¡ y !</button><button class="opt-btn" onclick="check('ex1-5','b','a')">b) Solo !</button></div><div class="feedback correct-fb" id="fb-ex1-5"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ DOS signos: ¡Hola! (inicio y final).</div><div class="why-wrong">✗ Español usa ambos.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex1-5"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ ¡ Y ! - al inicio y final.</div><div class="why-wrong">✗ No es solo uno.</div></div></div></div>
+                <div class="score-box"><div class="num" id="score1">0/5</div><div class="label">Paso 1</div></div>
+            </div>
+        </div>
+
+        <div class="step-card" id="step2">
+            <div class="step-header"><span class="step-icon">🤝</span><span class="step-title">Paso 2: Similitudes ESP ↔ ENG</span></div>
+            <table class="mini-table">
+                <tr><th>Similitud</th><th>Español</th><th>English</th></tr>
+                <tr><td>Punto termina</td><td>Hola.</td><td>Hello.</td></tr>
+                <tr><td>Coma separa</td><td>pan, leche, huevos</td><td>bread, milk, eggs</td></tr>
+                <tr><td>Mayúscula inicial</td><td>Mi mamá es...</td><td>My mother is...</td></tr>
+                <tr><td>Después de punto</td><td>Hola. Adiós.</td><td>Hello. Goodbye.</td></tr>
+            </table>
+            <div class="quick-example right"><span class="emoji">✅</span><div class="text"><div class="en">I like apples, oranges, and bananas.</div><div class="es">Me gustan manzanas, naranjas y plátanos.</div></div></div>
+            <div class="quick-example right"><span class="emoji">✅</span><div class="text"><div class="en">Hello. My name is Ana.</div><div class="es">Hola. Mi nombre es Ana.</div></div></div>
+            <div class="tip-box"><strong>💡 Parecido:</strong> Punto y coma funcionan IGUAL en ambos idiomas.</div>
+            <div class="exercise-section"><h3>✏️ Ejercicios</h3>
+                <div class="exercise" id="ex2-1"><div class="exercise-q">1. En inglés, el punto se usa:</div><div class="opts"><button class="opt-btn" onclick="check('ex2-1','a','a')">a) Al final de oración</button><button class="opt-btn" onclick="check('ex2-1','b','a')">b) En listas</button></div><div class="feedback correct-fb" id="fb-ex2-1"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ PUNTO al final: Hello.</div><div class="why-wrong">✗ En listas usamos COMA.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex2-1"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ AL FINAL de oración.</div><div class="why-wrong">✗ Listas usan coma.</div></div></div></div>
+                <div class="exercise" id="ex2-2"><div class="exercise-q">2. "Hello My name is Ana" necesita:</div><div class="opts"><button class="opt-btn" onclick="check('ex2-2','a','a')">a) Hello. My name...</button><button class="opt-btn" onclick="check('ex2-2','b','a')">b) Hello, My name...</button></div><div class="feedback correct-fb" id="fb-ex2-2"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ PUNTO separa oraciones completas.</div><div class="why-wrong">✗ Coma solo para listas/pausas cortas.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex2-2"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ PUNTO - son 2 oraciones completas.</div><div class="why-wrong">✗ Coma es para pausas cortas.</div></div></div></div>
+                <div class="exercise" id="ex2-3"><div class="exercise-q">3. Las listas en inglés usan:</div><div class="opts"><button class="opt-btn" onclick="check('ex2-3','a','a')">a) Comas</button><button class="opt-btn" onclick="check('ex2-3','b','a')">b) Puntos</button></div><div class="feedback correct-fb" id="fb-ex2-3"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ COMAS: apples, oranges, bananas.</div><div class="why-wrong">✗ Puntos son para terminar oraciones.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex2-3"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ COMAS en listas.</div><div class="why-wrong">✗ Puntos terminan oraciones.</div></div></div></div>
+                <div class="exercise" id="ex2-4"><div class="exercise-q">4. Después de punto va:</div><div class="opts"><button class="opt-btn" onclick="check('ex2-4','a','a')">a) Mayúscula</button><button class="opt-btn" onclick="check('ex2-4','b','a')">b) Minúscula</button></div><div class="feedback correct-fb" id="fb-ex2-4"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ MAYÚSCULA: Hello. My name...</div><div class="why-wrong">✗ Minúscula solo en medio de oración.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex2-4"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ MAYÚSCULA después de punto.</div><div class="why-wrong">✗ Es nueva oración.</div></div></div></div>
+                <div class="exercise" id="ex2-5"><div class="exercise-q">5. La coma en inglés:</div><div class="opts"><button class="opt-btn" onclick="check('ex2-5','a','a')">a) Separa elementos</button><button class="opt-btn" onclick="check('ex2-5','b','a')">b) Termina oración</button></div><div class="feedback correct-fb" id="fb-ex2-5"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ SEPARA: I like cats, dogs, and birds.</div><div class="why-wrong">✗ Terminar = punto (.).</div></div></div><div class="feedback incorrect-fb" id="fbi-ex2-5"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ SEPARA elementos.</div><div class="why-wrong">✗ Para terminar usa punto.</div></div></div></div>
+                <div class="score-box"><div class="num" id="score2">0/5</div><div class="label">Paso 2</div></div>
+            </div>
+        </div>
+
+        <div class="step-card" id="step3">
+            <div class="step-header"><span class="step-icon">⚠️</span><span class="step-title">Paso 3: ¡Cuidado! Diferencias</span></div>
+            <table class="mini-table">
+                <tr><th>Español</th><th>English</th><th>Explicación</th></tr>
+                <tr><td>¿Cómo estás?</td><td>How are you?</td><td>Solo ? al FINAL</td></tr>
+                <tr><td>¡Hola!</td><td>Hello!</td><td>Solo ! al FINAL</td></tr>
+                <tr><td>manzanas y naranjas</td><td>apples and oranges</td><td>Sin coma antes de "and"</td></tr>
+            </table>
+            <div class="quick-example wrong"><span class="emoji">❌</span><div class="text"><div class="en">¿How are you?</div><div class="es">INCORRECTO - NO usar ¿ en inglés</div></div></div>
+            <div class="quick-example right"><span class="emoji">✅</span><div class="text"><div class="en">How are you?</div><div class="es">Solo ? al final</div></div></div>
+            <div class="tip-box"><strong>💡 Truco:</strong> En inglés NO usamos ¿ ni ¡ al inicio.</div>
+            <div class="exercise-section"><h3>✏️ Ejercicios</h3>
+                <div class="exercise" id="ex3-1"><div class="exercise-q">1. "How are you" necesita:</div><div class="opts"><button class="opt-btn" onclick="check('ex3-1','a','a')">a) How are you?</button><button class="opt-btn" onclick="check('ex3-1','b','a')">b) ¿How are you?</button></div><div class="feedback correct-fb" id="fb-ex3-1"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Solo ? AL FINAL en inglés.</div><div class="why-wrong">✗ NO usar ¿ en inglés.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex3-1"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Solo ? al final.</div><div class="why-wrong">✗ ¿ es solo español.</div></div></div></div>
+                <div class="exercise" id="ex3-2"><div class="exercise-q">2. "Hello" con énfasis:</div><div class="opts"><button class="opt-btn" onclick="check('ex3-2','a','a')">a) Hello!</button><button class="opt-btn" onclick="check('ex3-2','b','a')">b) ¡Hello!</button></div><div class="feedback correct-fb" id="fb-ex3-2"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Solo ! AL FINAL.</div><div class="why-wrong">✗ NO usar ¡ en inglés.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex3-2"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Solo ! al final.</div><div class="why-wrong">✗ ¡ es solo español.</div></div></div></div>
+                <div class="exercise" id="ex3-3"><div class="exercise-q">3. "I like apples and oranges" ¿necesita coma?</div><div class="opts"><button class="opt-btn" onclick="check('ex3-3','a','b')">a) Sí</button><button class="opt-btn" onclick="check('ex3-3','b','b')">b) No</button></div><div class="feedback correct-fb" id="fb-ex3-3"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ NO necesita - solo 2 elementos.</div><div class="why-wrong">✗ Coma solo con 3+ elementos.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex3-3"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ NO - solo 2 cosas.</div><div class="why-wrong">✗ Coma solo para 3+.</div></div></div></div>
+                <div class="exercise" id="ex3-4"><div class="exercise-q">4. En inglés, preguntas usan:</div><div class="opts"><button class="opt-btn" onclick="check('ex3-4','a','a')">a) Solo ?</button><button class="opt-btn" onclick="check('ex3-4','b','a')">b) ¿ y ?</button></div><div class="feedback correct-fb" id="fb-ex3-4"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Solo ? al FINAL.</div><div class="why-wrong">✗ ¿ es solo en español.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex3-4"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ SOLO ? al final.</div><div class="why-wrong">✗ NO usar ¿ en inglés.</div></div></div></div>
+                <div class="exercise" id="ex3-5"><div class="exercise-q">5. "cats dogs and birds" necesita:</div><div class="opts"><button class="opt-btn" onclick="check('ex3-5','a','a')">a) cats, dogs, and birds</button><button class="opt-btn" onclick="check('ex3-5','b','a')">b) cats dogs and birds.</button></div><div class="feedback correct-fb" id="fb-ex3-5"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ COMAS separan elementos en lista.</div><div class="why-wrong">✗ Sin comas es confuso.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex3-5"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Comas necesarias en listas.</div><div class="why-wrong">✗ Sin comas = error.</div></div></div></div>
+                <div class="score-box"><div class="num" id="score3">0/5</div><div class="label">Paso 3</div></div>
+            </div>
+        </div>
+
+        <div class="step-card" id="step4">
+            <div class="step-header"><span class="step-icon">💡</span><span class="step-title">Paso 4: Consejos Rápidos</span></div>
+            <div class="rule-box"><div class="formula">🎯 . termina | , separa | ? pregunta | ! énfasis</div></div>
+            <div class="word-grid">
+                <div class="word-tag">Hello.</div>
+                <div class="word-tag">Hello?</div>
+                <div class="word-tag">Hello!</div>
+                <div class="word-tag">cats, dogs</div>
+            </div>
+            <div class="tip-box"><strong>🎯 Punto:</strong> Al final de oración (I am happy.)</div>
+            <div class="tip-box"><strong>⚠️ Coma:</strong> En listas (apples, oranges, bananas)</div>
+            <div class="tip-box"><strong>📝 Pregunta:</strong> Solo ? al final (How are you?)</div>
+            <div class="tip-box"><strong>🔄 NO usar:</strong> ¿ ni ¡ en inglés (solo español)</div>
+            <div class="exercise-section"><h3>✏️ Ejercicios</h3>
+                <div class="exercise" id="ex4-1"><div class="exercise-q">1. "Hello my name is Ana" →</div><div class="opts"><button class="opt-btn" onclick="check('ex4-1','a','a')">a) Hello. My name is Ana.</button><button class="opt-btn" onclick="check('ex4-1','b','a')">b) Hello my name is Ana</button></div><div class="feedback correct-fb" id="fb-ex4-1"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Punto + mayúscula + punto final.</div><div class="why-wrong">✗ Sin puntos = incorrecto.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex4-1"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Necesita puntos.</div><div class="why-wrong">✗ Son 2 oraciones.</div></div></div></div>
+                <div class="exercise" id="ex4-2"><div class="exercise-q">2. "I like cats dogs birds" →</div><div class="opts"><button class="opt-btn" onclick="check('ex4-2','a','a')">a) cats, dogs, and birds</button><button class="opt-btn" onclick="check('ex4-2','b','a')">b) cats dogs and birds</button></div><div class="feedback correct-fb" id="fb-ex4-2"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Comas en listas.</div><div class="why-wrong">✗ Sin comas = error.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex4-2"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Necesita comas.</div><div class="why-wrong">✗ Listas usan comas.</div></div></div></div>
+                <div class="exercise" id="ex4-3"><div class="exercise-q">3. "Where are you" →</div><div class="opts"><button class="opt-btn" onclick="check('ex4-3','a','a')">a) Where are you?</button><button class="opt-btn" onclick="check('ex4-3','b','a')">b) ¿Where are you?</button></div><div class="feedback correct-fb" id="fb-ex4-3"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Solo ? al final.</div><div class="why-wrong">✗ NO ¿ en inglés.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex4-3"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Solo ? al final.</div><div class="why-wrong">✗ ¿ es español.</div></div></div></div>
+                <div class="exercise" id="ex4-4"><div class="exercise-q">4. "Thank you" con énfasis →</div><div class="opts"><button class="opt-btn" onclick="check('ex4-4','a','a')">a) Thank you!</button><button class="opt-btn" onclick="check('ex4-4','b','a')">b) ¡Thank you!</button></div><div class="feedback correct-fb" id="fb-ex4-4"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Solo ! al final.</div><div class="why-wrong">✗ NO ¡ en inglés.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex4-4"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Solo ! al final.</div><div class="why-wrong">✗ ¡ es español.</div></div></div></div>
+                <div class="exercise" id="ex4-5"><div class="exercise-q">5. Después de punto va:</div><div class="opts"><button class="opt-btn" onclick="check('ex4-5','a','a')">a) Mayúscula</button><button class="opt-btn" onclick="check('ex4-5','b','a')">b) Minúscula</button></div><div class="feedback correct-fb" id="fb-ex4-5"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ MAYÚSCULA siempre.</div><div class="why-wrong">✗ Es nueva oración.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex4-5"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ MAYÚSCULA después de punto.</div><div class="why-wrong">✗ Nueva oración = mayúscula.</div></div></div></div>
+                <div class="score-box"><div class="num" id="score4">0/5</div><div class="label">Paso 4</div></div>
+            </div>
+        </div>
+
+        <div class="step-card" id="step5">
+            <div class="step-header"><span class="step-icon">✨</span><span class="step-title">Paso 5: Práctica Final</span></div>
+            <div class="rule-box"><div class="formula">. = termina | , = separa | ? = pregunta</div></div>
+            <div class="quick-example right"><span class="emoji">✅</span><div class="text"><div class="en">Hello. My name is Ana.</div><div class="es">Hola. Mi nombre es Ana.</div></div></div>
+            <div class="quick-example right"><span class="emoji">✅</span><div class="text"><div class="en">I like apples, oranges, and bananas.</div><div class="es">Me gustan manzanas, naranjas y plátanos.</div></div></div>
+            <div class="quick-example right"><span class="emoji">✅</span><div class="text"><div class="en">How are you?</div><div class="es">¿Cómo estás?</div></div></div>
+            <div class="exercise-section"><h3>✏️ Práctica Final</h3>
+                <div class="exercise" id="ex5-1"><div class="exercise-q">1. "Hello Where are you" →</div><div class="opts"><button class="opt-btn" onclick="check('ex5-1','a','a')">a) Hello. Where are you?</button><button class="opt-btn" onclick="check('ex5-1','b','a')">b) Hello where are you</button></div><div class="feedback correct-fb" id="fb-ex5-1"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Punto + mayúscula + pregunta.</div><div class="why-wrong">✗ Sin puntuación = error.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex5-1"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Necesita punto y ?.</div><div class="why-wrong">✗ Son 2 oraciones.</div></div></div></div>
+                <div class="exercise" id="ex5-2"><div class="exercise-q">2. "I like cats dogs" →</div><div class="opts"><button class="opt-btn" onclick="check('ex5-2','a','b')">a) cats, dogs.</button><button class="opt-btn" onclick="check('ex5-2','b','b')">b) cats and dogs.</button></div><div class="feedback correct-fb" id="fb-ex5-2"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Solo 2 elementos = NO coma antes de "and".</div><div class="why-wrong">✗ Coma solo con 3+ elementos.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex5-2"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ 2 elementos = and sin coma.</div><div class="why-wrong">✗ Coma es para 3+.</div></div></div></div>
+                <div class="exercise" id="ex5-3"><div class="exercise-q">3. "My <strong>mother</strong> is happy" →</div><div class="opts"><button class="opt-btn" onclick="check('ex5-3','a','a')">a) My mother is happy.</button><button class="opt-btn" onclick="check('ex5-3','b','a')">b) My mother is happy</button></div><div class="feedback correct-fb" id="fb-ex5-3"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ PUNTO al final.</div><div class="why-wrong">✗ Sin punto = incompleto.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex5-3"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Necesita punto final.</div><div class="why-wrong">✗ Siempre termina con punto.</div></div></div></div>
+                <div class="exercise" id="ex5-4"><div class="exercise-q">4. "Thank you so much" →</div><div class="opts"><button class="opt-btn" onclick="check('ex5-4','a','a')">a) Thank you!</button><button class="opt-btn" onclick="check('ex5-4','b','a')">b) ¡Thank you!</button></div><div class="feedback correct-fb" id="fb-ex5-4"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Solo ! al final.</div><div class="why-wrong">✗ NO ¡ en inglés.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex5-4"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ Solo ! al final.</div><div class="why-wrong">✗ ¡ es español.</div></div></div></div>
+                <div class="exercise" id="ex5-5"><div class="exercise-q">5. "apples oranges bananas" →</div><div class="opts"><button class="opt-btn" onclick="check('ex5-5','a','a')">a) apples, oranges, and bananas</button><button class="opt-btn" onclick="check('ex5-5','b','a')">b) apples oranges and bananas</button></div><div class="feedback correct-fb" id="fb-ex5-5"><div class="result">✅ ¡Correcto!</div><div class="explanation"><div class="why-correct">✓ Comas en listas de 3+.</div><div class="why-wrong">✗ Sin comas = error.</div></div></div><div class="feedback incorrect-fb" id="fbi-ex5-5"><div class="result">❌ Incorrecto</div><div class="explanation"><div class="why-correct">✓ 3+ elementos = comas.</div><div class="why-wrong">✗ Sin comas es confuso.</div></div></div></div>
+                <div class="score-box"><div class="num" id="score5">0/5</div><div class="label">Paso 5</div></div>
+            </div>
+            <div style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, #ffe8ec 0%, #ffdde1 100%); border-radius: 12px;">
+                <h3 style="color: #d8869b; font-size: 0.95rem; margin-bottom: 10px;">🎓 Resumen</h3>
+                <ul class="summary-list">
+                    <li><strong>Punto (.):</strong> Termina oraciones</li>
+                    <li><strong>Coma (,):</strong> Separa elementos en listas</li>
+                    <li><strong>? solo al final:</strong> NO usar ¿ en inglés</li>
+                    <li><strong>! solo al final:</strong> NO usar ¡ en inglés</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <button class="nav-btn prev" id="prevBtn" onclick="prevStep()" disabled>← Anterior</button>
+            <span class="step-ind"><span id="currentStep">1</span>/5</span>
+            <button class="nav-btn next" id="nextBtn" onclick="nextStep()">Siguiente →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 5;
+        const scores = {1:0, 2:0, 3:0, 4:0, 5:0};
+        const answered = {};
+
+        function goToStep(step) {
+            if (step < 1 || step > totalSteps) return;
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.querySelectorAll('.step-dot')[currentStep-1].classList.remove('active');
+            if (step > currentStep) {
+                document.querySelectorAll('.step-dot')[currentStep-1].classList.add('completed');
+            }
+            currentStep = step;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            document.querySelectorAll('.step-dot')[currentStep-1].classList.add('active');
+            updateNav();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function nextStep() { if (currentStep < totalSteps) goToStep(currentStep + 1); }
+        function prevStep() { if (currentStep > 1) goToStep(currentStep - 1); }
+
+        function updateNav() {
+            document.getElementById('currentStep').textContent = currentStep;
+            document.getElementById('prevBtn').disabled = currentStep === 1;
+            document.getElementById('nextBtn').disabled = currentStep === totalSteps;
+            document.getElementById('nextBtn').textContent = currentStep === totalSteps ? '✓ Fin' : 'Siguiente →';
+        }
+
+        function check(id, sel, correct) {
+            if (answered[id]) return;
+            answered[id] = true;
+            const ex = document.getElementById(id);
+            const btns = ex.querySelectorAll('.opt-btn');
+            const fbCorrect = document.getElementById(`fb-${id}`);
+            const fbIncorrect = document.getElementById(`fbi-${id}`);
+            btns.forEach(b => b.disabled = true);
+            const stepNum = parseInt(id.split('-')[0].replace('ex',''));
+            if (sel === correct) {
+                ex.classList.add('correct');
+                btns.forEach(b => { if (b.textContent.startsWith(sel+')')) b.classList.add('sel-correct'); });
+                fbCorrect.classList.add('show');
+                scores[stepNum]++;
+            } else {
+                ex.classList.add('incorrect');
+                btns.forEach(b => {
+                    if (b.textContent.startsWith(sel+')')) b.classList.add('sel-wrong');
+                    if (b.textContent.startsWith(correct+')')) b.classList.add('show-correct');
+                });
+                fbIncorrect.classList.add('show');
+            }
+            document.getElementById(`score${stepNum}`).textContent = `${scores[stepNum]}/5`;
+        }
+
+        updateNav();
+    </script>
+</body>
+</html>

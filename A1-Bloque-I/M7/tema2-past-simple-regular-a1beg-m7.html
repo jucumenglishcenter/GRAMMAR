@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past Simple Regular | A1-Beg M7 | JUCUM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffe8ec 0%, #ffdde1 100%);
+            min-height: 100vh;
+            padding: 15px;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%);
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(238, 156, 167, 0.4);
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 3px;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            color: white;
+        }
+
+        .progress-nav {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+
+        .step-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #ee9ca7;
+            background: white;
+            color: #ee9ca7;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+
+        .step-dot.active {
+            background: #ee9ca7;
+            color: white;
+        }
+
+        .step-dot.completed {
+            background: #d8869b;
+            color: white;
+            border-color: #d8869b;
+        }
+
+        .step-card {
+            display: none;
+            background: white;
+            border-radius: 16px;
+            padding: 20px 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+
+        .step-card.active {
+            display: block;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ffe8ec;
+        }
+
+        .step-icon {
+            font-size: 1.8rem;
+        }
+
+        .step-title {
+            color: #d8869b;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .compare-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .compare-item {
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .compare-item.pink {
+            background: linear-gradient(135deg, #ffdde1 0%, #ffcdd6 100%);
+            border: 2px solid #ee9ca7;
+        }
+
+        .compare-item .icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .compare-item .label {
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            color: #d8869b;
+        }
+
+        .compare-item ul {
+            list-style: none;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        .compare-item li {
+            padding: 3px 0;
+        }
+
+        .quick-example {
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quick-example .emoji {
+            font-size: 1.3rem;
+        }
+
+        .quick-example .text {
+            flex: 1;
+        }
+
+        .quick-example .en {
+            color: #d8869b;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .quick-example .es {
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        .quick-example.wrong {
+            background: #ffebee;
+            border-left: 3px solid #f44336;
+        }
+
+        .quick-example.right {
+            background: #ffe8ec;
+            border-left: 3px solid #ee9ca7;
+        }
+
+        .mini-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 0.8rem;
+        }
+
+        .mini-table th {
+            background: #ee9ca7;
+            color: white;
+            padding: 8px 6px;
+            text-align: center;
+        }
+
+        .mini-table td {
+            padding: 8px 6px;
+            border-bottom: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .mini-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin: 10px 0;
+            font-size: 0.85rem;
+            border-left: 3px solid #fbc02d;
+        }
+
+        .tip-box strong {
+            color: #f57f17;
+        }
+
+        .rule-box {
+            background: linear-gradient(135deg, #ffdde1 0%, #ffcdd6 100%);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+            text-align: center;
+            border: 2px solid #ee9ca7;
+        }
+
+        .rule-box .formula {
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #d8869b;
+            font-weight: 600;
+        }
+
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+            margin: 10px 0;
+        }
+
+        .word-tag {
+            padding: 6px 8px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            text-align: center;
+            font-weight: 500;
+            background: #ffdde1;
+            color: #d8869b;
+        }
+
+        .alert-box {
+            background: #ffebee;
+            border: 2px solid #ef5350;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .alert-box .title {
+            color: #c62828;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+        }
+
+        .exercise-section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px dashed #ffdde1;
+        }
+
+        .exercise-section h3 {
+            color: #d8869b;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .exercise {
+            background: #fafafa;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .exercise.correct {
+            border-color: #ee9ca7;
+            background: #ffe8ec;
+        }
+
+        .exercise.incorrect {
+            border-color: #f44336;
+            background: #ffebee;
+        }
+
+        .exercise-q {
+            font-size: 0.9rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .exercise-q strong {
+            color: #d8869b;
+        }
+
+        .opts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        .opt-btn {
+            padding: 10px 8px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            color: #555;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .opt-btn:hover:not(:disabled) {
+            border-color: #ee9ca7;
+            background: #ffe8ec;
+        }
+
+        .opt-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .opt-btn.sel-correct {
+            background: #ee9ca7;
+            color: white;
+            border-color: #ee9ca7;
+        }
+
+        .opt-btn.sel-wrong {
+            background: #f44336;
+            color: white;
+            border-color: #f44336;
+        }
+
+        .opt-btn.show-correct {
+            background: #ee9ca7;
+            color: white;
+            border-color: #ee9ca7;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct-fb {
+            background: #ffe8ec;
+            border: 1px solid #ffdde1;
+        }
+
+        .feedback.incorrect-fb {
+            background: #ffebee;
+            border: 1px solid #ef9a9a;
+        }
+
+        .feedback .result {
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .feedback.correct-fb .result {
+            color: #d8869b;
+        }
+
+        .feedback.incorrect-fb .result {
+            color: #c62828;
+        }
+
+        .feedback .explanation {
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .feedback .why-correct {
+            color: #d8869b;
+            margin-bottom: 4px;
+        }
+
+        .feedback .why-wrong {
+            color: #c62828;
+        }
+
+        .score-box {
+            text-align: center;
+            padding: 12px;
+            background: linear-gradient(135deg, #ffe8ec 0%, #ffdde1 100%);
+            border-radius: 10px;
+            margin-top: 12px;
+        }
+
+        .score-box .num {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #d8869b;
+        }
+
+        .score-box .label {
+            font-size: 0.8rem;
+            color: #ee9ca7;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 12px 15px;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .nav-btn.prev {
+            background: #e0e0e0;
+            color: #666;
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%);
+            color: white;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .step-ind {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .summary-list {
+            list-style: none;
+        }
+
+        .summary-list li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .summary-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #ee9ca7;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 Past Simple (Regular)</h1>
+            <div class="badge">🍑 A1-Beginner • M7 • Tema 2</div>
+        </div>
+
+        <div class="progress-nav">
+            <div class="step-dot active" onclick="goToStep(1)">1</div>
+            <div class="step-dot" onclick="goToStep(2)">2</div>
+            <div class="step-dot" onclick="goToStep(3)">3</div>
+            <div class="step-dot" onclick="goToStep(4)">4</div>
+            <div class="step-dot" onclick="goToStep(5)">5</div>
+        </div>
+
+        <!-- STEP 1 -->
+        <div class="step-card active" id="step1">
+            <div class="step-header">
+                <span class="step-icon">🇪🇸</span>
+                <span class="step-title">Paso 1: Repaso en Español</span>
+            </div>
+
+            <div class="compare-box">
+                <div class="compare-item pink">
+                    <div class="icon">📏</div>
+                    <div class="label">REGULARES</div>
+                    <ul>
+                        <li>✓ Siguen patrón</li>
+                        <li>✓ Predecibles</li>
+                        <li>✓ Añaden terminación</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="quick-example">
+                <span class="emoji">📖</span>
+                <div class="text">
+                    <div class="en">hablar → hablé, hablaste, habló</div>
+                    <div class="es">Sigue el patrón: -ar → -é/-aste/-ó</div>
+                </div>
+            </div>
+
+            <div class="quick-example">
+                <span class="emoji">📚</span>
+                <div class="text">
+                    <div class="en">comer → comí, comiste, comió</div>
+                    <div class="es">Patrón: -er → -í/-iste/-ió</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 En español:</strong> Los regulares tienen terminaciones predecibles según -ar/-er/-ir.
+            </div>
+
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex1-1">
+                    <div class="exercise-q">1. "Caminé al parque" es regular porque:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-1','a','a')">a) Sigue patrón</button>
+                        <button class="opt-btn" onclick="check('ex1-1','b','a')">b) Cambia raíz</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ SIGUE patrón: caminar → caminé (añade -é).</div>
+                            <div class="why-wrong">✗ Los que CAMBIAN raíz son irregulares.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ SIGUE patrón - caminar → caminé (predecible).</div>
+                            <div class="why-wrong">✗ NO cambia raíz - mantiene "camin-".</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-2">
+                    <div class="exercise-q">2. En español, verbos regulares son:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-2','a','a')">a) Predecibles</button>
+                        <button class="opt-btn" onclick="check('ex1-2','b','a')">b) Impredecibles</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ PREDECIBLES - siguen reglas fijas.</div>
+                            <div class="why-wrong">✗ Los impredecibles son los IRREGULARES.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ PREDECIBLES - hablar → hablé (siempre).</div>
+                            <div class="why-wrong">✗ Los irregulares son impredecibles.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-3">
+                    <div class="exercise-q">3. "Comí pizza" sigue el patrón de:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-3','a','a')">a) Verbos -er</button>
+                        <button class="opt-btn" onclick="check('ex1-3','b','a')">b) Verbos -ar</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ COMER es -er → comí (patrón -er).</div>
+                            <div class="why-wrong">✗ Los -ar tienen otro patrón (hablé).</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Verbos -ER: comer → comí.</div>
+                            <div class="why-wrong">✗ -AR es diferente: hablar → hablé.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-4">
+                    <div class="exercise-q">4. Los verbos regulares:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-4','a','b')">a) Se memorizan</button>
+                        <button class="opt-btn" onclick="check('ex1-4','b','b')">b) Se calculan</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ SE CALCULAN - aplicas la regla.</div>
+                            <div class="why-wrong">✗ Los que se memorizan son IRREGULARES.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ SE CALCULAN - aplicas regla: -ar → -é.</div>
+                            <div class="why-wrong">✗ Memorizar es para irregulares (hacer→hice).</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex1-5">
+                    <div class="exercise-q">5. "Trabajé ayer" - ¿regular o irregular?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex1-5','a','a')">a) Regular</button>
+                        <button class="opt-btn" onclick="check('ex1-5','b','a')">b) Irregular</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex1-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ REGULAR: trabajar → trabajé (patrón -ar).</div>
+                            <div class="why-wrong">✗ Es regular porque sigue regla.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex1-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ REGULAR - trabajar → trabajé (predecible).</div>
+                            <div class="why-wrong">✗ NO es irregular - sigue patrón.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score1">0/5</div>
+                    <div class="label">Paso 1</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step-card" id="step2">
+            <div class="step-header">
+                <span class="step-icon">🤝</span>
+                <span class="step-title">Paso 2: Similitudes ESP ↔ ENG</span>
+            </div>
+
+            <table class="mini-table">
+                <tr>
+                    <th>Similitud</th>
+                    <th>Español</th>
+                    <th>English</th>
+                </tr>
+                <tr>
+                    <td>Añaden terminación</td>
+                    <td>caminar → caminé</td>
+                    <td>walk → walked</td>
+                </tr>
+                <tr>
+                    <td>Siguen patrón</td>
+                    <td>-ar → -é/-aste</td>
+                    <td>verb → verb + -ed</td>
+                </tr>
+                <tr>
+                    <td>Son predecibles</td>
+                    <td>hablar → hablé</td>
+                    <td>talk → talked</td>
+                </tr>
+                <tr>
+                    <td>No cambian raíz</td>
+                    <td>trabajar → trabajé</td>
+                    <td>work → worked</td>
+                </tr>
+            </table>
+
+            <div class="quick-example right">
+                <span class="emoji">✅</span>
+                <div class="text">
+                    <div class="en">walk → walked (añade -ed)</div>
+                    <div class="es">caminar → caminé (añade -é)</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">✅</span>
+                <div class="text">
+                    <div class="en">work → worked (predecible)</div>
+                    <div class="es">trabajar → trabajé (predecible)</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Parecido:</strong> En ambos idiomas añaden terminación sin cambiar raíz.
+            </div>
+
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex2-1">
+                    <div class="exercise-q">1. En inglés, regulares añaden:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-1','a','a')">a) -ed</button>
+                        <button class="opt-btn" onclick="check('ex2-1','b','a')">b) -ing</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Añaden -ED: walk → walked, work → worked.</div>
+                            <div class="why-wrong">✗ -ING es para presente continuo.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ -ED para pasado: walked, worked, talked.</div>
+                            <div class="why-wrong">✗ -ING no es para pasado simple.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-2">
+                    <div class="exercise-q">2. "Walk → walked" es similar a:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-2','a','a')">a) caminar → caminé</button>
+                        <button class="opt-btn" onclick="check('ex2-2','b','a')">b) ir → fui</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Ambos REGULARES: añaden terminación.</div>
+                            <div class="why-wrong">✗ "Ir → fui" es IRREGULAR.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "Caminar → caminé" - ambos regulares.</div>
+                            <div class="why-wrong">✗ "Ir → fui" es irregular (no se compara).</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-3">
+                    <div class="exercise-q">3. Los regulares en ambos idiomas:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-3','a','a')">a) Siguen patrón</button>
+                        <button class="opt-btn" onclick="check('ex2-3','b','a')">b) Cambian raíz</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ SIGUEN patrón fijo y predecible.</div>
+                            <div class="why-wrong">✗ Los que cambian raíz son IRREGULARES.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ SIGUEN patrón: walk→walked, caminar→caminé.</div>
+                            <div class="why-wrong">✗ NO cambian raíz - eso es irregular.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-4">
+                    <div class="exercise-q">4. "Worked" es pasado de:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-4','a','a')">a) work</button>
+                        <button class="opt-btn" onclick="check('ex2-4','b','a')">b) walk</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ WORK → worked (añade -ed).</div>
+                            <div class="why-wrong">✗ Walk tiene otro pasado: walked también, pero la base es "walk".</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ WORK → worked (I worked yesterday).</div>
+                            <div class="why-wrong">✗ Walk es diferente base verbal.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex2-5">
+                    <div class="exercise-q">5. Los regulares son:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex2-5','a','a')">a) Fáciles de aprender</button>
+                        <button class="opt-btn" onclick="check('ex2-5','b','a')">b) Difíciles</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex2-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ FÁCILES - solo aplicas la regla -ed.</div>
+                            <div class="why-wrong">✗ Son fáciles porque son predecibles.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex2-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Son FÁCILES - regla simple: verb + -ed.</div>
+                            <div class="why-wrong">✗ Los difíciles son irregulares.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score2">0/5</div>
+                    <div class="label">Paso 2</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step-card" id="step3">
+            <div class="step-header">
+                <span class="step-icon">⚠️</span>
+                <span class="step-title">Paso 3: ¡Cuidado! Diferencias</span>
+            </div>
+
+            <div class="alert-box">
+                <div class="title">🚨 DIFERENCIA CLAVE</div>
+                En inglés: UNA sola forma (-ed) para TODAS las personas
+            </div>
+
+            <table class="mini-table">
+                <tr>
+                    <th>Español</th>
+                    <th>English</th>
+                    <th>Explicación</th>
+                </tr>
+                <tr>
+                    <td>Yo caminé<br>Tú caminaste<br>Él caminó</td>
+                    <td>I walked<br>You walked<br>He walked</td>
+                    <td>EN INGLÉS = MISMA forma</td>
+                </tr>
+                <tr>
+                    <td>Trabajé<br>Trabajaste<br>Trabajaron</td>
+                    <td>I worked<br>You worked<br>They worked</td>
+                    <td>SOLO cambia el sujeto</td>
+                </tr>
+                <tr>
+                    <td>3 terminaciones<br>-é/-aste/-ó</td>
+                    <td>1 terminación<br>-ed</td>
+                    <td>MÁS SIMPLE en inglés</td>
+                </tr>
+            </table>
+
+            <div class="quick-example wrong">
+                <span class="emoji">❌</span>
+                <div class="text">
+                    <div class="en">She walkeds to school</div>
+                    <div class="es">INCORRECTO - NO añadir -s extra</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">✅</span>
+                <div class="text">
+                    <div class="en">She walked to school</div>
+                    <div class="es">walked = para TODAS las personas</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Truco:</strong> En inglés, -ed NO cambia (I walked, you walked, he walked).
+            </div>
+
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex3-1">
+                    <div class="exercise-q">1. "She ___ to the store yesterday"</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-1','a','a')">a) walked</button>
+                        <button class="opt-btn" onclick="check('ex3-1','b','a')">b) walkeds</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ WALKED - NO añadir -s extra.</div>
+                            <div class="why-wrong">✗ "Walkeds" NO existe.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ WALKED - forma única para todos.</div>
+                            <div class="why-wrong">✗ "Walkeds" es error común - NO añadir -s.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-2">
+                    <div class="exercise-q">2. "They ___ hard yesterday"</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-2','a','a')">a) worked</button>
+                        <button class="opt-btn" onclick="check('ex3-2','b','a')">b) workeds</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ WORKED - sin -s extra.</div>
+                            <div class="why-wrong">✗ "Workeds" NO existe.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ WORKED - igual para "they".</div>
+                            <div class="why-wrong">✗ NO añadir -s en pasado.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-3">
+                    <div class="exercise-q">3. "I ___ my homework"</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-3','a','b')">a) finish</button>
+                        <button class="opt-btn" onclick="check('ex3-3','b','b')">b) finished</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ FINISHED - añadir -ed para pasado.</div>
+                            <div class="why-wrong">✗ "Finish" es presente.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ FINISHED - finish + -ed.</div>
+                            <div class="why-wrong">✗ "Finish" es presente, no pasado.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-4">
+                    <div class="exercise-q">4. ¿Cuál es DIFERENTE en español vs inglés?</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-4','a','a')">a) Cambia por persona</button>
+                        <button class="opt-btn" onclick="check('ex3-4','b','a')">b) Añaden terminación</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ ESP: caminé/caminaste | ENG: walked/walked (NO cambia).</div>
+                            <div class="why-wrong">✗ Ambos SÍ añaden terminación.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ "Cambia por persona" - ESP sí, ENG no.</div>
+                            <div class="why-wrong">✗ Ambos añaden terminación - eso es igual.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex3-5">
+                    <div class="exercise-q">5. "We ___ to music"</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex3-5','a','a')">a) listened</button>
+                        <button class="opt-btn" onclick="check('ex3-5','b','a')">b) listeneds</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex3-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ LISTENED - sin -s extra.</div>
+                            <div class="why-wrong">✗ "Listeneds" NO existe.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex3-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ LISTENED - listen + -ed.</div>
+                            <div class="why-wrong">✗ NO añadir -s en pasado.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score3">0/5</div>
+                    <div class="label">Paso 3</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="step-card" id="step4">
+            <div class="step-header">
+                <span class="step-icon">💡</span>
+                <span class="step-title">Paso 4: Consejos Rápidos</span>
+            </div>
+
+            <div class="rule-box">
+                <div class="formula">🎯 REGLA: verb + -ed (para TODAS las personas)</div>
+            </div>
+
+            <div class="word-grid">
+                <div class="word-tag">walk → walked</div>
+                <div class="word-tag">work → worked</div>
+                <div class="word-tag">talk → talked</div>
+                <div class="word-tag">play → played</div>
+                <div class="word-tag">watch → watched</div>
+                <div class="word-tag">listen → listened</div>
+                <div class="word-tag">clean → cleaned</div>
+                <div class="word-tag">cook → cooked</div>
+            </div>
+
+            <div class="tip-box">
+                <strong>🎯 Súper fácil:</strong> Solo añade -ed (walk → walked).
+            </div>
+
+            <div class="tip-box">
+                <strong>⚠️ Cuidado -e:</strong> Si termina en -e, solo añade -d (live → lived).
+            </div>
+
+            <div class="tip-box">
+                <strong>📝 NO añadir -s:</strong> En pasado NO hay -s para he/she (walked, NO walkeds).
+            </div>
+
+            <div class="tip-box">
+                <strong>🔄 Mismo siempre:</strong> I walked, you walked, he walked, they walked.
+            </div>
+
+            <div class="exercise-section">
+                <h3>✏️ Ejercicios</h3>
+
+                <div class="exercise" id="ex4-1">
+                    <div class="exercise-q">1. "He ___ TV last night"</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-1','a','a')">a) watched</button>
+                        <button class="opt-btn" onclick="check('ex4-1','b','a')">b) watch</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ WATCHED - watch + -ed.</div>
+                            <div class="why-wrong">✗ "Watch" es presente.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ WATCHED - pasado regular.</div>
+                            <div class="why-wrong">✗ Necesita -ed para pasado.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-2">
+                    <div class="exercise-q">2. "She ___ the house"</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-2','a','a')">a) cleaned</button>
+                        <button class="opt-btn" onclick="check('ex4-2','b','a')">b) cleaneds</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ CLEANED - sin -s extra.</div>
+                            <div class="why-wrong">✗ "Cleaneds" NO existe.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ CLEANED - clean + -ed.</div>
+                            <div class="why-wrong">✗ NO añadir -s en pasado.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-3">
+                    <div class="exercise-q">3. "I ___ in Lima" (vivir)</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-3','a','a')">a) lived</button>
+                        <button class="opt-btn" onclick="check('ex4-3','b','a')">b) liveed</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ LIVED - live ya termina en -e, solo añade -d.</div>
+                            <div class="why-wrong">✗ "Liveed" es incorrecto - no duplicar -e.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ LIVED - termina en -e, solo añade -d.</div>
+                            <div class="why-wrong">✗ NO escribir -eed.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-4">
+                    <div class="exercise-q">4. "They ___ soccer"</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-4','a','a')">a) played</button>
+                        <button class="opt-btn" onclick="check('ex4-4','b','a')">b) play</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ PLAYED - play + -ed.</div>
+                            <div class="why-wrong">✗ "Play" es presente.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ PLAYED - necesita -ed.</div>
+                            <div class="why-wrong">✗ Presente no funciona aquí.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex4-5">
+                    <div class="exercise-q">5. Verbos regulares son:</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex4-5','a','a')">a) Fáciles</button>
+                        <button class="opt-btn" onclick="check('ex4-5','b','a')">b) Difíciles</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex4-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ FÁCILES - solo añade -ed.</div>
+                            <div class="why-wrong">✗ Son los más simples.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex4-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ Son FÁCILES - regla simple.</div>
+                            <div class="why-wrong">✗ Los difíciles son irregulares.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score4">0/5</div>
+                    <div class="label">Paso 4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="step-card" id="step5">
+            <div class="step-header">
+                <span class="step-icon">✨</span>
+                <span class="step-title">Paso 5: Práctica Final</span>
+            </div>
+
+            <div class="rule-box">
+                <div class="formula">
+                    Subject + verb + -ed + complement
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">✅</span>
+                <div class="text">
+                    <div class="en">I <strong>walked</strong> to school yesterday.</div>
+                    <div class="es">Yo caminé a la escuela ayer.</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">✅</span>
+                <div class="text">
+                    <div class="en">She <strong>worked</strong> hard last week.</div>
+                    <div class="es">Ella trabajó duro la semana pasada.</div>
+                </div>
+            </div>
+
+            <div class="quick-example right">
+                <span class="emoji">✅</span>
+                <div class="text">
+                    <div class="en">They <strong>played</strong> soccer.</div>
+                    <div class="es">Ellos jugaron fútbol.</div>
+                </div>
+            </div>
+
+            <div class="exercise-section">
+                <h3>✏️ Práctica Final</h3>
+
+                <div class="exercise" id="ex5-1">
+                    <div class="exercise-q">1. My <strong>mother</strong> ___ dinner.</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-1','a','a')">a) cooked</button>
+                        <button class="opt-btn" onclick="check('ex5-1','b','a')">b) cook</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-1">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ COOKED - cook + -ed.</div>
+                            <div class="why-wrong">✗ "Cook" es presente.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-1">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ COOKED es pasado.</div>
+                            <div class="why-wrong">✗ Necesita -ed.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-2">
+                    <div class="exercise-q">2. I ___ to music.</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-2','a','a')">a) listened</button>
+                        <button class="opt-btn" onclick="check('ex5-2','b','a')">b) listen</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-2">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ LISTENED - listen + -ed.</div>
+                            <div class="why-wrong">✗ "Listen" es presente.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-2">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ LISTENED es correcto.</div>
+                            <div class="why-wrong">✗ Necesita -ed para pasado.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-3">
+                    <div class="exercise-q">3. They ___ the movie.</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-3','a','a')">a) watched</button>
+                        <button class="opt-btn" onclick="check('ex5-3','b','a')">b) watch</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-3">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ WATCHED - watch + -ed.</div>
+                            <div class="why-wrong">✗ "Watch" es presente.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-3">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ WATCHED es pasado.</div>
+                            <div class="why-wrong">✗ Necesita -ed.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-4">
+                    <div class="exercise-q">4. We ___ soccer.</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-4','a','a')">a) played</button>
+                        <button class="opt-btn" onclick="check('ex5-4','b','a')">b) play</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-4">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ PLAYED - play + -ed.</div>
+                            <div class="why-wrong">✗ "Play" es presente.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-4">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ PLAYED es correcto.</div>
+                            <div class="why-wrong">✗ Necesita -ed.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise" id="ex5-5">
+                    <div class="exercise-q">5. She ___ the house.</div>
+                    <div class="opts">
+                        <button class="opt-btn" onclick="check('ex5-5','a','a')">a) cleaned</button>
+                        <button class="opt-btn" onclick="check('ex5-5','b','a')">b) clean</button>
+                    </div>
+                    <div class="feedback correct-fb" id="fb-ex5-5">
+                        <div class="result">✅ ¡Correcto!</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ CLEANED - clean + -ed.</div>
+                            <div class="why-wrong">✗ "Clean" es presente.</div>
+                        </div>
+                    </div>
+                    <div class="feedback incorrect-fb" id="fbi-ex5-5">
+                        <div class="result">❌ Incorrecto</div>
+                        <div class="explanation">
+                            <div class="why-correct">✓ CLEANED es pasado.</div>
+                            <div class="why-wrong">✗ Necesita -ed.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-box">
+                    <div class="num" id="score5">0/5</div>
+                    <div class="label">Paso 5</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, #ffe8ec 0%, #ffdde1 100%); border-radius: 12px;">
+                <h3 style="color: #d8869b; font-size: 0.95rem; margin-bottom: 10px;">🎓 Resumen</h3>
+                <ul class="summary-list">
+                    <li><strong>Regla simple:</strong> verb + -ed (walk→walked, work→worked)</li>
+                    <li><strong>MISMA forma:</strong> I/you/he/she/they = walked</li>
+                    <li><strong>Si termina en -e:</strong> solo añade -d (live→lived)</li>
+                    <li><strong>NO añadir -s:</strong> En pasado NO hay -s para he/she</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <button class="nav-btn prev" id="prevBtn" onclick="prevStep()" disabled>← Anterior</button>
+            <span class="step-ind"><span id="currentStep">1</span>/5</span>
+            <button class="nav-btn next" id="nextBtn" onclick="nextStep()">Siguiente →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 5;
+        const scores = {1:0, 2:0, 3:0, 4:0, 5:0};
+        const answered = {};
+
+        function goToStep(step) {
+            if (step < 1 || step > totalSteps) return;
+            
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.querySelectorAll('.step-dot')[currentStep-1].classList.remove('active');
+            
+            if (step > currentStep) {
+                document.querySelectorAll('.step-dot')[currentStep-1].classList.add('completed');
+            }
+            
+            currentStep = step;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            document.querySelectorAll('.step-dot')[currentStep-1].classList.add('active');
+            
+            updateNav();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function nextStep() { if (currentStep < totalSteps) goToStep(currentStep + 1); }
+        function prevStep() { if (currentStep > 1) goToStep(currentStep - 1); }
+
+        function updateNav() {
+            document.getElementById('currentStep').textContent = currentStep;
+            document.getElementById('prevBtn').disabled = currentStep === 1;
+            document.getElementById('nextBtn').disabled = currentStep === totalSteps;
+            document.getElementById('nextBtn').textContent = currentStep === totalSteps ? '✓ Fin' : 'Siguiente →';
+        }
+
+        function check(id, sel, correct) {
+            if (answered[id]) return;
+            answered[id] = true;
+            
+            const ex = document.getElementById(id);
+            const btns = ex.querySelectorAll('.opt-btn');
+            const fbCorrect = document.getElementById(`fb-${id}`);
+            const fbIncorrect = document.getElementById(`fbi-${id}`);
+            
+            btns.forEach(b => b.disabled = true);
+            
+            const stepNum = parseInt(id.split('-')[0].replace('ex',''));
+            
+            if (sel === correct) {
+                ex.classList.add('correct');
+                btns.forEach(b => { 
+                    if (b.textContent.startsWith(sel+')')) b.classList.add('sel-correct'); 
+                });
+                fbCorrect.classList.add('show');
+                scores[stepNum]++;
+            } else {
+                ex.classList.add('incorrect');
+                btns.forEach(b => {
+                    if (b.textContent.startsWith(sel+')')) b.classList.add('sel-wrong');
+                    if (b.textContent.startsWith(correct+')')) b.classList.add('show-correct');
+                });
+                fbIncorrect.classList.add('show');
+            }
+            
+            document.getElementById(`score${stepNum}`).textContent = `${scores[stepNum]}/5`;
+        }
+
+        updateNav();
+    </script>
+</body>
+</html>
